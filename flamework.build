@@ -1,0 +1,13 @@
+{
+	"version": 1,
+	"flameworkVersion": "1.0.0-beta.24",
+	"identifiers": {
+		"descent:out/shared/functions/setup-logger@LogEventSFTOutputSink": "shared/functions/setup-logger@LogEventSFTOutputSink",
+		"descent:out/server/player/data/player-data-service@PlayerDataService": "server/player/data/player-data-service@PlayerDataService",
+		"descent:out/shared/network@GlobalEvents": "shared/network@GlobalEvents",
+		"descent:out/shared/network@GlobalFunctions": "shared/network@GlobalFunctions",
+		"descent:out/server/player/player-removal-service@PlayerRemovalService": "server/player/player-removal-service@PlayerRemovalService",
+		"descent:out/server/player/player-service@PlayerService": "server/player/player-service@PlayerService"
+	},
+	"metadata": {}
+}
