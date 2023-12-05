@@ -25,7 +25,7 @@ export default class PlayerDataService {
 	private async loadDefaultData(player: Player): Promise<void> {
 		store.loadPlayerData(player.Name, defaultPlayerData);
 
-		Promise.fromEvent(Players.PlayerRemoving, p => p === player)
+		return Promise.fromEvent(Players.PlayerRemoving, p => p === player)
 			.then(() => {
 				store.closePlayerData(player.Name);
 			})
@@ -52,7 +52,7 @@ export default class PlayerDataService {
 				}
 			});
 
-			void Promise.fromEvent(Players.PlayerRemoving, p => p === player).andThen(() => {
+			void Promise.fromEvent(Players.PlayerRemoving, p => p === player).then(() => {
 				void document.close();
 				unsubscribe();
 				store.closePlayerData(player.Name);

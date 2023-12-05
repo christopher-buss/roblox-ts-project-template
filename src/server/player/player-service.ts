@@ -13,7 +13,6 @@ export default class PlayerService implements OnStart {
 		private readonly playerDataService: PlayerDataService,
 		private readonly playerRemovalService: PlayerRemovalService,
 	) {}
-
 	private async onPlayerJoin(player: Player): Promise<void> {
 		const playerDocument = await this.playerDataService.loadPlayerData(player);
 		if (!playerDocument) {
@@ -22,23 +21,21 @@ export default class PlayerService implements OnStart {
 		}
 
 		// Call all connected lifecycle events
-		debug.profilebegin("Lifecycle_Player_Join");
-		{
-			for (const event of this.playerJoinEvents) {
-				debug.profilebegin(event.id);
-				{
-					Promise.defer(() => event.event.onPlayerJoin(playerEntity)).catch(err => {
-						this.logger.Error(err);
-					});
-				}
+		// Debug.profilebegin("Lifecycle_Player_Join");
+		// {
+		// 	For (const event of this.playerJoinEvents) {
+		// 		Debug.profilebegin(event.id);
+		// 		{
+		// Promise.defer(() => event.event.onPlayerJoin(playerEntity)).catch(err =>
+		// { this.logger.Error(err); }); }
 
-				debug.profileend();
-			}
-		}
+		// 		Debug.profileend();
+		// 	}
+		// }
 
-		debug.profileend();
+		// Debug.profileend();
 
-		this.onEntityFullyLoaded.Fire(playerEntity);
+		// This.onEntityFullyLoaded.Fire(playerEntity);
 	}
 
 	/** @hidden */

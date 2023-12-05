@@ -30,7 +30,7 @@ export function start<S extends object>(
 	const loop = new Loop<T>(world, state, myDebugger.getWidgets());
 	const hotReloader = new HotReloader();
 
-	let firstRunSystems = new Array<System<T>>();
+	let firstRunSystems = new Array<System<T>>() as Array<System<T>> | undefined;
 	const systemsByModule = new Map<ModuleScript, System<T>>();
 
 	function loadModule(mod: ModuleScript, ctx: Context): void {
@@ -55,7 +55,7 @@ export function start<S extends object>(
 	}
 
 	function unloadModule(_: ModuleScript, ctx: Context): void {
-		if (ctx.isReloading === true) {
+		if (ctx.isReloading) {
 			return;
 		}
 
@@ -70,8 +70,8 @@ export function start<S extends object>(
 		hotReloader.scan(container, loadModule, unloadModule);
 	}
 
-	loop.scheduleSystems(firstRunSystems);
-	firstRunSystems = undefined!;
+	loop.scheduleSystems(firstRunSystems!);
+	firstRunSystems = undefined;
 
 	myDebugger.autoInitialize(loop);
 

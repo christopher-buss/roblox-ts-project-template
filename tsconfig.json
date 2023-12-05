@@ -18,6 +18,7 @@
 			"node_modules/@rbxts",
 			"node_modules/@flamework"
 		],
+		"noUncheckedIndexedAccess": true,
 		// configurable
 		"rootDir": "src",
 		"outDir": "out",
@@ -37,8 +38,8 @@
 				"transform": "rbxts-transform-env"
 			},
 			{
-				"transform": "rbxts-transformer-t"
+				"transform": "rbxts-transformer-t-new"
 			}
 		]
-	}
+	},
 }
