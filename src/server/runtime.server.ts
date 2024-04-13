@@ -1,16 +1,21 @@
 import { Flamework, Modding } from "@flamework/core";
-import Log, { Logger } from "@rbxts/log";
+import type { Logger } from "@rbxts/log";
+import Log from "@rbxts/log";
+
 import { GAME_NAME } from "shared/constants";
 import { setupLogger } from "shared/functions/setup-logger";
 
-setupLogger();
-Log.Info(`${GAME_NAME} is starting up!`);
+function start(): void {
+	setupLogger();
 
-Modding.registerDependency<Logger>(ctor => {
-	return Log.ForContext(ctor);
-});
+	Log.Info(`${GAME_NAME} is starting up! Version: ${game.PlaceVersion}`);
 
-Flamework.addPaths("src/server");
+	Modding.registerDependency<Logger>(ctor => Log.ForContext(ctor));
 
-Log.Info(`Flamework ignite!`);
-Flamework.ignite();
+	Flamework.addPaths("src/server");
+
+	Log.Info(`Flamework ignite!`);
+	Flamework.ignite();
+}
+
+start();

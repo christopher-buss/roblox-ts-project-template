@@ -2,3 +2,12 @@
 /out
 /include
 *.tsbuildinfo
+flamework.build
+
+# Misc
+.DS_Store
+
+/dist
+sourcemap.json
+*.rbxl.lock
+*.rbxl

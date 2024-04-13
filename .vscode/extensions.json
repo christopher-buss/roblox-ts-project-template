@@ -1,6 +1,12 @@
 {
 	"recommendations": [
+		"SENKEN.vscode-multi-line-uncomment",
+		"dbaeumer.vscode-eslint",
+		"flamework.flamework-vscode",
 		"roblox-ts.vscode-roblox-ts",
-		"dbaeumer.vscode-eslint"
+		"streetsidesoftware.code-spell-checker",
+		"antfu.file-nesting",
+		"evaera.vscode-rojo",
+		"wayou.vscode-todo-highlight"
 	]
 }

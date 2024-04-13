@@ -1,1 +1,1 @@
-export const GAME_NAME = "Descent";
+export const GAME_NAME = "Template for roblox-ts";

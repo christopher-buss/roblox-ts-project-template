@@ -1,5 +1,9 @@
-import { playersSlice } from "./slices/players";
+import type { CombineStates } from "@rbxts/reflex";
+
+import { persistentSlice } from "./persistent/persistent-slice";
+
+export type SharedState = CombineStates<typeof slices>;
 
 export const slices = {
-	players: playersSlice,
+	persistent: persistentSlice,
 };

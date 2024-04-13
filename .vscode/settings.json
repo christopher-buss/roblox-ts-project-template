@@ -1,14 +1,74 @@
 {
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"files.eol": "\n",
-	"[typescript]": {
-		"editor.defaultFormatter": "dbaeumer.vscode-eslint",
-		"editor.formatOnSave": true
-	},
-	"[typescriptreact]": {
-		"editor.defaultFormatter": "dbaeumer.vscode-eslint",
-		"editor.formatOnSave": true
-	},
 	"eslint.run": "onType",
-	"eslint.format.enable": true
+	"eslint.format.enable": true,
+	// Enable the ESlint flat config support
+	"eslint.experimental.useFlatConfig": true,
+	"eslint.validate": ["typescript", "typescriptreact", "markdown", "json", "jsonc", "yaml"],
+	// Silent the stylistic rules in you IDE, but still auto fix them
+	"eslint.rules.customizations": [
+		{
+			"rule": "style/*",
+			"severity": "off"
+		},
+		{
+			"rule": "format/*",
+			"severity": "off"
+		},
+		{
+			"rule": "*-indent",
+			"severity": "off"
+		},
+		{
+			"rule": "*-spacing",
+			"severity": "off"
+		},
+		{
+			"rule": "no/autofix/*",
+			"severity": "error"
+		},
+		{
+			"rule": "*-spaces",
+			"severity": "off"
+		},
+		{
+			"rule": "*-order",
+			"severity": "off"
+		},
+		{
+			"rule": "*-dangle",
+			"severity": "off"
+		},
+		{
+			"rule": "*-newline",
+			"severity": "off"
+		},
+		{
+			"rule": "*quotes",
+			"severity": "off"
+		},
+		{
+			"rule": "*semi",
+			"severity": "off"
+		}
+	],
+	// Auto fix
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "always",
+		"source.organizeImports": "never"
+	},
+	"npm.packageManager": "pnpm",
+	"eslint.nodeEnv": "eslint.config.ts",
+	"cSpell.words": [
+		"darklua",
+		"Leaderstat",
+		"Leaderstats",
+		"proximityprompt",
+		"rbxtsc",
+		"rigidconstraint",
+		"rojo",
+		"traceback",
+		"worldmodel"
+	]
 }

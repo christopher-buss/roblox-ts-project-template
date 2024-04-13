@@ -1,0 +1,40 @@
+diff --git a/out/Project/functions/compileFiles.js b/out/Project/functions/compileFiles.js
+index 378a35afddd7693a6f7f829f4af7d52548ea15db..d5ff22b838f98d515edf78275d375131c0ee75c1 100644
+--- a/out/Project/functions/compileFiles.js
++++ b/out/Project/functions/compileFiles.js
+@@ -57,14 +57,18 @@ function getReverseSymlinkMap(program) {
+     }
+     return result;
+ }
++const ROJO_CACHE = new Map();
+ function compileFiles(program, data, pathTranslator, sourceFiles) {
+     var _a;
+     const compilerOptions = program.getCompilerOptions();
+     const multiTransformState = new TSTransformer_1.MultiTransformState();
+     const outDir = compilerOptions.outDir;
+     const rojoResolver = data.rojoConfigPath
+-        ? rojo_resolver_1.RojoResolver.fromPath(data.rojoConfigPath)
++        ? ROJO_CACHE.get(data.rojoConfigPath) ?? rojo_resolver_1.RojoResolver.fromPath(data.rojoConfigPath)
+         : rojo_resolver_1.RojoResolver.synthetic(outDir);
++    if (data.rojoConfigPath) {
++        ROJO_CACHE.set(data.rojoConfigPath, rojoResolver);
++    }
+     for (const warning of rojoResolver.getWarnings()) {
+         LogService_1.LogService.warn(warning);
+     }
+@@ -74,7 +78,14 @@ function compileFiles(program, data, pathTranslator, sourceFiles) {
+             (0, checkFileName_1.checkFileName)(sourceFile.fileName);
+         }
+     }
+-    const pkgRojoResolvers = compilerOptions.typeRoots.map(rojo_resolver_1.RojoResolver.synthetic);
++    const pkgRojoResolvers = compilerOptions.typeRoots.map(v => {
++        const existing = ROJO_CACHE.get(v);
++        if (existing)
++            return existing;
++        const rojo = rojo_resolver_1.RojoResolver.synthetic(v);
++        ROJO_CACHE.set(v, rojo);
++        return rojo;
++    });
+     const nodeModulesPathMapping = (0, createNodeModulesPathMapping_1.createNodeModulesPathMapping)(compilerOptions.typeRoots);
+     const reverseSymlinkMap = getReverseSymlinkMap(program);
+     const projectType = (_a = data.projectOptions.type) !== null && _a !== void 0 ? _a : inferProjectType(data, rojoResolver);

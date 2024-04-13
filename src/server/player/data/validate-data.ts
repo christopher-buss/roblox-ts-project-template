@@ -1,5 +1,5 @@
-import { t } from "@rbxts/t";
-import { $terrify } from "rbxts-transformer-t-new";
-import { PlayerData } from "shared/store/slices/players";
+import { Flamework } from "@flamework/core";
 
-export const validate: t.check<PlayerData> = $terrify<PlayerData>();
+import type { PlayerData } from "shared/store/persistent/persistent-slice";
+
+export const validate = Flamework.createGuard<PlayerData>();
