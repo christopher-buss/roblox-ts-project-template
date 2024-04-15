@@ -13,8 +13,6 @@
 		"build-dev": "cross-env NODE_ENV=development npx rbxtsc",
 		"watch-dev": "cross-env NODE_ENV=development npx rbxtsc -w",
 		"sync-dev": "rojo serve",
-		"build": "rbxtsc",
-		"watch": "rbxtsc -w",
 		"clean": "npx rimraf out/ && npx rimraf dist",
 		"darklua": "darklua process out dist --verbose",
 		"eslint-config": "eslint-flat-config-viewer",
@@ -26,7 +24,7 @@
 		"@flamework/networking": "^1.2.2",
 		"@rbxts/inspect": "^1.0.1",
 		"@rbxts/janitor": "1.15.7-ts.0",
-		"@rbxts/lapis": "^0.2.11",
+		"@rbxts/lapis": "^0.3.0",
 		"@rbxts/log": "^0.6.3",
 		"@rbxts/make": "^1.0.6",
 		"@rbxts/message-templates": "^0.3.2",
@@ -40,7 +38,6 @@
 		"@rbxts/react-roblox": "^0.3.6",
 		"@rbxts/reflex": "^4.3.1",
 		"@rbxts/remap": "^0.2.1",
-		"@rbxts/rewire": "^0.3.0",
 		"@rbxts/ripple": "^0.8.1",
 		"@rbxts/services": "^1.5.4",
 		"@rbxts/sift": "^0.0.8",
@@ -48,14 +45,13 @@
 		"@rbxts/t": "^3.1.1",
 		"@rbxts/ui-labs": "^2.0.2",
 		"@rbxts/validate-tree": "^2.0.2",
-		"eslint-plugin-arrow-return-style": "^1.3.0",
 		"rbxts-transform-debug": "^2.2.0",
 		"rbxts-transform-env": "^2.2.0"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.0.2",
 		"@isentinel/eslint-config": "^0.3.0",
-		"@rbxts/compiler-types": "2.3.0-types.0",
+		"@rbxts/compiler-types": "2.3.0-types.1",
 		"@rbxts/types": "^1.0.768",
 		"cross-env": "^7.0.3",
 		"eslint": "npm:eslint-ts-patch@8.57.0-0",
@@ -64,7 +60,7 @@
 		"eslint-plugin-format": "^0.1.0",
 		"eslint-plugin-react": "^7.34.1",
 		"eslint-plugin-react-hooks": "^4.6.0",
-		"eslint-plugin-simple-import-sort": "^12.0.0",
+		"eslint-plugin-simple-import-sort": "^12.1.0",
 		"eslint-ts-patch": "8.57.0-0",
 		"lint-staged": "^15.2.2",
 		"prettier-plugin-jsdoc": "^1.3.0",
@@ -72,7 +68,7 @@
 		"rimraf": "^5.0.5",
 		"roblox-ts": "2.3.0-dev-e6e7658",
 		"simple-git-hooks": "^2.11.1",
-		"typescript": "5.4.2"
+		"typescript": "5.4.5"
 	},
 	"pnpm": {
 		"patchedDependencies": {
