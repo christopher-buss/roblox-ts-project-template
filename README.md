@@ -74,6 +74,13 @@ All of the commands can be found in the `package.json` file under the `scripts`.
 These can be accessed in VSCode through the `npm scripts` tab in the sidebar,
 where you can run them by clicking the play button next to the command.
 
+### Contributing
+
+As this is a personal template, I am not typically seeking contributions.
+However, if you discover any bugs, feel free to create a pull request or an
+issue, and I will address it. If you wish to suggest a feature or improvement,
+please submit an issue first to initiate discussion!
+
 ## Credits 🙏
 
 Some of the code in this template has been taken from others and modified for my
