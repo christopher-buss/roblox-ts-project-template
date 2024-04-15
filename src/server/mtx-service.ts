@@ -240,8 +240,8 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		{ ProductId, PurchaseId }: ReceiptInfo,
 	): Promise<Enum.ProductPurchaseDecision> {
 		if (document.read().mtx.receiptHistory.includes(PurchaseId)) {
-			const [ok] = document.save().await();
-			if (!ok) {
+			const [success] = document.save().await();
+			if (!success) {
 				return Enum.ProductPurchaseDecision.NotProcessedYet;
 			}
 
@@ -261,22 +261,22 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 
 		const { receiptHistory } = data.mtx;
 
+		const updatedReceiptHistory =
+			receiptHistory.size() >= this.purchaseIdLog
+				? Sift.Array.shift(receiptHistory, receiptHistory.size() - this.purchaseIdLog + 1)
+				: receiptHistory;
+		updatedReceiptHistory.push(PurchaseId);
+
 		document.write(
 			Sift.Dictionary.merge(data, {
 				mtx: {
-					receiptHistory:
-						receiptHistory.size() >= this.purchaseIdLog
-							? Sift.Array.shift(
-									receiptHistory,
-									receiptHistory.size() - this.purchaseIdLog + 1,
-								)
-							: receiptHistory,
+					receiptHistory: updatedReceiptHistory,
 				},
 			}),
 		);
 
-		const [savedOk] = document.save().await();
-		if (!savedOk) {
+		const [success] = document.save().await();
+		if (!success) {
 			return Enum.ProductPurchaseDecision.NotProcessedYet;
 		}
 
