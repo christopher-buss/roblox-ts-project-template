@@ -33,12 +33,6 @@ export interface OnCharacterAdded {
  * rig is loaded and fully exists according to the schema before allowing any
  * other systems to interact with it. We also handle retries for loading the
  * character rig in case it fails to load.
- *
- * ### Usage:.
- *
- * ```ts
- * waitForCharacter(player).then(character => {}
- * ```
  */
 @Service({})
 export default class CharacterService implements OnStart, OnPlayerJoin {
