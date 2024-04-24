@@ -255,10 +255,6 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			return Enum.ProductPurchaseDecision.NotProcessedYet;
 		}
 
-		if (!data.mtx.receiptHistory.includes(PurchaseId)) {
-			await document.save();
-		}
-
 		const { receiptHistory } = data.mtx;
 
 		const updatedReceiptHistory =
