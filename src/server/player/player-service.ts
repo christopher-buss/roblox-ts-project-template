@@ -9,7 +9,7 @@ import { $NODE_ENV } from "rbxts-transform-env";
 import PlayerEntity from "server/player/player-entity";
 import type { ListenerData } from "shared/util/flamework-util";
 import { setupLifecycle } from "shared/util/flamework-util";
-import { onPlayerAdded } from "shared/util/player-util";
+import { onPlayerAdded, promisePlayerDisconnected } from "shared/util/player-util";
 import KickCode from "types/enum/kick-reason";
 
 import type PlayerDataService from "./data/player-data-service";
@@ -39,6 +39,7 @@ export interface OnPlayerLeave {
 /** A service that manages player entities in the game. */
 @Service({})
 export default class PlayerService implements OnStart {
+	private readonly onEntityJoined = new Signal<(playerEntity: PlayerEntity) => void>();
 	private readonly onEntityRemoving = new Signal();
 	private readonly playerEntities = new Map<Player, PlayerEntity>();
 	private readonly playerJoinEvents = new Array<ListenerData<OnPlayerJoin>>();
@@ -104,6 +105,40 @@ export default class PlayerService implements OnStart {
 	 */
 	public getPlayerEntity(player: Player): PlayerEntity | undefined {
 		return this.playerEntities.get(player);
+	}
+
+	/**
+	 * Retrieves the player entity asynchronously. This method will reject if
+	 * the player disconnects before the entity is created.
+	 *
+	 * @param player - The player object.
+	 * @returns A promise that resolves to the player entity, or undefined if
+	 *   not found.
+	 */
+	public async getPlayerEntityAsync(player: Player): Promise<PlayerEntity | undefined> {
+		const potentialEntity = this.getPlayerEntity(player);
+		if (potentialEntity) {
+			return potentialEntity;
+		}
+
+		const promise = Promise.fromEvent(
+			this.onEntityJoined,
+			(playerEntity: PlayerEntity) => playerEntity.player === player,
+		);
+
+		// eslint-disable-next-line promise/always-return -- This is the last callback
+		const disconnect = promisePlayerDisconnected(player).then(() => {
+			promise.cancel();
+		});
+
+		const [success, playerEntity] = promise.await();
+		if (!success) {
+			throw `Player ${player.Name} disconnected before entity was created`;
+		}
+
+		disconnect.cancel();
+
+		return playerEntity;
 	}
 
 	/**
@@ -173,6 +208,8 @@ export default class PlayerService implements OnStart {
 		}
 
 		debug.profileend();
+
+		this.onEntityJoined.Fire(playerEntity);
 	}
 
 	/**

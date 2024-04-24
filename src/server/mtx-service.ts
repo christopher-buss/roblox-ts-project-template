@@ -226,7 +226,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			return Enum.ProductPurchaseDecision.NotProcessedYet;
 		}
 
-		const playerEntity = this.playerService.getPlayerEntity(player);
+		const playerEntity = await this.playerService.getPlayerEntityAsync(player);
 		if (!playerEntity) {
 			this.logger.Error(`No entity for player ${player.Name}, cannot process receipt`);
 			return Enum.ProductPurchaseDecision.NotProcessedYet;

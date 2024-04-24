@@ -107,3 +107,19 @@ export function getPlayerByName(name: string): Player | undefined {
 
 	return player;
 }
+
+/**
+ * Returns a promise that resolves when the specified player is disconnected. If
+ * the player is not a descendant of the Players service, the promise will
+ * immediately resolve.
+ *
+ * @param player - The player to wait for disconnection.
+ * @returns A promise that resolves when the player is disconnected.
+ */
+export async function promisePlayerDisconnected(player: Player): Promise<void> {
+	if (!player.IsDescendantOf(Players)) {
+		return;
+	}
+
+	await Promise.fromEvent(Players.PlayerRemoving, playerWhoLeft => playerWhoLeft === player);
+}
