@@ -1,8 +1,9 @@
 import type { ProducerMiddleware } from "@rbxts/reflex";
 import { createBroadcastReceiver } from "@rbxts/reflex";
-import { RunService } from "@rbxts/services";
 
 import { Events } from "client/network";
+import { $NODE_ENV } from "rbxts-transform-env";
+import { IS_EDIT } from "shared/constants";
 
 /**
  * A middleware that listens for actions dispatched from the server and
@@ -11,8 +12,8 @@ import { Events } from "client/network";
  * @returns The middleware function.
  */
 export function receiverMiddleware(): ProducerMiddleware {
-	// If in edit mode (for storybook support), return a no-op middleware.
-	if (RunService.IsStudio() && !RunService.IsRunning()) {
+	// Storybook support
+	if ($NODE_ENV === "development" && IS_EDIT) {
 		return () => dispatch => dispatch;
 	}
 

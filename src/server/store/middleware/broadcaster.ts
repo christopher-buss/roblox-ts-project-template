@@ -1,15 +1,17 @@
 import type { ProducerMiddleware } from "@rbxts/reflex";
 import { createBroadcaster } from "@rbxts/reflex";
-import { Players, RunService } from "@rbxts/services";
+import { Players } from "@rbxts/services";
 
+import { $NODE_ENV } from "rbxts-transform-env";
 import { Events } from "server/network";
+import { IS_EDIT } from "shared/constants";
 import { slices } from "shared/store";
 
 export const ONCE_PER_MINUTE = 60;
 
 export function broadcasterMiddleware(): ProducerMiddleware {
-	// If in edit mode (for storybook support), return a no-op middleware.
-	if (RunService.IsStudio() && !RunService.IsRunning()) {
+	// Storybook support
+	if ($NODE_ENV === "development" && IS_EDIT) {
 		return () => dispatch => dispatch;
 	}
 
