@@ -19,6 +19,9 @@ const ASPECT_RATIO_WIDTH = 19;
 const ASPECT_RATIO_HEIGHT = 9;
 const MAX_ASPECT_RATIO = ASPECT_RATIO_WIDTH / ASPECT_RATIO_HEIGHT;
 
+// Wide screens should not scale beyond iPhone aspect ratio
+const SLOW_DOWN_SCALE = 0.25;
+
 export const RemContext = createContext<number>(DEFAULT_REM);
 
 export function RemProvider({
@@ -37,9 +40,6 @@ export function RemProvider({
 		if (remOverride !== undefined) {
 			return remOverride;
 		}
-
-		// Wide screens should not scale beyond iPhone aspect ratio
-		const SLOW_DOWN_SCALE = 0.25;
 
 		const resolution = new Vector2(
 			math.min(viewport.X, viewport.Y * MAX_ASPECT_RATIO),

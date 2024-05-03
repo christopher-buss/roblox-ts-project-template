@@ -43,7 +43,7 @@ function useRemContext({ maximum = math.huge, minimum = 0 }: RemOptions = {}): n
 export function useRem(options?: RemOptions): RemFunction {
 	const rem = useRemContext(options);
 
-	const remFunction: RemFunction = <T,>(value: T, mode: RemScaleMode = "unit"): T => {
+	const remFunction: RemFunction = <T>(value: T, mode: RemScaleMode = "unit"): T => {
 		const scale = scaleFunctions[typeOf(value) as never] as
 			| ((value: T, rem: number) => T)
 			| undefined;
