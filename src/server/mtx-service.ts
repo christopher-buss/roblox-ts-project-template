@@ -7,7 +7,7 @@ import Sift from "@rbxts/sift";
 import Signal from "@rbxts/signal";
 
 import { selectPlayerData, selectPlayerMtx } from "shared/store/persistent";
-import { Gamepass, Product } from "types/enum/mtx";
+import { GamePass, Product } from "types/enum/mtx";
 
 import type PlayerEntity from "./player/player-entity";
 import type { OnPlayerJoin } from "./player/player-service";
@@ -17,24 +17,24 @@ import { store } from "./store";
 const NETWORK_RETRY_DELAY = 2;
 const NETWORK_RETRY_ATTEMPTS = 10;
 
-type ProductInfo = GamePassProductInfo | DeveloperProductInfo;
+type ProductInfo = DeveloperProductInfo | GamePassProductInfo;
 
 /**
- * A service for managing gamepasses and processing receipts.
+ * A service for managing game passes and processing receipts.
  *
  * ```
- * this.mtxService.gamepassStatusChanged.Connect((playerEntity, gamepassId, isActive) => {
- *     if (!gamepassId === Gamepasses.Example || !isActive) {
+ * this.mtxService.gamePassStatusChanged.Connect((playerEntity, gamePassId, isActive) => {
+ *     if (!gamePassId === GamePasses.Example || !isActive) {
  *         return;
  *     }
  *
- *     // Do something with the gamepass owned
+ *     // Do something with the game pass owned
  *     ...
  * });
  *
- * for (const gamepass of gamepasses) {
- *     if (this.mtxService.isGamepassActive(playerEntity, gamepass)) {
- *         // Do something with the gamepass owned
+ * for (const pass of gamePasses) {
+ *     if (this.mtxService.isGamePassActive(playerEntity, pass)) {
+ *         // Do something with the game pass owned
  *         ...
  *     }
  * }
@@ -49,8 +49,8 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		(player: Player, productId: number) => void
 	>();
 
-	public readonly gamepassStatusChanged = new Signal<
-		(player: Player, gamepassId: Gamepass, isActive: boolean) => void
+	public readonly gamePassStatusChanged = new Signal<
+		(player: Player, gamePassId: GamePass, isActive: boolean) => void
 	>();
 
 	constructor(
@@ -61,7 +61,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 	/** @ignore */
 	public onInit(): void {
 		MarketplaceService.PromptGamePassPurchaseFinished.Connect((player, id, wasPurchased) => {
-			this.onGamePassPurchaseFinished(player, tostring(id) as Gamepass, wasPurchased);
+			this.onGamePassPurchaseFinished(player, tostring(id) as GamePass, wasPurchased);
 		});
 
 		MarketplaceService.ProcessReceipt = (...args): Enum.ProductPurchaseDecision => {
@@ -73,28 +73,28 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 
 	/** @ignore */
 	public onPlayerJoin({ player, userId }: PlayerEntity): void {
-		const gamepasses = store.getState(selectPlayerMtx(userId))?.gamepasses;
-		if (gamepasses === undefined) {
+		const gamePasses = store.getState(selectPlayerMtx(userId))?.gamePasses;
+		if (gamePasses === undefined) {
 			return;
 		}
 
-		const unowned = Object.values(Gamepass).filter(gamepassId => !gamepasses.has(gamepassId));
-		for (const gamepassId of unowned) {
-			this.checkForGamepassOwned(player, gamepassId)
+		const unowned = Object.values(GamePass).filter(gamePassId => !gamePasses.has(gamePassId));
+		for (const gamePassId of unowned) {
+			this.checkForGamePassOwned(player, gamePassId)
 				.then(owned => {
 					if (!owned) {
 						return;
 					}
 
-					store.setGamepassOwned(userId, gamepassId);
+					store.setGamePassOwned(userId, gamePassId);
 				})
 				.catch(err => {
-					this.logger.Warn(`Error checking gamepass ${gamepassId}: ${err}`);
+					this.logger.Warn(`Error checking game pass ${gamePassId}: ${err}`);
 				});
 		}
 
-		for (const [id, gamepassData] of gamepasses) {
-			this.notifyProductActive(player, id, gamepassData.active);
+		for (const [id, gamePassData] of gamePasses) {
+			this.notifyProductActive(player, id, gamePassData.active);
 		}
 	}
 
@@ -108,7 +108,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 	 *   if the information is not available.
 	 */
 	public async getProductInfo(
-		infoType: "Product" | "GamePass",
+		infoType: "GamePass" | "Product",
 		productId: number,
 	): Promise<ProductInfo | undefined> {
 		if (this.productInfoCache.has(productId)) {
@@ -138,34 +138,34 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 	}
 
 	/**
-	 * Checks if a gamepass is active for a specific player. This method will
-	 * return false if the gamepass is not owned by the player.
+	 * Checks if a game pass is active for a specific player. This method will
+	 * return false if the game pass is not owned by the player.
 	 *
-	 * @param player - The player for whom to check the gamepass.
-	 * @param gamepassId - The ID of the gamepass to check.
-	 * @returns A boolean indicating whether the gamepass is active or not.
+	 * @param player - The player for whom to check the game pass.
+	 * @param gamePassId - The ID of the game pass to check.
+	 * @returns A boolean indicating whether the game pass is active or not.
 	 */
-	public isGamepassActive(player: Player, gamepassId: Gamepass): boolean {
+	public isGamePassActive(player: Player, gamePassId: GamePass): boolean {
 		return (
-			store.getState(selectPlayerMtx(tostring(player.UserId)))?.gamepasses.get(gamepassId)
+			store.getState(selectPlayerMtx(tostring(player.UserId)))?.gamePasses.get(gamePassId)
 				?.active ?? false
 		);
 	}
 
-	private async checkForGamepassOwned(player: Player, gamepassId: Gamepass): Promise<boolean> {
-		// Ensure gamepassId is a valid gamepasses for our game
-		if (!Object.values(Gamepass).includes(gamepassId)) {
-			throw `Invalid gamepass id ${gamepassId}`;
+	private async checkForGamePassOwned(player: Player, gamePassId: GamePass): Promise<boolean> {
+		// Ensure game passId is a valid game passes for our game
+		if (!Object.values(GamePass).includes(gamePassId)) {
+			throw `Invalid game pass id ${gamePassId}`;
 		}
 
 		const owned = store
 			.getState(selectPlayerMtx(tostring(player.UserId)))
-			?.gamepasses.has(gamepassId);
+			?.gamePasses.has(gamePassId);
 		if (owned === true) {
 			return true;
 		}
 
-		return MarketplaceService.UserOwnsGamePassAsync(player.UserId, tonumber(gamepassId));
+		return MarketplaceService.UserOwnsGamePassAsync(player.UserId, tonumber(gamePassId));
 	}
 
 	private grantProduct(player: Player, productId: number, wasPurchased: boolean): void {
@@ -188,32 +188,32 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		this.developerProductPurchased.Fire(player, productId);
 	}
 
-	private notifyProductActive(player: Player, productId: Gamepass, isActive: boolean): void {
-		this.gamepassStatusChanged.Fire(player, productId, isActive);
+	private notifyProductActive(player: Player, productId: GamePass, isActive: boolean): void {
+		this.gamePassStatusChanged.Fire(player, productId, isActive);
 	}
 
 	private onGamePassPurchaseFinished(
 		player: Player,
-		gamepassId: Gamepass,
+		gamePassId: GamePass,
 		wasPurchased: boolean,
 	): void {
 		if (!wasPurchased) {
 			return;
 		}
 
-		// Ensure gamepassId is a valid gamepasses for our game
-		if (!Object.values(Gamepass).includes(gamepassId)) {
+		// Ensure game passId is a valid game passes for our game
+		if (!Object.values(GamePass).includes(gamePassId)) {
 			this.logger.Warn(
-				`Player ${player.Name} attempted to purchased invalid gamepass ${gamepassId}`,
+				`Player ${player.Name} attempted to purchased invalid game pass ${gamePassId}`,
 			);
 			return;
 		}
 
-		this.logger.Info(`Player ${player.Name} purchased gamepass ${gamepassId}`);
+		this.logger.Info(`Player ${player.Name} purchased game pass ${gamePassId}`);
 
-		store.setGamepassOwned(tostring(player.UserId), gamepassId);
+		store.setGamePassOwned(tostring(player.UserId), gamePassId);
 
-		this.notifyProductActive(player, gamepassId, true);
+		this.notifyProductActive(player, gamePassId, true);
 	}
 
 	private async processReceipt(receiptInfo: ReceiptInfo): Promise<Enum.ProductPurchaseDecision> {
