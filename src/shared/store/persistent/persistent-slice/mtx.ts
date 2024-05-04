@@ -1,6 +1,6 @@
 import { createProducer } from "@rbxts/reflex";
 
-import type { Gamepass, Product } from "types/enum/mtx";
+import type { GamePass, Product } from "types/enum/mtx";
 
 import type { PlayerData, PlayerMtx } from "./default-data";
 
@@ -42,15 +42,15 @@ export const mtxSlice = createProducer(initialState, {
 		};
 	},
 
-	setGamepassOwned: (state, player: string, gamepassId: Gamepass) => {
+	setGamePassOwned: (state, player: string, gamePassId: GamePass) => {
 		const mtx = state[player];
 
 		return {
 			...state,
 			[player]: mtx && {
 				...mtx,
-				gamepasses: mtx.gamepasses.set(gamepassId, {
-					id: gamepassId,
+				gamePasses: mtx.gamePasses.set(gamePassId, {
+					id: gamePassId,
 					active: true,
 				}),
 			},

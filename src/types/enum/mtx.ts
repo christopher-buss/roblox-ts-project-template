@@ -1,10 +1,10 @@
-export enum Gamepass {
+export enum GamePass {
 	Example = "1",
 }
 
-export interface GamepassData {
+export interface GamePassData {
 	active: boolean;
-	id: Gamepass;
+	id: GamePass;
 }
 
 export enum Product {

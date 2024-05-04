@@ -10,6 +10,7 @@ import type { RemProviderProps } from "../providers/rem-provider";
 import { RemProvider } from "../providers/rem-provider";
 
 interface MountProps extends RemProviderProps {
+	/** The key for the UI component. */
 	key: string;
 }
 

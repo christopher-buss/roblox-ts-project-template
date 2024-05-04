@@ -1,14 +1,17 @@
 /**
  * A function that returns a unique key based on the name passed.
  *
- * @returns A function that returns a unique key based on the name passed.
- * @see https://blog.boyned.com/articles/things-i-learned-using-react/
+ * @example
+ *
  * ```ts
  * const uniqueKey = createUniqueKey();
- * uniqueKey("Dog") // Returns "Dog"
- * uniqueKey("Cat") // Returns "Cat"
- * uniqueKey("Dog") // Returns "Dog_2"
+ * uniqueKey("Dog"); // Returns "Dog"
+ * uniqueKey("Cat"); // Returns "Cat"
+ * uniqueKey("Dog"); // Returns "Dog_2"
  * ```
+ *
+ * @returns A function that returns a unique key based on the name passed.
+ * @see https://blog.boyned.com/articles/things-i-learned-using-react/
  */
 export function createUniqueKey(): (name: string) => string {
 	const names = new Map<string, number>();

@@ -4,6 +4,7 @@ import type { Document } from "@rbxts/lapis";
 import type { PlayerData } from "shared/store/persistent";
 
 export default class PlayerEntity {
+	/** The player's username. */
 	public readonly name: string;
 	/** A string representation of the player's UserId. */
 	public readonly userId: string;

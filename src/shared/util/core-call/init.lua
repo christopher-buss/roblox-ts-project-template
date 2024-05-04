@@ -1,13 +1,14 @@
-local coreCall do
+local coreCall
+do
 	local MAX_RETRIES = 8
 
-	local StarterGui = game:GetService('StarterGui')
-	local RunService = game:GetService('RunService')
+	local StarterGui = game:GetService("StarterGui")
+	local RunService = game:GetService("RunService")
 
 	function coreCall(method, ...)
 		local result = {}
 		for _ = 1, MAX_RETRIES do
-			result = {pcall(StarterGui[method], StarterGui, ...)}
+			result = { pcall(StarterGui[method], StarterGui, ...) }
 			if result[1] then
 				break
 			end

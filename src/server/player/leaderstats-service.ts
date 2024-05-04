@@ -25,10 +25,8 @@ type Leaderstats = "Coins" | "Example2";
 
 type LeaderstatValue = Instances[keyof LeaderstatValueTypes];
 
-const DEFAULT_INT_VALUE = 0;
-
 /**
- * A service that initializes the roblox leaderboard stats for the game.
+ * A service that initializes the Roblox leaderboard stats for the game.
  *
  * This service is responsible for initializing the leaderboard stats for the
  * game. It will bind the stats to the player's leaderstats folder and update
@@ -77,7 +75,7 @@ export class LeaderstatsService implements OnInit, OnPlayerJoin, OnPlayerLeave {
 			valueMap.set(entry.Name, stat);
 
 			if (playerData === undefined || entry.PlayerDataKey === undefined) {
-				stat.Value = entry.ValueType === "IntValue" ? DEFAULT_INT_VALUE : "N/A";
+				stat.Value = entry.ValueType === "IntValue" ? 0 : "N/A";
 				continue;
 			}
 

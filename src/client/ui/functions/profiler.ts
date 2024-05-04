@@ -1,5 +1,5 @@
 import type { FunctionComponent } from "@rbxts/react";
-import Roact, { createElement } from "@rbxts/react";
+import React, { createElement } from "@rbxts/react";
 
 export function profiler<P extends object>(
 	name: string,
@@ -19,7 +19,7 @@ function getName(callback: Callback): string {
 }
 
 /**
- * Profiles all components created using Roact.createElement. This function
+ * Profiles all components created using React.createElement. This function
  * wraps each component with a profiler to measure its performance. Typically,
  * this function is used for debugging and performance optimization, and should
  * not be used in production.
@@ -27,19 +27,21 @@ function getName(callback: Callback): string {
 export function profileAllComponents(): void {
 	const profiledComponents = new Map<FunctionComponent, FunctionComponent>();
 
-	Roact.createElement = ((...args: Parameters<typeof Roact.createElement>) => {
+	React.createElement = ((...args: Parameters<typeof React.createElement>) => {
 		const [component] = args;
 
-		if (typeIs(component, "function")) {
-			let profiledComponent = profiledComponents.get(component);
-
-			if (!profiledComponent) {
-				profiledComponent = profiler(getName(component), component);
-				profiledComponents.set(component, profiledComponent);
-			}
-
-			args[0] = profiledComponent as never;
+		if (!typeIs(component, "function")) {
+			return createElement(...args);
 		}
+
+		let profiledComponent = profiledComponents.get(component);
+
+		if (!profiledComponent) {
+			profiledComponent = profiler(getName(component), component);
+			profiledComponents.set(component, profiledComponent);
+		}
+
+		args[0] = profiledComponent as never;
 
 		return createElement(...args);
 	}) as Callback;
