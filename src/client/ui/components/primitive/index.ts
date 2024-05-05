@@ -4,4 +4,6 @@ export * from "./frame";
 export * from "./group";
 export * from "./image";
 export * from "./layer";
+export * from "./padding-component";
+export * from "./scrolling-frame";
 export * from "./text";

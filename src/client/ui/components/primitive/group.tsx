@@ -30,7 +30,7 @@ interface GroupProps extends React.PropsWithChildren {
  *
  * @component
  */
-export const Group = forwardRef(
+const Group = forwardRef(
 	({ BackgroundTransparency, Native, children }: GroupProps, ref: React.Ref<Frame>) => {
 		const { AnchorPoint, Position, Size } = Native ?? {};
 
@@ -48,3 +48,5 @@ export const Group = forwardRef(
 		);
 	},
 );
+
+export default Group;

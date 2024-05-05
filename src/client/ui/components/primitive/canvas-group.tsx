@@ -19,7 +19,7 @@ export type CanvasGroupProps = FrameProps<CanvasGroup>;
  *
  * @see https://developer.roblox.com/en-us/api-reference/class/CanvasGroup
  */
-export const CanvasGroup = forwardRef((props: CanvasGroupProps, ref: React.Ref<CanvasGroup>) => {
+const CanvasGroup = forwardRef((props: CanvasGroupProps, ref: React.Ref<CanvasGroup>) => {
 	return (
 		<canvasgroup ref={ref} {...props.Native} BorderSizePixel={0}>
 			{props.children}
@@ -29,3 +29,5 @@ export const CanvasGroup = forwardRef((props: CanvasGroupProps, ref: React.Ref<C
 		</canvasgroup>
 	);
 });
+
+export default CanvasGroup;

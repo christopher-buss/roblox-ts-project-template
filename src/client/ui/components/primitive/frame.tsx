@@ -29,20 +29,20 @@ export interface FrameProps<T extends Instance = Frame> extends React.PropsWithC
  *
  * @see https://create.roblox.com/docs/reference/engine/classes/Frame
  */
-export const Frame = forwardRef(
-	({ CornerRadius, Native, children }: FrameProps, ref: Ref<Frame>) => {
-		const { AnchorPoint, Position } = Native ?? {};
+const Frame = forwardRef(({ CornerRadius, Native, children }: FrameProps, ref: Ref<Frame>) => {
+	const { AnchorPoint, Position } = Native ?? {};
 
-		return (
-			<frame
-				ref={ref}
-				{...Native}
-				AnchorPoint={AnchorPoint ?? new Vector2(0.5, 0.5)}
-				Position={Position ?? new UDim2(0.5, 0, 0.5, 0)}
-			>
-				{children}
-				{CornerRadius ? <uicorner CornerRadius={CornerRadius} /> : undefined}
-			</frame>
-		);
-	},
-);
+	return (
+		<frame
+			ref={ref}
+			{...Native}
+			AnchorPoint={AnchorPoint ?? new Vector2(0.5, 0.5)}
+			Position={Position ?? new UDim2(0.5, 0, 0.5, 0)}
+		>
+			{children}
+			{CornerRadius ? <uicorner CornerRadius={CornerRadius} /> : undefined}
+		</frame>
+	);
+});
+
+export default Frame;

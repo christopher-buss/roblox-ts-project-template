@@ -28,7 +28,7 @@ export interface ImageProps extends FrameProps<ImageLabel> {
  *
  * @see https://developer.roblox.com/en-us/api-reference/class/ImageLabel
  */
-export const Image = forwardRef((props: ImageProps, ref: React.Ref<ImageLabel>) => {
+const Image = forwardRef((props: ImageProps, ref: React.Ref<ImageLabel>) => {
 	const { CornerRadius, Native } = props;
 
 	return (
@@ -37,3 +37,5 @@ export const Image = forwardRef((props: ImageProps, ref: React.Ref<ImageLabel>) 
 		</imagelabel>
 	);
 });
+
+export default Image;
