@@ -1,9 +1,15 @@
+import type { Badge } from "types/enum/badge";
 import type { GamePass, GamePassData, Product, ProductData } from "types/enum/mtx";
 
 export interface PlayerData {
+	readonly achievements: PlayerAchievements;
 	readonly balance: PlayerBalance;
 	readonly mtx: PlayerMtx;
 	readonly settings: PlayerSettings;
+}
+
+export interface PlayerAchievements {
+	readonly badges: Map<Badge, boolean>;
 }
 
 export interface PlayerBalance {
@@ -26,6 +32,9 @@ export type PlayerMtxType = keyof PlayerMtx;
 export type PlayerSettingsType = keyof PlayerSettings;
 
 export const defaultPlayerData: PlayerData = {
+	achievements: {
+		badges: new Map<Badge, boolean>(),
+	},
 	balance: {
 		currency: 0,
 	},
