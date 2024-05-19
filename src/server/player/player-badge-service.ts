@@ -55,11 +55,11 @@ export default class PlayerBadgeService implements OnPlayerJoin {
 			return true;
 		}
 
-		return Promise.try(() => BadgeService.UserHasBadgeAsync(player.UserId, badge));
+		return Promise.try(() => BadgeService.UserHasBadgeAsync(player.UserId, tonumber(badge)));
 	}
 
 	public async getBadgeInfo(badge: Badge): Promise<BadgeInfo> {
-		return Promise.try(() => BadgeService.GetBadgeInfoAsync(badge));
+		return Promise.try(() => BadgeService.GetBadgeInfoAsync(tonumber(badge)));
 	}
 
 	private async giveBadge(playerEntity: PlayerEntity, badge: Badge): Promise<void> {
@@ -72,7 +72,9 @@ export default class PlayerBadgeService implements OnPlayerJoin {
 				return;
 			}
 
-			const [success, awarded] = pcall(() => BadgeService.AwardBadge(player.UserId, badge));
+			const [success, awarded] = pcall(() =>
+				BadgeService.AwardBadge(player.UserId, tonumber(badge)),
+			);
 			if (!success) {
 				throw `Failed to award badge ${badge} to ${userId}: ${awarded}`;
 			}
