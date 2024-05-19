@@ -3,9 +3,9 @@ declare namespace SoundSystem {
 
 	export function Create(
 		id: string,
-		target: Instance | Vector3 | CFrame,
+		target: CFrame | Instance | Vector3,
 		looped?: boolean,
-	): Attachment & { Sound: Sound };
+	): { Sound: Sound } & Attachment;
 }
 
 export = SoundSystem;

@@ -2,7 +2,7 @@ import React from "@rbxts/react";
 
 import { IS_EDIT } from "shared/constants";
 
-import { Group } from "./group";
+import Group from "./group";
 
 export interface LayerProps extends React.PropsWithChildren {
 	/** The display order of the layer. */

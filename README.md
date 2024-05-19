@@ -32,23 +32,23 @@ sync-dev`).
 
 #### Packages
 
-- [Flamework](https://flamework.fireboltofdeath.dev/)
-- [Janitor](https://howmanysmall.github.io/Janitor/)
-- [Lapis](https://nezuo.github.io/lapis/)
-- [Log](https://www.npmjs.com/package/@rbxts/log)
-- [React](https://www.npmjs.com/package/@rbxts/react)
-- [Reflex](https://littensy.github.io/reflex/docs/guides/)
-- [Ripple](https://github.com/littensy/ripple)
-- [UI Labs](https://ui-labs-roblox.github.io/ui-labs-docs/)
+-   [Flamework](https://flamework.fireboltofdeath.dev/)
+-   [Janitor](https://howmanysmall.github.io/Janitor/)
+-   [Lapis](https://nezuo.github.io/lapis/)
+-   [Log](https://www.npmjs.com/package/@rbxts/log)
+-   [React](https://www.npmjs.com/package/@rbxts/react)
+-   [Reflex](https://littensy.github.io/reflex/docs/guides/)
+-   [Ripple](https://github.com/littensy/ripple)
+-   [UI Labs](https://ui-labs-roblox.github.io/ui-labs-docs/)
 
 #### Tools
 
-- [Darklua](https://darklua.com/)
-- [ESLint config](https://github.com/christopher-buss/roblox-ts-eslint-config)
-- [ESLint](https://eslint.org/)
-- [Rojo](https://rojo.space/)
-- [pnpm](https://pnpm.io/)
-- [roblox-ts](https://roblox-ts.com/)
+-   [Darklua](https://darklua.com/)
+-   [ESLint config](https://github.com/christopher-buss/roblox-ts-eslint-config)
+-   [ESLint](https://eslint.org/)
+-   [Rojo](https://rojo.space/)
+-   [pnpm](https://pnpm.io/)
+-   [roblox-ts](https://roblox-ts.com/)
 
 ## Guide
 
@@ -86,5 +86,5 @@ please submit an issue first to initiate discussion!
 Some of the code in this template has been taken from others and modified for my
 usage, and I would like to give credit to the following people and projects:
 
-- [Grilme99 (Tabletop Island)](https://github.com/grilme99/tabletop-island/)
-- [Littensy (Slither)](https://github.com/littensy/slither/)
+-   [Grilme99 (Tabletop Island)](https://github.com/grilme99/tabletop-island/)
+-   [Littensy (Slither)](https://github.com/littensy/slither/)

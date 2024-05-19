@@ -114,7 +114,7 @@ export default class SoundController implements OnInit, OnStart {
 	private makeSoundGroup(soundType: SoundType): SoundGroup {
 		// Make sure this SoundGroup doesn't already exist
 		const existing = SoundService.FindFirstChild(soundType);
-		if (existing && existing.IsA("SoundGroup")) {
+		if (existing?.IsA("SoundGroup") === true) {
 			return existing;
 		}
 

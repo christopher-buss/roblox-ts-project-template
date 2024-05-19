@@ -51,7 +51,7 @@ export function useMotion<T extends MotionGoal, U = T>(
 			connection.Disconnect();
 			motion.destroy();
 		};
-	}, [motion]);
+	}, [get, motion, setValue]);
 
 	return $tuple(binding, motion);
 }

@@ -8,4 +8,4 @@ interface ServerResponseErr {
 	success: false;
 }
 
-export type ServerResponse<T = void> = ServerResponseOk<T> | ServerResponseErr;
+export type ServerResponse<T = void> = ServerResponseErr | ServerResponseOk<T>;

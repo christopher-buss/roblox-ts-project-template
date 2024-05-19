@@ -1,5 +1,5 @@
 type NestedKeyOf<T extends object> = {
-	[Key in keyof T & (string | number)]: T[Key] extends object
-		? `${Key}` | `${Key}.${NestedKeyOf<T[Key]>}`
+	[Key in keyof T & (number | string)]: T[Key] extends object
+		? `${Key}.${NestedKeyOf<T[Key]>}` | `${Key}`
 		: `${Key}`;
-}[keyof T & (string | number)];
+}[keyof T & (number | string)];

@@ -19,7 +19,7 @@ let playerService: PlayerService | undefined;
  */
 export default function withPlayerEntity<
 	T extends Array<unknown>,
-	R extends void | undefined = void,
+	R extends undefined | void = void,
 >(
 	func: (playerEntity: PlayerEntity, ...args: T) => R,
 ): (player: Player, ...args: T) => ServerResponse {
