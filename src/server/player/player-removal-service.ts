@@ -15,7 +15,7 @@ export default class PlayerRemovalService {
 	 * @param code - The reason the player was removed.
 	 */
 	public removeForBug(player: Player, code: KickCode): void {
-		this.logger.Warn(`Removing ${player.Name} due to bug: ${this.toMessage(code)}`);
+		this.logger.Warn(`Removing ${player.UserId} due to bug: ${this.toMessage(code)}`);
 		player.Kick(this.toMessage(code));
 	}
 

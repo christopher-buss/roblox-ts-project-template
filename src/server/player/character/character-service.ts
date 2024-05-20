@@ -84,7 +84,7 @@ export default class CharacterService implements OnStart, OnPlayerJoin {
 		return (player: Player, ...args: T): R | undefined => {
 			const playerRig = this.getCharacterRig(player);
 			if (!playerRig) {
-				this.logger.Info(`Could not get character rig for ${player.Name}`);
+				this.logger.Info(`Could not get character rig for ${player.UserId}`);
 				return;
 			}
 
@@ -118,7 +118,7 @@ export default class CharacterService implements OnStart, OnPlayerJoin {
 		connection.Disconnect();
 
 		if (!success) {
-			throw `Could not get character rig for ${player.Name}`;
+			throw `Could not get character rig for ${player.UserId}`;
 		}
 
 		this.listenForCharacterRemoving(player, model);
@@ -180,7 +180,7 @@ export default class CharacterService implements OnStart, OnPlayerJoin {
 	}
 
 	private async retryCharacterLoad(player: Player): Promise<void> {
-		this.logger.Warn(`Getting full rig for ${player.Name} timed out. Retrying...`);
+		this.logger.Warn(`Getting full rig for ${player.UserId} timed out. Retrying...`);
 		return loadCharacter(player);
 	}
 }

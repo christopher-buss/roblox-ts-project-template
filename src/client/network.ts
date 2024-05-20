@@ -13,10 +13,10 @@ export const Functions = GlobalFunctions.createClient({
 // Log warnings for bad requests and responses in development
 if ($NODE_ENV === "development") {
 	GlobalEvents.registerHandler("onBadRequest", (player, message) => {
-		Log.Warn(`Bad request from ${player.Name}: ${message}`);
+		Log.Warn(`Bad request from ${player.UserId}: ${message}`);
 	});
 
 	GlobalFunctions.registerHandler("onBadResponse", (player, message) => {
-		Log.Warn(`Bad response from ${player.Name}: ${message}`);
+		Log.Warn(`Bad response from ${player.UserId}: ${message}`);
 	});
 }
