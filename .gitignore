@@ -13,4 +13,4 @@ sourcemap.json
 *.rbxl
 
 # Bundled eslint config
-.mjs
+*.mjs
