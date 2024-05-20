@@ -2,7 +2,7 @@ import { Dependency } from "@flamework/core";
 import Log from "@rbxts/log";
 
 import type PlayerService from "server/player/player-service";
-import type { ServerResponse } from "types/interfaces/network-types";
+import type { ServerResponse } from "types/interfaces/network";
 
 import type PlayerEntity from "./player-entity";
 

@@ -24,47 +24,10 @@ class LogEventSFTOutputSink implements ILogEventSink {
 			MessageTemplateParser.GetTokens(message.Template),
 		);
 
-		let tag = "";
-
-		switch (message.Level) {
-			case LogLevel.Verbose: {
-				tag = "VERBOSE";
-				break;
-			}
-			case LogLevel.Debugging: {
-				tag = "DEBUG";
-				break;
-			}
-			case LogLevel.Information: {
-				tag = "INFO";
-				break;
-			}
-			case LogLevel.Warning: {
-				tag = "WARN";
-				break;
-			}
-			case LogLevel.Error: {
-				tag = "ERROR";
-				break;
-			}
-			case LogLevel.Fatal: {
-				tag = "FATAL";
-				break;
-			}
-		}
-
+		const tag = this.getLogLevelString(message.Level);
 		const context = message.SourceContext ?? "Game";
 		const messageResult = template.Render(message);
-
-		let fileInfo = "";
-		if (LOG_LEVEL <= LogLevel.Verbose) {
-			const source =
-				context === "Game"
-					? debug.info(STACK_TRACE_LEVEL_MODULE, "sl")
-					: debug.info(STACK_TRACE_LEVEL_FLAMEWORK, "sl");
-			const [file, line] = source;
-			fileInfo = ` (${file}:${line})`;
-		}
+		const fileInfo = this.getFileInformation(context);
 
 		const formatted_message =
 			`[${tag}] ${context} (${Environment}) - ${messageResult}` + fileInfo;
@@ -76,6 +39,42 @@ class LogEventSFTOutputSink implements ILogEventSink {
 		} else {
 			print(formatted_message);
 		}
+	}
+
+	private getLogLevelString(level: LogLevel): string {
+		switch (level) {
+			case LogLevel.Verbose: {
+				return "VERBOSE";
+			}
+			case LogLevel.Debugging: {
+				return "DEBUG";
+			}
+			case LogLevel.Information: {
+				return "INFO";
+			}
+			case LogLevel.Warning: {
+				return "WARN";
+			}
+			case LogLevel.Error: {
+				return "ERROR";
+			}
+			case LogLevel.Fatal: {
+				return "FATAL";
+			}
+		}
+	}
+
+	private getFileInformation(context: string): string {
+		if (LOG_LEVEL > LogLevel.Verbose) {
+			return "";
+		}
+
+		const source =
+			context === "Game"
+				? debug.info(STACK_TRACE_LEVEL_MODULE, "sl")
+				: debug.info(STACK_TRACE_LEVEL_FLAMEWORK, "sl");
+		const [file, line] = source;
+		return ` (${file}:${line})`;
 	}
 }
 

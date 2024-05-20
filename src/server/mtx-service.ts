@@ -1,11 +1,13 @@
 import type { OnInit } from "@flamework/core";
 import { Service } from "@flamework/core";
+import type { Document } from "@rbxts/lapis";
 import type { Logger } from "@rbxts/log";
 import Object from "@rbxts/object-utils";
 import { MarketplaceService, Players } from "@rbxts/services";
 import Sift from "@rbxts/sift";
 import Signal from "@rbxts/signal";
 
+import type { PlayerData } from "shared/store/persistent";
 import { selectPlayerData, selectPlayerMtx } from "shared/store/persistent";
 import { GamePass, Product } from "types/enum/mtx";
 
@@ -176,12 +178,12 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		// Ensure productId is a valid product for our game
 		if (!Object.values(Product).includes(tostring(productId) as Product)) {
 			this.logger.Warn(
-				`Player ${player.Name} attempted to purchased invalid product ${productId}`,
+				`Player ${player.UserId} attempted to purchased invalid product ${productId}`,
 			);
 			return;
 		}
 
-		this.logger.Info(`Player ${player.Name} purchased developer product ${productId}`);
+		this.logger.Info(`Player ${player.UserId} purchased developer product ${productId}`);
 
 		store.purchaseDeveloperProduct(tostring(player.UserId), productId);
 
@@ -201,17 +203,19 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			return;
 		}
 
+		const { UserId } = player;
+
 		// Ensure game passId is a valid game passes for our game
 		if (!Object.values(GamePass).includes(gamePassId)) {
 			this.logger.Warn(
-				`Player ${player.Name} attempted to purchased invalid game pass ${gamePassId}`,
+				`Player ${UserId} attempted to purchased invalid game pass ${gamePassId}`,
 			);
 			return;
 		}
 
-		this.logger.Info(`Player ${player.Name} purchased game pass ${gamePassId}`);
+		this.logger.Info(`Player ${UserId} purchased game pass ${gamePassId}`);
 
-		store.setGamePassOwned(tostring(player.UserId), gamePassId);
+		store.setGamePassOwned(tostring(UserId), gamePassId);
 
 		this.notifyProductActive(player, gamePassId, true);
 	}
@@ -228,7 +232,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 
 		const playerEntity = await this.playerService.getPlayerEntityAsync(player);
 		if (!playerEntity) {
-			this.logger.Error(`No entity for player ${player.Name}, cannot process receipt`);
+			this.logger.Error(`No entity for player ${player.UserId}, cannot process receipt`);
 			return Enum.ProductPurchaseDecision.NotProcessedYet;
 		}
 
@@ -255,13 +259,28 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			return Enum.ProductPurchaseDecision.NotProcessedYet;
 		}
 
+		this.updateReceiptHistory(data, document, PurchaseId);
+
+		const [success] = document.save().await();
+		if (!success) {
+			return Enum.ProductPurchaseDecision.NotProcessedYet;
+		}
+
+		return Enum.ProductPurchaseDecision.PurchaseGranted;
+	}
+
+	private updateReceiptHistory(
+		data: PlayerData,
+		document: Document<PlayerData>,
+		purchaseId: string,
+	): void {
 		const { receiptHistory } = data.mtx;
 
 		const updatedReceiptHistory =
 			receiptHistory.size() >= this.purchaseIdLog
 				? Sift.Array.shift(receiptHistory, receiptHistory.size() - this.purchaseIdLog + 1)
 				: receiptHistory;
-		updatedReceiptHistory.push(PurchaseId);
+		updatedReceiptHistory.push(purchaseId);
 
 		document.write(
 			Sift.Dictionary.merge(data, {
@@ -270,12 +289,5 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 				},
 			}),
 		);
-
-		const [success] = document.save().await();
-		if (!success) {
-			return Enum.ProductPurchaseDecision.NotProcessedYet;
-		}
-
-		return Enum.ProductPurchaseDecision.PurchaseGranted;
 	}
 }

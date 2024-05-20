@@ -22,7 +22,7 @@
 		"@flamework/components": "^1.2.2",
 		"@flamework/core": "^1.2.2",
 		"@flamework/networking": "^1.2.2",
-		"@isentinel/eslint-config": "^0.5.0",
+		"@isentinel/eslint-config": "^0.5.2",
 		"@rbxts/inspect": "^1.0.1",
 		"@rbxts/janitor": "1.15.7-ts.0",
 		"@rbxts/lapis": "^0.3.0",

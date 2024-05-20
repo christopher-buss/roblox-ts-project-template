@@ -1,6 +1,7 @@
 import type { OnStart } from "@flamework/core";
 import { Service } from "@flamework/core";
 import { Janitor } from "@rbxts/janitor";
+import type { Document } from "@rbxts/lapis";
 import type { Logger } from "@rbxts/log";
 import Object from "@rbxts/object-utils";
 import { Players } from "@rbxts/services";
@@ -8,6 +9,7 @@ import Signal from "@rbxts/signal";
 
 import { $NODE_ENV } from "rbxts-transform-env";
 import PlayerEntity from "server/player/player-entity";
+import type { PlayerData } from "shared/store/persistent";
 import type { ListenerData } from "shared/util/flamework-util";
 import { setupLifecycle } from "shared/util/flamework-util";
 import { onPlayerAdded, promisePlayerDisconnected } from "shared/util/player-util";
@@ -59,32 +61,19 @@ export default class PlayerService implements OnStart {
 
 		onPlayerAdded(player => {
 			this.onPlayerJoin(player).catch(err => {
-				this.logger.Error(`Failed to load player ${player.Name}: ${err}`);
+				this.logger.Error(`Failed to load player ${player.UserId}: ${err}`);
 			});
 		});
 
-		Players.PlayerRemoving.Connect(player => {
-			this.onPlayerRemoving(player).catch(err => {
-				this.logger.Error(`Failed to close player ${player.Name}: ${err}`);
-			});
-		});
+		Players.PlayerRemoving.Connect(
+			this.withPlayerEntity(playerEntity => {
+				this.onPlayerRemoving(playerEntity).catch(err => {
+					this.logger.Error(`Failed to close player ${playerEntity.userId}: ${err}`);
+				});
+			}),
+		);
 
-		// We want to hold the server open until all PlayerEntities are cleaned
-		// up and removed.
-		game.BindToClose(() => {
-			// We don't want to hold the server open in development
-			if ($NODE_ENV !== "production") {
-				return;
-			}
-
-			this.logger.Debug(`Game closing, holding open until all player entities are removed.`);
-
-			while (!this.playerEntities.isEmpty()) {
-				this.onEntityRemoving.Wait();
-			}
-
-			this.logger.Debug(`All player entities removed, closing game.`);
-		});
+		this.bindHoldServerOpen();
 	}
 
 	/**
@@ -134,7 +123,7 @@ export default class PlayerService implements OnStart {
 
 		const [success, playerEntity] = promise.await();
 		if (!success) {
-			throw `Player ${player.Name} disconnected before entity was created`;
+			throw `Player ${player.UserId} disconnected before entity was created`;
 		}
 
 		disconnect.cancel();
@@ -157,7 +146,7 @@ export default class PlayerService implements OnStart {
 			const playerEntity = this.getPlayerEntity(player);
 			if (!playerEntity) {
 				this.logger.Error(
-					`No entity for player ${player.Name}, cannot continue to callback`,
+					`No entity for player ${player.UserId}, cannot continue to callback`,
 				);
 				return;
 			}
@@ -175,23 +164,10 @@ export default class PlayerService implements OnStart {
 		const playerDocument = await this.playerDataService.loadPlayerData(player);
 		if (!playerDocument) {
 			this.playerRemovalService.removeForBug(player, KickCode.PlayerInstantiationError);
-			throw player;
+			return;
 		}
 
-		const janitor = new Janitor();
-		janitor.Add(async () => {
-			this.logger.Info(`Player ${player.Name} leaving game, cleaning up Janitor`);
-
-			try {
-				await playerDocument.close();
-			} catch (err) {
-				this.logger.Error(`Failed to close player document for ${player.Name}: ${err}`);
-			}
-
-			this.playerEntities.delete(player);
-			this.onEntityRemoving.Fire();
-		});
-
+		const janitor = this.setupPlayerJanitor(player, playerDocument);
 		const playerEntity = new PlayerEntity(player, janitor, playerDocument);
 		this.playerEntities.set(player, playerEntity);
 
@@ -213,19 +189,32 @@ export default class PlayerService implements OnStart {
 		this.onEntityJoined.Fire(playerEntity);
 	}
 
+	private setupPlayerJanitor(player: Player, playerDocument: Document<PlayerData>): Janitor {
+		const janitor = new Janitor();
+		janitor.Add(async () => {
+			this.logger.Info(`Player ${player.UserId} leaving game, cleaning up Janitor`);
+
+			try {
+				await playerDocument.close();
+			} catch (err) {
+				this.logger.Error(`Failed to close player document for ${player.UserId}: ${err}`);
+			}
+
+			this.playerEntities.delete(player);
+			this.onEntityRemoving.Fire();
+		});
+
+		return janitor;
+	}
+
 	/**
 	 * Called internally when a player is removed from the game. We hold the
 	 * PlayerEntity until all lifecycle events have been called, so that we can
 	 * access player data on player leaving if required.
 	 *
-	 * @param player - The player that is being removed.
+	 * @param playerEntity - The player entity associated with the player.
 	 */
-	private async onPlayerRemoving(player: Player): Promise<void> {
-		const playerEntity = this.getPlayerEntity(player);
-		if (!playerEntity) {
-			return;
-		}
-
+	private async onPlayerRemoving(playerEntity: PlayerEntity): Promise<void> {
 		// Call all connected lifecycle events
 		const promises = new Array<Promise<void>>();
 		debug.profilebegin("Lifecycle_Player_Leave");
@@ -248,16 +237,38 @@ export default class PlayerService implements OnStart {
 			this.logger.Error(`Error in player leave lifecycle event:\n${err}`);
 		});
 
+		// If we're in development, we want to warn if the lifecycle events take
+		// too long to complete. This is to ensure that we don't have any
+		// blocking code in these events.
 		if ($NODE_ENV === "development") {
 			lifecycles.timeout(MAX_REMOVING_TIMEOUT).catch(() => {
 				this.logger.Fatal(
-					`Player lifecycle events for ${player.Name} took too long. Please ensure ` +
-						`that lifecycle events do not take too long to complete.`,
+					`Player lifecycle events for ${playerEntity.userId} took too long. Please ` +
+						`ensure that lifecycle events do not take too long to complete.`,
 				);
 			});
 		}
 
 		await lifecycles;
 		playerEntity.janitor.Destroy();
+	}
+
+	private bindHoldServerOpen(): void {
+		// We want to hold the server open until all PlayerEntities are cleaned
+		// up and removed.
+		game.BindToClose(() => {
+			// We don't want to hold the server open in development
+			if ($NODE_ENV !== "production") {
+				return;
+			}
+
+			this.logger.Debug(`Game closing, holding open until all player entities are removed.`);
+
+			while (!this.playerEntities.isEmpty()) {
+				this.onEntityRemoving.Wait();
+			}
+
+			this.logger.Debug(`All player entities removed, closing game.`);
+		});
 	}
 }

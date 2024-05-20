@@ -11,11 +11,7 @@ export default style(
 		gitignore: true,
 		markdown: true,
 		react: true,
-
 		rules: {
-			"jsdoc/check-param-names": ["warn", { checkDestructured: false }],
-
-			"jsdoc/require-param": ["warn", { checkDestructured: false }],
 			"perfectionist/sort-objects": [
 				"warn",
 				{
@@ -32,11 +28,11 @@ export default style(
 					type: "natural",
 				},
 			],
-
 			"ts/no-magic-numbers": [
 				"error",
 				{
 					ignore: [0, 1],
+					ignoreEnums: true,
 					ignoreReadonlyClassProperties: true,
 					ignoreTypeIndexes: true,
 				},
