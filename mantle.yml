@@ -1,0 +1,16 @@
+owner: personal
+
+# If it's a group, you need to change it to this:
+# owner:
+#   group: group_id
+
+environments:
+  - label: staging
+    branches: [dev, dev/*]
+    targetOverrides:
+      configuration:
+        icon: marketing/beta-game-icon.png
+
+  - label: production
+    branches: [main]
+    targetAccess: public
