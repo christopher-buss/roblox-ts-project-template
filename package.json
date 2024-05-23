@@ -9,7 +9,7 @@
 	"main": "index.js",
 	"scripts": {
 		"build-prod": "npm run clean && cross-env NODE_ENV=production npx rbxtsc --verbose && npm run darklua",
-		"sync-prod": "rojo serve ./deploy.project.json",
+		"sync-prod": "rojo serve ./build.project.json",
 		"build-dev": "cross-env NODE_ENV=development npx rbxtsc",
 		"watch-dev": "cross-env NODE_ENV=development npx rbxtsc -w",
 		"sync-dev": "rojo serve",
@@ -25,6 +25,8 @@
 		"@isentinel/eslint-config": "^0.5.2",
 		"@rbxts/inspect": "^1.0.1",
 		"@rbxts/janitor": "1.15.7-ts.0",
+		"@rbxts/jest": "^0.1.0",
+		"@rbxts/jest-globals": "^0.1.0",
 		"@rbxts/lapis": "^0.3.0",
 		"@rbxts/log": "^0.6.3",
 		"@rbxts/make": "^1.0.6",

@@ -1,6 +1,6 @@
 {
 	"name": "example-build",
-	"globIgnorePaths": ["**/package.json", "**/tsconfig.json"],
+	"globIgnorePaths": ["**/package.json", "**/tsconfig.json", "**/*.spec.lua", "**/jest.config.lua"],
 	"tree": {
 		"$className": "DataModel",
 		"ServerScriptService": {
@@ -56,6 +56,10 @@
 			"$properties": {
 				"RespectFilteringEnabled": true
 			}
+		},
+		"TestService": {
+			"$className": "TestService",
+			"$ignoreUnknownInstances": false
 		}
 	}
 }
