@@ -2,9 +2,13 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - develop
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - develop
 
 permissions:
   contents: write
@@ -13,26 +17,34 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [20]
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
         with:
-          version: 9.0.5
-      - uses: ok-nick/setup-aftman@v0.4.2
+          version: 9
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
       - name: Install dependencies
         run: pnpm install
 
+      - name: Setup Aftman
+        uses: ok-nick/setup-aftman@v0.4.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Lint
         run: |
-          pnpm eslint .
-          pnpm prettier --check src
+          pnpm lint
 
       - name: Compile
-        run: pnpm build:dev --verbose
+        run: pnpm build-prod
 
       - name: Build project
-        run: rojo build --output place.rbxlx
+        run: rojo build ./build.project.json --output place.rbxlx

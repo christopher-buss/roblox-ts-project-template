@@ -2,6 +2,7 @@
 	"name": "roblox-ts-project-template",
 	"type": "module",
 	"version": "1.0.0",
+	"packageManager": "pnpm@9.1.2",
 	"description": "A Roblox game made with React and Roblox-TS",
 	"author": "",
 	"license": "ISC",
@@ -9,20 +10,20 @@
 	"main": "index.js",
 	"scripts": {
 		"build-prod": "npm run clean && cross-env NODE_ENV=production npx rbxtsc --verbose && npm run darklua",
-		"sync-prod": "rojo serve ./deploy.project.json",
+		"sync-prod": "rojo serve ./build.project.json",
 		"build-dev": "cross-env NODE_ENV=development npx rbxtsc",
 		"watch-dev": "cross-env NODE_ENV=development npx rbxtsc -w",
 		"sync-dev": "rojo serve",
 		"clean": "npx rimraf out/ && npx rimraf dist",
 		"darklua": "darklua process out dist --verbose",
 		"eslint-config": "npx @eslint/config-inspector",
-		"lint": "eslint . --fix"
+		"lint": "eslint --no-config-lookup --config eslint.config.js --max-warnings 0 ."
 	},
 	"dependencies": {
 		"@flamework/components": "^1.2.2",
 		"@flamework/core": "^1.2.2",
 		"@flamework/networking": "^1.2.2",
-		"@isentinel/eslint-config": "^0.5.2",
+		"@isentinel/eslint-config": "^0.5.6",
 		"@rbxts/inspect": "^1.0.1",
 		"@rbxts/janitor": "1.15.7-ts.0",
 		"@rbxts/lapis": "^0.3.0",

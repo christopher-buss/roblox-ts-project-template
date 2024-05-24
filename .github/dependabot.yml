@@ -1,11 +1,11 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: npm
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
     groups:
       deps:
-        dependency-type: "production"
+        dependency-type: production
       deps-dev:
-        dependency-type: "development"
+        dependency-type: development
