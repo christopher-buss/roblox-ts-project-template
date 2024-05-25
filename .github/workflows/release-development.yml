@@ -39,6 +39,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Setup Aftman
+        uses: ok-nick/setup-aftman@v0.4.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Compile
         run: pnpm build-dev --verbose
 
@@ -46,10 +51,11 @@ jobs:
         run: rojo build ./default.project.json --output place.rbxlx
 
       - name: Upload place
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: place
           path: place.rbxlx
+          if-no-files-found: error
 
   deploy:
     runs-on: ubuntu-latest
@@ -69,3 +75,5 @@ jobs:
 
       - name: Deploy place
         run: mantle deploy --environment development
+        env:
+          ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}

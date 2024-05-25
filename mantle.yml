@@ -5,10 +5,14 @@ owner: personal
 #   group: group_id
 
 # This should typically be kept in remote state.
-state: local
+state:
+  remote:
+    region: eu-central-1
+    bucket: christopher-buss-mantle-states
+    key: roblox-ts-example
 
 environments:
-  - label: staging
+  - label: development
     branches:
       - develop
     targetNamePrefix: environmentLabel

@@ -39,6 +39,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Setup Aftman
+        uses: ok-nick/setup-aftman@v0.4.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Compile
         run: pnpm build-prod --verbose
 
