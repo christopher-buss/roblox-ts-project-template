@@ -9,6 +9,7 @@ on:
       - LICENSE.md
       - 'scripts/**'
       - '.github/**'
+  workflow_dispatch:
 
 permissions:
   contents: write
