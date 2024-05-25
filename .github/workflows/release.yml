@@ -58,7 +58,7 @@ jobs:
           path: place.rbxlx
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     environment: production
     needs: build
 
