@@ -4,13 +4,51 @@ owner: personal
 # owner:
 #   group: group_id
 
+# This should typically be kept in remote state.
+state: local
+
 environments:
   - label: staging
-    branches: [dev, dev/*]
+    branches:
+      - develop
+    targetNamePrefix: environmentLabel
+    targetAccess: private
     targetOverrides:
-      configuration:
-        icon: marketing/beta-game-icon.png
+      icon: assets/marketing/example.png
 
   - label: production
-    branches: [main]
+    branches:
+      - main
     targetAccess: public
+
+target:
+  experience:
+    icon: assets/marketing/example.png
+    configuration:
+      playableDevices: [computer, console, phone, tablet]
+      privateServers:
+        price: 0
+      enableStudioAccessToApis: true
+      avatarType: playerChoice
+      avatarAnimationType: playerChoice
+    spatialVoice:
+      enabled: true
+    places:
+      start:
+        file: place.rbxlx
+        configuration:
+          name: roblox-ts Project Template
+          description: A project template for Roblox TypeScript projects.
+          maxPlayerCount: 700
+    badges:
+      1-example:
+        name: Welcome Example Badge
+        description: This is an example badge.
+        icon: assets/badges/example.png
+        enabled: true
+    products:
+      1-example:
+        name: Example Product
+        description: This is an example product.
+        price: 5
+        icon: assets/marketing/example.png

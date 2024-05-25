@@ -1,0 +1,71 @@
+name: Release Develop
+
+on:
+  push:
+    branches:
+      - develop
+    paths-ignore:
+      - README.md
+      - LICENSE.md
+      - 'scripts/**'
+      - '.github/**'
+
+permissions:
+  contents: write
+  packages: write
+
+concurrency:
+  group: development_environment
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Compile
+        run: pnpm build-dev --verbose
+
+      - name: Build project
+        run: rojo build ./default.project.json --output place.rbxlx
+
+      - name: Upload place
+        uses: actions/upload-artifact@v4
+        with:
+          name: place
+          path: place.rbxlx
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment: development
+    needs: build
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ok-nick/setup-aftman@v0.4.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download place artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: place
+
+      - name: Deploy place
+        run: mantle deploy --environment development

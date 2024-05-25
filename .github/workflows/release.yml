@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  release:
+    types:
+      - released
+    workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+
+concurrency:
+  group: production_environment
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Compile
+        run: pnpm build-prod --verbose
+
+      - name: Build project
+        run: rojo build ./build.project.json --output place.rbxlx
+
+      - name: Upload place
+        uses: actions/upload-artifact@v4
+        with:
+          name: place
+          path: place.rbxlx
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    needs: build
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ok-nick/setup-aftman@v0.4.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download place artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: place
+
+      - name: Deploy game
+        run: mantle deploy --allow-purchases --environment production
