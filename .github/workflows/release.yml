@@ -74,3 +74,7 @@ jobs:
 
       - name: Deploy game
         run: mantle deploy --allow-purchases --environment production
+        env:
+          ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
+          MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.MANTLE_AWS_ACCESS_KEY_ID }}
+          MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.MANTLE_AWS_SECRET_ACCESS_KEY }}

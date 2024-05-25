@@ -77,3 +77,5 @@ jobs:
         run: mantle deploy --environment development
         env:
           ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
+          MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.MANTLE_AWS_ACCESS_KEY_ID }}
+          MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.MANTLE_AWS_SECRET_ACCESS_KEY }}
