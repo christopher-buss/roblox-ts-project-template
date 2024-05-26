@@ -18,7 +18,7 @@ environments:
     targetNamePrefix: environmentLabel
     targetAccess: private
     targetOverrides:
-      icon: assets/marketing/example.png
+      icon: assets/marketing/example_icon.png
 
   - label: production
     branches:
@@ -27,7 +27,7 @@ environments:
 
 target:
   experience:
-    icon: assets/marketing/example.png
+    icon: assets/marketing/example_icon.png
     configuration:
       playableDevices: [computer, console, phone, tablet]
       privateServers:
@@ -48,11 +48,11 @@ target:
       1-example:
         name: Welcome Example Badge
         description: This is an example badge.
-        icon: assets/badges/example.png
+        icon: assets/badges/example_badge.png
         enabled: true
     products:
       1-example:
         name: Example Product
         description: This is an example product.
         price: 5
-        icon: assets/marketing/example.png
+        icon: assets/marketing/example_icon.png
