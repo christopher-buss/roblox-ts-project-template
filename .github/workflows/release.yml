@@ -63,6 +63,9 @@ jobs:
     needs: build
 
     steps:
+      - name: Install GH CLI
+        uses: dev-hanz-ops/install-gh-cli-action@v0.2.0
+
       - uses: actions/checkout@v4
       - uses: ok-nick/setup-aftman@v0.4.2
         with:
