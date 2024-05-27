@@ -1,5 +1,5 @@
+import type { PropsWithChildren } from "@rbxts/react";
 import React, { forwardRef } from "@rbxts/react";
-import type { PropsWithChildren } from "@rbxts/roact";
 
 interface PaddingProps extends PropsWithChildren {
 	readonly Padding: number;

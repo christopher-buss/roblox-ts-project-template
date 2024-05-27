@@ -58,9 +58,6 @@ importers:
       '@rbxts/rbx-debug':
         specifier: ^1.0.1
         version: 1.0.1
-      '@rbxts/rbx-react-error-boundary':
-        specifier: ^1.0.0
-        version: 1.0.0
       '@rbxts/react':
         specifier: ^0.3.6
         version: 0.3.6
@@ -607,9 +604,6 @@ packages:
   '@rbxts/log@0.6.3':
     resolution: {integrity: sha512-YZpDvjL7yif9aYuNAkuM9vnegcwQmOwX0CfvGfWvrzCpmARY4Ey2pTMhoEgxKo36HcdPPi3aLxmcuvn0NHrPPg==}
 
-  '@rbxts/luau-polyfill-internal@1.2.3-ts.0':
-    resolution: {integrity: sha512-LG1h4uf+MpMxu6RfOLowRe+NOs2SWXzCmYd49WvfR8ZKVUNHvT0BeVIL9rS9q//mTlz8BXDyl5EVIyjnKgsekA==}
-
   '@rbxts/maid@1.1.0':
     resolution: {integrity: sha512-bVWXZ0p2M3OJzPzvN5fY0T4s37ezUMY7EX31Xspp7Ds4C/K9yE4MHMRXjtlNvsYVPmoc5tdhAbpZY02Veix5lg==}
 
@@ -631,20 +625,8 @@ packages:
   '@rbxts/promise-child@1.2.1':
     resolution: {integrity: sha512-z1Qiim2l59fM2MSi3oi7mQyyxg74YjlSeSrDzBAb9Kd7SLe+bm2V00LOexuUtydZlxxzkrozzaCOlLPwoXwcaQ==}
 
-  '@rbxts/promise-forward@1.0.5':
-    resolution: {integrity: sha512-FrL3pIQDbRD1hKsUNH1Fwwd5jOuqU0vzKQI4Xo96AqzizYc4fb6vDkUg9Iq+IFki6FVlFvPN+YnvkCxGMjJw4Q==}
-
   '@rbxts/rbx-debug@1.0.1':
     resolution: {integrity: sha512-RXlr08yA1FbkUue7LbtnlGetqBHIp3OwfkHPV2J2aRoxDLeo3DuMQ3JPywbWooyCFFj7nw+rwkxyLWtBhNT7Sg==}
-
-  '@rbxts/rbx-react-error-boundary@1.0.0':
-    resolution: {integrity: sha512-KPYBRDGdNdfTjcneh3OKU749tbhuH2mo8G6WhL1sIyWk5DAEwvmeSraaGoWCM089mJEdK2vobStlsZsJE2Uk4g==}
-
-  '@rbxts/react-internal@0.2.2':
-    resolution: {integrity: sha512-/34bcOntTzucAwMvo2OtSJT05zfH88kjR0UKyBcADbbZ71KgMKai2Q8ccKKt7IuoPJDzP14dCHd5pXL44M2rkw==}
-
-  '@rbxts/react-reconciler-internal@0.2.1':
-    resolution: {integrity: sha512-+1iF6id3YuhChfJguBFqzDtYvruGFhkLz9Wr8T0ekp7RlGe4l7d7KLUg5l8GRPj9FbmjQFc0UufBHWmKkrJ2qQ==}
 
   '@rbxts/react-reflex@0.3.4':
     resolution: {integrity: sha512-GCXd7PjS/ovxD5v2oWqKMrxXROL5k49DiQC2M4UOUKHp+rGJeRGTlGcThnS7uqg6GZpSaCbPPsDZAx1hm7E2Yw==}
@@ -652,14 +634,8 @@ packages:
       '@rbxts/react': '*'
       '@rbxts/reflex': '*'
 
-  '@rbxts/react-roblox@0.1.2':
-    resolution: {integrity: sha512-74R0iemEWSgrE8f98JMfdQFSE+VpJTqo91aaZoBbskqHdeWX+kvVxjkiE5nMOkjIfptVHlZvD7P18hOTe2lwog==}
-
   '@rbxts/react-roblox@0.3.6':
     resolution: {integrity: sha512-4o6UUPXHZMZuUuAl92aTe/b1YoQkuPFsah3iQVV+Ic50cJivX0cBqEs5sGj6GviBUbQI1ZilYBhlc0/uk63iSA==}
-
-  '@rbxts/react-ts@0.9.0':
-    resolution: {integrity: sha512-u8sSmEpGio+udmXPnfHMoTENgI/PkAPeqs4qwagkntiMiqo/EbTSh7HJHaYh5pFcRgdaTxOvtcZyfjfr4lhgiA==}
 
   '@rbxts/react-vendor@0.3.6':
     resolution: {integrity: sha512-q3HilP6ZNHSgWW0lwka+Ft4Iq+fnPBppOeQhGua1XCtM2hEqhmUmME8DI1UlnaK/aGzdYW1bWC7YfHZhHGsIeA==}
@@ -676,20 +652,11 @@ packages:
   '@rbxts/ripple@0.8.1':
     resolution: {integrity: sha512-3zQznIQcuXKb6Q0jZpKvhYRdWjQ+sMOBQt3KlQ7as4URiiQyXQCBGx7oWupVwJHuWi4CnpfQVkB2VFDWAmH20Q==}
 
-  '@rbxts/roact-compat-internal@0.3.1':
-    resolution: {integrity: sha512-euje2jF3S83VNMtNvrjDgO3XpMibyIYcstCKsvLfIDASfCArtltwQRnjk3ewq20b2hOfy4wneQ8iXu2Di7J8rw==}
-
-  '@rbxts/scheduler-internal@0.2.1':
-    resolution: {integrity: sha512-9CVi2ZJMH+T4blfDd0t7bScBLWi49eD99eJ3Ie/Cv3WxQ5iYsZLSeSxzut5Yzkb83cYGb/alUGM/gzx0B19KQw==}
-
   '@rbxts/services@1.5.4':
     resolution: {integrity: sha512-Klh+gRIT8zy3xRTX1YD6FZ9nAMzkzPLTHmciigt59PEF7PJXo31CF0IU0RegQ7VSMrz1iOnXwxbIwy3htcMfOA==}
 
   '@rbxts/set-timeout@1.1.2':
     resolution: {integrity: sha512-P/A0IiH9wuZdSJYr4Us0MDFm61nvIFR0acfKFHLkcOsgvIgELC90Up9ugiSsaMEHRIcIcO5UjE39LuS3xTzQHw==}
-
-  '@rbxts/shared-internal@0.2.1':
-    resolution: {integrity: sha512-HWLFesx5u8NTyDMTNXEkskGT6nE5VLaEnnnq852ixiBtdfIdN/sGCgNnkwbHAq9P9cgX52V3EB5GdVeWcwJzkA==}
 
   '@rbxts/sift@0.0.9':
     resolution: {integrity: sha512-5Ycw3mSuUYbPT36Zcs6DtsikdlRcBOo2eG7gvM+HW+2L+VD7bU6+txWELZif6nX6DjjXQtYk19do/frTilfbKw==}
@@ -3732,8 +3699,6 @@ snapshots:
     dependencies:
       '@rbxts/message-templates': 0.3.2
 
-  '@rbxts/luau-polyfill-internal@1.2.3-ts.0': {}
-
   '@rbxts/maid@1.1.0': {}
 
   '@rbxts/make@1.0.6':
@@ -3755,50 +3720,17 @@ snapshots:
 
   '@rbxts/promise-child@1.2.1': {}
 
-  '@rbxts/promise-forward@1.0.5': {}
-
   '@rbxts/rbx-debug@1.0.1': {}
-
-  '@rbxts/rbx-react-error-boundary@1.0.0':
-    dependencies:
-      '@rbxts/roact': '@rbxts/react-ts@0.9.0'
-      '@rbxts/t': 3.1.1
-
-  '@rbxts/react-internal@0.2.2':
-    dependencies:
-      '@rbxts/luau-polyfill-internal': 1.2.3-ts.0
-      '@rbxts/shared-internal': 0.2.1
-
-  '@rbxts/react-reconciler-internal@0.2.1':
-    dependencies:
-      '@rbxts/luau-polyfill-internal': 1.2.3-ts.0
-      '@rbxts/promise-forward': 1.0.5
-      '@rbxts/react-internal': 0.2.2
-      '@rbxts/scheduler-internal': 0.2.1
-      '@rbxts/shared-internal': 0.2.1
 
   '@rbxts/react-reflex@0.3.4(@rbxts/react@0.3.6)(@rbxts/reflex@4.3.1)':
     dependencies:
       '@rbxts/react': 0.3.6
       '@rbxts/reflex': 4.3.1
 
-  '@rbxts/react-roblox@0.1.2':
-    dependencies:
-      '@rbxts/luau-polyfill-internal': 1.2.3-ts.0
-      '@rbxts/react-internal': 0.2.2
-      '@rbxts/react-reconciler-internal': 0.2.1
-      '@rbxts/scheduler-internal': 0.2.1
-      '@rbxts/shared-internal': 0.2.1
-
   '@rbxts/react-roblox@0.3.6':
     dependencies:
       '@rbxts/react': 0.3.6
       '@rbxts/react-vendor': 0.3.6
-
-  '@rbxts/react-ts@0.9.0':
-    dependencies:
-      '@rbxts/react-internal': 0.2.2
-      '@rbxts/roact-compat-internal': 0.3.1
 
   '@rbxts/react-vendor@0.3.6': {}
 
@@ -3812,27 +3744,11 @@ snapshots:
 
   '@rbxts/ripple@0.8.1': {}
 
-  '@rbxts/roact-compat-internal@0.3.1':
-    dependencies:
-      '@rbxts/luau-polyfill-internal': 1.2.3-ts.0
-      '@rbxts/react-internal': 0.2.2
-      '@rbxts/react-roblox': 0.1.2
-      '@rbxts/shared-internal': 0.2.1
-
-  '@rbxts/scheduler-internal@0.2.1':
-    dependencies:
-      '@rbxts/luau-polyfill-internal': 1.2.3-ts.0
-      '@rbxts/shared-internal': 0.2.1
-
   '@rbxts/services@1.5.4': {}
 
   '@rbxts/set-timeout@1.1.2':
     dependencies:
       '@rbxts/services': 1.5.4
-
-  '@rbxts/shared-internal@0.2.1':
-    dependencies:
-      '@rbxts/luau-polyfill-internal': 1.2.3-ts.0
 
   '@rbxts/sift@0.0.9': {}
 
