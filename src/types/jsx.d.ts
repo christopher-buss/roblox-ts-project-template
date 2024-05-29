@@ -1,14 +1,16 @@
+import type { InstanceProps } from "@rbxts/react";
+
 declare namespace JSX {
 	interface IntrinsicElements {
-		attachment: IntrinsicElement<Attachment>;
-		blureffect: IntrinsicElement<BlurEffect>;
-		folder: IntrinsicElement<Folder>;
-		highlight: IntrinsicElement<Highlight>;
-		motor6d: IntrinsicElement<Motor6D>;
-		part: IntrinsicElement<Part>;
-		proximityprompt: IntrinsicElement<ProximityPrompt>;
-		rigidconstraint: IntrinsicElement<RigidConstraint>;
-		texture: IntrinsicElement<Texture>;
-		worldmodel: IntrinsicElement<WorldModel>;
+		attachment: InstanceProps<Attachment>;
+		blureffect: InstanceProps<BlurEffect>;
+		folder: InstanceProps<Folder>;
+		highlight: InstanceProps<Highlight>;
+		motor6d: InstanceProps<Motor6D>;
+		part: InstanceProps<Part>;
+		proximityprompt: InstanceProps<ProximityPrompt>;
+		rigidconstraint: InstanceProps<RigidConstraint>;
+		texture: InstanceProps<Texture>;
+		worldmodel: InstanceProps<WorldModel>;
 	}
 }
