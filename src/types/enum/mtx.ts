@@ -11,7 +11,6 @@ export type GamePass = ValueOf<typeof GamePass>;
 
 export interface GamePassData {
 	active: boolean;
-	id: GamePass;
 }
 
 export const Product = {
@@ -24,6 +23,5 @@ export const Product = {
 export type Product = ValueOf<typeof Product>;
 
 export interface ProductData {
-	id: number;
 	timesPurchased: number;
 }

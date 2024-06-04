@@ -25,32 +25,28 @@ export const mtxSlice = createProducer(initialState, {
 		};
 	},
 
-	purchaseDeveloperProduct: (state, player: string, productId: number) => {
+	purchaseDeveloperProduct: (state, player: string, productId: Product) => {
 		const mtx = state[player];
-
-		const id = tostring(productId) as Product;
 
 		return {
 			...state,
 			[player]: mtx && {
 				...mtx,
-				developerProducts: mtx.products.set(id, {
-					id: productId,
-					timesPurchased: (mtx.products.get(id)?.timesPurchased ?? 0) + 1,
+				developerProducts: new Map([...mtx.products]).set(productId, {
+					timesPurchased: (mtx.products.get(productId)?.timesPurchased ?? 0) + 1,
 				}),
 			},
 		};
 	},
 
-	setGamePassOwned: (state, player: string, gamePassId: GamePass) => {
+	purchaseGamePass: (state, player: string, gamePassId: GamePass) => {
 		const mtx = state[player];
 
 		return {
 			...state,
 			[player]: mtx && {
 				...mtx,
-				gamePasses: mtx.gamePasses.set(gamePassId, {
-					id: gamePassId,
+				gamePasses: new Map([...mtx.gamePasses]).set(gamePassId, {
 					active: true,
 				}),
 			},
