@@ -2,7 +2,7 @@
 	"name": "roblox-ts-project-template",
 	"type": "module",
 	"version": "1.0.0",
-	"packageManager": "pnpm@9.1.3",
+	"packageManager": "pnpm@9.1.4",
 	"description": "A Roblox game made with React and Roblox-TS",
 	"author": "",
 	"license": "ISC",
@@ -34,7 +34,6 @@
 		"@rbxts/pretty-react-hooks": "^0.4.2",
 		"@rbxts/promise-child": "^1.2.1",
 		"@rbxts/rbx-debug": "^1.0.1",
-
 		"@rbxts/react": "^0.3.6",
 		"@rbxts/react-reflex": "^0.3.4",
 		"@rbxts/react-roblox": "^0.3.6",
