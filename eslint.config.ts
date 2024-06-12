@@ -1,4 +1,4 @@
-import style from "@isentinel/eslint-config";
+import style, { GLOB_TSX, GLOB_YAML } from "@isentinel/eslint-config";
 
 import prettierrc from "./.prettierrc.config.ts";
 
@@ -7,6 +7,7 @@ export default style(
 		formatters: {
 			markdown: true,
 			prettierOptions: prettierrc,
+			toml: true,
 		},
 		gitignore: true,
 		markdown: true,
@@ -54,9 +55,15 @@ export default style(
 		ignores: ["*.js"],
 	},
 	{
-		files: ["**/*.tsx"],
+		files: [GLOB_TSX],
 		rules: {
 			"ts/no-magic-numbers": "off",
+		},
+	},
+	{
+		files: [GLOB_YAML],
+		rules: {
+			"comment-length/limit-multi-line-comments": "off",
 		},
 	},
 );

@@ -11,6 +11,7 @@ flamework.build
 sourcemap.json
 *.rbxl.lock
 *.rbxl
+*.rbxlx
 
 # Bundled eslint config
 *.mjs
