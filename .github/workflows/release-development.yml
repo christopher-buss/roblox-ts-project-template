@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
       - name: Install pnpm
         uses: pnpm/action-setup@v3
@@ -32,7 +32,7 @@ jobs:
           version: 9.1.4
 
       - name: Use Node.js 20
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
         with:
           node-version: 20
           cache: pnpm
@@ -41,7 +41,7 @@ jobs:
         run: pnpm install
 
       - name: Setup Aftman
-        uses: ok-nick/setup-aftman@v0.4.2
+        uses: ok-nick/setup-aftman@e226f24209f47677da7b215bab44f6351a2c043b # v0.4.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -52,7 +52,7 @@ jobs:
         run: rojo build ./default.project.json --output place.rbxlx
 
       - name: Upload place
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
         with:
           name: place
           path: place.rbxlx
@@ -65,15 +65,15 @@ jobs:
 
     steps:
       - name: Install GH CLI
-        uses: dev-hanz-ops/install-gh-cli-action@v0.2.0
+        uses: dev-hanz-ops/install-gh-cli-action@8fff9050dae2d81b38f94500d8b74ad1d1d47410 # v0.2.0
 
-      - uses: actions/checkout@v4
-      - uses: ok-nick/setup-aftman@v0.4.2
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: ok-nick/setup-aftman@e226f24209f47677da7b215bab44f6351a2c043b # v0.4.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download place artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3
         with:
           name: place
 
