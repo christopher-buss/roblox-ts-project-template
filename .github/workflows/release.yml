@@ -52,10 +52,11 @@ jobs:
         run: rojo build ./build.project.json --output place.rbxlx
 
       - name: Upload place
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: place
           path: place.rbxlx
+          if-no-files-found: error
 
   deploy:
     runs-on: self-hosted
