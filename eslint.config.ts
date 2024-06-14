@@ -64,6 +64,7 @@ export default style(
 		files: [GLOB_YAML],
 		rules: {
 			"comment-length/limit-multi-line-comments": "off",
+			"no-inline-comments": "off",
 		},
 	},
 );
