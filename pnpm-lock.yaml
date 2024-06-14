@@ -72,7 +72,7 @@ importers:
         version: 4.3.1
       '@rbxts/remap':
         specifier: ^0.2.1
-        version: 0.2.1
+        version: 0.2.2
       '@rbxts/ripple':
         specifier: ^0.8.1
         version: 0.8.1
@@ -659,8 +659,8 @@ packages:
   '@rbxts/reflex@4.3.1':
     resolution: {integrity: sha512-S5MbEpHKeRh9NWhwGJ789WbUsmlAlpQziWaNK4+kz1EpaaQ7uHQMZAuN1DYl4+QkqmOSuPlj04COwmArBGWH1Q==}
 
-  '@rbxts/remap@0.2.1':
-    resolution: {integrity: sha512-aj5kdtx01v5a0Vy9HC6PIwS+d9S8SePbvtAbawuuI0/C20NcA3cpZZgGoJPaN5IR0DJbwUmg2wjDEsU9S4KURg==}
+  '@rbxts/remap@0.2.2':
+    resolution: {integrity: sha512-VAzqk5LsF5phR0KGrrKYOBPlgwrv+cOE5iDEPTCW1yJvqWwTyhrzfGb9lGKqJvMJ+6gDNbaQJeESkcR1dmdPCw==}
 
   '@rbxts/ripple@0.8.1':
     resolution: {integrity: sha512-3zQznIQcuXKb6Q0jZpKvhYRdWjQ+sMOBQt3KlQ7as4URiiQyXQCBGx7oWupVwJHuWi4CnpfQVkB2VFDWAmH20Q==}
@@ -3856,7 +3856,7 @@ snapshots:
 
   '@rbxts/reflex@4.3.1': {}
 
-  '@rbxts/remap@0.2.1': {}
+  '@rbxts/remap@0.2.2': {}
 
   '@rbxts/ripple@0.8.1': {}
 
