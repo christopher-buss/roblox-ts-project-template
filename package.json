@@ -56,7 +56,7 @@
 		"@rbxts/types": "1.0.781",
 		"bundle-require": "5.0.0",
 		"cross-env": "7.0.3",
-		"eslint": "9.4.0",
+		"eslint": "9.5.0",
 		"eslint-config-flat-gitignore": "0.1.5",
 		"eslint-plugin-format": "0.1.2",
 		"eslint-plugin-react-hooks": "4.6.2",
