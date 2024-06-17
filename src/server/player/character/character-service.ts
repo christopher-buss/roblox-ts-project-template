@@ -143,6 +143,7 @@ export default class CharacterService implements OnStart, OnPlayerJoin {
 
 		addToCollisionGroup(rig, CollisionGroup.Character);
 		rig.AddTag(Tag.PlayerCharacter);
+		this.characterRigs.set(player, rig);
 
 		this.logger.Debug(`Loaded character rig for ${name}`);
 
