@@ -57,6 +57,7 @@ sync-dev`).
 -   [React](https://www.npmjs.com/package/@rbxts/react)
 -   [Reflex](https://littensy.github.io/reflex/docs/guides/)
 -   [Ripple](https://github.com/littensy/ripple)
+-   [Sift](https://cxmeel.github.io/sift/)
 -   [UI Labs](https://ui-labs-roblox.github.io/ui-labs-docs/)
 
 #### Tools
@@ -64,6 +65,8 @@ sync-dev`).
 -   [Darklua](https://darklua.com/)
 -   [ESLint config](https://github.com/christopher-buss/roblox-ts-eslint-config)
 -   [ESLint](https://eslint.org/)
+-   [Mantle](https://mantledeploy.vercel.app/)
+-   [Renovate](https://docs.renovatebot.com/)
 -   [Rojo](https://rojo.space/)
 -   [pnpm](https://pnpm.io/)
 -   [roblox-ts](https://roblox-ts.com/)
