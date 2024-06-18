@@ -65,24 +65,26 @@ export default class PlayerBadgeService implements OnPlayerJoin {
 	private async giveBadge(playerEntity: PlayerEntity, badge: Badge): Promise<void> {
 		const { player, userId } = playerEntity;
 
-		try {
-			const badgeInfo = await this.getBadgeInfo(badge);
-			if (!badgeInfo.IsEnabled) {
-				this.logger.Warn(`Badge ${badge} is not enabled.`);
-				return;
-			}
-
-			const [success, awarded] = pcall(() =>
-				BadgeService.AwardBadge(player.UserId, tonumber(badge)),
-			);
-			if (!success) {
-				throw `Failed to award badge ${badge} to ${userId}: ${awarded}`;
-			}
-
-			store.awardBadge(userId, badge, awarded);
-		} catch (err) {
-			this.logger.Error(`Failed to award badge ${badge} to ${player.UserId}: ${err}`);
+		const badgeInfo = await this.getBadgeInfo(badge);
+		if (!badgeInfo.IsEnabled) {
+			this.logger.Warn(`Badge ${badge} is not enabled.`);
+			return;
 		}
+
+		const [success, awarded] = pcall(() =>
+			BadgeService.AwardBadge(player.UserId, tonumber(badge)),
+		);
+		if (!success) {
+			throw awarded;
+		}
+
+		if (!awarded) {
+			this.logger.Warn(`Awarded badge ${badge} to ${userId} but it was not successful.`);
+		} else {
+			this.logger.Info(`Awarded badge ${badge} to ${userId}`);
+		}
+
+		store.awardBadge(userId, badge, awarded);
 	}
 
 	private async awardUnrewardedBadges(playerEntity: PlayerEntity): Promise<void> {
