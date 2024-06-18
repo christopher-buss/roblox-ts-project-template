@@ -1,6 +1,7 @@
 import { Service } from "@flamework/core";
 import type { Collection, Document } from "@rbxts/lapis";
 import { createCollection, setConfig } from "@rbxts/lapis";
+import DataStoreServiceMock from "@rbxts/lapis-mockdatastore";
 import type { Logger } from "@rbxts/log";
 import { Players, RunService } from "@rbxts/services";
 
@@ -12,7 +13,6 @@ import { defaultPlayerData } from "shared/store/persistent/persistent-slice";
 import KickCode from "types/enum/kick-reason";
 
 import type PlayerRemovalService from "../player-removal-service";
-import DataStoreServiceMock from "./mock-data-store";
 import { validate } from "./validate-data";
 
 const DATA_STORE_NAME = RunService.IsStudio() ? "Development" : "Production";
