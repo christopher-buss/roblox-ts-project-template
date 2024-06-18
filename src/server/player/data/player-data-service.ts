@@ -30,7 +30,7 @@ export default class PlayerDataService {
 		private readonly logger: Logger,
 		private readonly playerRemovalService: PlayerRemovalService,
 	) {
-		if (RunService.IsStudio() && $NODE_ENV === "development") {
+		if ($NODE_ENV === "development" && RunService.IsStudio()) {
 			setConfig({
 				dataStoreService: new DataStoreServiceMock(),
 			});
