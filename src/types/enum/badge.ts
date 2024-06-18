@@ -2,8 +2,8 @@ import { GameId, getConfigValueForGame } from "shared/functions/game-config";
 
 export const Badge = {
 	Welcome: getConfigValueForGame({
-		[GameId.Development]: "0",
-		[GameId.Production]: "1",
+		[GameId.Development]: "3630460038655754",
+		[GameId.Production]: "1933841780815262",
 	}),
 } as const;
 

@@ -4,7 +4,6 @@ owner: personal
 # owner:
 #   group: group_id
 
-# This should typically be kept in remote state.
 state:
   remote:
     region: eu-central-1
@@ -44,6 +43,7 @@ target:
           name: roblox-ts Project Template
           description: A project template for Roblox TypeScript projects.
           maxPlayerCount: 700
+          allowCopying: true # !!! TURN THIS OFF FOR YOUR GAME !!!
     badges:
       1-example:
         name: Welcome Example Badge
