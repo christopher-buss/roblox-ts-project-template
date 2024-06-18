@@ -1,0 +1,13 @@
+asset_dir = "assets"
+write_dir = "src/shared/"
+
+[creator]
+type = "user"
+id = 1910140
+
+[codegen]
+output_name = "assets"
+typescript = true
+luau = true
+style = "nested"
+strip_extension = true

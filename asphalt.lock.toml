@@ -1,0 +1,11 @@
+[entries."assets/badges/example-badge.png"]
+hash = "e6a5f98cc1a6a0083ef4a96f70bbdf0aebdf2c9371891c62df18072d6e94970e"
+asset_id = 18110928024
+
+[entries."assets/marketing/example-icon.png"]
+hash = "e6a5f98cc1a6a0083ef4a96f70bbdf0aebdf2c9371891c62df18072d6e94970e"
+asset_id = 18110928241
+
+[entries."assets/marketing/googly.png"]
+hash = "122fcb83b8f30d23615603fe2268c6293f17988c9bd44d58f1681c0f4cfc84ed"
+asset_id = 18110928530

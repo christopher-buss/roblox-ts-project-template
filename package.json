@@ -17,7 +17,8 @@
 		"clean": "npx rimraf out/ && npx rimraf dist",
 		"darklua": "darklua process out dist --verbose",
 		"eslint-config": "npx @eslint/config-inspector",
-		"lint": "eslint --no-config-lookup --config eslint.config.js --max-warnings 0 ."
+		"lint": "eslint --max-warnings 0 .",
+		"upload-assets": "dotenv -e .env asphalt sync && eslint src/shared/assets.d.ts --fix"
 	},
 	"dependencies": {
 		"@flamework/components": "^1.2.3",
@@ -57,6 +58,7 @@
 		"@rbxts/types": "1.0.782",
 		"bundle-require": "5.0.0",
 		"cross-env": "7.0.3",
+		"dotenv-cli": "^7.4.2",
 		"eslint": "9.5.0",
 		"eslint-config-flat-gitignore": "0.1.5",
 		"eslint-plugin-format": "0.1.2",

@@ -15,3 +15,5 @@ sourcemap.json
 
 # Bundled eslint config
 *.mjs
+
+.env
