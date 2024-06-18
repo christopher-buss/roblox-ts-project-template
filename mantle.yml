@@ -56,3 +56,9 @@ target:
         description: This is an example product.
         price: 5
         icon: assets/marketing/example-icon.png
+    passes:
+      1-example:
+        name: Example Pass
+        description: This is an example pass.
+        price: 5
+        icon: assets/marketing/example-icon.png
