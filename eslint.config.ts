@@ -1,4 +1,4 @@
-import style, { GLOB_TSX, GLOB_YAML } from "@isentinel/eslint-config";
+import style, { GLOB_JS, GLOB_TSX, GLOB_YAML } from "@isentinel/eslint-config";
 
 import prettierrc from "./.prettierrc.config.ts";
 
@@ -52,7 +52,7 @@ export default style(
 		},
 	},
 	{
-		ignores: ["*.js"],
+		ignores: [GLOB_JS],
 	},
 	{
 		files: [GLOB_TSX],
