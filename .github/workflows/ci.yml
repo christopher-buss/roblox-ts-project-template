@@ -10,6 +10,9 @@ permissions:
   contents: write
   packages: write
 
+env:
+  HUSKY: 0
+
 jobs:
   build:
     runs-on: ubuntu-latest
