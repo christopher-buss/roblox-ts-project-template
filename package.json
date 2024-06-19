@@ -19,7 +19,7 @@
 		"eslint-config": "npx @eslint/config-inspector",
 		"lint": "eslint --max-warnings 0 .",
 		"upload-assets": "asphalt sync && eslint src/shared/assets.d.ts --fix",
-		"prepare": "husky"
+		"prepare": "node .husky/install.js"
 	},
 	"dependencies": {
 		"@flamework/components": "1.2.3",
