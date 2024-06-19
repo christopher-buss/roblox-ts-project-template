@@ -138,7 +138,7 @@ importers:
         specifier: 12.1.0
         version: 12.1.0(eslint@9.5.0)
       git-pull-run:
-        specifier: ^1.4.0
+        specifier: 1.4.0
         version: 1.4.0
       husky:
         specifier: 9.0.11
