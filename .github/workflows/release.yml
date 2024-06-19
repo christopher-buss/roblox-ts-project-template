@@ -36,7 +36,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --prod
 
       - name: Setup Aftman
         uses: ok-nick/setup-aftman@e226f24209f47677da7b215bab44f6351a2c043b # v0.4.2

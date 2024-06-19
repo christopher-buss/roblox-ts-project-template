@@ -18,7 +18,8 @@
 		"darklua": "darklua process out dist --verbose",
 		"eslint-config": "npx @eslint/config-inspector",
 		"lint": "eslint --max-warnings 0 .",
-		"upload-assets": "asphalt sync && eslint src/shared/assets.d.ts --fix"
+		"upload-assets": "asphalt sync && eslint src/shared/assets.d.ts --fix",
+		"prepare": "husky"
 	},
 	"dependencies": {
 		"@flamework/components": "1.2.3",
@@ -63,12 +64,12 @@
 		"eslint-plugin-format": "0.1.2",
 		"eslint-plugin-react-hooks": "4.6.2",
 		"eslint-plugin-simple-import-sort": "12.1.0",
+		"husky": "^9.0.11",
 		"lint-staged": "15.2.7",
 		"prettier-plugin-jsdoc": "1.3.0",
 		"rbxts-transformer-flamework": "1.2.3",
 		"rimraf": "5.0.7",
 		"roblox-ts": "2.3.0-dev-e6e7658",
-		"simple-git-hooks": "2.11.1",
 		"typescript": "5.4.5"
 	},
 	"pnpm": {
@@ -76,9 +77,6 @@
 			"roblox-ts@2.3.0-dev-e6e7658": "patches/roblox-ts@2.3.0-dev-e6e7658.patch",
 			"rbxts-transform-env@2.2.0": "patches/rbxts-transform-env@2.2.0.patch"
 		}
-	},
-	"simple-git-hooks": {
-		"pre-commit": "pnpm lint-staged"
 	},
 	"lint-staged": {
 		"*": "eslint --fix"
