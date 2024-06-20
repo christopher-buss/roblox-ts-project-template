@@ -33,7 +33,7 @@
 		"@rbxts/make": "1.0.6",
 		"@rbxts/message-templates": "0.3.2",
 		"@rbxts/object-utils": "1.0.4",
-		"@rbxts/pretty-react-hooks": "0.5.0",
+		"@rbxts/pretty-react-hooks": "0.5.1",
 		"@rbxts/promise-child": "1.2.1",
 		"@rbxts/rbx-debug": "1.0.1",
 		"@rbxts/react": "0.4.0",
