@@ -19,7 +19,7 @@
 > [!CAUTION]
 > You likely do not need a fully managed rojo project. For the vast majority of
 > projects, a more simple setup will suffice. If you are new to roblox-ts, I
-> would stronly advise against using the fully managed portions of this
+> would strongly advise against using the fully managed portions of this
 > template. This includes the usage of Mantle and the release process (under
 > `.github/workflows`). Aside from these features, the template can be a great
 > starting point for new projects.
@@ -37,7 +37,7 @@ which is a highly opinionated guide for writing clean and consistent code.
 > [!NOTE]
 > This aims to be a fully-fledged solution to fully managed rojo projects but does
 > not currently have any built-in support for handing models. Eventually this
-> functionality will exist. For now, you can look into
+> functionality will exist. For now, you can investigate
 > [Lune](https://lune-org.github.io/docs) to figure out solutions that will work
 > for your use case.
 
@@ -46,7 +46,7 @@ which is a highly opinionated guide for writing clean and consistent code.
 1. Press the green `Use this template` button on the top right of the page to
    create a new repository.
 2. Clone the repository to your local machine.
-3. Run `pnpm install` to install all of the dependencies.
+3. Run `pnpm install` to install all the dependencies.
 4. Run `pnpm run watch-dev` to start the development server.
 5. Sync in with rojo (either by using the rojo extension or by running `pnpm run
 sync-dev`).
