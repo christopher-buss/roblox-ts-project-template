@@ -16,6 +16,13 @@
 
 </div>
 
+> [!CAUTION]
+> You likely do not need a fully managed rojo project. For the vast majority of
+> projects, a more simple setup will suffice. If you are new to roblox-ts, I
+> would stronly advise against using the fully managed portions of this
+> template. This includes the usage of Mantle and the release process (under
+> `.github/workflows`). Aside from these features, the template can be a great
+> starting point for new projects.
 ---
 
 This is my personal template for use in the roblox-ts ecosystem, utilizing
@@ -27,13 +34,12 @@ initiating new projects, complete with frequently used patterns that I adopt
 already configured. Additionally, it integrated my own customized eslint-config,
 which is a highly opinionated guide for writing clean and consistent code.
 
-### Warning ⚠️
-
-My eslint-config is very strict and highly opinionated and may not be suitable
-for beginners or people who prefer a more relaxed coding style. If you would
-like to use this template without my eslint-config, you can remove it from
-the `package.json` file, remove the `eslint.config.ts` file, along with the
-`tsconfig.build.json` file, and then replace it with your own configuration.
+> [!NOTE]
+> This aims to be a fully-fledged solution to fully managed rojo projects but does
+> not currently have any built-in support for handing models. Eventually this
+> functionality will exist. For now, you can look into
+> [Lune](https://lune-org.github.io/docs) to figure out solutions that will work
+> for your use case.
 
 ### How to use:
 
