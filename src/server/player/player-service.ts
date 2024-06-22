@@ -42,11 +42,11 @@ export interface OnPlayerLeave {
 /** A service that manages player entities in the game. */
 @Service({})
 export default class PlayerService implements OnStart {
+	private readonly playerLeaveEvents = new Array<ListenerData<OnPlayerLeave>>();
 	private readonly onEntityJoined = new Signal<(playerEntity: PlayerEntity) => void>();
 	private readonly onEntityRemoving = new Signal();
 	private readonly playerEntities = new Map<Player, PlayerEntity>();
 	private readonly playerJoinEvents = new Array<ListenerData<OnPlayerJoin>>();
-	private readonly playerLeaveEvents = new Array<ListenerData<OnPlayerLeave>>();
 
 	constructor(
 		private readonly logger: Logger,
@@ -185,6 +185,8 @@ export default class PlayerService implements OnStart {
 		}
 
 		debug.profileend();
+
+		this.logger.Info(`Player ${player.UserId} joined the game.`);
 
 		this.onEntityJoined.Fire(playerEntity);
 	}

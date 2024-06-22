@@ -1,16 +1,7 @@
-import style, { GLOB_JS, GLOB_TSX, GLOB_YAML } from "@isentinel/eslint-config";
-
-import prettierrc from "./.prettierrc.config.ts";
+import style, { GLOB_JS, GLOB_TSX } from "@isentinel/eslint-config";
 
 export default style(
 	{
-		formatters: {
-			markdown: true,
-			prettierOptions: prettierrc,
-			toml: true,
-		},
-		gitignore: true,
-		markdown: true,
 		react: true,
 		rules: {
 			"perfectionist/sort-objects": [
@@ -39,16 +30,10 @@ export default style(
 				},
 			],
 		},
-		toml: true,
 		typescript: {
 			parserOptions: {
-				ecmaVersion: 2018,
-				jsx: true,
 				project: "tsconfig.build.json",
-				sourceType: "module",
-				useJSXTextNode: true,
 			},
-			tsconfigPath: "tsconfig.build.json",
 		},
 	},
 	{
@@ -58,13 +43,6 @@ export default style(
 		files: [GLOB_TSX],
 		rules: {
 			"ts/no-magic-numbers": "off",
-		},
-	},
-	{
-		files: [GLOB_YAML],
-		rules: {
-			"comment-length/limit-multi-line-comments": "off",
-			"no-inline-comments": "off",
 		},
 	},
 );
