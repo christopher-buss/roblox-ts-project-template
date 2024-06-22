@@ -5,7 +5,7 @@
 	"eslint.format.enable": true,
 	// Enable the ESlint flat config support
 	"eslint.useFlatConfig": true,
-	"eslint.validate": ["typescript", "typescriptreact", "markdown", "json", "jsonc", "yaml", "toml"],
+	"eslint.validate": ["typescript", "typescriptreact", "markdown", "json", "jsonc", "yaml", "toml", "luau"],
 	// Silent the stylistic rules in you IDE, but still auto fix them
 	"eslint.rules.customizations": [
 		{
@@ -58,36 +58,5 @@
 		"source.fixAll.eslint": "always",
 		"source.organizeImports": "never"
 	},
-	"npm.packageManager": "pnpm",
-	"cSpell.words": [
-		"blureffect",
-		"canvasgroup",
-		"darklua",
-		"Flamework",
-		"imagelabel",
-		"leaderboard",
-		"Leaderstat",
-		"Leaderstats",
-		"lifecycles",
-		"profilebegin",
-		"proximityprompt",
-		"rbxassetid",
-		"rbxts",
-		"rbxtsc",
-		"rigidconstraint",
-		"Roblox",
-		"rojo",
-		"screengui",
-		"scrollingframe",
-		"textbutton",
-		"textlabel",
-		"tostring",
-		"traceback",
-		"typeof",
-		"uicorner",
-		"uigridlayout",
-		"uipadding",
-		"viewportframe",
-		"worldmodel"
-	]
+	"npm.packageManager": "pnpm"
 }
