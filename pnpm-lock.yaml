@@ -120,8 +120,8 @@ importers:
         specifier: 0.4.11
         version: 0.4.11(eslint@9.5.0)
       '@isentinel/eslint-config':
-        specifier: 0.6.1
-        version: 0.6.1(@babel/core@7.24.7)(@eslint-react/eslint-plugin@1.5.16(eslint@9.5.0)(typescript@5.4.5))(@types/eslint@8.56.10)(eslint-plugin-react-hooks@4.6.2(eslint@9.5.0))(eslint@9.5.0)(typescript@5.4.5)
+        specifier: 0.6.2
+        version: 0.6.2(@babel/core@7.24.7)(@eslint-react/eslint-plugin@1.5.16(eslint@9.5.0)(typescript@5.4.5))(@types/eslint@8.56.10)(eslint-plugin-react-hooks@4.6.2(eslint@9.5.0))(eslint@9.5.0)(typescript@5.4.5)
       '@rbxts/compiler-types':
         specifier: 2.3.0-types.1
         version: 2.3.0-types.1
@@ -814,11 +814,11 @@ packages:
   '@isentinel/dict-rbxts@1.0.1':
     resolution: {integrity: sha512-Icj7VOG1p/y9i1ngtaguSuSE6ToUeX2XU6uIjUHDmS9qfe1xxYuZMyBa3sVBnP3/oPnWFrMglVqoH/RUOQoQpg==}
 
-  '@isentinel/dict-roblox@1.0.2':
-    resolution: {integrity: sha512-QNMEEzZAe6vGOSyxGLihO2YHnWjxRoqgSFM7Ma7jf89YqbN1VA+bT+CQ4mTXGXKbzgTsl31ZEP1jtDthlZau1Q==}
+  '@isentinel/dict-roblox@1.0.3':
+    resolution: {integrity: sha512-XR1KVHZLyyamVobUICxTlDkB3gfLVuV34mdFQeIL7DfCtNI2uCeuZm6g6J63AQzUrqsCIUF166Ogf+TL0przdg==}
 
-  '@isentinel/eslint-config@0.6.1':
-    resolution: {integrity: sha512-Zowl4izFyo605Gm81rYSOgjob549iTNuDB/utwDnna/qyMvoebce8KU8k8p9OvjikAHM4Ec6se/zEk+bqw981Q==}
+  '@isentinel/eslint-config@0.6.2':
+    resolution: {integrity: sha512-BHB3qD9OQj37hMLs87inVMCOC+pQE2LS3G86f/Blyo86O0yjSK7oCXNGxyupW1yUtt+sbgZ96Vn/GxLD/qqaqQ==}
     hasBin: true
     peerDependencies:
       '@eslint-react/eslint-plugin': ^1.5.8
@@ -4657,9 +4657,9 @@ snapshots:
 
   '@isentinel/dict-rbxts@1.0.1': {}
 
-  '@isentinel/dict-roblox@1.0.2': {}
+  '@isentinel/dict-roblox@1.0.3': {}
 
-  '@isentinel/eslint-config@0.6.1(@babel/core@7.24.7)(@eslint-react/eslint-plugin@1.5.16(eslint@9.5.0)(typescript@5.4.5))(@types/eslint@8.56.10)(eslint-plugin-react-hooks@4.6.2(eslint@9.5.0))(eslint@9.5.0)(typescript@5.4.5)':
+  '@isentinel/eslint-config@0.6.2(@babel/core@7.24.7)(@eslint-react/eslint-plugin@1.5.16(eslint@9.5.0)(typescript@5.4.5))(@types/eslint@8.56.10)(eslint-plugin-react-hooks@4.6.2(eslint@9.5.0))(eslint@9.5.0)(typescript@5.4.5)':
     dependencies:
       '@antfu/install-pkg': 0.3.3
       '@clack/prompts': 0.7.0
@@ -4668,7 +4668,7 @@ snapshots:
       '@eslint-types/unicorn': 52.0.0
       '@eslint/compat': 1.1.0
       '@isentinel/dict-rbxts': 1.0.1
-      '@isentinel/dict-roblox': 1.0.2
+      '@isentinel/dict-roblox': 1.0.3
       '@isentinel/eslint-plugin-comment-length': 1.7.3(eslint@9.5.0)(typescript@5.4.5)
       '@shopify/eslint-plugin': 45.0.0(@babel/core@7.24.7)(@types/eslint@8.56.10)(eslint@9.5.0)(prettier@3.3.2)(typescript@5.4.5)
       '@stylistic/eslint-plugin': 2.2.2(eslint@9.5.0)(typescript@5.4.5)
