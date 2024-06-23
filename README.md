@@ -68,9 +68,12 @@ sync-dev`).
 
 #### Tools
 
+-   [Aftman](https://github.com/LPGhatguy/aftman)
+-   [Asphalt](https://github.com/jackTabsCode/asphalt)
 -   [Darklua](https://darklua.com/)
 -   [ESLint config](https://github.com/christopher-buss/roblox-ts-eslint-config)
 -   [ESLint](https://eslint.org/)
+-   [Husky](https://typicode.github.io/husky/#/)
 -   [Mantle](https://mantledeploy.vercel.app/)
 -   [Renovate](https://docs.renovatebot.com/)
 -   [Rojo](https://rojo.space/)
