@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - develop
-    paths-ignore:
-      - README.md
-      - LICENSE.md
-      - 'scripts/**'
-      - '.github/**'
+    paths:
+      - 'src/**/*'
+      - default.project.json
+      - mantle.yml
+      - package.json
   workflow_dispatch:
 
 permissions:
