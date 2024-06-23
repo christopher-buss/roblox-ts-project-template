@@ -37,5 +37,5 @@
 			}
 		]
 	},
-	"exclude": ["./eslint.config.ts"]
+	"exclude": ["./eslint.config.ts", "./commitlint.config.ts"]
 }
