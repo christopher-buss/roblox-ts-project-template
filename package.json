@@ -9,10 +9,10 @@
 	"keywords": [],
 	"main": "index.js",
 	"scripts": {
-		"build-prod": "npm run clean && NODE_ENV=production npx rbxtsc --verbose && npm run darklua",
+		"build-prod": "npm run clean && NODE_ENV=production && npx rbxtsc --verbose && npm run darklua",
 		"sync-prod": "rojo serve ./build.project.json",
-		"build-dev": "NODE_ENV=development npx rbxtsc",
-		"watch-dev": "NODE_ENV=development npx rbxtsc -w",
+		"build-dev": "NODE_ENV=development && npx rbxtsc",
+		"watch-dev": "NODE_ENV=development && npx rbxtsc -w",
 		"sync-dev": "rojo serve",
 		"clean": "npx rimraf out/ && npx rimraf dist",
 		"darklua": "darklua process out dist --verbose",
