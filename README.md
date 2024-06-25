@@ -54,6 +54,9 @@ sync-dev`).
 
 ### Resources
 
+The following is a list of resources that are used in this project (in
+alphabetical order):
+
 #### Packages
 
 -   [Flamework](https://flamework.fireboltofdeath.dev/)
@@ -66,19 +69,22 @@ sync-dev`).
 -   [Sift](https://cxmeel.github.io/sift/)
 -   [UI Labs](https://ui-labs-roblox.github.io/ui-labs-docs/)
 
-#### Tools
+#### Roblox Tools
 
 -   [Aftman](https://github.com/LPGhatguy/aftman)
 -   [Asphalt](https://github.com/jackTabsCode/asphalt)
 -   [Darklua](https://darklua.com/)
+-   [Mantle](https://mantledeploy.vercel.app/)
+-   [Rojo](https://rojo.space/)
+-   [roblox-ts](https://roblox-ts.com/)
+
+#### Development Tools
+
 -   [ESLint config](https://github.com/christopher-buss/roblox-ts-eslint-config)
 -   [ESLint](https://eslint.org/)
 -   [Husky](https://typicode.github.io/husky/#/)
--   [Mantle](https://mantledeploy.vercel.app/)
 -   [Renovate](https://docs.renovatebot.com/)
--   [Rojo](https://rojo.space/)
 -   [pnpm](https://pnpm.io/)
--   [roblox-ts](https://roblox-ts.com/)
 
 ## Guide
 
