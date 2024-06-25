@@ -10,11 +10,10 @@ export default style(
 					"custom-groups": {
 						id: "id",
 						name: "name",
-						ga: "progressionStatus",
-						"react-props": ["children", "ref"],
+						reactProps: ["children", "ref"],
 						reflex: ["loadPlayerData", "closePlayerData"],
 					},
-					groups: ["id", "name", "reflex", "ga", "unknown", "react-props"],
+					groups: ["id", "name", "reflex", "unknown", "reactProps"],
 					order: "asc",
 					"partition-by-comment": "Part:**",
 					type: "natural",
