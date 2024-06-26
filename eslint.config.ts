@@ -33,6 +33,7 @@ export default style(
 			parserOptions: {
 				project: "tsconfig.build.json",
 			},
+			tsconfigPath: "tsconfig.build.json",
 		},
 	},
 	{
