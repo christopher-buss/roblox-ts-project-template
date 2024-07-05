@@ -11,7 +11,7 @@
 		{
 			"matchPackageNames": ["@rbxts/types"],
 			"automerge": true,
-			"minimumReleaseAge": 0
+			"minimumReleaseAge": "0 days"
 		}
 	]
 }
