@@ -2,9 +2,16 @@ import React from "@rbxts/react";
 
 import { IS_EDIT } from "shared/constants";
 
+import UltraWideContainer from "../ultra-wide-container";
 import Group from "./group";
 
 export interface LayerProps extends React.PropsWithChildren {
+	/**
+	 * Whether or not to constraint ultra wide monitors to 16:9.
+	 *
+	 * @default true
+	 */
+	readonly ClampUltraWide?: boolean;
 	/** The display order of the layer. */
 	readonly DisplayOrder?: number;
 }
@@ -27,20 +34,28 @@ export interface LayerProps extends React.PropsWithChildren {
  *
  * @param props - The component props.
  * @returns The rendered Layer component.
+ * @note By default, the `ClampUltraWide` property is set to `true`. This means
+ * that the layer will be constrained to a 16:9 aspect ratio on ultra wide
+ * monitors. If you want to disable this behavior, set the property to `false`.
+ *
  * @component
  *
  * @see https://developer.roblox.com/en-us/api-reference/class/ScreenGui
  */
-export default function Layer({ DisplayOrder, children }: LayerProps): React.Element {
+export default function Layer({
+	ClampUltraWide = true,
+	DisplayOrder,
+	children,
+}: LayerProps): React.Element {
 	return IS_EDIT ? (
 		<Group
 			Native={{
 				AnchorPoint: new Vector2(0, 0),
 				Position: new UDim2(0, 0, 0, 0),
-				ZIndex: DisplayOrder ?? 0,
+				ZIndex: DisplayOrder,
 			}}
 		>
-			{children}
+			{ClampUltraWide ? <UltraWideContainer>{children}</UltraWideContainer> : children}
 		</Group>
 	) : (
 		<screengui
@@ -49,7 +64,7 @@ export default function Layer({ DisplayOrder, children }: LayerProps): React.Ele
 			ResetOnSpawn={false}
 			ZIndexBehavior="Sibling"
 		>
-			{children}
+			{ClampUltraWide ? <UltraWideContainer>{children}</UltraWideContainer> : children}
 		</screengui>
 	);
 }
