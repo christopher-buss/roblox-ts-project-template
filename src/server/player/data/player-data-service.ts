@@ -7,9 +7,8 @@ import { Players, RunService } from "@rbxts/services";
 
 import { $NODE_ENV } from "rbxts-transform-env";
 import { store } from "server/store";
-import { selectPlayerData } from "shared/store/persistent/persistent-selectors";
-import type { PlayerData } from "shared/store/persistent/persistent-slice";
-import { defaultPlayerData } from "shared/store/persistent/persistent-slice";
+import type { PlayerData } from "shared/store/persistent";
+import { defaultPlayerData, selectPlayerData } from "shared/store/persistent";
 import KickCode from "types/enum/kick-reason";
 
 import type PlayerRemovalService from "../player-removal-service";
