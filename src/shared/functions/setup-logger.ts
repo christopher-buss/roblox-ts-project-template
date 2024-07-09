@@ -29,15 +29,15 @@ class LogEventSFTOutputSink implements ILogEventSink {
 		const messageResult = template.Render(message);
 		const fileInfo = this.getFileInformation(context);
 
-		const formatted_message =
+		const formattedMessage =
 			`[${tag}] ${context} (${Environment}) - ${messageResult}` + fileInfo;
 
 		if (message.Level >= LogLevel.Fatal) {
-			error(formatted_message);
+			error(formattedMessage);
 		} else if (message.Level >= LogLevel.Warning) {
-			warn(formatted_message);
+			warn(formattedMessage);
 		} else {
-			print(formatted_message);
+			print(formattedMessage);
 		}
 	}
 
