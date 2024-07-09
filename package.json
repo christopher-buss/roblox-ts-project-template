@@ -71,7 +71,7 @@
 		"rbxts-transformer-flamework": "1.2.3",
 		"rimraf": "5.0.8",
 		"roblox-ts": "2.3.0-dev-e6e7658",
-		"typescript": "5.4.5"
+		"typescript": "5.5.3"
 	},
 	"pnpm": {
 		"patchedDependencies": {
