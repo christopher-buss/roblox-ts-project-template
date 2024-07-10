@@ -61,7 +61,7 @@
 		"@eslint/config-inspector": "0.5.1",
 		"@isentinel/eslint-config": "0.7.0",
 		"@rbxts/compiler-types": "2.3.0-types.1",
-		"@rbxts/types": "1.0.788",
+		"@rbxts/types": "1.0.789",
 		"bundle-require": "5.0.0",
 		"eslint": "9.6.0",
 		"eslint-plugin-react-hooks": "4.6.2",
