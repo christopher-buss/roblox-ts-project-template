@@ -2,7 +2,7 @@
 	"name": "roblox-ts-project-template",
 	"type": "module",
 	"version": "1.0.0",
-	"packageManager": "pnpm@9.4.0",
+	"packageManager": "pnpm@9.5.0",
 	"description": "A Roblox game made with React and Roblox-TS",
 	"author": "",
 	"license": "ISC",
