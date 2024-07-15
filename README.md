@@ -71,11 +71,11 @@ alphabetical order):
 
 #### Roblox Tools
 
--   [Aftman](https://github.com/LPGhatguy/aftman)
 -   [Asphalt](https://github.com/jackTabsCode/asphalt)
 -   [Darklua](https://darklua.com/)
 -   [Mantle](https://mantledeploy.vercel.app/)
 -   [Rojo](https://rojo.space/)
+-   [Rokit](https://github.com/rojo-rbx/rokit)
 -   [roblox-ts](https://roblox-ts.com/)
 
 #### Development Tools
