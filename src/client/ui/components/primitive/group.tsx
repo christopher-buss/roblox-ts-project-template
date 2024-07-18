@@ -2,7 +2,7 @@ import React, { forwardRef } from "@rbxts/react";
 
 interface GroupProps extends React.PropsWithChildren {
 	/** All the default properties of a `Frame` component. */
-	readonly Native?: Partial<Omit<React.InstanceProps<Frame>, "BackgroundTransparency">>;
+	Native?: Partial<Omit<React.InstanceProps<Frame>, "BackgroundTransparency">>;
 }
 
 /**
@@ -22,7 +22,7 @@ interface GroupProps extends React.PropsWithChildren {
  *
  * @component
  */
-const Group = forwardRef(({ Native, children }: GroupProps, ref: React.Ref<Frame>) => {
+const Group = forwardRef(({ Native, children }: Readonly<GroupProps>, ref: React.Ref<Frame>) => {
 	const { AnchorPoint, Position, Size } = Native ?? {};
 
 	return (

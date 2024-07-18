@@ -1,12 +1,12 @@
 import React from "@rbxts/react";
 
 interface ErrorPageProps {
-	readonly Message: string;
+	Message: string;
 }
 
-export default function ErrorPage({ Message }: ErrorPageProps): React.Element {
+export default function ErrorPage({ Message }: Readonly<ErrorPageProps>): React.Element {
 	warn(Message);
 
-	// eslint-disable-next-line react/no-useless-fragment -- This is a placeholder for future functions.
+	// eslint-disable-next-line react/no-useless-fragment -- This is a placeholder for a future error page.
 	return <></>;
 }

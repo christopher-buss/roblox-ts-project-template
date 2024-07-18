@@ -3,15 +3,15 @@ import { setTimeout } from "@rbxts/set-timeout";
 
 interface DelayRenderProps extends React.PropsWithChildren {
 	/** The delay (in seconds) before rendering the children component. */
-	readonly MountDelay?: number;
+	MountDelay?: number;
 	/**
 	 * Indicates whether the children component should be rendered. If true, the
 	 * children component will be rendered after the MountDelay. If false, the
 	 * children component will be unmounted after the UnmountDelay.
 	 */
-	readonly ShouldRender: boolean;
+	ShouldRender: boolean;
 	/** The delay (in seconds) before unmounting the children component. */
-	readonly UnmountDelay?: number;
+	UnmountDelay?: number;
 }
 
 /**
@@ -39,7 +39,7 @@ export function DelayRender({
 	ShouldRender,
 	UnmountDelay = 0,
 	children,
-}: DelayRenderProps): React.Element {
+}: Readonly<DelayRenderProps>): React.Element {
 	const [render, setRender] = useState(false);
 
 	useEffect(() => {

@@ -12,9 +12,9 @@ export interface LayerProps extends React.PropsWithChildren {
 	 *
 	 * @default true
 	 */
-	readonly ClampUltraWide?: boolean;
+	ClampUltraWide?: boolean;
 	/** The display order of the layer. */
-	readonly DisplayOrder?: number;
+	DisplayOrder?: number;
 }
 
 /**
@@ -47,7 +47,7 @@ export default function Layer({
 	ClampUltraWide = true,
 	DisplayOrder,
 	children,
-}: LayerProps): React.Element {
+}: Readonly<LayerProps>): React.Element {
 	return $NODE_ENV === "development" && IS_EDIT ? (
 		<Group
 			Native={{

@@ -10,23 +10,23 @@ export interface TextLabelProps extends FrameProps<TextLabel> {
 	 * The font of the text, defaults to the primary font specified by the
 	 * default theme.
 	 */
-	readonly Font?: BindingValue<Enum.Font>;
+	Font?: BindingValue<Enum.Font>;
 	/**
 	 * The default properties of a `TextLabel` component, minus the ones
 	 * specified in the TextProps.
 	 */
-	readonly Native?: Partial<
+	Native?: Partial<
 		Omit<
 			React.InstanceProps<TextLabel>,
 			"Font" | "Text" | "TextColor" | "TextColor3" | "TextSize"
 		>
 	>;
 	/** The text to display. */
-	readonly Text: BindingValue<string>;
+	Text: BindingValue<string>;
 	/** The color of the text. */
-	readonly TextColor?: BindingValue<Color3>;
+	TextColor?: BindingValue<Color3>;
 	/** The size of the text. */
-	readonly TextSize?: BindingValue<number>;
+	TextSize?: BindingValue<number>;
 }
 
 /**
@@ -49,7 +49,15 @@ export interface TextLabelProps extends FrameProps<TextLabel> {
  */
 const TextLabel = forwardRef(
 	(
-		{ CornerRadius, Font, Native, Text, TextColor, TextSize, children }: TextLabelProps,
+		{
+			CornerRadius,
+			Font,
+			Native,
+			Text,
+			TextColor,
+			TextSize,
+			children,
+		}: Readonly<TextLabelProps>,
 		ref: React.Ref<TextLabel>,
 	) => {
 		const rem = useRem();

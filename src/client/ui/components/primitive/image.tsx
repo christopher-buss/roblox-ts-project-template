@@ -7,7 +7,7 @@ import type { FrameProps } from "./frame";
 
 export interface ImageProps extends FrameProps<ImageLabel> {
 	/** The image to display. */
-	readonly Image: BindingValue<AssetId>;
+	Image: BindingValue<AssetId>;
 }
 
 /**
@@ -28,7 +28,7 @@ export interface ImageProps extends FrameProps<ImageLabel> {
  *
  * @see https://developer.roblox.com/en-us/api-reference/class/ImageLabel
  */
-const ImageLabel = forwardRef((props: ImageProps, ref: React.Ref<ImageLabel>) => {
+const ImageLabel = forwardRef((props: Readonly<ImageProps>, ref: React.Ref<ImageLabel>) => {
 	const { CornerRadius, Image, Native, children } = props;
 
 	return (
