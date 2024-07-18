@@ -139,9 +139,9 @@ export default class CharacterService implements OnStart, OnPlayerJoin {
 	}
 
 	private onRigLoaded(playerEntity: PlayerEntity, rig: CharacterRig): void {
-		const { name, player } = playerEntity;
+		const { name, janitor, player } = playerEntity;
 
-		addToCollisionGroup(rig, CollisionGroup.Character);
+		janitor.Add(addToCollisionGroup(rig, CollisionGroup.Character));
 		rig.AddTag(Tag.PlayerCharacter);
 		this.characterRigs.set(player, rig);
 
@@ -150,18 +150,22 @@ export default class CharacterService implements OnStart, OnPlayerJoin {
 		debug.profilebegin("Lifecycle_Character_Added");
 		{
 			for (const { id, event } of this.characterAddedEvents) {
-				Promise.defer(() => {
-					debug.profilebegin(id);
-					event.onCharacterAdded(rig, playerEntity);
-				}).catch(err => {
-					this.logger.Error(`Error in character lifecycle ${id}: ${err}`);
-				});
+				janitor
+					.Add(
+						Promise.defer(() => {
+							debug.profilebegin(id);
+							event.onCharacterAdded(rig, playerEntity);
+						}),
+					)
+					.catch(err => {
+						this.logger.Error(`Error in character lifecycle ${id}: ${err}`);
+					});
 			}
 		}
 
 		debug.profileend();
 
-		this.characterAppearanceLoaded(player, rig).catch(err => {
+		janitor.Add(this.characterAppearanceLoaded(player, rig)).catch(err => {
 			this.logger.Info(`Character appearance did not load for`, player, err);
 		});
 	}

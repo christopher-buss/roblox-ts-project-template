@@ -175,12 +175,16 @@ export default class PlayerService implements OnStart {
 		debug.profilebegin("Lifecycle_Player_Join");
 		{
 			for (const { id, event } of this.playerJoinEvents) {
-				Promise.defer(() => {
-					debug.profilebegin(id);
-					event.onPlayerJoin(playerEntity);
-				}).catch(err => {
-					this.logger.Error(`Error in player lifecycle ${id}: ${err}`);
-				});
+				janitor
+					.Add(
+						Promise.defer(() => {
+							debug.profilebegin(id);
+							event.onPlayerJoin(playerEntity);
+						}),
+					)
+					.catch(err => {
+						this.logger.Error(`Error in player lifecycle ${id}: ${err}`);
+					});
 			}
 		}
 
