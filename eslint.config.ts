@@ -1,4 +1,4 @@
-import style, { GLOB_JS, GLOB_TSX } from "@isentinel/eslint-config";
+import style, { GLOB_TS } from "@isentinel/eslint-config";
 
 export default style(
 	{
@@ -19,6 +19,18 @@ export default style(
 					type: "natural",
 				},
 			],
+		},
+		typescript: {
+			parserOptions: {
+				project: "tsconfig.build.json",
+			},
+			tsconfigPath: "tsconfig.build.json",
+		},
+	},
+	{
+		files: [GLOB_TS],
+		rules: {
+			"no-param-reassign": "error",
 			"ts/no-magic-numbers": [
 				"error",
 				{
@@ -29,20 +41,11 @@ export default style(
 				},
 			],
 		},
-		typescript: {
-			parserOptions: {
-				project: "tsconfig.build.json",
-			},
-			tsconfigPath: "tsconfig.build.json",
-		},
 	},
 	{
-		ignores: [GLOB_JS],
-	},
-	{
-		files: [GLOB_TSX],
+		files: ["src/client/ui/hooks/**/*"],
 		rules: {
-			"ts/no-magic-numbers": "off",
+			"max-lines-per-function": "off",
 		},
 	},
 );
