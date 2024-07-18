@@ -1,1 +1,1 @@
-export type BindingValue<T> = React.Binding<T> | T;
+export type BindingValue<T = unknown> = NonNullable<T> | React.Binding<T>;
