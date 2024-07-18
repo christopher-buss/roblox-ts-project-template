@@ -50,8 +50,8 @@ importers:
         specifier: 1.0.4
         version: 1.0.4
       '@rbxts/pretty-react-hooks':
-        specifier: 0.5.1
-        version: 0.5.1
+        specifier: 0.5.2
+        version: 0.5.2
       '@rbxts/promise-child':
         specifier: 1.2.1
         version: 1.2.1
@@ -928,8 +928,8 @@ packages:
   '@rbxts/object-utils@1.0.4':
     resolution: {integrity: sha512-dLLhf022ipV+9i910sOE7kl9losKHoon0WgeerHqVMQA5EYsLUsVT2AxhJuhk8MiDn5oJ2GiFofE/LadY9TpJQ==}
 
-  '@rbxts/pretty-react-hooks@0.5.1':
-    resolution: {integrity: sha512-0JreWizUKryJGhU34PnK5XQNQkD1odgW3ZXri3SBGbMs0mtS+Icb7eJKJ0ul+4k4u4FEO/gKRPo5SWFP+XJ3xA==}
+  '@rbxts/pretty-react-hooks@0.5.2':
+    resolution: {integrity: sha512-aOnYTDXUGspMIXdqUw65ub9js40c0BZqXK5ROR7esRHak+JtpbGdbkM2a4A8Pw7c3jehi0Ri+tnLsmmLAj9mhQ==}
 
   '@rbxts/promise-child@1.2.1':
     resolution: {integrity: sha512-z1Qiim2l59fM2MSi3oi7mQyyxg74YjlSeSrDzBAb9Kd7SLe+bm2V00LOexuUtydZlxxzkrozzaCOlLPwoXwcaQ==}
@@ -4919,7 +4919,7 @@ snapshots:
 
   '@rbxts/object-utils@1.0.4': {}
 
-  '@rbxts/pretty-react-hooks@0.5.1':
+  '@rbxts/pretty-react-hooks@0.5.2':
     dependencies:
       '@rbxts/flipper': 2.0.1
       '@rbxts/react': 0.4.0
