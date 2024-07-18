@@ -19,7 +19,7 @@ export type CanvasGroupProps = FrameProps<CanvasGroup>;
  *
  * @see https://developer.roblox.com/en-us/api-reference/class/CanvasGroup
  */
-const CanvasGroup = forwardRef((props: CanvasGroupProps, ref: React.Ref<CanvasGroup>) => {
+const CanvasGroup = forwardRef((props: Readonly<CanvasGroupProps>, ref: React.Ref<CanvasGroup>) => {
 	const { CornerRadius, Native, children } = props;
 
 	return (

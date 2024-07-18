@@ -4,23 +4,23 @@ import type { FrameProps } from "./frame";
 
 export interface ButtonProps extends FrameProps<TextButton> {
 	/** The default properties of a `TextButton` component. */
-	readonly Native?: Partial<React.InstanceProps<TextButton>>;
+	Native?: Partial<React.InstanceProps<TextButton>>;
 	/** A callback that is triggered when the button is clicked. */
-	readonly onClick?: () => void;
+	onClick?: () => void;
 	/**
 	 * A callback that is triggered when the mouse button is pressed down on the
 	 * button.
 	 */
-	readonly onMouseDown?: () => void;
+	onMouseDown?: () => void;
 	/** A callback that is triggered when the mouse enters the button. */
-	readonly onMouseEnter?: () => void;
+	onMouseEnter?: () => void;
 	/** A callback that is triggered when the mouse leaves the button. */
-	readonly onMouseLeave?: () => void;
+	onMouseLeave?: () => void;
 	/**
 	 * A callback that is triggered when the mouse button is released on the
 	 * button.
 	 */
-	readonly onMouseUp?: () => void;
+	onMouseUp?: () => void;
 }
 
 /**
@@ -55,7 +55,7 @@ export default function Button({
 	onMouseLeave,
 	onMouseUp,
 	children,
-}: ButtonProps): React.Element {
+}: Readonly<ButtonProps>): React.Element {
 	const event = {
 		Activated: () => {
 			onClick?.();

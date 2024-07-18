@@ -6,7 +6,7 @@ import type { BindingValue } from "types/util/react";
 
 interface BackgroundBlurProps {
 	/** The size of the blur effect. */
-	readonly BlurSize?: BindingValue<number>;
+	BlurSize?: BindingValue<number>;
 }
 
 /**
@@ -15,7 +15,7 @@ interface BackgroundBlurProps {
  * @param props - The component props.
  * @returns The rendered background blur component.
  */
-export function BackgroundBlur({ BlurSize }: BackgroundBlurProps): React.Element {
+export function BackgroundBlur({ BlurSize }: Readonly<BackgroundBlurProps>): React.Element {
 	const camera = useCamera();
 	const [visible, setVisible] = useState(false);
 

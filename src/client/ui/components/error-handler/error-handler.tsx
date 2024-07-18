@@ -3,9 +3,9 @@ import React from "@rbxts/react";
 import ErrorBoundary from "./error-boundary";
 import ErrorPage from "./error-page";
 
-type ErrorHandlerProps = Readonly<React.PropsWithChildren>;
+type ErrorHandlerProps = React.PropsWithChildren;
 
-export default function ErrorHandler({ children }: ErrorHandlerProps): React.Element {
+export default function ErrorHandler({ children }: Readonly<ErrorHandlerProps>): React.Element {
 	return (
 		<ErrorBoundary
 			Fallback={err => {

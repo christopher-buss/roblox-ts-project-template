@@ -4,9 +4,9 @@ import { useRem, useTheme } from "client/ui/hooks";
 
 interface ScrollingFrameProps extends React.PropsWithChildren {
 	/** The size of the canvas. */
-	readonly CanvasSize: Vector2;
+	CanvasSize: Vector2;
 	/** All the default properties of a `ScrollingFrame` component. */
-	readonly Native?: Partial<Omit<React.InstanceProps<ScrollingFrame>, "BackgroundTransparency">>;
+	Native?: Partial<Omit<React.InstanceProps<ScrollingFrame>, "BackgroundTransparency">>;
 }
 
 /**
@@ -43,7 +43,7 @@ export default function ScrollingFrame({
 	CanvasSize,
 	Native,
 	children,
-}: ScrollingFrameProps): React.Element {
+}: Readonly<ScrollingFrameProps>): React.Element {
 	const theme = useTheme();
 	const rem = useRem();
 
