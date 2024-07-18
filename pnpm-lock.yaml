@@ -29,8 +29,8 @@ importers:
         specifier: 1.0.1
         version: 1.0.1
       '@rbxts/janitor':
-        specifier: 1.15.7-ts.0
-        version: 1.15.7-ts.0
+        specifier: 1.16.0-ts.0
+        version: 1.16.0-ts.0
       '@rbxts/lapis':
         specifier: 0.3.3
         version: 0.3.3(@rbxts/t@3.1.1)
@@ -902,8 +902,8 @@ packages:
   '@rbxts/inspect@1.0.1':
     resolution: {integrity: sha512-O+fbpjl0iKWfVSILrgBRoZcCUzYSbRIOrgW8RrLWNBLFzoxIBu9uydx4RavYgT2RsmRm5zK2aM3MakEZ2z+jlQ==}
 
-  '@rbxts/janitor@1.15.7-ts.0':
-    resolution: {integrity: sha512-lcg+QECf5aZFH2ZUd5j5Dslt09Hxa5Iy4fjjI7Gh0oDs41BLsY+tP+MTvgjfwzO/3A2JoVQNSwGIfBc2jnC+zA==}
+  '@rbxts/janitor@1.16.0-ts.0':
+    resolution: {integrity: sha512-WAePVQuJg5NolwsY3dYLsyJa0Cf7dOyoGBUf6jtP2azgti7yUr0bmYNR7Z+nNEXWxsSKO49EdI+YOhnvp9b4mQ==}
 
   '@rbxts/lapis-mockdatastore@1.0.6':
     resolution: {integrity: sha512-wJ+WA793xErlAYMPUpmCOJC67OUeGTntsi9rzPZ/skEKUj2ii6cZYkgSR6X/KOnHpGFrT8C8w4QCv0l+teKuNg==}
@@ -4859,7 +4859,7 @@ snapshots:
 
   '@rbxts/inspect@1.0.1': {}
 
-  '@rbxts/janitor@1.15.7-ts.0': {}
+  '@rbxts/janitor@1.16.0-ts.0': {}
 
   '@rbxts/lapis-mockdatastore@1.0.6': {}
 
