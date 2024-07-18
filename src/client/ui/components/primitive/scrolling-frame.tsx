@@ -50,12 +50,14 @@ export default function ScrollingFrame({
 	return (
 		<scrollingframe
 			{...Native}
+			AnchorPoint={Native?.AnchorPoint ?? new Vector2(0.5, 0.5)}
 			BackgroundTransparency={0}
 			BorderSizePixel={0}
 			CanvasSize={UDim2.fromOffset(
 				CanvasSize.X !== 0 ? CanvasSize.X + 5 : 0,
 				CanvasSize.Y !== 0 ? CanvasSize.Y + 5 : 0,
 			)}
+			Position={Native?.Position ?? new UDim2(0.5, 0, 0.5, 0)}
 			ScrollBarImageColor3={theme.colors.secondary}
 			ScrollBarThickness={rem(0.5)}
 		>

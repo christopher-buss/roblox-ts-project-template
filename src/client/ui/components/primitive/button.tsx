@@ -76,9 +76,15 @@ export default function Button({
 	};
 
 	return (
-		<textbutton {...Native} Event={event}>
-			{children}
+		<textbutton
+			{...Native}
+			AnchorPoint={Native?.AnchorPoint ?? new Vector2(0.5, 0.5)}
+			Event={event}
+			Position={Native?.Position ?? new UDim2(0.5, 0, 0.5, 0)}
+			Text={Native?.Text ?? ""}
+		>
 			{CornerRadius ? <uicorner CornerRadius={CornerRadius} /> : undefined}
+			{children}
 		</textbutton>
 	);
 }

@@ -16,7 +16,7 @@ export interface ImageProps extends FrameProps<ImageLabel> {
  * @example
  *
  * ```tsx
- * <Image
+ * <ImageLabel
  * 	Image="rbxassetid://1234567890"
  * 	Native={{
  * 		Size={new UDim2(0, 100, 0, 100)}
@@ -28,14 +28,22 @@ export interface ImageProps extends FrameProps<ImageLabel> {
  *
  * @see https://developer.roblox.com/en-us/api-reference/class/ImageLabel
  */
-const Image = forwardRef((props: ImageProps, ref: React.Ref<ImageLabel>) => {
-	const { CornerRadius, Native } = props;
+const ImageLabel = forwardRef((props: ImageProps, ref: React.Ref<ImageLabel>) => {
+	const { CornerRadius, Image, Native, children } = props;
 
 	return (
-		<imagelabel ref={ref} {...Native} BackgroundTransparency={1} Image={props.Image}>
+		<imagelabel
+			ref={ref}
+			{...Native}
+			AnchorPoint={Native?.AnchorPoint ?? new Vector2(0.5, 0.5)}
+			BackgroundTransparency={Native?.BackgroundTransparency ?? 1}
+			Image={Image}
+			Position={Native?.Position ?? new UDim2(0.5, 0, 0.5, 0)}
+		>
 			{CornerRadius ? <uicorner CornerRadius={CornerRadius} /> : undefined}
+			{children}
 		</imagelabel>
 	);
 });
 
-export default Image;
+export default ImageLabel;

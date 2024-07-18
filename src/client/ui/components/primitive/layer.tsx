@@ -1,5 +1,6 @@
 import React from "@rbxts/react";
 
+import { $NODE_ENV } from "rbxts-transform-env";
 import { IS_EDIT } from "shared/constants";
 
 import UltraWideContainer from "../ultra-wide-container";
@@ -47,7 +48,7 @@ export default function Layer({
 	DisplayOrder,
 	children,
 }: LayerProps): React.Element {
-	return IS_EDIT ? (
+	return $NODE_ENV === "development" && IS_EDIT ? (
 		<Group
 			Native={{
 				AnchorPoint: new Vector2(0, 0),
