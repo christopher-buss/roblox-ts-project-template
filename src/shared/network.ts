@@ -27,8 +27,7 @@ interface ServerToClientEvents {
 	};
 }
 
-// eslint-disable-next-line ts/no-empty-interface -- This is a placeholder for future functions.
-interface ClientToServerFunctions {}
+type ClientToServerFunctions = object;
 
 export const GlobalEvents = Networking.createEvent<ClientToServerEvents, ServerToClientEvents>();
 export const GlobalFunctions = Networking.createFunction<
