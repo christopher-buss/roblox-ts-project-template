@@ -30,6 +30,7 @@ const Group = forwardRef(({ Native, children }: Readonly<GroupProps>, ref: React
 			ref={ref}
 			{...Native}
 			AnchorPoint={AnchorPoint ?? new Vector2(0.5, 0.5)}
+			BackgroundTransparency={1}
 			Position={Position ?? new UDim2(0.5, 0, 0.5, 0)}
 			Size={Size ?? new UDim2(1, 0, 1, 0)}
 		>
