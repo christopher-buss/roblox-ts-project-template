@@ -51,7 +51,7 @@ export default function ScrollingFrame({
 		<scrollingframe
 			{...Native}
 			AnchorPoint={Native?.AnchorPoint ?? new Vector2(0.5, 0.5)}
-			BackgroundTransparency={0}
+			BackgroundTransparency={1}
 			BorderSizePixel={0}
 			CanvasSize={UDim2.fromOffset(
 				CanvasSize.X !== 0 ? CanvasSize.X + 5 : 0,
