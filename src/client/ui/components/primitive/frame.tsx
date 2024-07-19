@@ -39,9 +39,10 @@ const Frame = forwardRef(
 				{...Native}
 				AnchorPoint={AnchorPoint ?? new Vector2(0.5, 0.5)}
 				Position={Position ?? new UDim2(0.5, 0, 0.5, 0)}
+				Size={Native?.Size ?? new UDim2(1, 0, 1, 0)}
 			>
-				{children}
 				{CornerRadius ? <uicorner CornerRadius={CornerRadius} /> : undefined}
+				{children}
 			</frame>
 		);
 	},
