@@ -78,7 +78,7 @@
 		"git-pull-run": "1.4.0",
 		"husky": "9.0.11",
 		"lint-staged": "15.2.7",
-		"rbxts-build": "2.3.0",
+		"rbxts-build": "2.4.0",
 		"rbxts-transformer-flamework": "1.2.3",
 		"rimraf": "6.0.1",
 		"roblox-ts": "2.3.0-dev-e6e7658",
