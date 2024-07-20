@@ -97,7 +97,7 @@ jobs:
     needs: deploy
     steps:
       - name: GitFlow workflow action - Release workflows
-        uses: hoangvvo/gitflow-workflow-action@0.3.7
+        uses: hoangvvo/gitflow-workflow-action@6f190b60eedc913790eeeee8077426c297ea9c0e # 0.3.7
         with:
           develop_branch: develop
           main_branch: main
