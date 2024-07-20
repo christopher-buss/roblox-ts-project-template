@@ -4,9 +4,9 @@ import { useRem, useTheme } from "client/ui/hooks";
 
 interface ScrollingFrameProps extends React.PropsWithChildren {
 	/** The size of the canvas. */
-	readonly CanvasSize: Vector2;
+	CanvasSize: Vector2;
 	/** All the default properties of a `ScrollingFrame` component. */
-	readonly Native?: Partial<Omit<React.InstanceProps<ScrollingFrame>, "BackgroundTransparency">>;
+	Native?: Partial<Omit<React.InstanceProps<ScrollingFrame>, "BackgroundTransparency">>;
 }
 
 /**
@@ -43,19 +43,21 @@ export default function ScrollingFrame({
 	CanvasSize,
 	Native,
 	children,
-}: ScrollingFrameProps): React.Element {
+}: Readonly<ScrollingFrameProps>): React.Element {
 	const theme = useTheme();
 	const rem = useRem();
 
 	return (
 		<scrollingframe
 			{...Native}
-			BackgroundTransparency={0}
+			AnchorPoint={Native?.AnchorPoint ?? new Vector2(0.5, 0.5)}
+			BackgroundTransparency={1}
 			BorderSizePixel={0}
 			CanvasSize={UDim2.fromOffset(
 				CanvasSize.X !== 0 ? CanvasSize.X + 5 : 0,
 				CanvasSize.Y !== 0 ? CanvasSize.Y + 5 : 0,
 			)}
+			Position={Native?.Position ?? new UDim2(0.5, 0, 0.5, 0)}
 			ScrollBarImageColor3={theme.colors.secondary}
 			ScrollBarThickness={rem(0.5)}
 		>

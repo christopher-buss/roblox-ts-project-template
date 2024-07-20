@@ -5,9 +5,9 @@ import type { BindingValue } from "types/util/react";
 
 export interface FrameProps<T extends Instance = Frame> extends React.PropsWithChildren {
 	/** An optional helper that rounds the corners of the frame. */
-	readonly CornerRadius?: BindingValue<UDim>;
+	CornerRadius?: BindingValue<UDim>;
 	/** The default properties of the component. */
-	readonly Native?: Partial<React.InstanceProps<T>>;
+	Native?: Partial<React.InstanceProps<T>>;
 }
 
 /**
@@ -29,20 +29,23 @@ export interface FrameProps<T extends Instance = Frame> extends React.PropsWithC
  *
  * @see https://create.roblox.com/docs/reference/engine/classes/Frame
  */
-const Frame = forwardRef(({ CornerRadius, Native, children }: FrameProps, ref: Ref<Frame>) => {
-	const { AnchorPoint, Position } = Native ?? {};
+const Frame = forwardRef(
+	({ CornerRadius, Native, children }: Readonly<FrameProps>, ref: Ref<Frame>) => {
+		const { AnchorPoint, Position } = Native ?? {};
 
-	return (
-		<frame
-			ref={ref}
-			{...Native}
-			AnchorPoint={AnchorPoint ?? new Vector2(0.5, 0.5)}
-			Position={Position ?? new UDim2(0.5, 0, 0.5, 0)}
-		>
-			{children}
-			{CornerRadius ? <uicorner CornerRadius={CornerRadius} /> : undefined}
-		</frame>
-	);
-});
+		return (
+			<frame
+				ref={ref}
+				{...Native}
+				AnchorPoint={AnchorPoint ?? new Vector2(0.5, 0.5)}
+				Position={Position ?? new UDim2(0.5, 0, 0.5, 0)}
+				Size={Native?.Size ?? new UDim2(1, 0, 1, 0)}
+			>
+				{CornerRadius ? <uicorner CornerRadius={CornerRadius} /> : undefined}
+				{children}
+			</frame>
+		);
+	},
+);
 
 export default Frame;

@@ -5,7 +5,7 @@ import Log from "@rbxts/log";
 import { GAME_NAME } from "shared/constants";
 import { setupLogger } from "shared/functions/setup-logger";
 
-import { reactConfig } from "./ui/react-config";
+import { createApp, reactConfig } from "./ui/react-config";
 
 function start(): void {
 	reactConfig();
@@ -19,6 +19,10 @@ function start(): void {
 
 	Log.Info(`Flamework ignite!`);
 	Flamework.ignite();
+
+	createApp().catch(() => {
+		Log.Fatal(`Failed to create React app!`);
+	});
 }
 
 start();

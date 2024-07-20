@@ -27,6 +27,7 @@ function getName(callback: Callback): string {
 export function profileAllComponents(): void {
 	const profiledComponents = new Map<FunctionComponent, FunctionComponent>();
 
+	// eslint-disable-next-line react/prefer-read-only-props -- We need to modify the props
 	React.createElement = ((...args: Parameters<typeof React.createElement>) => {
 		const [component] = args;
 

@@ -1,16 +1,7 @@
-import style, { GLOB_TSX, GLOB_YAML } from "@isentinel/eslint-config";
-
-import prettierrc from "./.prettierrc.config.ts";
+import style, { GLOB_TS } from "@isentinel/eslint-config";
 
 export default style(
 	{
-		formatters: {
-			markdown: true,
-			prettierOptions: prettierrc,
-			toml: true,
-		},
-		gitignore: true,
-		markdown: true,
 		react: true,
 		rules: {
 			"perfectionist/sort-objects": [
@@ -19,16 +10,27 @@ export default style(
 					"custom-groups": {
 						id: "id",
 						name: "name",
-						ga: "progressionStatus",
-						"react-props": ["children", "ref"],
+						reactProps: ["children", "ref"],
 						reflex: ["loadPlayerData", "closePlayerData"],
 					},
-					groups: ["id", "name", "reflex", "ga", "unknown", "react-props"],
+					groups: ["id", "name", "reflex", "unknown", "reactProps"],
 					order: "asc",
 					"partition-by-comment": "Part:**",
 					type: "natural",
 				},
 			],
+		},
+		typescript: {
+			parserOptions: {
+				project: "tsconfig.build.json",
+			},
+			tsconfigPath: "tsconfig.build.json",
+		},
+	},
+	{
+		files: [GLOB_TS],
+		rules: {
+			"no-param-reassign": "error",
 			"ts/no-magic-numbers": [
 				"error",
 				{
@@ -39,32 +41,11 @@ export default style(
 				},
 			],
 		},
-		toml: true,
-		typescript: {
-			parserOptions: {
-				ecmaVersion: 2018,
-				jsx: true,
-				project: "tsconfig.build.json",
-				sourceType: "module",
-				useJSXTextNode: true,
-			},
-			tsconfigPath: "tsconfig.build.json",
-		},
 	},
 	{
-		ignores: ["*.js"],
-	},
-	{
-		files: [GLOB_TSX],
+		files: ["src/client/ui/hooks/**/*"],
 		rules: {
-			"ts/no-magic-numbers": "off",
-		},
-	},
-	{
-		files: [GLOB_YAML],
-		rules: {
-			"comment-length/limit-multi-line-comments": "off",
-			"no-inline-comments": "off",
+			"max-lines-per-function": "off",
 		},
 	},
 );

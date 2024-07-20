@@ -1,18 +1,17 @@
 import { Service } from "@flamework/core";
 import type { Collection, Document } from "@rbxts/lapis";
 import { createCollection, setConfig } from "@rbxts/lapis";
+import DataStoreServiceMock from "@rbxts/lapis-mockdatastore";
 import type { Logger } from "@rbxts/log";
 import { Players, RunService } from "@rbxts/services";
 
 import { $NODE_ENV } from "rbxts-transform-env";
 import { store } from "server/store";
-import { selectPlayerData } from "shared/store/persistent/persistent-selectors";
-import type { PlayerData } from "shared/store/persistent/persistent-slice";
-import { defaultPlayerData } from "shared/store/persistent/persistent-slice";
+import type { PlayerData } from "shared/store/persistent";
+import { defaultPlayerData, selectPlayerData } from "shared/store/persistent";
 import KickCode from "types/enum/kick-reason";
 
 import type PlayerRemovalService from "../player-removal-service";
-import DataStoreServiceMock from "./mock-data-store";
 import { validate } from "./validate-data";
 
 const DATA_STORE_NAME = RunService.IsStudio() ? "Development" : "Production";
@@ -30,7 +29,7 @@ export default class PlayerDataService {
 		private readonly logger: Logger,
 		private readonly playerRemovalService: PlayerRemovalService,
 	) {
-		if (RunService.IsStudio() && $NODE_ENV === "development") {
+		if ($NODE_ENV === "development" && RunService.IsStudio()) {
 			setConfig({
 				dataStoreService: new DataStoreServiceMock(),
 			});

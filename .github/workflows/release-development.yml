@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - develop
-    paths-ignore:
-      - README.md
-      - LICENSE.md
-      - 'scripts/**'
-      - '.github/**'
+    paths:
+      - 'src/**/*'
+      - default.project.json
+      - mantle.yml
+      - package.json
   workflow_dispatch:
 
 permissions:
@@ -30,13 +30,16 @@ jobs:
         uses: pnpm/action-setup@v3
 
       - name: Use Node.js 20
-        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4
         with:
           node-version: 20
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --prod
+
+      - name: Install roblox-ts
+        run: pnpm add roblox-ts
 
       - name: Setup Aftman
         uses: ok-nick/setup-aftman@e226f24209f47677da7b215bab44f6351a2c043b # v0.4.2
@@ -50,7 +53,7 @@ jobs:
         run: rojo build ./default.project.json --output place.rbxlx
 
       - name: Upload place
-        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4
+        uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4
         with:
           name: place
           path: place.rbxlx
@@ -71,7 +74,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download place artifact
-        uses: actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e # v4
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4
         with:
           name: place
 

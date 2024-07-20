@@ -2,9 +2,16 @@
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": [
 		"config:recommended",
-		"docker:pinDigests",
+		":pinAllExceptPeerDependencies",
+		"github>sasial-dev/aftman-renovate-config",
 		"helpers:pinGitHubActionDigests",
-		":pinDevDependencies",
-		"github>sasial-dev/aftman-renovate-config"
+		"npm:unpublishSafe"
+	],
+	"packageRules": [
+		{
+			"matchPackageNames": ["@rbxts/types"],
+			"automerge": true,
+			"minimumReleaseAge": "0 days"
+		}
 	]
 }

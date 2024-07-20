@@ -42,11 +42,11 @@ export interface OnPlayerLeave {
 /** A service that manages player entities in the game. */
 @Service({})
 export default class PlayerService implements OnStart {
+	private readonly playerLeaveEvents = new Array<ListenerData<OnPlayerLeave>>();
 	private readonly onEntityJoined = new Signal<(playerEntity: PlayerEntity) => void>();
 	private readonly onEntityRemoving = new Signal();
 	private readonly playerEntities = new Map<Player, PlayerEntity>();
 	private readonly playerJoinEvents = new Array<ListenerData<OnPlayerJoin>>();
-	private readonly playerLeaveEvents = new Array<ListenerData<OnPlayerLeave>>();
 
 	constructor(
 		private readonly logger: Logger,
@@ -175,16 +175,22 @@ export default class PlayerService implements OnStart {
 		debug.profilebegin("Lifecycle_Player_Join");
 		{
 			for (const { id, event } of this.playerJoinEvents) {
-				Promise.defer(() => {
-					debug.profilebegin(id);
-					event.onPlayerJoin(playerEntity);
-				}).catch(err => {
-					this.logger.Error(`Error in player lifecycle ${id}: ${err}`);
-				});
+				janitor
+					.Add(
+						Promise.defer(() => {
+							debug.profilebegin(id);
+							event.onPlayerJoin(playerEntity);
+						}),
+					)
+					.catch(err => {
+						this.logger.Error(`Error in player lifecycle ${id}: ${err}`);
+					});
 			}
 		}
 
 		debug.profileend();
+
+		this.logger.Info(`Player ${player.UserId} joined the game.`);
 
 		this.onEntityJoined.Fire(playerEntity);
 	}

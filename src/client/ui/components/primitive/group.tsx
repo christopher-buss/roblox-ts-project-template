@@ -1,16 +1,8 @@
 import React, { forwardRef } from "@rbxts/react";
 
 interface GroupProps extends React.PropsWithChildren {
-	/**
-	 * The background transparency property exists purely for debugging
-	 * purposes. If you need a visible background, use a `Frame` instead.
-	 *
-	 * @ignore
-	 * @deprecated
-	 */
-	readonly BackgroundTransparency?: number;
 	/** All the default properties of a `Frame` component. */
-	readonly Native?: Partial<Omit<React.InstanceProps<Frame>, "BackgroundTransparency">>;
+	Native?: Partial<Omit<React.InstanceProps<Frame>, "BackgroundTransparency">>;
 }
 
 /**
@@ -30,23 +22,21 @@ interface GroupProps extends React.PropsWithChildren {
  *
  * @component
  */
-const Group = forwardRef(
-	({ BackgroundTransparency, Native, children }: GroupProps, ref: React.Ref<Frame>) => {
-		const { AnchorPoint, Position, Size } = Native ?? {};
+const Group = forwardRef(({ Native, children }: Readonly<GroupProps>, ref: React.Ref<Frame>) => {
+	const { AnchorPoint, Position, Size } = Native ?? {};
 
-		return (
-			<frame
-				ref={ref}
-				{...Native}
-				AnchorPoint={AnchorPoint ?? new Vector2(0.5, 0.5)}
-				BackgroundTransparency={BackgroundTransparency ?? 1}
-				Position={Position ?? new UDim2(0.5, 0, 0.5, 0)}
-				Size={Size ?? new UDim2(1, 0, 1, 0)}
-			>
-				{children}
-			</frame>
-		);
-	},
-);
+	return (
+		<frame
+			ref={ref}
+			{...Native}
+			AnchorPoint={AnchorPoint ?? new Vector2(0.5, 0.5)}
+			BackgroundTransparency={1}
+			Position={Position ?? new UDim2(0.5, 0, 0.5, 0)}
+			Size={Size ?? new UDim2(1, 0, 1, 0)}
+		>
+			{children}
+		</frame>
+	);
+});
 
 export default Group;

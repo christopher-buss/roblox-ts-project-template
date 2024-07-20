@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "@rbxts/react";
 import React, { forwardRef } from "@rbxts/react";
 
 interface PaddingProps extends PropsWithChildren {
-	readonly Padding: number;
+	Padding: number;
 }
 
 /**
@@ -19,7 +19,7 @@ interface PaddingProps extends PropsWithChildren {
  * @see https://developer.roblox.com/en-us/api-reference/class/UIPadding
  */
 const PaddingComponent = forwardRef(
-	({ Padding, children }: PaddingProps, ref: React.Ref<UIPadding>) => {
+	({ Padding, children }: Readonly<PaddingProps>, ref: React.Ref<UIPadding>) => {
 		return (
 			<uipadding
 				key="Padding"
