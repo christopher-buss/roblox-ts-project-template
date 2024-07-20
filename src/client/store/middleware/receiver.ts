@@ -4,6 +4,7 @@ import { createBroadcastReceiver } from "@rbxts/reflex";
 import { Events } from "client/network";
 import { $NODE_ENV } from "rbxts-transform-env";
 import { IS_EDIT } from "shared/constants";
+import { stateSerDes } from "shared/store";
 
 /**
  * A middleware that listens for actions dispatched from the server and
@@ -28,7 +29,7 @@ export function receiverMiddleware(): ProducerMiddleware {
 	});
 
 	Events.store.hydrate.connect(state => {
-		receiver.hydrate(state);
+		receiver.hydrate(stateSerDes.deserialize(state.buffer, state.blobs));
 	});
 
 	return receiver.middleware;

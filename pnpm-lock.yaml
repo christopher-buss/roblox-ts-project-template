@@ -25,6 +25,9 @@ importers:
       '@flamework/networking':
         specifier: 1.2.3
         version: 1.2.3(@flamework/core@1.2.3)
+      '@rbxts/flamework-binary-serializer':
+        specifier: 0.6.0
+        version: 0.6.0(@flamework/core@1.2.3)(rbxts-transformer-flamework@1.2.3(typescript@5.4.5))
       '@rbxts/inspect':
         specifier: 1.0.1
         version: 1.0.1
@@ -895,6 +898,12 @@ packages:
 
   '@rbxts/compiler-types@2.3.0-types.1':
     resolution: {integrity: sha512-NZWNo+fC4icfJte+NiDSDdWJo1KwzD0MDQ2iBi70YhNYlkA7+Xc+B1udbVqxLJuBur2JxG5bbKrpMAfHqfCtbw==}
+
+  '@rbxts/flamework-binary-serializer@0.6.0':
+    resolution: {integrity: sha512-tB6zoE0PCJ6DLQCCNvzOe75pLnhp8eq8YmpQQAALq9fqsSW+zXEAnY5tawCvJkJOApKcMQBhBDAGhpazGaRFgg==}
+    peerDependencies:
+      '@flamework/core': '*'
+      rbxts-transformer-flamework: '*'
 
   '@rbxts/flipper@2.0.1':
     resolution: {integrity: sha512-kxb5AZizP05XSmo3waS/QkcfNMD5b6HX4gGwyHOyBow260R5MIT4L/ZUPLvleXXyb9b67X4NVmHoac1tPXOLNA==}
@@ -4823,6 +4832,11 @@ snapshots:
   '@rbxts/compiler-types@1.2.3-types.1': {}
 
   '@rbxts/compiler-types@2.3.0-types.1': {}
+
+  '@rbxts/flamework-binary-serializer@0.6.0(@flamework/core@1.2.3)(rbxts-transformer-flamework@1.2.3(typescript@5.4.5))':
+    dependencies:
+      '@flamework/core': 1.2.3
+      rbxts-transformer-flamework: 1.2.3(typescript@5.4.5)
 
   '@rbxts/flipper@2.0.1': {}
 

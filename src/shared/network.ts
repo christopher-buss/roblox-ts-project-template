@@ -1,7 +1,7 @@
 import { Networking } from "@flamework/networking";
 import type { BroadcastAction } from "@rbxts/reflex";
 
-import type { SharedState } from "./store";
+import type { SerializedSharedState } from "./store";
 
 /** Fired by client to server. */
 interface ClientToServerEvents {
@@ -23,7 +23,7 @@ interface ServerToClientEvents {
 		 * @param actions - The actions to send to the client.
 		 */
 		dispatch: (actions: Array<BroadcastAction>) => void;
-		hydrate: (state: SharedState) => void;
+		hydrate: (state: SerializedSharedState) => void;
 	};
 }
 
