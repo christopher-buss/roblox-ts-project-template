@@ -3,23 +3,30 @@
 	"version": "1.0.0",
 	"description": "A Roblox game made with React and Roblox-TS",
 	"keywords": [],
-	"license": "ISC",
+	"license": "MIT",
 	"author": "",
 	"type": "module",
 	"main": "index.js",
 	"scripts": {
-		"build-dev": "NODE_ENV=development && npx rbxtsc",
-		"build-prod": "npm run clean && NODE_ENV=production && npx rbxtsc --verbose && npm run darklua",
+		"assets:upload": "asphalt sync",
 		"clean": "npx rimraf out/ && npx rimraf dist",
 		"commit": "commit",
 		"darklua": "darklua process out dist --verbose",
+		"dev:build": "npx rbxtsc",
+		"dev:compile": "rbxts-build compile",
+		"dev:open": "rbxts-build open",
+		"dev:restart": "pnpm run dev:stop && pnpm run dev:start",
+		"dev:start": "rbxts-build start",
+		"dev:stop": "rbxts-build stop",
+		"dev:sync": "rbxts-build sync",
+		"dev:watch": "rbxts-build watch",
 		"eslint-config": "npx @eslint/config-inspector",
 		"lint": "eslint --max-warnings 0 .",
+		"postassets:upload": "eslint src/shared/assets.d.ts --fix",
+		"postdev:sync": "eslint src/types/services.d.ts --fix",
 		"prepare": "node .husky/install.js",
-		"sync-dev": "rojo serve",
-		"sync-prod": "rojo serve ./build.project.json",
-		"upload-assets": "asphalt sync && eslint src/shared/assets.d.ts --fix",
-		"watch-dev": "NODE_ENV=development && npx rbxtsc -w"
+		"prod:build": "npm run clean && NODE_ENV=production && npx rbxtsc --verbose && npm run darklua",
+		"prod:sync": "rojo serve ./build.project.json"
 	},
 	"lint-staged": {
 		"*": "eslint --fix"
@@ -71,6 +78,7 @@
 		"git-pull-run": "1.4.0",
 		"husky": "9.0.11",
 		"lint-staged": "15.2.7",
+		"rbxts-build": "2.3.0",
 		"rbxts-transformer-flamework": "1.2.3",
 		"rimraf": "6.0.1",
 		"roblox-ts": "2.3.0-dev-e6e7658",
@@ -81,6 +89,15 @@
 		"patchedDependencies": {
 			"roblox-ts@2.3.0-dev-e6e7658": "patches/roblox-ts@2.3.0-dev-e6e7658.patch",
 			"rbxts-transform-env@2.2.0": "patches/rbxts-transform-env@2.2.0.patch"
+		}
+	},
+	"rbxts-build": {
+		"syncLocation": "src/types/services.d.ts",
+		"names": {
+			"build": "dev:build",
+			"compile": "dev:compile",
+			"open": "dev:open",
+			"watch": "dev:watch"
 		}
 	}
 }

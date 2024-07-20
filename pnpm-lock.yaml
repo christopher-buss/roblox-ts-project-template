@@ -149,6 +149,9 @@ importers:
       lint-staged:
         specifier: 15.2.7
         version: 15.2.7
+      rbxts-build:
+        specifier: 2.3.0
+        version: 2.3.0
       rbxts-transformer-flamework:
         specifier: 1.2.3
         version: 1.2.3(typescript@5.4.5)
@@ -3322,6 +3325,10 @@ packages:
   radix3@1.1.2:
     resolution: {integrity: sha512-b484I/7b8rDEdSDKckSSBA8knMpcdsXudlE/LNL639wFoHKwLbEkQFZHWEYwDC0wa0FKUcCY+GAF73Z7wxNVFA==}
 
+  rbxts-build@2.3.0:
+    resolution: {integrity: sha512-6OiXOTlwexzc9hxknQ+o7h/zw9HUyl8ciE/lTk3bl8Rnnkhxns6koR+lDNw/ShbGN1Aig4rh5ahGUlFde/R27Q==}
+    hasBin: true
+
   rbxts-transform-debug@2.2.0:
     resolution: {integrity: sha512-JWYia7sG/MbkDJ8AnIqMI/Kx1zn73QnszIj0qT9+lhZ4Zbtc/XEOeTDLFMh+x3SIWtppzopRkQvnl+gtR4YdeA==}
 
@@ -3922,6 +3929,9 @@ packages:
   yocto-queue@1.0.0:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
+
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
 snapshots:
 
@@ -7739,6 +7749,12 @@ snapshots:
 
   radix3@1.1.2: {}
 
+  rbxts-build@2.3.0:
+    dependencies:
+      kleur: 4.1.5
+      yargs: 17.7.2
+      zod: 3.23.8
+
   rbxts-transform-debug@2.2.0:
     dependencies:
       chalk: 4.1.2
@@ -8406,3 +8422,5 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   yocto-queue@1.0.0: {}
+
+  zod@3.23.8: {}
