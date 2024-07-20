@@ -12,7 +12,7 @@
 		"clean": "npx rimraf out/ && npx rimraf dist",
 		"commit": "commit",
 		"darklua": "darklua process out dist --verbose",
-		"dev:build": "npx rbxtsc",
+		"dev:build": "rbxts-build build",
 		"dev:compile": "rbxts-build compile",
 		"dev:open": "rbxts-build open",
 		"dev:restart": "pnpm run dev:stop && pnpm run dev:start",

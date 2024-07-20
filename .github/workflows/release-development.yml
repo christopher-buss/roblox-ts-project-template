@@ -47,7 +47,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Compile
-        run: pnpm dev:build --verbose
+        run: npx rbxtsc --verbose
 
       - name: Build project
         run: rojo build ./default.project.json --output place.rbxlx
