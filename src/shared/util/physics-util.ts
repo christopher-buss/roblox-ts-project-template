@@ -12,7 +12,7 @@
 export function addToCollisionGroup(
 	object: Instance,
 	group: string,
-	trackNewDescendants?: true,
+	trackNewDescendants: true,
 ): () => void;
 export function addToCollisionGroup(
 	object: Instance,
