@@ -55,7 +55,7 @@ export default function Button({
 	onMouseLeave,
 	onMouseUp,
 	children,
-}: Readonly<ButtonProps>): React.Element {
+}: Readonly<ButtonProps>): React.ReactNode {
 	const event = {
 		Activated: () => {
 			onClick?.();

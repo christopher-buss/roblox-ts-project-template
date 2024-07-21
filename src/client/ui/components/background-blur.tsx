@@ -15,7 +15,7 @@ interface BackgroundBlurProps {
  * @param props - The component props.
  * @returns The rendered background blur component.
  */
-export function BackgroundBlur({ BlurSize }: Readonly<BackgroundBlurProps>): React.Element {
+export function BackgroundBlur({ BlurSize }: Readonly<BackgroundBlurProps>): React.ReactNode {
 	const camera = useCamera();
 	const [visible, setVisible] = useState(false);
 

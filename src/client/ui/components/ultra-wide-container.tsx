@@ -20,7 +20,7 @@ type UltraWideContainerProps = React.PropsWithChildren;
  */
 export default function UltraWideContainer({
 	children,
-}: Readonly<UltraWideContainerProps>): React.Element {
+}: Readonly<UltraWideContainerProps>): React.ReactNode {
 	const viewport = useViewport();
 
 	return (
