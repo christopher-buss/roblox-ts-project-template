@@ -1,4 +1,8 @@
 interface ReplicatedStorage {
+	rbxts_include: {
+		Promise: ModuleScript;
+		RuntimeLib: ModuleScript;
+	} & Folder;
 	TS: {
 		assets: ModuleScript;
 		constants: ModuleScript;
@@ -40,10 +44,6 @@ interface ReplicatedStorage {
 		} & Folder;
 		interfaces: Folder;
 		util: Folder;
-	} & Folder;
-	rbxts_include: {
-		Promise: ModuleScript;
-		RuntimeLib: ModuleScript;
 	} & Folder;
 }
 
