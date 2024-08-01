@@ -57,6 +57,7 @@ export interface ListenerData<T> {
 /**
  * Sets up the lifecycle for a given array of listener data.
  *
+ * @template T - The type of the listener.
  * @param lifecycle - The array of listener data.
  * @param specifier - The specifier for the listener. This can be passed through
  *   as a generic.
