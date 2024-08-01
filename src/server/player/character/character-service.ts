@@ -139,7 +139,7 @@ export default class CharacterService implements OnStart, OnPlayerJoin {
 	}
 
 	private onRigLoaded(playerEntity: PlayerEntity, rig: CharacterRig): void {
-		const { name, janitor, player } = playerEntity;
+		const { name, janitor, player, userId } = playerEntity;
 
 		janitor.Add(addToCollisionGroup(rig, CollisionGroup.Character, true), true);
 		rig.AddTag(Tag.PlayerCharacter);
@@ -166,7 +166,9 @@ export default class CharacterService implements OnStart, OnPlayerJoin {
 		debug.profileend();
 
 		janitor.AddPromise(this.characterAppearanceLoaded(player, rig)).catch(err => {
-			this.logger.Info(`Character appearance did not load for`, player, err);
+			this.logger.Info(
+				`Character appearance did not load for ${userId}, with reason: ${err}`,
+			);
 		});
 	}
 
