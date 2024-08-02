@@ -7,7 +7,7 @@ on:
     paths:
       - 'src/**/*'
       - default.project.json
-      - mantle.yml
+      - mantle.yaml
       - package.json
   workflow_dispatch:
 
