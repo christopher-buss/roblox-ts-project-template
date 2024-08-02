@@ -56,7 +56,7 @@ jobs:
         run: rojo build ./build.project.json --output place.rbxlx
 
       - name: Upload place
-        uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4
+        uses: actions/upload-artifact@89ef406dd8d7e03cfd12d9e0a4a378f454709029 # v4
         with:
           name: place
           path: place.rbxlx
@@ -92,15 +92,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
       - name: Bump version and push tag
         id: tag_version
-        uses: mathieudutour/github-tag-action@v6.2
+        uses: mathieudutour/github-tag-action@a22cf08638b34d5badda920f9daf6e72c477b07b # v6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create a GitHub release
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@2c591bcc8ecdcd2db72b97d6147f871fcd833ba5 # v1
         with:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
