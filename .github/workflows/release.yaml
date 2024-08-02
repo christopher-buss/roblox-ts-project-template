@@ -92,17 +92,3 @@ jobs:
           ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
           MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.MANTLE_AWS_ACCESS_KEY_ID }}
           MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.MANTLE_AWS_SECRET_ACCESS_KEY }}
-
-  release_workflow:
-    runs-on: ubuntu-latest
-    needs: deploy
-    steps:
-      - name: GitFlow workflow action - Release workflows
-        uses: hoangvvo/gitflow-workflow-action@6f190b60eedc913790eeeee8077426c297ea9c0e # 0.3.7
-        with:
-          develop_branch: develop
-          main_branch: main
-          merge_back_from_main: false
-          version: ${{ inputs.version }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
