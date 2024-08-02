@@ -79,7 +79,7 @@ jobs:
           name: place
 
       - name: Deploy place
-        run: mantle deploy --environment development
+        run: mantle deploy mantle.yaml --environment development
         env:
           ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
           MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.MANTLE_AWS_ACCESS_KEY_ID }}
