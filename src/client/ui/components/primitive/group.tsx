@@ -23,16 +23,14 @@ interface GroupProps extends React.PropsWithChildren {
  * @component
  */
 const Group = forwardRef(({ Native, children }: Readonly<GroupProps>, ref: React.Ref<Frame>) => {
-	const { AnchorPoint, Position, Size } = Native ?? {};
-
 	return (
 		<frame
 			ref={ref}
-			{...Native}
-			AnchorPoint={AnchorPoint ?? new Vector2(0.5, 0.5)}
+			AnchorPoint={new Vector2(0.5, 0.5)}
 			BackgroundTransparency={1}
-			Position={Position ?? new UDim2(0.5, 0, 0.5, 0)}
-			Size={Size ?? new UDim2(1, 0, 1, 0)}
+			Position={new UDim2(0.5, 0, 0.5, 0)}
+			Size={new UDim2(1, 0, 1, 0)}
+			{...Native}
 		>
 			{children}
 		</frame>

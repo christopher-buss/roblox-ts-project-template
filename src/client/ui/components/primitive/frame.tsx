@@ -31,18 +31,16 @@ export interface FrameProps<T extends Instance = Frame> extends React.PropsWithC
  */
 const Frame = forwardRef(
 	({ CornerRadius, Native, children }: Readonly<FrameProps>, ref: Ref<Frame>) => {
-		const { AnchorPoint, Position } = Native ?? {};
-
 		return (
 			<frame
 				ref={ref}
+				AnchorPoint={new Vector2(0.5, 0.5)}
+				Position={new UDim2(0.5, 0, 0.5, 0)}
+				Size={new UDim2(1, 0, 1, 0)}
 				{...Native}
-				AnchorPoint={AnchorPoint ?? new Vector2(0.5, 0.5)}
-				Position={Position ?? new UDim2(0.5, 0, 0.5, 0)}
-				Size={Native?.Size ?? new UDim2(1, 0, 1, 0)}
 			>
-				{CornerRadius ? <uicorner CornerRadius={CornerRadius} /> : undefined}
 				{children}
+				{CornerRadius ? <uicorner CornerRadius={CornerRadius} /> : undefined}
 			</frame>
 		);
 	},

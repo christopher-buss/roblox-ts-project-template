@@ -51,8 +51,6 @@ export default function Layer({
 	return $NODE_ENV === "development" && IS_EDIT ? (
 		<Group
 			Native={{
-				AnchorPoint: new Vector2(0, 0),
-				Position: new UDim2(0, 0, 0, 0),
 				ZIndex: DisplayOrder,
 			}}
 		>
