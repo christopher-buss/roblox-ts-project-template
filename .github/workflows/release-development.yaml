@@ -1,29 +1,22 @@
-name: Release
+name: Release Develop
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
     branches:
-      - main
+      - develop
     paths:
       - 'src/**/*'
-      - build.project.json
+      - default.project.json
       - mantle.yml
       - package.json
   workflow_dispatch:
-    inputs:
-      version:
-        type: string
-        required: true
-        description: Version to release
 
 permissions:
   contents: write
   packages: write
 
 concurrency:
-  group: production_environment
+  group: development_environment
   cancel-in-progress: true
 
 jobs:
@@ -54,10 +47,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Compile
-        run: pnpm build-prod --verbose
+        run: npx rbxtsc --verbose
 
       - name: Build project
-        run: rojo build ./build.project.json --output place.rbxlx
+        run: rojo build ./default.project.json --output place.rbxlx
 
       - name: Upload place
         uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4
@@ -68,7 +61,7 @@ jobs:
 
   deploy:
     runs-on: self-hosted
-    environment: production
+    environment: development
     needs: build
 
     steps:
@@ -85,23 +78,9 @@ jobs:
         with:
           name: place
 
-      - name: Deploy game
-        run: mantle deploy --allow-purchases --environment production
+      - name: Deploy place
+        run: mantle deploy mantle.yaml --environment development
         env:
           ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
           MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.MANTLE_AWS_ACCESS_KEY_ID }}
           MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.MANTLE_AWS_SECRET_ACCESS_KEY }}
-
-  release_workflow:
-    runs-on: ubuntu-latest
-    needs: deploy
-    steps:
-      - name: GitFlow workflow action - Release workflows
-        uses: hoangvvo/gitflow-workflow-action@6f190b60eedc913790eeeee8077426c297ea9c0e # 0.3.7
-        with:
-          develop_branch: develop
-          main_branch: main
-          merge_back_from_main: false
-          version: ${{ inputs.version }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

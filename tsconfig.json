@@ -33,7 +33,8 @@
 			},
 			{
 				"transform": "rbxts-transform-env",
-				"shortCircuitNodeEnv": false
+				"shortCircuitNodeEnv": false,
+				"defaultEnvironment": "development"
 			}
 		]
 	},

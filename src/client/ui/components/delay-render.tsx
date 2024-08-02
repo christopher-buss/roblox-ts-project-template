@@ -39,7 +39,7 @@ export function DelayRender({
 	ShouldRender,
 	UnmountDelay = 0,
 	children,
-}: Readonly<DelayRenderProps>): React.Element {
+}: Readonly<DelayRenderProps>): React.ReactNode {
 	const [render, setRender] = useState(false);
 
 	useEffect(() => {

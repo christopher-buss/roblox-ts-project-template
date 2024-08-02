@@ -1,0 +1,36 @@
+name: Release Flow
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        required: true
+        description: Version to release
+
+permissions:
+  contents: write
+  packages: write
+  pull-requests: write
+
+concurrency:
+  group: production_environment
+  cancel-in-progress: true
+
+jobs:
+  release_workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: GitFlow workflow action - Release workflows
+        uses: christopher-buss/gitflow-workflow-action@e65093fd5e72625766cda8aba6098271a8690052
+        with:
+          develop_branch: develop
+          main_branch: main
+          merge_back_from_main: false
+          version: ${{ inputs.version }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

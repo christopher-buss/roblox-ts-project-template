@@ -7,7 +7,7 @@ export default style(
 			"perfectionist/sort-objects": [
 				"warn",
 				{
-					"custom-groups": {
+					customGroups: {
 						id: "id",
 						name: "name",
 						reactProps: ["children", "ref"],
@@ -15,7 +15,7 @@ export default style(
 					},
 					groups: ["id", "name", "reflex", "unknown", "reactProps"],
 					order: "asc",
-					"partition-by-comment": "Part:**",
+					partitionByComment: "Part:**",
 					type: "natural",
 				},
 			],

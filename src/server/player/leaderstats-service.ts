@@ -116,10 +116,7 @@ export class LeaderstatsService implements OnInit, OnPlayerJoin, OnPlayerLeave {
 	 * @param statName - The name of the stat to find.
 	 * @returns The stat object if it exists.
 	 */
-	public getStatObject<N extends keyof LeaderstatValueTypes>(
-		player: Player,
-		statName: Leaderstats,
-	): Instances[N] | undefined {
+	public getStatObject(player: Player, statName: Leaderstats): LeaderstatValue | undefined {
 		const valueMap = this.playerToValueMap.get(player);
 		if (!valueMap) {
 			return;
@@ -130,7 +127,7 @@ export class LeaderstatsService implements OnInit, OnPlayerJoin, OnPlayerLeave {
 			return;
 		}
 
-		return valueMap.get(entry.Name) as Instances[N] | undefined;
+		return valueMap.get(entry.Name);
 	}
 
 	/**

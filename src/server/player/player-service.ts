@@ -18,8 +18,6 @@ import KickCode from "types/enum/kick-reason";
 import type PlayerDataService from "./data/player-data-service";
 import type PlayerRemovalService from "./player-removal-service";
 
-const MAX_REMOVING_TIMEOUT = 5;
-
 export interface OnPlayerJoin {
 	/**
 	 * Fires when a player joins the game and is fully initialized. The player
@@ -176,7 +174,7 @@ export default class PlayerService implements OnStart {
 		{
 			for (const { id, event } of this.playerJoinEvents) {
 				janitor
-					.Add(
+					.AddPromise(
 						Promise.defer(() => {
 							debug.profilebegin(id);
 							event.onPlayerJoin(playerEntity);
@@ -226,12 +224,26 @@ export default class PlayerService implements OnStart {
 		debug.profilebegin("Lifecycle_Player_Leave");
 		{
 			for (const { id, event } of this.playerLeaveEvents) {
-				promises.push(
-					Promise.defer(() => {
-						debug.profilebegin(id);
-						return Promise.resolve(event.onPlayerLeave(playerEntity)).await();
-					}),
-				);
+				const promiseEvent = Promise.defer<void>((resolve, reject) => {
+					debug.profilebegin(id);
+					try {
+						const leaveEvent = async (): Promise<void> => {
+							await event.onPlayerLeave(playerEntity);
+						};
+
+						const [success, err] = leaveEvent().await();
+						if (!success) {
+							reject(err);
+							return;
+						}
+
+						resolve();
+					} catch (err) {
+						this.logger.Error(`Error in player lifecycle ${id}: ${err}`);
+					}
+				});
+
+				promises.push(promiseEvent);
 			}
 		}
 
@@ -239,24 +251,9 @@ export default class PlayerService implements OnStart {
 
 		// We ensure that all lifecycle events are called before we continue
 		// since we may need to access player data in these events.
-		const lifecycles = Promise.all(promises).catch(err => {
-			this.logger.Error(`Error in player leave lifecycle event:\n${err}`);
+		await Promise.all(promises).finally(() => {
+			playerEntity.janitor.Destroy();
 		});
-
-		// If we're in development, we want to warn if the lifecycle events take
-		// too long to complete. This is to ensure that we don't have any
-		// blocking code in these events.
-		if ($NODE_ENV === "development") {
-			lifecycles.timeout(MAX_REMOVING_TIMEOUT).catch(() => {
-				this.logger.Fatal(
-					`Player lifecycle events for ${playerEntity.userId} took too long. Please ` +
-						`ensure that lifecycle events do not take too long to complete.`,
-				);
-			});
-		}
-
-		await lifecycles;
-		playerEntity.janitor.Destroy();
 	}
 
 	private bindHoldServerOpen(): void {

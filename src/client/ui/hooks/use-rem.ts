@@ -17,6 +17,8 @@ interface RemFunction {
 type RemScaleMode = "pixel" | "unit";
 
 const scaleFunctions = {
+	number: (value: number, rem: number): number => value * rem,
+
 	UDim: (value: UDim, rem: number): UDim => new UDim(value.Scale, value.Offset * rem),
 
 	UDim2: (value: UDim2, rem: number): UDim2 => {
@@ -24,8 +26,6 @@ const scaleFunctions = {
 	},
 
 	Vector2: (value: Vector2, rem: number): Vector2 => new Vector2(value.X * rem, value.Y * rem),
-
-	number: (value: number, rem: number): number => value * rem,
 };
 
 function useRemContext({ maximum = math.huge, minimum = 0 }: RemOptions = {}): number {

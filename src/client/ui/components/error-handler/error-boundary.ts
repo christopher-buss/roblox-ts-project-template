@@ -3,7 +3,7 @@ import type { ErrorInfo } from "@rbxts/react";
 import React, { ReactComponent } from "@rbxts/react";
 
 interface ErrorBoundaryProps extends React.PropsWithChildren {
-	Fallback: (error: unknown) => React.Element;
+	Fallback: (error: unknown) => React.ReactNode;
 }
 
 interface ErrorBoundaryState {

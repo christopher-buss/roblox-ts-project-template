@@ -43,7 +43,7 @@ export default function ScrollingFrame({
 	CanvasSize,
 	Native,
 	children,
-}: Readonly<ScrollingFrameProps>): React.Element {
+}: Readonly<ScrollingFrameProps>): React.ReactNode {
 	const theme = useTheme();
 	const rem = useRem();
 

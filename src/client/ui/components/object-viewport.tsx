@@ -47,7 +47,7 @@ export default function ObjectViewport({
 	Native,
 	Object,
 	children,
-}: Readonly<ObjectViewportProps>): React.Element {
+}: Readonly<ObjectViewportProps>): React.ReactNode {
 	// Setup the viewport after mounting when we have a ref to it
 	const viewportRef = useRef<ViewportFrame>();
 

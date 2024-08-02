@@ -1,22 +1,30 @@
-name: Release Develop
+name: Release
 
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
-      - develop
+      - main
     paths:
       - 'src/**/*'
-      - default.project.json
+      - build.project.json
       - mantle.yml
       - package.json
   workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        required: true
+        description: Version to release
 
 permissions:
   contents: write
   packages: write
+  pull-requests: write
 
 concurrency:
-  group: development_environment
+  group: production_environment
   cancel-in-progress: true
 
 jobs:
@@ -47,10 +55,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Compile
-        run: pnpm build-dev --verbose
+        run: pnpm prod:build --verbose
 
       - name: Build project
-        run: rojo build ./default.project.json --output place.rbxlx
+        run: rojo build ./build.project.json --output place.rbxlx
 
       - name: Upload place
         uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4
@@ -61,7 +69,7 @@ jobs:
 
   deploy:
     runs-on: self-hosted
-    environment: development
+    environment: production
     needs: build
 
     steps:
@@ -78,8 +86,8 @@ jobs:
         with:
           name: place
 
-      - name: Deploy place
-        run: mantle deploy --environment development
+      - name: Deploy game
+        run: mantle deploy mantle.yaml --allow-purchases --environment production
         env:
           ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
           MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.MANTLE_AWS_ACCESS_KEY_ID }}

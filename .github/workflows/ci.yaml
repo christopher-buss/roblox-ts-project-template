@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - develop
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -42,11 +43,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Lint
-        run: |
-          pnpm lint
+        run: pnpm lint
 
       - name: Compile
-        run: pnpm build-prod
+        run: pnpm prod:build
 
       - name: Build project
         run: rojo build ./build.project.json --output place.rbxlx

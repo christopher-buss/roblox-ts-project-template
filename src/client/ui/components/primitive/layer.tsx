@@ -47,7 +47,7 @@ export default function Layer({
 	ClampUltraWide = true,
 	DisplayOrder,
 	children,
-}: Readonly<LayerProps>): React.Element {
+}: Readonly<LayerProps>): React.ReactNode {
 	return $NODE_ENV === "development" && IS_EDIT ? (
 		<Group
 			Native={{

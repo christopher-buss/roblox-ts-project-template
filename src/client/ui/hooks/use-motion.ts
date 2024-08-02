@@ -19,6 +19,8 @@ export function useMotion<T extends MotionGoal, U = T>(
  * Creates a memoized Motion object set to the given initial value. Returns a
  * binding that updates with the Motion, along with the Motion object.
  *
+ * @template T - The type of the Motion goal.
+ * @template U - The type of the mapped value.
  * @param goal - The initial value of the Motion.
  * @param mapper - A function to map the Motion value to a different type.
  * @returns A tuple containing the binding and the Motion object.

@@ -30,7 +30,7 @@ export function RemProvider({
 	minimumRem = MIN_REM,
 	remOverride,
 	children,
-}: Readonly<RemProviderProps>): React.Element {
+}: Readonly<RemProviderProps>): React.ReactNode {
 	const camera = useCamera();
 	const [rem, setRem] = useDebounceState(baseRem, { leading: true, wait: 0.2 });
 

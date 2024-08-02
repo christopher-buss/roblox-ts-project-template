@@ -39,13 +39,11 @@ export function useWhyDidYouUpdate(
 				// We need to remove the meta tables from the previous and new
 				// values to ensure we don't call any meta-methods on the props.
 				if (t.table(previousValue)) {
-					// eslint-disable-next-line ts/no-non-null-assertion -- Required to remove meta table
-					previousValue = setmetatable(table.clone(previousValue), undefined!);
+					previousValue = setmetatable(table.clone(previousValue), undefined);
 				}
 
 				if (t.table(updatedValue)) {
-					// eslint-disable-next-line ts/no-non-null-assertion -- Required to remove meta table
-					updatedValue = setmetatable(table.clone(updatedValue), undefined!);
+					updatedValue = setmetatable(table.clone(updatedValue), undefined);
 				}
 
 				changesObject[key] = {

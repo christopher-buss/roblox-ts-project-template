@@ -14,14 +14,12 @@ let playerService: PlayerService | undefined;
  * when responding to network events. If wrapping server-side events, you should
  * use `withPlayerEntity` from the `PlayerService` class.
  *
+ * @template T - The type of the arguments passed to the callback.
  * @param func - The callback to wrap.
  * @returns The server response.
  */
-export default function withPlayerEntity<
-	T extends Array<unknown>,
-	R extends undefined | void = void,
->(
-	func: (playerEntity: PlayerEntity, ...args: T) => R,
+export default function withPlayerEntity<T extends Array<unknown>>(
+	func: (playerEntity: PlayerEntity, ...args: T) => undefined | void,
 ): (player: Player, ...args: T) => ServerResponse {
 	if (!playerService) {
 		playerService = Dependency<PlayerService>();
