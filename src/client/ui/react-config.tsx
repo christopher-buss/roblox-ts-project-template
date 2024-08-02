@@ -6,7 +6,7 @@ export function reactConfig(): void {
 	}
 
 	_G.__DEV__ = true;
-	_G.__PROFILE__ = true;
+	_G.__PROFILE__ = false;
 
 	// Avoid implicit React import before setting the __DEV__ flag
 	void import("client/ui/functions/profiler").then(({ profileAllComponents }) => {
