@@ -5,8 +5,11 @@ on:
     inputs:
       version:
         type: string
-        required: true
+        required: false
         description: Version to release
+  pull_request:
+    types:
+      - closed
 
 permissions:
   contents: write
