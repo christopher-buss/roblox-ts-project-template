@@ -8,7 +8,7 @@ const initialState: SettingsState = {};
 
 export const settingsSlice = createProducer(initialState, {
 	/** @ignore */
-	closePlayerData: (state, player: string) => {
+	closePlayerData: (state, player: string): SettingsState => {
 		return {
 			...state,
 			[player]: undefined,
@@ -16,7 +16,7 @@ export const settingsSlice = createProducer(initialState, {
 	},
 
 	/** @ignore */
-	loadPlayerData: (state, player: string, data: PlayerData) => {
+	loadPlayerData: (state, player: string, data: PlayerData): SettingsState => {
 		return {
 			...state,
 			[player]: data.settings,
@@ -28,7 +28,7 @@ export const settingsSlice = createProducer(initialState, {
 		player: string,
 		settingType: keyof PlayerSettings,
 		value: PlayerSettings[keyof PlayerSettings],
-	) => {
+	): SettingsState => {
 		const setting = state[player];
 
 		return {

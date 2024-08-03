@@ -71,7 +71,7 @@ export default class PlayerDataService {
 
 			return document;
 		} catch (err) {
-			this.logger.Warn(`Failed to load data for ${player.Name}: ${err}`);
+			this.logger.Warn(`Failed to load data for ${player.UserId}: ${err}`);
 			this.playerRemovalService.removeForBug(player, KickCode.PlayerProfileUndefined);
 		}
 	}
