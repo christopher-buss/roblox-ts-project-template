@@ -39,7 +39,7 @@
 		"@rbxts/inspect": "1.0.1",
 		"@rbxts/janitor": "1.16.0-ts.0",
 		"@rbxts/lapis": "0.3.3",
-		"@rbxts/lapis-mockdatastore": "1.0.6",
+		"@rbxts/lapis-mockdatastore": "0.3.6",
 		"@rbxts/log": "0.6.3",
 		"@rbxts/make": "1.0.6",
 		"@rbxts/message-templates": "0.3.2",
