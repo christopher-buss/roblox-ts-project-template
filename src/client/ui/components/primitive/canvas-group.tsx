@@ -25,11 +25,11 @@ const CanvasGroup = forwardRef((props: Readonly<CanvasGroupProps>, ref: React.Re
 	return (
 		<canvasgroup
 			ref={ref}
-			{...Native}
-			AnchorPoint={Native?.AnchorPoint ?? new Vector2(0.5, 0.5)}
-			BackgroundTransparency={Native?.BackgroundTransparency ?? 1}
+			AnchorPoint={new Vector2(0.5, 0.5)}
+			BackgroundTransparency={1}
 			BorderSizePixel={0}
-			Position={Native?.Position ?? new UDim2(0.5, 0, 0.5, 0)}
+			Position={new UDim2(0.5, 0, 0.5, 0)}
+			{...Native}
 		>
 			{CornerRadius ? <uicorner key="corner" CornerRadius={CornerRadius} /> : undefined}
 			{children}

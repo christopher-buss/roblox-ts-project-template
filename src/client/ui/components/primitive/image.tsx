@@ -34,11 +34,12 @@ const ImageLabel = forwardRef((props: Readonly<ImageProps>, ref: React.Ref<Image
 	return (
 		<imagelabel
 			ref={ref}
-			{...Native}
-			AnchorPoint={Native?.AnchorPoint ?? new Vector2(0.5, 0.5)}
-			BackgroundTransparency={Native?.BackgroundTransparency ?? 1}
+			AnchorPoint={new Vector2(0.5, 0.5)}
+			BackgroundTransparency={1}
 			Image={Image}
-			Position={Native?.Position ?? new UDim2(0.5, 0, 0.5, 0)}
+			Position={new UDim2(0.5, 0, 0.5, 0)}
+			Size={new UDim2(1, 0, 1, 0)}
+			{...Native}
 		>
 			{CornerRadius ? <uicorner CornerRadius={CornerRadius} /> : undefined}
 			{children}

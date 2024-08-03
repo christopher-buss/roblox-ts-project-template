@@ -63,19 +63,17 @@ const TextLabel = forwardRef(
 		const rem = useRem();
 		const theme = useTheme();
 
-		const { AnchorPoint, BackgroundTransparency, Position } = Native ?? {};
-
 		return (
 			<textlabel
-				{...Native}
 				ref={ref}
-				AnchorPoint={AnchorPoint ?? new Vector2(0.5, 0.5)}
-				BackgroundTransparency={BackgroundTransparency ?? 1}
+				AnchorPoint={new Vector2(0.5, 0.5)}
+				BackgroundTransparency={1}
 				Font={Font ?? theme.fonts.primary.regular}
-				Position={Position ?? new UDim2(0.5, 0, 0.5, 0)}
+				Position={new UDim2(0.5, 0, 0.5, 0)}
 				Text={Text}
 				TextColor3={TextColor}
 				TextSize={TextSize ?? rem(1)}
+				{...Native}
 			>
 				{children}
 				{CornerRadius ? <uicorner CornerRadius={CornerRadius} /> : undefined}

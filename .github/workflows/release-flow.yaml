@@ -33,7 +33,7 @@ jobs:
         with:
           develop_branch: develop
           main_branch: main
-          merge_back_from_main: false
+          merge_back_from_main: true
           version: ${{ inputs.version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

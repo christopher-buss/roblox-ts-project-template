@@ -72,7 +72,7 @@ export default function ObjectViewport({
 	});
 
 	return (
-		<viewportframe {...Native} ref={viewportRef}>
+		<viewportframe ref={viewportRef} {...Native}>
 			{children}
 		</viewportframe>
 	);
