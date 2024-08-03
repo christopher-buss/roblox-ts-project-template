@@ -25,6 +25,10 @@ function getName(callback: Callback): string {
  * not be used in production.
  */
 export function profileAllComponents(): void {
+	if (!_G.__PROFILE__) {
+		return;
+	}
+
 	const profiledComponents = new Map<FunctionComponent, FunctionComponent>();
 
 	// eslint-disable-next-line react/prefer-read-only-props -- We need to modify the props
