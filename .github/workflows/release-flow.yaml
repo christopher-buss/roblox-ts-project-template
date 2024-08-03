@@ -16,10 +16,6 @@ permissions:
   packages: write
   pull-requests: write
 
-concurrency:
-  group: production_environment
-  cancel-in-progress: true
-
 jobs:
   release_workflow:
     runs-on: ubuntu-latest
@@ -33,7 +29,7 @@ jobs:
         with:
           develop_branch: develop
           main_branch: main
-          merge_back_from_main: true
+          merge_back_from_main: false
           version: ${{ inputs.version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
