@@ -8,7 +8,7 @@ const initialState: BalanceState = {};
 
 export const balanceSlice = createProducer(initialState, {
 	/** @ignore */
-	closePlayerData: (state, player: string) => {
+	closePlayerData: (state, player: string): BalanceState => {
 		return {
 			...state,
 			[player]: undefined,
@@ -16,14 +16,14 @@ export const balanceSlice = createProducer(initialState, {
 	},
 
 	/** @ignore */
-	loadPlayerData: (state, player: string, data: PlayerData) => {
+	loadPlayerData: (state, player: string, data: PlayerData): BalanceState => {
 		return {
 			...state,
 			[player]: data.balance,
 		};
 	},
 
-	giveCurrency: (state, player: string, amount: number) => {
+	giveCurrency: (state, player: string, amount: number): BalanceState => {
 		const balance = state[player];
 		return {
 			...state,
