@@ -8,7 +8,7 @@ const Configuration: UserConfig = {
 		"scope-enum": [
 			RuleConfigSeverity.Error,
 			"always",
-			["core", "deps", "dev", "lint", "ui", "audio", "assets"],
+			["core", "deps", "dev", "lint", "ui", "audio", "assets", "mtx"],
 		],
 	},
 };

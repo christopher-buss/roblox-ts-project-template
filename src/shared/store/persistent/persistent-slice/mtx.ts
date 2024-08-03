@@ -10,7 +10,7 @@ const initialState: MtxState = {};
 
 export const mtxSlice = createProducer(initialState, {
 	/** @ignore */
-	closePlayerData: (state, player: string) => {
+	closePlayerData: (state, player: string): MtxState => {
 		return {
 			...state,
 			[player]: undefined,
@@ -18,28 +18,28 @@ export const mtxSlice = createProducer(initialState, {
 	},
 
 	/** @ignore */
-	loadPlayerData: (state, player: string, data: PlayerData) => {
+	loadPlayerData: (state, player: string, data: PlayerData): MtxState => {
 		return {
 			...state,
 			[player]: data.mtx,
 		};
 	},
 
-	purchaseDeveloperProduct: (state, player: string, productId: Product) => {
+	purchaseDeveloperProduct: (state, player: string, productId: Product): MtxState => {
 		const mtx = state[player];
 
 		return {
 			...state,
 			[player]: mtx && {
 				...mtx,
-				developerProducts: new Map([...mtx.products]).set(productId, {
+				products: new Map([...mtx.products]).set(productId, {
 					timesPurchased: (mtx.products.get(productId)?.timesPurchased ?? 0) + 1,
 				}),
 			},
 		};
 	},
 
-	purchaseGamePass: (state, player: string, gamePassId: GamePass) => {
+	purchaseGamePass: (state, player: string, gamePassId: GamePass): MtxState => {
 		const mtx = state[player];
 
 		return {
