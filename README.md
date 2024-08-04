@@ -19,10 +19,11 @@
 > [!CAUTION]
 > You likely do not need a fully managed rojo project. For the vast majority of
 > projects, a more simple setup will suffice. If you are new to roblox-ts, I
-> would strongly advise against using the fully managed portions of this
-> template. This includes the usage of Mantle and the release process (under
-> `.github/workflows`). Aside from these features, the template can be a great
-> starting point for new projects.
+> would strongly advise against using the vast majority of the tooling in this
+> project. Instead, I would recommend starting with a more simple setup such as
+> the default flamework template, or the
+> [roblox-ts-template](https://github.com/MonzterDev/Roblox-TS-Template) by
+> MonzterDev.
 ---
 
 This is my personal template for use in the roblox-ts ecosystem, utilizing
@@ -31,7 +32,7 @@ comprehensive list of packages, refer to the `package.json` file.
 
 The primary objective of this project is to provide a streamlined approach for
 initiating new projects, complete with frequently used patterns that I adopt
-already configured. Additionally, it integrated my own customized eslint-config,
+already configured. Additionally, it integrates my own customized eslint-config,
 which is a highly opinionated guide for writing clean and consistent code.
 
 > [!NOTE]
@@ -47,14 +48,12 @@ which is a highly opinionated guide for writing clean and consistent code.
    create a new repository.
 2. Clone the repository to your local machine.
 3. Run `pnpm install` to install all the dependencies.
-4. Run `pnpm run watch-dev` to start the development server.
-5. Sync in with rojo (either by using the rojo extension or by running `pnpm run
-sync-dev`).
-6. Start coding! 🎉
+4. Run `pnpm run dev:start` to start the development server.
+5. Start coding! 🎉
 
 ### Resources
 
-The following is a list of resources that are used in this project (in
+The following is a list of primary resources that are used in this project (in
 alphabetical order):
 
 #### Packages
@@ -76,6 +75,7 @@ alphabetical order):
 -   [Mantle](https://mantledeploy.vercel.app/)
 -   [Rojo](https://rojo.space/)
 -   [Rokit](https://github.com/rojo-rbx/rokit)
+-   [rbxts-build](https://www.npmjs.com/package/rbxts-build)
 -   [roblox-ts](https://roblox-ts.com/)
 
 #### Development Tools
@@ -91,24 +91,28 @@ alphabetical order):
 The following is a guide to the tools of the project and how to typically use
 them.
 
-### Syncing with Rojo
+### Developing
 
-While in development, I would typically use the `pnpm run watch-dev` command to
-start the development server, and then use the `pnpm run sync-dev` command to
-sync the project with Rojo.
+While in development, I would typically use the `pnpm run dev:start` command to
+compile the project and start the development server. This will compile the
+code, build the project, and then automatically open the place file in Roblox
+Studio.
 
-To publish the project, I would use the `pnpm run build-prod` command to build
+To publish the project, I would use the `pnpm run prod:build` command to build
 the game project with the production configuration. This will delete your
 current `out` folder, replace it with the new build, and then automatically runs
 darklua on the project (outputting the game project to the `dist` folder). This
 allows us to completely remove any development only code, such that it does not
-even exist in the final game project.
+exist in the final game project. This process is currently automated when you
+merge a pull request into the `main` branch.
 
 ### Tip
 
-All of the commands can be found in the `package.json` file under the `scripts`.
-These can be accessed in VSCode through the `npm scripts` tab in the sidebar,
-where you can run them by clicking the play button next to the command.
+All of the commands can be found in the `package.json` file under the `scripts`
+section. These can be accessed in VSCode through the `NPM SCRIPTS` tab in the
+sidebar, where you can run them by clicking the play button next to the command.
+
+<img src="https://i.imgur.com/iVmauv3.png" height="400">
 
 ### Contributing
 
