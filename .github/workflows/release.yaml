@@ -44,8 +44,8 @@ jobs:
       - name: Install roblox-ts
         run: pnpm add roblox-ts
 
-      - name: Setup Aftman
-        uses: ok-nick/setup-aftman@e226f24209f47677da7b215bab44f6351a2c043b # v0.4.2
+      - name: Setup Rokit
+        uses: CompeyDev/setup-rokit@a13c97e4a1f72bc90e106bf044118fea3e341ffb # v0.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -71,8 +71,8 @@ jobs:
       - name: Install GH CLI
         uses: dev-hanz-ops/install-gh-cli-action@8fff9050dae2d81b38f94500d8b74ad1d1d47410 # v0.2.0
 
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-      - uses: ok-nick/setup-aftman@e226f24209f47677da7b215bab44f6351a2c043b # v0.4.2
+      - name: Setup Rokit
+        uses: CompeyDev/setup-rokit@a13c97e4a1f72bc90e106bf044118fea3e341ffb # v0.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -99,9 +99,15 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Download place artifact
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4
+        with:
+          name: place
+
       - name: Create a GitHub release
         uses: ncipollo/release-action@2c591bcc8ecdcd2db72b97d6147f871fcd833ba5 # v1
         with:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
+          artifacts: place.rbxlx

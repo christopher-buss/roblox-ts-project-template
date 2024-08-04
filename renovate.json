@@ -3,7 +3,7 @@
 	"extends": [
 		"config:recommended",
 		":pinAllExceptPeerDependencies",
-		"github>sasial-dev/aftman-renovate-config",
+		"github>christopher-buss/rokit-renovate-config",
 		"helpers:pinGitHubActionDigests",
 		"npm:unpublishSafe"
 	],
