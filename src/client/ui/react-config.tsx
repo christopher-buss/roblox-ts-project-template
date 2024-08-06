@@ -1,3 +1,5 @@
+import type { ProfilerOnRenderCallback } from "@rbxts/react";
+
 import { $NODE_ENV } from "rbxts-transform-env";
 
 export function reactConfig(): void {
@@ -22,3 +24,12 @@ export async function createApp(): Promise<void> {
 
 	mount({ key: "app", children: <App /> });
 }
+
+export const onRenderProfiler: ProfilerOnRenderCallback = (
+	...args: Parameters<ProfilerOnRenderCallback>
+) => {
+	const [id, phase, actualDuration, baseDuration, startTime, commitTime, interactions] = args;
+	print(
+		`id: ${id}, phase: ${phase}, actualDuration: ${actualDuration}, baseDuration: ${baseDuration}, startTime: ${startTime}, commitTime: ${commitTime}, interactions: ${interactions}`,
+	);
+};
