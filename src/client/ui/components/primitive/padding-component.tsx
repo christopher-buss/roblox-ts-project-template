@@ -18,7 +18,7 @@ interface PaddingProps extends PropsWithChildren {
  *
  * @see https://developer.roblox.com/en-us/api-reference/class/UIPadding
  */
-const PaddingComponent = forwardRef(
+export const PaddingComponent = forwardRef(
 	({ Padding, children }: Readonly<PaddingProps>, ref: React.Ref<UIPadding>) => {
 		return (
 			<uipadding
@@ -34,5 +34,3 @@ const PaddingComponent = forwardRef(
 		);
 	},
 );
-
-export default PaddingComponent;

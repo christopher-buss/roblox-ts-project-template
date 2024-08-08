@@ -1,8 +1,8 @@
 import React, { forwardRef } from "@rbxts/react";
 
+import { useRem, useTheme } from "client/ui/hooks";
 import type { BindingValue } from "types/util/react";
 
-import { useRem, useTheme } from "../../hooks";
 import type { FrameProps } from "./frame";
 
 export interface TextLabelProps extends FrameProps<TextLabel> {
@@ -47,19 +47,10 @@ export interface TextLabelProps extends FrameProps<TextLabel> {
  *
  * @see https://create.roblox.com/docs/reference/engine/classes/TextLabel
  */
-const TextLabel = forwardRef(
-	(
-		{
-			CornerRadius,
-			Font,
-			Native,
-			Text,
-			TextColor,
-			TextSize,
-			children,
-		}: Readonly<TextLabelProps>,
-		ref: React.Ref<TextLabel>,
-	) => {
+export const TextLabel = forwardRef(
+	(props: Readonly<TextLabelProps>, ref: React.Ref<TextLabel>) => {
+		const { CornerRadius, Font, Native, Text, TextColor, TextSize, children } = props;
+
 		const rem = useRem();
 		const theme = useTheme();
 
@@ -81,5 +72,3 @@ const TextLabel = forwardRef(
 		);
 	},
 );
-
-export default TextLabel;

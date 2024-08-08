@@ -42,7 +42,7 @@ function setDefaultCameraView(camera: Camera, model: Model, cameraDepth = 0): vo
  * @returns The rendered viewport.
  * @component
  */
-export default function ObjectViewport({
+export function ObjectViewport({
 	ExtraCameraDepth,
 	Native,
 	Object,

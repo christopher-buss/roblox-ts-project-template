@@ -3,8 +3,8 @@ import React from "@rbxts/react";
 import { $NODE_ENV } from "rbxts-transform-env";
 import { IS_EDIT } from "shared/constants";
 
-import UltraWideContainer from "../ultra-wide-container";
-import Group from "./group";
+import { UltraWideContainer } from "../ultra-wide-container";
+import { Group } from "./group";
 
 export interface LayerProps extends React.PropsWithChildren {
 	/**
@@ -43,7 +43,7 @@ export interface LayerProps extends React.PropsWithChildren {
  *
  * @see https://developer.roblox.com/en-us/api-reference/class/ScreenGui
  */
-export default function Layer({
+export function Layer({
 	ClampUltraWide = true,
 	DisplayOrder,
 	children,

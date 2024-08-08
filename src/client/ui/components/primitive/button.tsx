@@ -46,7 +46,7 @@ export interface ButtonProps extends FrameProps<TextButton> {
  *
  * @see https://create.roblox.com/docs/reference/engine/classes/TextButton
  */
-export default function Button({
+export function Button({
 	CornerRadius,
 	Native,
 	onClick,
