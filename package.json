@@ -21,7 +21,7 @@
 		"dev:sync": "rbxts-build sync",
 		"dev:watch": "rbxts-build watch",
 		"eslint-config": "npx @eslint/config-inspector",
-		"lint": "eslint --max-warnings 0 .",
+		"lint": "eslint --max-warnings 0 --flag unstable_ts_config .",
 		"postassets:upload": "eslint src/shared/assets.d.ts --fix",
 		"postdev:sync": "eslint src/types/services.d.ts --fix",
 		"prepare": "node .husky/install.js",
@@ -29,7 +29,7 @@
 		"prod:sync": "rojo serve ./build.project.json"
 	},
 	"lint-staged": {
-		"*": "eslint --fix"
+		"*": "eslint --fix --max-warnings 0 --flag unstable_ts_config ."
 	},
 	"dependencies": {
 		"@flamework/components": "1.2.3",
@@ -73,8 +73,7 @@
 		"@isentinel/eslint-config": "0.7.5",
 		"@rbxts/compiler-types": "2.3.0-types.1",
 		"@rbxts/types": "1.0.798",
-		"bundle-require": "5.0.0",
-		"eslint": "9.8.0",
+		"eslint": "9.9.0",
 		"eslint-plugin-react-hooks": "4.6.2",
 		"git-pull-run": "1.4.0",
 		"husky": "9.1.4",

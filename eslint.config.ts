@@ -43,7 +43,7 @@ export default style(
 		},
 	},
 	{
-		files: ["src/client/ui/hooks/**/*"],
+		files: ["src/client/ui/hooks/**/*", "src/client/ui/components/**/*"],
 		rules: {
 			"max-lines-per-function": "off",
 		},
