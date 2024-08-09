@@ -79,6 +79,7 @@
 		"git-pull-run": "1.4.0",
 		"husky": "9.1.4",
 		"lint-staged": "15.2.8",
+		"prism-react-renderer": "2.3.1",
 		"rbxts-build": "2.4.0",
 		"rbxts-transformer-flamework": "1.2.3",
 		"rimraf": "6.0.1",

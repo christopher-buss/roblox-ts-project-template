@@ -14,7 +14,10 @@
 		"module": "commonjs",
 		"moduleResolution": "Node",
 		"resolveJsonModule": true,
-		"typeRoots": ["node_modules/@rbxts", "node_modules/@flamework"],
+		"typeRoots": [
+			"node_modules/@rbxts",
+			"node_modules/@flamework"
+		],
 		"strict": true,
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitReturns": true,
@@ -38,5 +41,9 @@
 			}
 		]
 	},
-	"exclude": ["./eslint.config.ts", "./commitlint.config.ts"]
+	"exclude": [
+		"./eslint.config.ts",
+		"./commitlint.config.ts",
+		"docs/**/*"
+	]
 }
