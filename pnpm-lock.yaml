@@ -35,8 +35,8 @@ importers:
         specifier: 1.16.0-ts.0
         version: 1.16.0-ts.0
       '@rbxts/lapis':
-        specifier: 0.3.3
-        version: 0.3.3(@rbxts/t@3.1.1)
+        specifier: 0.3.4
+        version: 0.3.4(@rbxts/t@3.1.1)
       '@rbxts/lapis-mockdatastore':
         specifier: 0.3.6
         version: 0.3.6
@@ -907,8 +907,8 @@ packages:
   '@rbxts/lapis-mockdatastore@0.3.6':
     resolution: {integrity: sha512-4zqDR58JndTaa3+qSP14GXnSWzlPe2WqYXlyhPPSfqaaImR8emMINoe6S5MffAwai8wAE74l6PDYjWV5LHrrqw==}
 
-  '@rbxts/lapis@0.3.3':
-    resolution: {integrity: sha512-urdmxGO0bK7iu8AmocZROKTsp2kWg1HMpK9TzPCU1144XqtqnOJZjVjGB6RC8lQm93tGQwaMDTOxBCW/58tDcA==}
+  '@rbxts/lapis@0.3.4':
+    resolution: {integrity: sha512-TZ5AFMv7kv14ZwkvhXgf42ONKygvyBjhnUCPARrpstwyHeipmpG5aYmsgcH5DjPnOto/6wuZBwyXcsG04Mud5Q==}
     peerDependencies:
       '@rbxts/t': '*'
 
@@ -4982,7 +4982,7 @@ snapshots:
 
   '@rbxts/lapis-mockdatastore@0.3.6': {}
 
-  '@rbxts/lapis@0.3.3(@rbxts/t@3.1.1)':
+  '@rbxts/lapis@0.3.4(@rbxts/t@3.1.1)':
     dependencies:
       '@rbxts/t': 3.1.1
 
@@ -5073,7 +5073,7 @@ snapshots:
     dependencies:
       '@babel/eslint-parser': 7.25.0(@babel/core@7.24.9)(eslint@9.8.0)
       '@babel/eslint-plugin': 7.24.7(@babel/eslint-parser@7.25.0(@babel/core@7.24.9)(eslint@9.8.0))(eslint@9.8.0)
-      '@typescript-eslint/eslint-plugin': 7.17.0(@typescript-eslint/parser@7.17.0(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5)
+      '@typescript-eslint/eslint-plugin': 7.17.0(@typescript-eslint/parser@8.0.0(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5)
       '@typescript-eslint/parser': 7.17.0(eslint@9.8.0)(typescript@5.4.5)
       change-case: 4.1.2
       common-tags: 1.8.2
@@ -5083,7 +5083,7 @@ snapshots:
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.17.0(eslint@9.8.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint@9.8.0)
       eslint-plugin-eslint-comments: 3.2.0(eslint@9.8.0)
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.17.0(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)
-      eslint-plugin-jest: 28.6.0(@typescript-eslint/eslint-plugin@7.17.0(@typescript-eslint/parser@8.0.0(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5)
+      eslint-plugin-jest: 28.6.0(@typescript-eslint/eslint-plugin@7.17.0(@typescript-eslint/parser@7.17.0(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5)
       eslint-plugin-jest-formatting: 3.1.0(eslint@9.8.0)
       eslint-plugin-jsx-a11y: 6.9.0(eslint@9.8.0)
       eslint-plugin-node: 11.1.0(eslint@9.8.0)
@@ -5224,10 +5224,10 @@ snapshots:
     dependencies:
       '@types/yargs-parser': 21.0.3
 
-  '@typescript-eslint/eslint-plugin@7.17.0(@typescript-eslint/parser@7.17.0(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5)':
+  '@typescript-eslint/eslint-plugin@7.17.0(@typescript-eslint/parser@8.0.0(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5)':
     dependencies:
       '@eslint-community/regexpp': 4.11.0
-      '@typescript-eslint/parser': 7.17.0(eslint@9.8.0)(typescript@5.4.5)
+      '@typescript-eslint/parser': 8.0.0(eslint@9.8.0)(typescript@5.4.5)
       '@typescript-eslint/scope-manager': 7.17.0
       '@typescript-eslint/type-utils': 7.17.0(eslint@9.8.0)(typescript@5.4.5)
       '@typescript-eslint/utils': 7.17.0(eslint@9.8.0)(typescript@5.4.5)
@@ -6342,12 +6342,12 @@ snapshots:
     dependencies:
       eslint: 9.8.0
 
-  eslint-plugin-jest@28.6.0(@typescript-eslint/eslint-plugin@7.17.0(@typescript-eslint/parser@8.0.0(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5):
+  eslint-plugin-jest@28.6.0(@typescript-eslint/eslint-plugin@7.17.0(@typescript-eslint/parser@7.17.0(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5):
     dependencies:
       '@typescript-eslint/utils': 7.17.0(eslint@9.8.0)(typescript@5.4.5)
       eslint: 9.8.0
     optionalDependencies:
-      '@typescript-eslint/eslint-plugin': 7.17.0(@typescript-eslint/parser@7.17.0(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5)
+      '@typescript-eslint/eslint-plugin': 7.17.0(@typescript-eslint/parser@8.0.0(eslint@9.8.0)(typescript@5.4.5))(eslint@9.8.0)(typescript@5.4.5)
     transitivePeerDependencies:
       - supports-color
       - typescript
