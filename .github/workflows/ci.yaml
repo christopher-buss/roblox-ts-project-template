@@ -38,7 +38,7 @@ jobs:
         run: pnpm install
 
       - name: Setup Rokit
-        uses: CompeyDev/setup-rokit@a13c97e4a1f72bc90e106bf044118fea3e341ffb # v0.1.0
+        uses: CompeyDev/setup-rokit@db64ed031f87db76c65d9e0c991047f7d2b63355 # v0.1.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
