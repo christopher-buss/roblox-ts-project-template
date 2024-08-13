@@ -45,7 +45,7 @@ jobs:
         run: pnpm add roblox-ts
 
       - name: Setup Rokit
-        uses: CompeyDev/setup-rokit@db64ed031f87db76c65d9e0c991047f7d2b63355 # v0.1.1
+        uses: CompeyDev/setup-rokit@d49be92bd9502180218c3f43e7988faa945217b0 # v0.1.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -72,7 +72,7 @@ jobs:
         uses: dev-hanz-ops/install-gh-cli-action@8fff9050dae2d81b38f94500d8b74ad1d1d47410 # v0.2.0
 
       - name: Setup Rokit
-        uses: CompeyDev/setup-rokit@db64ed031f87db76c65d9e0c991047f7d2b63355 # v0.1.1
+        uses: CompeyDev/setup-rokit@d49be92bd9502180218c3f43e7988faa945217b0 # v0.1.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
