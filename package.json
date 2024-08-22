@@ -72,7 +72,7 @@
 		"@eslint/config-inspector": "0.5.2",
 		"@isentinel/eslint-config": "0.7.5",
 		"@rbxts/compiler-types": "2.3.0-types.1",
-		"@rbxts/types": "1.0.799",
+		"@rbxts/types": "1.0.800",
 		"eslint": "9.9.0",
 		"eslint-plugin-react-hooks": "4.6.2",
 		"git-pull-run": "1.4.0",
