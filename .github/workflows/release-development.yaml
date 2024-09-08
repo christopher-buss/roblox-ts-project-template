@@ -5,7 +5,7 @@ on:
     branches:
       - develop
     paths:
-      - 'src/**/*'
+      - "src/**/*"
       - default.project.json
       - mantle.yaml
       - package.json
@@ -60,7 +60,7 @@ jobs:
           if-no-files-found: error
 
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     environment: development
     needs: build
 

@@ -7,7 +7,7 @@ on:
     branches:
       - main
     paths:
-      - 'src/**/*'
+      - "src/**/*"
       - assets
       - build.project.json
       - mantle.yaml
@@ -63,7 +63,7 @@ jobs:
           if-no-files-found: error
 
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     environment: production
     needs: build
 
@@ -85,6 +85,7 @@ jobs:
         run: mantle deploy mantle.yaml --allow-purchases --environment production
         env:
           ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
+          MANTLE_OPEN_CLOUD_API_KEY: ${{ secrets.MANTLE_OPEN_CLOUD_API_KEY }}
           MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.MANTLE_AWS_ACCESS_KEY_ID }}
           MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.MANTLE_AWS_SECRET_ACCESS_KEY }}
 
