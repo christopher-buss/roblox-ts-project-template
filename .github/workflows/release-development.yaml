@@ -5,7 +5,7 @@ on:
     branches:
       - develop
     paths:
-      - "src/**/*"
+      - 'src/**/*'
       - default.project.json
       - mantle.yaml
       - package.json
