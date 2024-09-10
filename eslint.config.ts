@@ -2,6 +2,17 @@ import style, { GLOB_TS } from "@isentinel/eslint-config";
 
 export default style(
 	{
+		perfectionist: {
+			customClassGroups: [
+				"onInit",
+				"onStart",
+				"onPlayerJoin",
+				"onPlayerLeave",
+				"onRender",
+				"onPhysics",
+				"onTick",
+			],
+		},
 		react: true,
 		rules: {
 			"perfectionist/sort-objects": [
