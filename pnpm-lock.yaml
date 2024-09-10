@@ -56,8 +56,8 @@ importers:
         specifier: 0.1.0
         version: 0.1.0
       '@rbxts/pretty-react-hooks':
-        specifier: 0.5.2
-        version: 0.5.2
+        specifier: 0.6.0
+        version: 0.6.0
       '@rbxts/promise-child':
         specifier: 1.2.1
         version: 1.2.1
@@ -1450,9 +1450,6 @@ packages:
       '@flamework/core': '*'
       rbxts-transformer-flamework: '*'
 
-  '@rbxts/flipper@2.0.1':
-    resolution: {integrity: sha512-kxb5AZizP05XSmo3waS/QkcfNMD5b6HX4gGwyHOyBow260R5MIT4L/ZUPLvleXXyb9b67X4NVmHoac1tPXOLNA==}
-
   '@rbxts/inspect@1.0.1':
     resolution: {integrity: sha512-O+fbpjl0iKWfVSILrgBRoZcCUzYSbRIOrgW8RrLWNBLFzoxIBu9uydx4RavYgT2RsmRm5zK2aM3MakEZ2z+jlQ==}
 
@@ -1485,8 +1482,8 @@ packages:
   '@rbxts/player-module-types@0.1.0':
     resolution: {integrity: sha512-i+y6bFmyEA+UOClbd6e+yYRSkzpqN8O1D1t9+jsfyPOTi95AUWfOMoCCDu0kM70sQZNJht3odbA+cIZgXcY5RA==}
 
-  '@rbxts/pretty-react-hooks@0.5.2':
-    resolution: {integrity: sha512-aOnYTDXUGspMIXdqUw65ub9js40c0BZqXK5ROR7esRHak+JtpbGdbkM2a4A8Pw7c3jehi0Ri+tnLsmmLAj9mhQ==}
+  '@rbxts/pretty-react-hooks@0.6.0':
+    resolution: {integrity: sha512-KPaJ9xvbE6UJ1ECe4bwHBM3iqQ+IYcn0QfHjyRNZgADrz6/An+2zpxydY4ACjawAqRYybV7jwd6MqCJJiXHjOA==}
 
   '@rbxts/promise-child@1.2.1':
     resolution: {integrity: sha512-z1Qiim2l59fM2MSi3oi7mQyyxg74YjlSeSrDzBAb9Kd7SLe+bm2V00LOexuUtydZlxxzkrozzaCOlLPwoXwcaQ==}
@@ -6416,8 +6413,6 @@ snapshots:
       '@flamework/core': 1.2.3
       rbxts-transformer-flamework: 1.2.3(typescript@5.4.5)
 
-  '@rbxts/flipper@2.0.1': {}
-
   '@rbxts/inspect@1.0.1': {}
 
   '@rbxts/janitor@1.16.0-ts.0': {}
@@ -6445,11 +6440,11 @@ snapshots:
 
   '@rbxts/player-module-types@0.1.0': {}
 
-  '@rbxts/pretty-react-hooks@0.5.2':
+  '@rbxts/pretty-react-hooks@0.6.0':
     dependencies:
-      '@rbxts/flipper': 2.0.1
       '@rbxts/react': 0.4.0
       '@rbxts/react-roblox': 0.4.0
+      '@rbxts/ripple': 0.8.2
       '@rbxts/services': 1.5.4
       '@rbxts/set-timeout': 1.1.2
 
