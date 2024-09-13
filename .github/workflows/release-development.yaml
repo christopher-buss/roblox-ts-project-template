@@ -75,31 +75,14 @@ jobs:
 
       # As ROBLOSECURITY keys are region locked, we need to use a VPN to ensure
       # the github actions runner is in the same region as our Roblox account.
-      - name: Easy WireGuard Connection
-        uses: niklaskeerl/easy-wireguard-action@v2
-        with:
-          WG_CONFIG_FILE: ${{ secrets.WG_CONFIG_FILE }}
-
-      # - name: Poll for IP Change
-      #   run: |
-      #     $elapsed = 0
-      #     while ($true) {
-      #       try {
-      #         $response = Invoke-WebRequest -Uri 'https://httpbin.org/ip' -Method GET -UseBasicParsing
-      #         $content = ConvertFrom-Json $response.Content
-      #         if ($content.origin -eq "159.223.100.103") {
-      #           break
-      #         }
-      #       } catch {}
-      #       if ($elapsed -ge 20) {
-      #         Write-Error "Timeout reached!"
-      #         exit 1
-      #       }
-      #       Write-Output "Polling.. Elasped: $elapsed, IP: $($content.origin)"
-      #       Start-Sleep 5
-      #       $elapsed += 5
-      #     }
-      #     Write-Output "Success!"
+      - name: WireGuard Connection
+        run: |
+          sudo apt install wireguard
+          echo "${{ inputs.WG_CONFIG_FILE }}" > wg0.conf
+          sudo chmod 600 wg0.conf
+          echo "setting config"
+          sudo wg-quick up ./wg0.conf
+        shell: bash
 
       - name: Deploy place
         run: mantle deploy mantle.yaml --environment development
