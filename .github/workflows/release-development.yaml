@@ -86,24 +86,22 @@ jobs:
 
       - name: Poll for IP Change
         run: |
-          $elapsed = 0
-          while ($true) {
-            try {
-              $response = Invoke-WebRequest -Uri 'https://httpbin.org/ip' -Method GET -UseBasicParsing
-              $content = ConvertFrom-Json $response.Content
-              if ($content.origin -eq "104.199.120.221") {
-                break
-              }
-            } catch {}
-            if ($elapsed -ge 20) {
-              Write-Error "Timeout reached!"
+          elapsed=0
+          while true; do
+            response=$(curl -s 'https://httpbin.org/ip')
+            content=$(echo $response | jq -r '.origin')
+            if [ "$content" == "104.199.120.221" ]; then
+              break
+            fi
+            if [ $elapsed -ge 20 ]; then
+              echo "Timeout reached!"
               exit 1
-            }
-            Write-Output "Polling.. Elasped: $elapsed, IP: $($content.origin)"
-            Start-Sleep 5
-            $elapsed += 5
-          }
-          Write-Output "Success!"
+            fi
+            echo "Polling.. Elapsed: $elapsed, IP: $content"
+            sleep 5
+            elapsed=$((elapsed + 5))
+          done
+          echo "Success!"
 
       - name: Deploy place
         run: mantle deploy mantle.yaml --environment development
