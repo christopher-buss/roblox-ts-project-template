@@ -77,12 +77,12 @@ jobs:
       # the github actions runner is in the same region as our Roblox account.
       - name: WireGuard Connection
         run: |
-          sudo apt install resolvconf
+          sudo apt install ifup
           sudo apt install wireguard
           echo "${{ secrets.WG_CONFIG_FILE }}" > wg0.conf
           sudo chmod 600 wg0.conf
           echo "setting config"
-          sudo wg-quick up ./wg0.conf
+          sudo sudo ifup wg0
         shell: bash
 
       - name: Poll for IP Change
