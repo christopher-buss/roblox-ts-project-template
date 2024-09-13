@@ -81,9 +81,8 @@ jobs:
           sudo apt install wireguard
           echo "${{ secrets.WG_CONFIG_FILE }}" > wg0.conf
           echo "${{ secrets.WG_INTERFACE_FILE }}" | sudo tee /etc/network/interfaces.d/wg0
-          sudo chmod 600 wg0.conf
           echo "setting config"
-          sudo sudo ifup wg0
+          sudo ifup wg0
         shell: bash
 
       - name: Poll for IP Change
