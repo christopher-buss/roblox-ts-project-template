@@ -81,7 +81,7 @@ jobs:
           endpoint: '${{ secrets.ENDPOINT }}'
           endpoint_public_key: '${{ secrets.ENDPOINT_PUBLIC }}'
           ips: '${{ secrets.IPS }}'
-          allowed_ips: 0.0.0.0/0
+          allowed_ips: '0.0.0.0/0,::/0'
           private_key: '${{ secrets.PRIVATE }}'
           keepalive: 25
 
