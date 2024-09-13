@@ -84,6 +84,27 @@ jobs:
           sudo wg-quick up ./wg0.conf
         shell: bash
 
+      - name: Poll for IP Change
+        run: |
+          $elapsed = 0
+          while ($true) {
+            try {
+              $response = Invoke-WebRequest -Uri 'https://httpbin.org/ip' -Method GET -UseBasicParsing
+              $content = ConvertFrom-Json $response.Content
+              if ($content.origin -eq "104.199.120.221") {
+                break
+              }
+            } catch {}
+            if ($elapsed -ge 20) {
+              Write-Error "Timeout reached!"
+              exit 1
+            }
+            Write-Output "Polling.. Elasped: $elapsed, IP: $($content.origin)"
+            Start-Sleep 5
+            $elapsed += 5
+          }
+          Write-Output "Success!"
+
       - name: Deploy place
         run: mantle deploy mantle.yaml --environment development
         env:
