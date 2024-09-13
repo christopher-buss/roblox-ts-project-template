@@ -81,6 +81,7 @@ jobs:
           echo "${{ inputs.WG_CONFIG_FILE }}" > wg0.conf
           sudo chmod 600 wg0.conf
           echo "setting config"
+          echo wg0.conf
           sudo ifup wg0
         shell: bash
 
