@@ -80,8 +80,8 @@ importers:
         specifier: 0.2.2
         version: 0.2.2
       '@rbxts/ripple':
-        specifier: 0.8.2
-        version: 0.8.2
+        specifier: 0.9.1
+        version: 0.9.1
       '@rbxts/services':
         specifier: 1.5.4
         version: 1.5.4
@@ -1515,8 +1515,8 @@ packages:
   '@rbxts/remap@0.2.2':
     resolution: {integrity: sha512-VAzqk5LsF5phR0KGrrKYOBPlgwrv+cOE5iDEPTCW1yJvqWwTyhrzfGb9lGKqJvMJ+6gDNbaQJeESkcR1dmdPCw==}
 
-  '@rbxts/ripple@0.8.2':
-    resolution: {integrity: sha512-1F+yA8ugw0LEDBerQfIiIdUDoOfwz8O86GkH+sJkBViC/zJWDCZdrlzcdk7G7adePqkeBRfPp89g/4dUzZ4JQQ==}
+  '@rbxts/ripple@0.9.1':
+    resolution: {integrity: sha512-gLjKYy+mJO67NoN/9d7/8kBy6+SNG1/09GNNnh89DYWT5iHYdxC0/XKbKrKZpx7Fcsz5iY9Sl6vOvSnFwFbQuw==}
 
   '@rbxts/services@1.5.4':
     resolution: {integrity: sha512-Klh+gRIT8zy3xRTX1YD6FZ9nAMzkzPLTHmciigt59PEF7PJXo31CF0IU0RegQ7VSMrz1iOnXwxbIwy3htcMfOA==}
@@ -6477,7 +6477,7 @@ snapshots:
 
   '@rbxts/remap@0.2.2': {}
 
-  '@rbxts/ripple@0.8.2': {}
+  '@rbxts/ripple@0.9.1': {}
 
   '@rbxts/services@1.5.4': {}
 
