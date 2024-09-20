@@ -1,4 +1,4 @@
-import Object from "@rbxts/object-utils";
+import { Object } from "@rbxts/luau-polyfill";
 import { TableToString } from "@rbxts/rbx-debug";
 import { useEffect, useRef } from "@rbxts/react";
 import { t } from "@rbxts/t";

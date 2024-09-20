@@ -1,8 +1,8 @@
 import type { OnInit, OnStart } from "@flamework/core";
 import { Controller } from "@flamework/core";
-import inspect from "@rbxts/inspect";
 import type { Logger } from "@rbxts/log";
 import Make from "@rbxts/make";
+import { Inspect } from "@rbxts/rbx-debug";
 import { SoundService, TweenService } from "@rbxts/services";
 
 import { USER_ID } from "client/constants";
@@ -74,7 +74,7 @@ export default class SoundController implements OnInit, OnStart {
 		const soundParent = attachToPoint ?? soundGroup;
 		const soundObject = Make("Sound", {
 			...soundProperties,
-			Name: debugName ?? inspect(sound),
+			Name: debugName ?? Inspect(sound),
 			Parent: soundParent,
 			SoundGroup: soundGroup,
 			SoundId: `rbxassetid://${sound}`,

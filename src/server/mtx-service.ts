@@ -2,10 +2,10 @@ import type { OnInit } from "@flamework/core";
 import { Service } from "@flamework/core";
 import type { Document } from "@rbxts/lapis";
 import type { Logger } from "@rbxts/log";
-import Object from "@rbxts/object-utils";
+import { Object } from "@rbxts/luau-polyfill";
+import Signal from "@rbxts/rbx-better-signal";
 import { MarketplaceService, Players } from "@rbxts/services";
 import Sift from "@rbxts/sift";
-import Signal from "@rbxts/signal";
 
 import type { PlayerData } from "shared/store/persistent";
 import { selectPlayerData, selectPlayerMtx } from "shared/store/persistent";

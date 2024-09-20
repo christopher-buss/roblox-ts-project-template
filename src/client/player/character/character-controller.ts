@@ -1,7 +1,7 @@
 import type { OnStart } from "@flamework/core";
 import { Controller } from "@flamework/core";
 import type { Logger } from "@rbxts/log";
-import Signal from "@rbxts/signal";
+import Signal from "@rbxts/rbx-better-signal";
 import { promiseTree } from "@rbxts/validate-tree";
 
 import { LocalPlayer } from "client/constants";

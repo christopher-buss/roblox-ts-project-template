@@ -3,9 +3,9 @@ import { Service } from "@flamework/core";
 import { Janitor } from "@rbxts/janitor";
 import type { Document } from "@rbxts/lapis";
 import type { Logger } from "@rbxts/log";
-import Object from "@rbxts/object-utils";
+import { Object } from "@rbxts/luau-polyfill";
+import Signal from "@rbxts/rbx-better-signal";
 import { Players } from "@rbxts/services";
-import Signal from "@rbxts/signal";
 
 import { $NODE_ENV } from "rbxts-transform-env";
 import PlayerEntity from "server/player/player-entity";
