@@ -1,6 +1,7 @@
-import Make from "@rbxts/make";
 import { useMountEffect } from "@rbxts/pretty-react-hooks";
 import React, { useRef } from "@rbxts/react";
+
+import Make from "shared/modules/make";
 
 export interface ObjectViewportProps extends React.PropsWithChildren {
 	/** Additional depth to push the camera back. */

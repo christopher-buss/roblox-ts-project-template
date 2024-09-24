@@ -1,13 +1,13 @@
 import type { OnInit, OnStart } from "@flamework/core";
 import { Controller } from "@flamework/core";
 import type { Logger } from "@rbxts/log";
-import Make from "@rbxts/make";
 import { Inspect } from "@rbxts/rbx-debug";
 import { SoundService, TweenService } from "@rbxts/services";
 
 import { USER_ID } from "client/constants";
 import { store } from "client/store";
 import SoundSystem from "shared/modules/3d-sound-system";
+import Make from "shared/modules/make";
 import type { PlayerSettings } from "shared/store/persistent";
 import { selectPlayerSettings } from "shared/store/persistent";
 
