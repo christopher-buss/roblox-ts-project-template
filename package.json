@@ -41,7 +41,6 @@
 		"@rbxts/lapis-mockdatastore": "0.3.6",
 		"@rbxts/log": "0.6.3",
 		"@rbxts/luau-polyfill": "1.1.2",
-		"@rbxts/make": "1.0.6",
 		"@rbxts/message-templates": "0.3.2",
 		"@rbxts/player-module-types": "0.1.0",
 		"@rbxts/pretty-react-hooks": "0.6.0",
@@ -60,7 +59,7 @@
 		"@rbxts/ui-labs": "2.2.0-ts.1",
 		"@rbxts/validate-tree": "2.0.2",
 		"rbxts-transform-debug": "2.2.0",
-		"rbxts-transform-env": "2.2.0"
+		"rbxts-transform-env": "github:roblox-aurora/rbxts-transform-env"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "19.5.0",
@@ -70,7 +69,7 @@
 		"@eslint-react/eslint-plugin": "1.14.2",
 		"@eslint/config-inspector": "0.5.4",
 		"@isentinel/eslint-config": "0.8.0",
-		"@rbxts/compiler-types": "2.3.0-types.2",
+		"@rbxts/compiler-types": "3.0.0-types.0",
 		"@rbxts/types": "1.0.809",
 		"eslint": "9.11.0",
 		"eslint-plugin-react-roblox-hooks": "5.1.0-rbx.1",
@@ -81,13 +80,12 @@
 		"rbxts-build": "2.4.0",
 		"rbxts-transformer-flamework": "1.2.3",
 		"rimraf": "6.0.1",
-		"roblox-ts": "2.3.0-dev-e6e7658",
-		"typescript": "5.4.5"
+		"roblox-ts": "3.0.0",
+		"typescript": "5.5.3"
 	},
 	"packageManager": "pnpm@9.11.0",
 	"pnpm": {
 		"patchedDependencies": {
-			"roblox-ts@2.3.0-dev-e6e7658": "patches/roblox-ts@2.3.0-dev-e6e7658.patch",
 			"rbxts-transform-env@2.2.0": "patches/rbxts-transform-env@2.2.0.patch"
 		}
 	},
