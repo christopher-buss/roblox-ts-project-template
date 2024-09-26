@@ -29,7 +29,7 @@
 		"prod:sync": "rojo serve ./build.project.json"
 	},
 	"lint-staged": {
-		"*": "eslint --fix --max-warnings 0 --flag unstable_ts_config ."
+		"*": "eslint --fix --max-warnings 0 --no-warn-ignored --flag unstable_ts_config"
 	},
 	"dependencies": {
 		"@flamework/components": "1.2.3",
