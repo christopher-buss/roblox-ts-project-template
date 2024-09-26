@@ -29,8 +29,8 @@ importers:
         specifier: 1.17.0-ts.1
         version: 1.17.0-ts.1
       '@rbxts/lapis':
-        specifier: 0.3.5
-        version: 0.3.5(@rbxts/t@3.1.1)
+        specifier: 0.3.6
+        version: 0.3.6(@rbxts/t@3.1.1)
       '@rbxts/lapis-mockdatastore':
         specifier: 0.3.6
         version: 0.3.6
@@ -1461,8 +1461,8 @@ packages:
   '@rbxts/lapis-mockdatastore@0.3.6':
     resolution: {integrity: sha512-4zqDR58JndTaa3+qSP14GXnSWzlPe2WqYXlyhPPSfqaaImR8emMINoe6S5MffAwai8wAE74l6PDYjWV5LHrrqw==}
 
-  '@rbxts/lapis@0.3.5':
-    resolution: {integrity: sha512-0EIqGH5DojnBJQrQJziqBGyFdjZU03sEwpNuZwciGDi94YfSr1WsBx4CCC1NxgggdcZcro1Aoq6aQZhCRCSMbw==}
+  '@rbxts/lapis@0.3.6':
+    resolution: {integrity: sha512-NpvnT1yQYmgKlddxFTmaHSEXlcuDJOSMVMcnZOjL5ILy8ia/KiPqQ1ESWmXfvdfNNwQ7+fI0H/qtZU5PY2/0fA==}
     peerDependencies:
       '@rbxts/t': '*'
 
@@ -1581,9 +1581,6 @@ packages:
 
   '@types/eslint@9.6.1':
     resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
-
-  '@types/estree@1.0.5':
-    resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
@@ -6376,7 +6373,7 @@ snapshots:
 
   '@rbxts/lapis-mockdatastore@0.3.6': {}
 
-  '@rbxts/lapis@0.3.5(@rbxts/t@3.1.1)':
+  '@rbxts/lapis@0.3.6(@rbxts/t@3.1.1)':
     dependencies:
       '@rbxts/t': 3.1.1
 
@@ -6531,11 +6528,8 @@ snapshots:
 
   '@types/eslint@9.6.1':
     dependencies:
-      '@types/estree': 1.0.5
+      '@types/estree': 1.0.6
       '@types/json-schema': 7.0.15
-    optional: true
-
-  '@types/estree@1.0.5':
     optional: true
 
   '@types/estree@1.0.6': {}
