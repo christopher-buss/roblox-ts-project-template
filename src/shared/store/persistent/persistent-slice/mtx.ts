@@ -25,14 +25,27 @@ export const mtxSlice = createProducer(initialState, {
 		};
 	},
 
-	purchaseDeveloperProduct: (state, player: string, productId: Product): MtxState => {
+	purchaseDeveloperProduct: (
+		state,
+		player: string,
+		productId: Product,
+		currencySpent: number,
+	): MtxState => {
 		const mtx = state[player];
+		const purchaseInfo = {
+			purchasePrice: currencySpent,
+			purchaseTime: os.time(),
+		};
 
 		return {
 			...state,
 			[player]: mtx && {
 				...mtx,
 				products: new Map([...mtx.products]).set(productId, {
+					purchaseInfo: [
+						...(mtx.products.get(productId)?.purchaseInfo ?? []),
+						purchaseInfo,
+					],
 					timesPurchased: (mtx.products.get(productId)?.timesPurchased ?? 0) + 1,
 				}),
 			},

@@ -66,7 +66,11 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 	public onInit(): void {
 		MarketplaceService.PromptGamePassPurchaseFinished.Connect(
 			this.playerService.withPlayerEntity((playerEntity, gamePassId, purchased) => {
-				this.onGamePassPurchaseFinished(playerEntity, gamePassId, purchased);
+				if (!purchased) {
+					return;
+				}
+
+				this.grantGamePass(playerEntity, gamePassId);
 			}),
 		);
 
@@ -94,7 +98,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 						return;
 					}
 
-					store.purchaseGamePass(userId, gamePassId);
+					this.grantGamePass(playerEntity, tonumber(gamePassId));
 				})
 				.catch(err => {
 					this.logger.Warn(`Error checking game pass ${gamePassId}: ${err}`);
@@ -130,6 +134,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			return;
 		}
 
+		this.logger.Debug(`Registered handler for product ${productId}`);
 		this.productHandlers.set(productId, handler);
 	}
 
@@ -196,7 +201,11 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		return MarketplaceService.UserOwnsGamePassAsync(player.UserId, tonumber(gamePassId));
 	}
 
-	private grantProduct(playerEntity: PlayerEntity, productId: number): boolean {
+	private grantProduct(
+		playerEntity: PlayerEntity,
+		productId: number,
+		currencySpent: number,
+	): boolean {
 		const { userId } = playerEntity;
 
 		const product = tostring(productId) as Product;
@@ -222,7 +231,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		}
 
 		this.logger.Info(`Player ${userId} purchased developer product ${productId}`);
-		store.purchaseDeveloperProduct(userId, product);
+		store.purchaseDeveloperProduct(userId, product, currencySpent);
 		return true;
 	}
 
@@ -234,15 +243,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		this.gamePassStatusChanged.Fire(playerEntity, productId, isActive);
 	}
 
-	private onGamePassPurchaseFinished(
-		playerEntity: PlayerEntity,
-		gamePassId: number,
-		wasPurchased: boolean,
-	): void {
-		if (!wasPurchased) {
-			return;
-		}
-
+	private grantGamePass(playerEntity: PlayerEntity, gamePassId: number): void {
 		const { userId } = playerEntity;
 		const gamePass = tostring(gamePassId) as GamePass;
 
@@ -280,7 +281,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 
 	private async purchaseIdCheck(
 		playerEntity: PlayerEntity,
-		{ ProductId, PurchaseId }: ReceiptInfo,
+		{ CurrencySpent, ProductId, PurchaseId }: ReceiptInfo,
 	): Promise<Enum.ProductPurchaseDecision> {
 		const { document, userId } = playerEntity;
 
@@ -298,7 +299,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			return Enum.ProductPurchaseDecision.NotProcessedYet;
 		}
 
-		if (!this.grantProduct(playerEntity, ProductId)) {
+		if (!this.grantProduct(playerEntity, ProductId, CurrencySpent)) {
 			return Enum.ProductPurchaseDecision.NotProcessedYet;
 		}
 
