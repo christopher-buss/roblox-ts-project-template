@@ -66,6 +66,20 @@ export const mtxSlice = createProducer(initialState, {
 		};
 	},
 
+	setGamePassActive: (state, player: string, gamePass: GamePass, active: boolean): MtxState => {
+		const mtx = state[player];
+
+		return {
+			...state,
+			[player]: mtx && {
+				...mtx,
+				gamePasses: new Map([...mtx.gamePasses]).set(gamePass, {
+					active,
+				}),
+			},
+		};
+	},
+
 	updateReceiptHistory: (state, player: string, receiptHistory: Array<string>): MtxState => {
 		const mtx = state[player];
 

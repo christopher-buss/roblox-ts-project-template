@@ -1,6 +1,5 @@
-import type { OnInit } from "@flamework/core";
+import type { OnInit, OnStart } from "@flamework/core";
 import { Service } from "@flamework/core";
-import type { Document } from "@rbxts/lapis";
 import type { Logger } from "@rbxts/log";
 import { Object } from "@rbxts/luau-polyfill";
 import { MarketplaceService, Players } from "@rbxts/services";
@@ -12,6 +11,7 @@ import { selectPlayerData, selectPlayerMtx } from "shared/store/persistent";
 import { noYield } from "shared/util/no-yield";
 import { GamePass, Product } from "types/enum/mtx";
 
+import { Events } from "./network";
 import type PlayerEntity from "./player/player-entity";
 import type { OnPlayerJoin } from "./player/player-service";
 import type PlayerService from "./player/player-service";
@@ -44,7 +44,7 @@ type ProductInfo = DeveloperProductInfo | GamePassProductInfo;
  * ```
  */
 @Service({})
-export default class MtxService implements OnInit, OnPlayerJoin {
+export default class MtxService implements OnInit, OnStart, OnPlayerJoin {
 	private readonly productHandlers = new Map<
 		Product,
 		(playerEntity: PlayerEntity, productId: Product) => boolean
@@ -79,6 +79,19 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			this.logger.Info(`ProcessReceipt result: ${result}`);
 			return result;
 		};
+	}
+
+	/** @ignore */
+	public onStart(): void {
+		Events.mtx.setGamePassActive.connect(
+			this.playerService.withPlayerEntity((playerEntity, gamePassId, active) => {
+				this.setGamePassActive(playerEntity, gamePassId, active).catch(err => {
+					this.logger.Error(
+						`Failed to set game pass ${gamePassId} active for ${playerEntity.userId}: ${err}`,
+					);
+				});
+			}),
+		);
 	}
 
 	/** @ignore */
@@ -233,6 +246,26 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		this.logger.Info(`Player ${userId} purchased developer product ${productId}`);
 		store.purchaseDeveloperProduct(userId, product, currencySpent);
 		return true;
+	}
+
+	private async setGamePassActive(
+		playerEntity: PlayerEntity,
+		gamePassId: GamePass,
+		active: boolean,
+	): Promise<void> {
+		await this.checkForGamePassOwned(playerEntity, gamePassId).then(owned => {
+			const { userId } = playerEntity;
+			if (!owned) {
+				this.logger.Warn(
+					`Player ${userId} tried to activate not game pass ${gamePassId} that they do not own.`,
+				);
+
+				return;
+			}
+
+			store.setGamePassActive(userId, gamePassId, active);
+			this.notifyProductActive(playerEntity, gamePassId, active);
+		});
 	}
 
 	private notifyProductActive(
