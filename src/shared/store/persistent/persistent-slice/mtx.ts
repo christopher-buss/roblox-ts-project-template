@@ -52,4 +52,16 @@ export const mtxSlice = createProducer(initialState, {
 			},
 		};
 	},
+
+	updateReceiptHistory: (state, player: string, receiptHistory: Array<string>): MtxState => {
+		const mtx = state[player];
+
+		return {
+			...state,
+			[player]: mtx && {
+				...mtx,
+				receiptHistory,
+			},
+		};
+	},
 });

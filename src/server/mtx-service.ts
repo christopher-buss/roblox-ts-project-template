@@ -293,16 +293,16 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			return Enum.ProductPurchaseDecision.PurchaseGranted;
 		}
 
-		if (!this.grantProduct(playerEntity, ProductId)) {
-			return Enum.ProductPurchaseDecision.NotProcessedYet;
-		}
-
 		const data = store.getState(selectPlayerData(userId));
 		if (!data) {
 			return Enum.ProductPurchaseDecision.NotProcessedYet;
 		}
 
-		this.updateReceiptHistory(data, document, PurchaseId);
+		if (!this.grantProduct(playerEntity, ProductId)) {
+			return Enum.ProductPurchaseDecision.NotProcessedYet;
+		}
+
+		this.updateReceiptHistory(userId, data, PurchaseId);
 
 		const [success] = document.save().await();
 		if (!success) {
@@ -312,11 +312,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		return Enum.ProductPurchaseDecision.PurchaseGranted;
 	}
 
-	private updateReceiptHistory(
-		data: PlayerData,
-		document: Document<PlayerData>,
-		purchaseId: string,
-	): void {
+	private updateReceiptHistory(userId: string, data: PlayerData, purchaseId: string): void {
 		const { receiptHistory } = data.mtx;
 
 		let updatedReceiptHistory = Sift.Array.push(receiptHistory, purchaseId);
@@ -327,13 +323,6 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			);
 		}
 
-		document.write(
-			Sift.Dictionary.merge(data, {
-				mtx: {
-					...data.mtx,
-					receiptHistory: updatedReceiptHistory,
-				},
-			}),
-		);
+		store.updateReceiptHistory(userId, updatedReceiptHistory);
 	}
 }
