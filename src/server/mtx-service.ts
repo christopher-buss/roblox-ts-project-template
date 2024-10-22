@@ -1,6 +1,5 @@
-import type { OnInit } from "@flamework/core";
+import type { OnInit, OnStart } from "@flamework/core";
 import { Service } from "@flamework/core";
-import type { Document } from "@rbxts/lapis";
 import type { Logger } from "@rbxts/log";
 import { Object } from "@rbxts/luau-polyfill";
 import { MarketplaceService, Players } from "@rbxts/services";
@@ -12,6 +11,7 @@ import { selectPlayerData, selectPlayerMtx } from "shared/store/persistent";
 import { noYield } from "shared/util/no-yield";
 import { GamePass, Product } from "types/enum/mtx";
 
+import { Events } from "./network";
 import type PlayerEntity from "./player/player-entity";
 import type { OnPlayerJoin } from "./player/player-service";
 import type PlayerService from "./player/player-service";
@@ -44,7 +44,7 @@ type ProductInfo = DeveloperProductInfo | GamePassProductInfo;
  * ```
  */
 @Service({})
-export default class MtxService implements OnInit, OnPlayerJoin {
+export default class MtxService implements OnInit, OnStart, OnPlayerJoin {
 	private readonly productHandlers = new Map<
 		Product,
 		(playerEntity: PlayerEntity, productId: Product) => boolean
@@ -66,7 +66,11 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 	public onInit(): void {
 		MarketplaceService.PromptGamePassPurchaseFinished.Connect(
 			this.playerService.withPlayerEntity((playerEntity, gamePassId, purchased) => {
-				this.onGamePassPurchaseFinished(playerEntity, gamePassId, purchased);
+				if (!purchased) {
+					return;
+				}
+
+				this.grantGamePass(playerEntity, gamePassId);
 			}),
 		);
 
@@ -75,6 +79,19 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			this.logger.Info(`ProcessReceipt result: ${result}`);
 			return result;
 		};
+	}
+
+	/** @ignore */
+	public onStart(): void {
+		Events.mtx.setGamePassActive.connect(
+			this.playerService.withPlayerEntity((playerEntity, gamePassId, active) => {
+				this.setGamePassActive(playerEntity, gamePassId, active).catch(err => {
+					this.logger.Error(
+						`Failed to set game pass ${gamePassId} active for ${playerEntity.userId}: ${err}`,
+					);
+				});
+			}),
+		);
 	}
 
 	/** @ignore */
@@ -94,7 +111,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 						return;
 					}
 
-					store.purchaseGamePass(userId, gamePassId);
+					this.grantGamePass(playerEntity, tonumber(gamePassId));
 				})
 				.catch(err => {
 					this.logger.Warn(`Error checking game pass ${gamePassId}: ${err}`);
@@ -130,6 +147,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			return;
 		}
 
+		this.logger.Debug(`Registered handler for product ${productId}`);
 		this.productHandlers.set(productId, handler);
 	}
 
@@ -196,7 +214,11 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		return MarketplaceService.UserOwnsGamePassAsync(player.UserId, tonumber(gamePassId));
 	}
 
-	private grantProduct(playerEntity: PlayerEntity, productId: number): boolean {
+	private grantProduct(
+		playerEntity: PlayerEntity,
+		productId: number,
+		currencySpent: number,
+	): boolean {
 		const { userId } = playerEntity;
 
 		const product = tostring(productId) as Product;
@@ -222,8 +244,28 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		}
 
 		this.logger.Info(`Player ${userId} purchased developer product ${productId}`);
-		store.purchaseDeveloperProduct(userId, product);
+		store.purchaseDeveloperProduct(userId, product, currencySpent);
 		return true;
+	}
+
+	private async setGamePassActive(
+		playerEntity: PlayerEntity,
+		gamePassId: GamePass,
+		active: boolean,
+	): Promise<void> {
+		await this.checkForGamePassOwned(playerEntity, gamePassId).then(owned => {
+			const { userId } = playerEntity;
+			if (!owned) {
+				this.logger.Warn(
+					`Player ${userId} tried to activate not game pass ${gamePassId} that they do not own.`,
+				);
+
+				return;
+			}
+
+			store.setGamePassActive(userId, gamePassId, active);
+			this.notifyProductActive(playerEntity, gamePassId, active);
+		});
 	}
 
 	private notifyProductActive(
@@ -234,15 +276,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		this.gamePassStatusChanged.Fire(playerEntity, productId, isActive);
 	}
 
-	private onGamePassPurchaseFinished(
-		playerEntity: PlayerEntity,
-		gamePassId: number,
-		wasPurchased: boolean,
-	): void {
-		if (!wasPurchased) {
-			return;
-		}
-
+	private grantGamePass(playerEntity: PlayerEntity, gamePassId: number): void {
 		const { userId } = playerEntity;
 		const gamePass = tostring(gamePassId) as GamePass;
 
@@ -280,7 +314,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 
 	private async purchaseIdCheck(
 		playerEntity: PlayerEntity,
-		{ ProductId, PurchaseId }: ReceiptInfo,
+		{ CurrencySpent, ProductId, PurchaseId }: ReceiptInfo,
 	): Promise<Enum.ProductPurchaseDecision> {
 		const { document, userId } = playerEntity;
 
@@ -293,16 +327,16 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			return Enum.ProductPurchaseDecision.PurchaseGranted;
 		}
 
-		if (!this.grantProduct(playerEntity, ProductId)) {
-			return Enum.ProductPurchaseDecision.NotProcessedYet;
-		}
-
 		const data = store.getState(selectPlayerData(userId));
 		if (!data) {
 			return Enum.ProductPurchaseDecision.NotProcessedYet;
 		}
 
-		this.updateReceiptHistory(data, document, PurchaseId);
+		if (!this.grantProduct(playerEntity, ProductId, CurrencySpent)) {
+			return Enum.ProductPurchaseDecision.NotProcessedYet;
+		}
+
+		this.updateReceiptHistory(userId, data, PurchaseId);
 
 		const [success] = document.save().await();
 		if (!success) {
@@ -312,11 +346,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		return Enum.ProductPurchaseDecision.PurchaseGranted;
 	}
 
-	private updateReceiptHistory(
-		data: PlayerData,
-		document: Document<PlayerData>,
-		purchaseId: string,
-	): void {
+	private updateReceiptHistory(userId: string, data: PlayerData, purchaseId: string): void {
 		const { receiptHistory } = data.mtx;
 
 		let updatedReceiptHistory = Sift.Array.push(receiptHistory, purchaseId);
@@ -327,13 +357,6 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			);
 		}
 
-		document.write(
-			Sift.Dictionary.merge(data, {
-				mtx: {
-					...data.mtx,
-					receiptHistory: updatedReceiptHistory,
-				},
-			}),
-		);
+		store.updateReceiptHistory(userId, updatedReceiptHistory);
 	}
 }
