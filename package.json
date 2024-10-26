@@ -49,7 +49,7 @@
 		"@rbxts/rbx-debug": "1.0.2-ts.0",
 		"@rbxts/react": "17.2.1",
 		"@rbxts/react-reflex": "0.3.4",
-		"@rbxts/react-roblox": "0.4.0",
+		"@rbxts/react-roblox": "17.2.1",
 		"@rbxts/reflex": "4.3.1",
 		"@rbxts/remap": "0.2.2",
 		"@rbxts/ripple": "0.9.1",
