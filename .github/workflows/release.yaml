@@ -39,7 +39,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --prod
+        run: pnpm install
 
       - name: Install roblox-ts
         run: pnpm add roblox-ts
@@ -75,6 +75,38 @@ jobs:
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4
         with:
           name: place
+
+      # As ROBLOSECURITY keys are region locked, we need to use a VPN to ensure
+      # the github actions runner is in the same region as our Roblox account.
+      - name: WireGuard Connection
+        run: |
+          sudo apt install resolvconf wireguard
+          echo "${{ secrets.WG_CONFIG_FILE }}" > wg0.conf
+          sudo chmod 600 wg0.conf
+          echo "setting config"
+          sudo wg-quick up ./wg0.conf
+
+        shell: bash
+
+      # Ensure the IP has changed before deploying
+      - name: Poll for IP Change
+        run: |
+          elapsed=0
+          while true; do
+            response=$(curl -s 'https://httpbin.org/ip')
+            content=$(echo $response | jq -r '.origin')
+            if [ "$content" == "104.199.120.221" ]; then
+              break
+            fi
+            if [ $elapsed -ge 20 ]; then
+              echo "Timeout reached!"
+              exit 1
+            fi
+            echo "Polling.. Elapsed: $elapsed, IP: $content"
+            sleep 5
+            elapsed=$((elapsed + 5))
+          done
+          echo "Success!"
 
       - name: Deploy game
         run: mantle deploy mantle.yaml --allow-purchases --environment production
