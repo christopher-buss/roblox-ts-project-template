@@ -47,7 +47,7 @@
 		"@rbxts/promise-child": "1.2.1",
 		"@rbxts/rbx-better-signal": "2.1.0",
 		"@rbxts/rbx-debug": "1.0.2-ts.0",
-		"@rbxts/react": "0.4.0",
+		"@rbxts/react": "17.2.1",
 		"@rbxts/react-reflex": "0.3.4",
 		"@rbxts/react-roblox": "0.4.0",
 		"@rbxts/reflex": "4.3.1",
