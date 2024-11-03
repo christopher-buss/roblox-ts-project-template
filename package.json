@@ -43,7 +43,7 @@
 		"@rbxts/luau-polyfill": "1.1.2",
 		"@rbxts/message-templates": "0.3.2",
 		"@rbxts/player-module-types": "0.1.0",
-		"@rbxts/pretty-react-hooks": "0.6.0",
+		"@rbxts/pretty-react-hooks": "0.6.1",
 		"@rbxts/promise-child": "1.2.1",
 		"@rbxts/rbx-better-signal": "2.1.0",
 		"@rbxts/rbx-debug": "1.0.2-ts.0",
