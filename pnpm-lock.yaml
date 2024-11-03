@@ -47,8 +47,8 @@ importers:
         specifier: 0.1.0
         version: 0.1.0
       '@rbxts/pretty-react-hooks':
-        specifier: 0.6.0
-        version: 0.6.0
+        specifier: 0.6.1
+        version: 0.6.1
       '@rbxts/promise-child':
         specifier: 1.2.1
         version: 1.2.1
@@ -1494,8 +1494,8 @@ packages:
   '@rbxts/player-module-types@0.1.0':
     resolution: {integrity: sha512-i+y6bFmyEA+UOClbd6e+yYRSkzpqN8O1D1t9+jsfyPOTi95AUWfOMoCCDu0kM70sQZNJht3odbA+cIZgXcY5RA==}
 
-  '@rbxts/pretty-react-hooks@0.6.0':
-    resolution: {integrity: sha512-KPaJ9xvbE6UJ1ECe4bwHBM3iqQ+IYcn0QfHjyRNZgADrz6/An+2zpxydY4ACjawAqRYybV7jwd6MqCJJiXHjOA==}
+  '@rbxts/pretty-react-hooks@0.6.1':
+    resolution: {integrity: sha512-dnHS1z2Emq2ZC1dqKtcYmuhu04xkFgN25J/rnWYL4UnX9LuGXGrG4qF3kBlNRyTQXjGf+pXVlX6mLQmwfsSxOQ==}
 
   '@rbxts/promise-child@1.2.1':
     resolution: {integrity: sha512-z1Qiim2l59fM2MSi3oi7mQyyxg74YjlSeSrDzBAb9Kd7SLe+bm2V00LOexuUtydZlxxzkrozzaCOlLPwoXwcaQ==}
@@ -6428,7 +6428,7 @@ snapshots:
 
   '@rbxts/player-module-types@0.1.0': {}
 
-  '@rbxts/pretty-react-hooks@0.6.0':
+  '@rbxts/pretty-react-hooks@0.6.1':
     dependencies:
       '@rbxts/react': 17.2.1
       '@rbxts/react-roblox': 17.2.1
