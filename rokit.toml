@@ -4,7 +4,7 @@
 # New tools can be added by running `rokit add <tool>` in a terminal.
 
 [tools]
-asphalt = "jacktabscode/asphalt@0.8.1"
+asphalt = "jacktabscode/asphalt@0.9.1"
 darklua = "seaofvoices/darklua@0.14.0"
 lune = "lune-org/lune@0.8.9"
 mantle = "blake-mealey/mantle@0.11.17-prerelease"
