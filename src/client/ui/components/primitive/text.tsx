@@ -18,7 +18,7 @@ export interface TextLabelProps extends FrameProps<TextLabel> {
 	Native?: Partial<
 		Omit<
 			React.InstanceProps<TextLabel>,
-			"Font" | "Text" | "TextColor" | "TextColor3" | "TextSize"
+			"Font" | "Text" | "TextColor3" | "TextColor" | "TextSize"
 		>
 	>;
 	/** The text to display. */

@@ -16,21 +16,23 @@ export default style(
 		react: true,
 		rules: {
 			"perfectionist/sort-objects": [
-				"warn",
+				"error",
 				{
 					customGroups: {
-						id: "id",
-						name: "name",
-						reactProps: ["children", "ref"],
-						reflex: ["loadPlayerData", "closePlayerData"],
+						id: "^id$",
+						name: "^name$",
+						callbacks: ["\b(on[A-Z][a-zA-Z]*)\b"],
+						reactProps: ["^children$", "^ref$"],
+						reflex: ["^loadPlayerData$", "^closePlayerData$"],
 					},
 					groups: ["id", "name", "reflex", "unknown", "reactProps"],
 					order: "asc",
-					partitionByComment: "Part:**",
+					partitionByComment: "^Part:\\*\\*(.*)$",
 					type: "natural",
 				},
 			],
 		},
+		type: "game",
 		typescript: {
 			parserOptions: {
 				project: "tsconfig.build.json",

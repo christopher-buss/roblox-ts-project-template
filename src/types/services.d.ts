@@ -1,78 +1,78 @@
 interface ReplicatedStorage {
-	rbxts_include: {
+	rbxts_include: Folder & {
 		Promise: ModuleScript;
 		RuntimeLib: ModuleScript;
-	} & Folder;
-	TS: {
+	};
+	TS: Folder & {
 		assets: ModuleScript;
 		constants: ModuleScript;
-		functions: {
+		functions: Folder & {
 			"game-config": ModuleScript;
 			"setup-logger": ModuleScript;
-		} & Folder;
-		modules: {
+		};
+		modules: Folder & {
 			"3d-sound-system": ModuleScript;
-		} & Folder;
+		};
 		network: ModuleScript;
-		store: {
-			middleware: {
+		store: ModuleScript & {
+			middleware: Folder & {
 				profiler: ModuleScript;
-			} & Folder;
-			persistent: {
+			};
+			persistent: ModuleScript & {
 				"persistent-selectors": ModuleScript;
-				"persistent-slice": {
+				"persistent-slice": ModuleScript & {
 					achievements: ModuleScript;
 					balance: ModuleScript;
 					"default-data": ModuleScript;
 					mtx: ModuleScript;
 					settings: ModuleScript;
-				} & ModuleScript;
-			} & ModuleScript;
-		} & ModuleScript;
-		util: {
+				};
+			};
+		};
+		util: Folder & {
 			"core-call": ModuleScript;
 			"flamework-util": ModuleScript;
 			"physics-util": ModuleScript;
 			"player-util": ModuleScript;
-		} & Folder;
-	} & Folder;
-	"TS-types": {
-		enum: {
+		};
+	};
+	"TS-types": Folder & {
+		enum: Folder & {
 			badge: ModuleScript;
 			mtx: ModuleScript;
 			tag: ModuleScript;
-		} & Folder;
+		};
 		interfaces: Folder;
 		util: Folder;
-	} & Folder;
+	};
 }
 
 interface ServerScriptService {
-	TS: {
+	TS: Folder & {
 		"mtx-service": ModuleScript;
 		network: ModuleScript;
-		player: {
-			character: {
+		player: Folder & {
+			character: Folder & {
 				"character-service": ModuleScript;
-			} & Folder;
-			data: {
+			};
+			data: Folder & {
 				"player-data-service": ModuleScript;
 				"validate-data": ModuleScript;
-			} & Folder;
+			};
 			"leaderstats-service": ModuleScript;
 			"player-badge-service": ModuleScript;
 			"player-entity": ModuleScript;
 			"player-removal-service": ModuleScript;
 			"player-service": ModuleScript;
 			"with-player-entity": ModuleScript;
-		} & Folder;
+		};
 		runtime: Script;
-		store: {
-			middleware: {
+		store: ModuleScript & {
+			middleware: Folder & {
 				broadcaster: ModuleScript;
-			} & Folder;
-		} & ModuleScript;
-	} & Folder;
+			};
+		};
+	};
 }
 
 interface Workspace {
