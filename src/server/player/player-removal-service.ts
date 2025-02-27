@@ -27,17 +27,17 @@ export default class PlayerRemovalService {
 	 */
 	public toMessage(code: KickCode): string {
 		switch (code) {
-			case KickCode.PlayerProfileUndefined: {
-				return `Your player profile is undefined. Please rejoin the game.`;
-			}
-			case KickCode.PlayerProfileReleased: {
-				return `Your player profile has been released. Please rejoin the game.`;
-			}
 			case KickCode.PlayerFullServer: {
 				return `The server is full. Please try again later.`;
 			}
 			case KickCode.PlayerInstantiationError: {
 				return `An error occurred while instantiating your player. Please rejoin the game.`;
+			}
+			case KickCode.PlayerProfileReleased: {
+				return `Your player profile has been released. Please rejoin the game.`;
+			}
+			case KickCode.PlayerProfileUndefined: {
+				return `Your player profile is undefined. Please rejoin the game.`;
 			}
 		}
 	}

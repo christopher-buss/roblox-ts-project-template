@@ -58,7 +58,7 @@ export default class PlayerService implements OnStart {
 		setupLifecycle<OnPlayerLeave>(this.playerLeaveEvents);
 
 		onPlayerAdded(player => {
-			this.onPlayerJoin(player).catch(err => {
+			this.onPlayerAdded(player).catch(err => {
 				this.logger.Error(`Failed to load player ${player.UserId}: ${err}`);
 			});
 		});
@@ -158,7 +158,7 @@ export default class PlayerService implements OnStart {
 	 *
 	 * @param player - The player that joined the game.
 	 */
-	private async onPlayerJoin(player: Player): Promise<void> {
+	private async onPlayerAdded(player: Player): Promise<void> {
 		const playerDocument = await this.playerDataService.loadPlayerData(player);
 		if (!playerDocument) {
 			this.playerRemovalService.removeForBug(player, KickCode.PlayerInstantiationError);

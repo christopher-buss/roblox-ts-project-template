@@ -1,8 +1,10 @@
 {
 	"typescript.tsdk": "node_modules/typescript/lib",
+	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"files.eol": "\n",
 	"eslint.run": "onType",
 	"eslint.format.enable": true,
+	"editor.formatOnSave": false,
 	// Enable the ESlint flat config support
 	"eslint.useFlatConfig": true,
 	"eslint.validate": ["typescript", "typescriptreact", "markdown", "json", "jsonc", "yaml", "toml", "luau"],
@@ -21,9 +23,8 @@
 	],
 	// Auto fix
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": "always",
+		"source.fixAll.eslint": "explicit",
 		"source.organizeImports": "never"
 	},
-	"npm.packageManager": "pnpm",
-	"eslint.options": { "flags": ["unstable_ts_config"] }
+	"npm.packageManager": "pnpm"
 }

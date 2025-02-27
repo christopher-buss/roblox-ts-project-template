@@ -43,23 +43,23 @@ class LogEventSFTOutputSink implements ILogEventSink {
 
 	private getLogLevelString(level: LogLevel): string {
 		switch (level) {
-			case LogLevel.Verbose: {
-				return "VERBOSE";
-			}
 			case LogLevel.Debugging: {
 				return "DEBUG";
-			}
-			case LogLevel.Information: {
-				return "INFO";
-			}
-			case LogLevel.Warning: {
-				return "WARN";
 			}
 			case LogLevel.Error: {
 				return "ERROR";
 			}
 			case LogLevel.Fatal: {
 				return "FATAL";
+			}
+			case LogLevel.Information: {
+				return "INFO";
+			}
+			case LogLevel.Verbose: {
+				return "VERBOSE";
+			}
+			case LogLevel.Warning: {
+				return "WARN";
 			}
 		}
 	}

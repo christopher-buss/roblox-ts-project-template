@@ -49,7 +49,6 @@ export default class MtxService implements OnInit, OnStart, OnPlayerJoin {
 		Product,
 		(playerEntity: PlayerEntity, productId: Product) => boolean
 	>();
-
 	private readonly productInfoCache = new Map<number, ProductInfo>();
 	private readonly purchaseIdLog = 50;
 
