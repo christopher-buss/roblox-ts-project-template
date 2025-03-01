@@ -17,11 +17,11 @@ function start(): void {
 
 	Flamework.addPaths("src/client");
 
-	Log.Info(`Flamework ignite!`);
+	Log.Info("Flamework ignite!");
 	Flamework.ignite();
 
 	createApp().catch(() => {
-		Log.Fatal(`Failed to create React app!`);
+		Log.Fatal("Failed to create React app!");
 	});
 }
 

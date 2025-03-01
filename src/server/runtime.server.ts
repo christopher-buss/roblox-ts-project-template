@@ -14,7 +14,7 @@ function start(): void {
 
 	Flamework.addPaths("src/server");
 
-	Log.Info(`Flamework ignite!`);
+	Log.Info("Flamework ignite!");
 	Flamework.ignite();
 }
 

@@ -171,19 +171,18 @@ export default class PlayerService implements OnStart {
 
 		// Call all connected lifecycle events
 		debug.profilebegin("Lifecycle_Player_Join");
-		{
-			for (const { id, event } of this.playerJoinEvents) {
-				janitor
-					.AddPromise(
-						Promise.defer(() => {
-							debug.profilebegin(id);
-							event.onPlayerJoin(playerEntity);
-						}),
-					)
-					.catch(err => {
-						this.logger.Error(`Error in player lifecycle ${id}: ${err}`);
-					});
-			}
+
+		for (const { id, event } of this.playerJoinEvents) {
+			janitor
+				.AddPromise(
+					Promise.defer(() => {
+						debug.profilebegin(id);
+						event.onPlayerJoin(playerEntity);
+					}),
+				)
+				.catch(err => {
+					this.logger.Error(`Error in player lifecycle ${id}: ${err}`);
+				});
 		}
 
 		debug.profileend();
@@ -222,29 +221,28 @@ export default class PlayerService implements OnStart {
 		// Call all connected lifecycle events
 		const promises = new Array<Promise<void>>();
 		debug.profilebegin("Lifecycle_Player_Leave");
-		{
-			for (const { id, event } of this.playerLeaveEvents) {
-				const promiseEvent = Promise.defer<void>((resolve, reject) => {
-					debug.profilebegin(id);
-					try {
-						const leaveEvent = async (): Promise<void> => {
-							await event.onPlayerLeave(playerEntity);
-						};
 
-						const [success, err] = leaveEvent().await();
-						if (!success) {
-							reject(err);
-							return;
-						}
+		for (const { id, event } of this.playerLeaveEvents) {
+			const promiseEvent = Promise.defer<void>((resolve, reject) => {
+				debug.profilebegin(id);
+				try {
+					const leaveEvent = async (): Promise<void> => {
+						await event.onPlayerLeave(playerEntity);
+					};
 
-						resolve();
-					} catch (err) {
-						this.logger.Error(`Error in player lifecycle ${id}: ${err}`);
+					const [success, err] = leaveEvent().await();
+					if (!success) {
+						reject(err);
+						return;
 					}
-				});
 
-				promises.push(promiseEvent);
-			}
+					resolve();
+				} catch (err) {
+					this.logger.Error(`Error in player lifecycle ${id}: ${err}`);
+				}
+			});
+
+			promises.push(promiseEvent);
 		}
 
 		debug.profileend();
@@ -265,13 +263,13 @@ export default class PlayerService implements OnStart {
 				return;
 			}
 
-			this.logger.Debug(`Game closing, holding open until all player entities are removed.`);
+			this.logger.Debug("Game closing, holding open until all player entities are removed.");
 
 			while (!this.playerEntities.isEmpty()) {
 				this.onEntityRemoving.Wait();
 			}
 
-			this.logger.Debug(`All player entities removed, closing game.`);
+			this.logger.Debug("All player entities removed, closing game.");
 		});
 	}
 }

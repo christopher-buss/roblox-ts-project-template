@@ -4,7 +4,7 @@ declare const assets: {
 	};
 	marketing: {
 		"example-icon": "rbxassetid://18110928241";
-		googly: "rbxassetid://18110928530";
+		"googly": "rbxassetid://18110928530";
 	};
 };
 export = assets;

@@ -148,19 +148,18 @@ export default class CharacterService implements OnStart, OnPlayerJoin {
 		this.logger.Debug(`Loaded character rig for ${name}`);
 
 		debug.profilebegin("Lifecycle_Character_Added");
-		{
-			for (const { id, event } of this.characterAddedEvents) {
-				janitor
-					.Add(
-						Promise.defer(() => {
-							debug.profilebegin(id);
-							event.onCharacterAdded(rig, playerEntity);
-						}),
-					)
-					.catch(err => {
-						this.logger.Error(`Error in character lifecycle ${id}: ${err}`);
-					});
-			}
+
+		for (const { id, event } of this.characterAddedEvents) {
+			janitor
+				.Add(
+					Promise.defer(() => {
+						debug.profilebegin(id);
+						event.onCharacterAdded(rig, playerEntity);
+					}),
+				)
+				.catch(err => {
+					this.logger.Error(`Error in character lifecycle ${id}: ${err}`);
+				});
 		}
 
 		debug.profileend();
