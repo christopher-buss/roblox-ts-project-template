@@ -36,7 +36,7 @@
 		"@rbxts/flamework-binary-serializer": "0.6.0",
 		"@rbxts/janitor": "1.17.0-ts.1",
 		"@rbxts/lapis": "0.3.6",
-		"@rbxts/lapis-mockdatastore": "0.3.6",
+		"@rbxts/lapis-mockdatastore": "0.3.7",
 		"@rbxts/log": "0.6.3",
 		"@rbxts/luau-polyfill": "1.1.2",
 		"@rbxts/message-templates": "0.3.2",
