@@ -96,7 +96,7 @@ export default class CharacterController implements OnStart {
 				return;
 			}
 
-			this.logger.Verbose(`Character has been removed.`);
+			this.logger.Verbose("Character has been removed.");
 
 			connection.Disconnect();
 			this.currentCharacter = undefined;
@@ -110,7 +110,7 @@ export default class CharacterController implements OnStart {
 	 * @param rig - The character rig that was loaded.
 	 */
 	private onRigLoaded(rig: CharacterRig): void {
-		this.logger.Debug(`Loaded character rig.`);
+		this.logger.Debug("Loaded character rig.");
 		this.currentCharacter = rig;
 		this.onCharacterAdded.Fire(rig);
 	}

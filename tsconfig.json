@@ -19,6 +19,7 @@
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitReturns": true,
 		"noUncheckedIndexedAccess": true,
+		"useUnknownInCatchVariables": true,
 		"downlevelIteration": true,
 		"outDir": "out/",
 		"allowSyntheticDefaultImports": true,

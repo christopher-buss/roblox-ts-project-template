@@ -3,7 +3,7 @@ import { Flamework, Modding, Reflect } from "@flamework/core";
 
 export const FLAMEWORK_DEFAULT_LOAD_ORDER = 1;
 
-export const FLAMEWORK_DECORATOR_PREFIX = `flamework:decorators.`;
+export const FLAMEWORK_DECORATOR_PREFIX = "flamework:decorators.";
 
 /**
  * Checks if the given object is decorated with a specific identifier.

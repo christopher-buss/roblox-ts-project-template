@@ -47,7 +47,7 @@ export default class SoundController implements OnInit, OnStart {
 		this.soundGroups.set(SoundType.Music, this.makeSoundGroup(SoundType.Music));
 		this.soundGroups.set(SoundType.SoundEffect, this.makeSoundGroup(SoundType.SoundEffect));
 
-		this.logger.Info(`Setup SoundGroup instances`);
+		this.logger.Info("Setup SoundGroup instances");
 	}
 
 	/** @ignore */
@@ -127,11 +127,11 @@ export default class SoundController implements OnInit, OnStart {
 
 	private onSettingsChanged(current: PlayerSettings): void {
 		const musicGroup = this.soundGroups.get(SoundType.Music);
-		assert(musicGroup, `Music SoundGroup not found`);
+		assert(musicGroup, "Music SoundGroup not found");
 		musicGroup.Volume = current.musicVolume;
 
 		const sfxGroup = this.soundGroups.get(SoundType.SoundEffect);
-		assert(sfxGroup, `SoundEffect SoundGroup not found`);
+		assert(sfxGroup, "SoundEffect SoundGroup not found");
 		sfxGroup.Volume = current.sfxVolume;
 	}
 }

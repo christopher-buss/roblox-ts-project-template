@@ -145,7 +145,7 @@ export class LeaderstatsService implements OnInit, OnPlayerJoin, OnPlayerLeave {
 	): void {
 		assert(
 			this.leaderstats.find(entry => entry.Name === statName) === undefined,
-			`Stat provided already exists.`,
+			"Stat provided already exists.",
 		);
 
 		this.leaderstats.push({
@@ -154,7 +154,7 @@ export class LeaderstatsService implements OnInit, OnPlayerJoin, OnPlayerLeave {
 			ValueType: valueType,
 		});
 
-		this.logger.Info(`Registered leaderboard stat {@stat}`, statName);
+		this.logger.Info("Registered leaderboard stat {@stat}", statName);
 	}
 
 	/**

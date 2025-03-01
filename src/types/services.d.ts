@@ -1,9 +1,9 @@
 interface ReplicatedStorage {
-	rbxts_include: Folder & {
+	"rbxts_include": Folder & {
 		Promise: ModuleScript;
 		RuntimeLib: ModuleScript;
 	};
-	TS: Folder & {
+	"TS": Folder & {
 		assets: ModuleScript;
 		constants: ModuleScript;
 		functions: Folder & {
@@ -21,11 +21,11 @@ interface ReplicatedStorage {
 			persistent: ModuleScript & {
 				"persistent-selectors": ModuleScript;
 				"persistent-slice": ModuleScript & {
-					achievements: ModuleScript;
-					balance: ModuleScript;
+					"achievements": ModuleScript;
+					"balance": ModuleScript;
 					"default-data": ModuleScript;
-					mtx: ModuleScript;
-					settings: ModuleScript;
+					"mtx": ModuleScript;
+					"settings": ModuleScript;
 				};
 			};
 		};
@@ -50,12 +50,12 @@ interface ReplicatedStorage {
 interface ServerScriptService {
 	TS: Folder & {
 		"mtx-service": ModuleScript;
-		network: ModuleScript;
-		player: Folder & {
-			character: Folder & {
+		"network": ModuleScript;
+		"player": Folder & {
+			"character": Folder & {
 				"character-service": ModuleScript;
 			};
-			data: Folder & {
+			"data": Folder & {
 				"player-data-service": ModuleScript;
 				"validate-data": ModuleScript;
 			};
@@ -66,8 +66,8 @@ interface ServerScriptService {
 			"player-service": ModuleScript;
 			"with-player-entity": ModuleScript;
 		};
-		runtime: Script;
-		store: ModuleScript & {
+		"runtime": Script;
+		"store": ModuleScript & {
 			middleware: Folder & {
 				broadcaster: ModuleScript;
 			};
