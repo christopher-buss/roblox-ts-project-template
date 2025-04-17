@@ -1,7 +1,7 @@
 import type { OnInit, OnStart } from "@flamework/core";
 import { Service } from "@flamework/core";
 import type { Logger } from "@rbxts/log";
-import { Object } from "@rbxts/luau-polyfill";
+import { Error, Object } from "@rbxts/luau-polyfill";
 import { MarketplaceService, Players } from "@rbxts/services";
 import Sift from "@rbxts/sift";
 import Signal from "@rbxts/signal";
@@ -12,9 +12,8 @@ import { noYield } from "shared/util/no-yield";
 import { GamePass, Product } from "types/enum/mtx";
 
 import { Events } from "./network";
-import type PlayerEntity from "./player/player-entity";
-import type { OnPlayerJoin } from "./player/player-service";
-import type PlayerService from "./player/player-service";
+import type { PlayerEntity } from "./player/player-entity";
+import type { OnPlayerJoin, PlayerService } from "./player/player-service";
 import { store } from "./store";
 
 const NETWORK_RETRY_DELAY = 2;
@@ -44,7 +43,7 @@ type ProductInfo = DeveloperProductInfo | GamePassProductInfo;
  * ```
  */
 @Service({})
-export default class MtxService implements OnInit, OnStart, OnPlayerJoin {
+export class MtxService implements OnInit, OnStart, OnPlayerJoin {
 	private readonly productHandlers = new Map<
 		Product,
 		(playerEntity: PlayerEntity, productId: Product) => boolean
@@ -202,7 +201,7 @@ export default class MtxService implements OnInit, OnStart, OnPlayerJoin {
 	): Promise<boolean> {
 		// Ensure game passId is a valid game passes for our game
 		if (!Object.values(GamePass).includes(gamePassId)) {
-			throw `Invalid game pass id ${gamePassId}`;
+			throw new Error(`Invalid game pass id ${gamePassId}`);
 		}
 
 		const owned = store.getState(selectPlayerMtx(userId))?.gamePasses.has(gamePassId);

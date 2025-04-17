@@ -26,7 +26,7 @@ interface ErrorBoundaryState {
  * @see https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary
  */
 @ReactComponent
-export default class ErrorBoundary extends React.Component<
+export class ErrorBoundary extends React.Component<
 	Readonly<ErrorBoundaryProps>,
 	ErrorBoundaryState
 > {

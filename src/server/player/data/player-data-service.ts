@@ -11,7 +11,7 @@ import type { PlayerData } from "shared/store/persistent";
 import { defaultPlayerData, selectPlayerData } from "shared/store/persistent";
 import KickCode from "types/enum/kick-reason";
 
-import type PlayerRemovalService from "../player-removal-service";
+import type { PlayerRemovalService } from "../player-removal-service";
 import { validate } from "./validate-data";
 
 const DATA_STORE_NAME = RunService.IsStudio() ? "Development" : "Production";
@@ -22,7 +22,7 @@ const DATA_STORE_NAME = RunService.IsStudio() ? "Development" : "Production";
  * changes to the player's data document in the data store.
  */
 @Service({})
-export default class PlayerDataService {
+export class PlayerDataService {
 	private readonly collection: Collection<PlayerData>;
 
 	constructor(

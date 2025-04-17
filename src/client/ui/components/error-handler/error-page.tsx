@@ -5,7 +5,7 @@ interface ErrorPageProps {
 	Message: string;
 }
 
-export default function ErrorPage({ Message }: Readonly<ErrorPageProps>): React.ReactNode {
+export function ErrorPage({ Message }: Readonly<ErrorPageProps>): React.ReactNode {
 	warn(Message);
 
 	return undefined;

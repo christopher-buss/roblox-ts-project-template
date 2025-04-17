@@ -1,6 +1,7 @@
 import type { OnStart } from "@flamework/core";
 import { Controller } from "@flamework/core";
 import type { Logger } from "@rbxts/log";
+import { Error } from "@rbxts/luau-polyfill";
 import Signal from "@rbxts/rbx-better-signal";
 import { promiseTree } from "@rbxts/validate-tree";
 
@@ -21,7 +22,7 @@ import {
  * `player.Character`.
  */
 @Controller({})
-export default class CharacterController implements OnStart {
+export class CharacterController implements OnStart {
 	private currentCharacter?: CharacterRig;
 
 	public readonly onCharacterAdded = new Signal<(character: CharacterRig) => void>();
@@ -74,11 +75,11 @@ export default class CharacterController implements OnStart {
 		});
 
 		const [success, rig] = promise.await();
-		coroutine.close(timeout);
+		task.cancel(timeout);
 		connection.Disconnect();
 
 		if (!success) {
-			throw "Character failed to load.";
+			throw new Error("Character failed to load.");
 		}
 
 		this.listenForCharacterRemoving(model);

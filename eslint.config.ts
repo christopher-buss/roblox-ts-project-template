@@ -1,4 +1,4 @@
-import style, { GLOB_TS } from "@isentinel/eslint-config";
+import style from "@isentinel/eslint-config";
 
 export default style(
 	{
@@ -13,6 +13,7 @@ export default style(
 				"onTick",
 			],
 		},
+		pnpm: true,
 		react: true,
 		rules: {
 			"perfectionist/sort-objects": [
@@ -38,21 +39,6 @@ export default style(
 				project: "tsconfig.build.json",
 			},
 			tsconfigPath: "tsconfig.build.json",
-		},
-	},
-	{
-		files: [GLOB_TS],
-		rules: {
-			"no-param-reassign": "error",
-			"ts/no-magic-numbers": [
-				"error",
-				{
-					ignore: [0, 1],
-					ignoreEnums: true,
-					ignoreReadonlyClassProperties: true,
-					ignoreTypeIndexes: true,
-				},
-			],
 		},
 	},
 	{

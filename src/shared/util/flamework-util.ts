@@ -5,16 +5,10 @@ export const FLAMEWORK_DEFAULT_LOAD_ORDER = 1;
 
 export const FLAMEWORK_DECORATOR_PREFIX = "flamework:decorators.";
 
-/**
- * Checks if the given object is decorated with a specific identifier.
- *
- * @param id - The identifier to check for.
- * @param object - The object to check.
- * @returns True if the object is decorated with the specified identifier, false
- *   otherwise.
- */
-export function isDecoratorOf(id: string, object: object): boolean {
-	return Reflect.hasMetadata(object, FLAMEWORK_DECORATOR_PREFIX + id);
+export interface ListenerData<T> {
+	event: T;
+	id: string;
+	loadOrder: number;
 }
 
 /**
@@ -25,6 +19,18 @@ export function isDecoratorOf(id: string, object: object): boolean {
  */
 export function isController(object: object): boolean {
 	return isDecoratorOf(Flamework.id<typeof Controller>(), object);
+}
+
+/**
+ * Checks if the given object is decorated with a specific identifier.
+ *
+ * @param id - The identifier to check for.
+ * @param object - The object to check.
+ * @returns True if the object is decorated with the specified identifier, false
+ *   otherwise.
+ */
+export function isDecoratorOf(id: string, object: object): boolean {
+	return Reflect.hasMetadata(object, FLAMEWORK_DECORATOR_PREFIX + id);
 }
 
 /**
@@ -46,12 +52,6 @@ export function isService(object: object): boolean {
  */
 export function isSingleton(object: object): boolean {
 	return isController(object) || isService(object);
-}
-
-export interface ListenerData<T> {
-	event: T;
-	id: string;
-	loadOrder: number;
 }
 
 /**

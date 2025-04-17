@@ -5,7 +5,7 @@ import KickCode from "types/enum/kick-reason";
 
 /** This handles removing the player from the game for various reasons. */
 @Service({})
-export default class PlayerRemovalService {
+export class PlayerRemovalService {
 	constructor(private readonly logger: Logger) {}
 
 	/**

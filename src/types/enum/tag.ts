@@ -1,6 +1,4 @@
-declare const enum Tag {
+export const enum Tag {
 	PlayerCharacter = "PlayerCharacter",
 	PlayerHead = "PlayerHead",
 }
-
-export default Tag;

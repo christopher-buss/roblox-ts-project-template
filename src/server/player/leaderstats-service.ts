@@ -7,7 +7,7 @@ import type { PlayerData } from "shared/store/persistent";
 import { selectPlayerData } from "shared/store/persistent";
 
 import { store } from "../store";
-import type PlayerEntity from "./player-entity";
+import type { PlayerEntity } from "./player-entity";
 import type { OnPlayerJoin, OnPlayerLeave } from "./player-service";
 
 interface LeaderstatValueTypes {
