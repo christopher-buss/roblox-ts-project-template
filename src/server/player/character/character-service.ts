@@ -1,10 +1,10 @@
 import type { OnStart } from "@flamework/core";
 import { Service } from "@flamework/core";
 import type { Logger } from "@rbxts/log";
+import { Error } from "@rbxts/luau-polyfill";
 import { PhysicsService } from "@rbxts/services";
 import { promiseTree } from "@rbxts/validate-tree";
 
-import type PlayerEntity from "server/player/player-entity";
 import type { ListenerData } from "shared/util/flamework-util";
 import { setupLifecycle } from "shared/util/flamework-util";
 import { addToCollisionGroup } from "shared/util/physics-util";
@@ -16,8 +16,9 @@ import {
 	onCharacterAdded,
 } from "shared/util/player-util";
 import CollisionGroup from "types/enum/collision-group";
-import Tag from "types/enum/tag";
+import { Tag } from "types/enum/tag";
 
+import type { PlayerEntity } from "../player-entity";
 import type { OnPlayerJoin } from "../player-service";
 
 PhysicsService.RegisterCollisionGroup(CollisionGroup.Character);
@@ -35,7 +36,7 @@ export interface OnCharacterAdded {
  * character rig in case it fails to load.
  */
 @Service({})
-export default class CharacterService implements OnStart, OnPlayerJoin {
+export class CharacterService implements OnStart, OnPlayerJoin {
 	private readonly characterAddedEvents = new Array<ListenerData<OnCharacterAdded>>();
 	private readonly characterRigs = new Map<Player, CharacterRig>();
 
@@ -118,7 +119,7 @@ export default class CharacterService implements OnStart, OnPlayerJoin {
 		connection.Disconnect();
 
 		if (!success) {
-			throw `Could not get character rig for ${player.UserId}`;
+			throw new Error(`Could not get character rig for ${player.UserId}`);
 		}
 
 		this.listenForCharacterRemoving(player, model);

@@ -1,0 +1,62 @@
+catalogs:
+  dev:
+    '@commitlint/cli': 19.5.0
+    '@commitlint/config-conventional': 19.5.0
+    '@commitlint/prompt-cli': 19.5.0
+    '@commitlint/types': 19.5.0
+    '@eslint-react/eslint-plugin': 1.47.1
+    '@eslint/config-inspector': 0.5.5
+    '@isentinel/eslint-config': 1.0.0
+    '@rbxts/compiler-types': 3.0.0-types.0
+    '@rbxts/types': 1.0.813
+    eslint-plugin-pnpm: 0.3.1
+    eslint-plugin-react-roblox-hooks: 5.1.0-rbx.1
+    eslint: 9.21.0
+    git-pull-run: 1.4.0
+    husky: 9.1.6
+    jiti: 2.3.3
+    lint-staged: 15.2.10
+    rbxts-build: 2.4.0
+    rbxts-transformer-flamework: 1.2.3
+    rimraf: 6.0.1
+    roblox-ts: 3.0.0
+    typescript: 5.5.3
+  prod:
+    '@flamework/components': 1.2.3
+    '@flamework/core': 1.2.3
+    '@flamework/networking': 1.2.3
+    '@rbxts/flamework-binary-serializer': 0.6.0
+    '@rbxts/janitor': 1.17.0-ts.1
+    '@rbxts/lapis': 0.3.6
+    '@rbxts/lapis-mockdatastore': 0.3.6
+    '@rbxts/log': 0.6.3
+    '@rbxts/luau-polyfill': 1.1.2
+    '@rbxts/message-templates': 0.3.2
+    '@rbxts/player-module-types': 0.1.0
+    '@rbxts/pretty-react-hooks': 0.6.1
+    '@rbxts/promise-child': 1.2.1
+    '@rbxts/rbx-better-signal': 2.1.0
+    '@rbxts/rbx-debug': 1.0.2-ts.0
+    '@rbxts/react': 17.2.1
+    '@rbxts/react-reflex': 0.3.4
+    '@rbxts/react-roblox': 17.2.1
+    '@rbxts/reflex': 4.3.1
+    '@rbxts/remap': 0.2.2
+    '@rbxts/ripple': 0.9.1
+    '@rbxts/services': 1.5.5
+    '@rbxts/sift': 0.0.9
+    '@rbxts/t': 3.1.1
+    '@rbxts/ui-labs': 2.3.0
+    '@rbxts/validate-tree': 2.0.2
+    rbxts-transform-debug: 2.2.0
+    rbxts-transform-env: 3.0.0
+
+onlyBuiltDependencies:
+  - esbuild
+
+publicHoistPattern:
+  - '*@rbxts*'
+
+patchedDependencies:
+  rbxts-transform-env: patches/rbxts-transform-env.patch
+  roblox-ts: patches/roblox-ts.patch

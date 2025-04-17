@@ -8,15 +8,15 @@ import Signal from "@rbxts/rbx-better-signal";
 import { Players } from "@rbxts/services";
 
 import { $NODE_ENV } from "rbxts-transform-env";
-import PlayerEntity from "server/player/player-entity";
 import type { PlayerData } from "shared/store/persistent";
 import type { ListenerData } from "shared/util/flamework-util";
 import { setupLifecycle } from "shared/util/flamework-util";
 import { onPlayerAdded, promisePlayerDisconnected } from "shared/util/player-util";
 import KickCode from "types/enum/kick-reason";
 
-import type PlayerDataService from "./data/player-data-service";
-import type PlayerRemovalService from "./player-removal-service";
+import type { PlayerDataService } from "./data/player-data-service";
+import { PlayerEntity } from "./player-entity";
+import type { PlayerRemovalService } from "./player-removal-service";
 
 export interface OnPlayerJoin {
 	/**
@@ -39,7 +39,7 @@ export interface OnPlayerLeave {
 
 /** A service that manages player entities in the game. */
 @Service({})
-export default class PlayerService implements OnStart {
+export class PlayerService implements OnStart {
 	private readonly onEntityJoined = new Signal<(playerEntity: PlayerEntity) => void>();
 	private readonly onEntityRemoving = new Signal();
 	private readonly playerEntities = new Map<Player, PlayerEntity>();
@@ -120,11 +120,12 @@ export default class PlayerService implements OnStart {
 		});
 
 		const [success, playerEntity] = promise.await();
-		if (!success) {
-			throw `Player ${player.UserId} disconnected before entity was created`;
-		}
-
 		disconnect.cancel();
+
+		if (!success) {
+			this.logger.Debug(`Player ${player.UserId} disconnected before entity was created`);
+			return;
+		}
 
 		return playerEntity;
 	}

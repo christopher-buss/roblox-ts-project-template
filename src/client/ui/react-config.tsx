@@ -18,6 +18,7 @@ export function reactConfig(): void {
 
 export async function createApp(): Promise<void> {
 	// Avoid implicit React import before setting the __DEV__ flag
+	// eslint-disable-next-line sonar/no-dead-store -- False positive
 	const React = await import("@rbxts/react");
 	const { App } = await import("client/ui/app");
 	const { mount } = await import("client/ui/functions");

@@ -37,7 +37,7 @@ interface PlaySoundOptions {
  * ```
  */
 @Controller({})
-export default class SoundController implements OnInit, OnStart {
+export class SoundController implements OnInit, OnStart {
 	private readonly soundGroups = new Map<SoundType, SoundGroup>();
 
 	constructor(private readonly logger: Logger) {}
