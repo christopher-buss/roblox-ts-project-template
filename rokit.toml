@@ -5,7 +5,7 @@
 
 [tools]
 asphalt = "jacktabscode/asphalt@0.9.1"
-darklua = "seaofvoices/darklua@0.14.0"
+darklua = "seaofvoices/darklua@0.17.1"
 lune = "lune-org/lune@0.8.9"
 mantle = "blake-mealey/mantle@0.11.17-prerelease"
 rojo = "rojo-rbx/rojo@7.4.4"
