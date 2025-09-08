@@ -9,9 +9,9 @@ catalogs:
     '@isentinel/eslint-config': 1.0.0
     '@rbxts/compiler-types': 3.0.0-types.0
     '@rbxts/types': 1.0.813
+    eslint: 9.21.0
     eslint-plugin-pnpm: 0.3.1
     eslint-plugin-react-roblox-hooks: 5.1.0-rbx.1
-    eslint: 9.21.0
     git-pull-run: 1.4.0
     husky: 9.1.6
     jiti: 2.3.3
@@ -53,10 +53,11 @@ catalogs:
 
 onlyBuiltDependencies:
   - esbuild
-
-publicHoistPattern:
-  - '*@rbxts*'
+  - unrs-resolver
 
 patchedDependencies:
   rbxts-transform-env: patches/rbxts-transform-env.patch
   roblox-ts: patches/roblox-ts.patch
+
+publicHoistPattern:
+  - '*@rbxts*'
