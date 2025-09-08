@@ -1,0 +1,10 @@
+[env]
+_.path = [ '{{config_root}}/node_modules/.bin' ]
+
+[tools]
+"ubi:blake-mealey/mantle" = "0.11.17-prerelease"
+"ubi:jacktabscode/asphalt" = "0.9.1"
+"ubi:lune-org/lune" = "0.8.9"
+"ubi:rojo-rbx/rojo" = "7.4.4"
+"ubi:seaofvoices/darklua" = "0.14.0"
+node = { version = "lts", postinstall = "corepack enable" }

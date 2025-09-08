@@ -26,5 +26,16 @@
 		"source.fixAll.eslint": "explicit",
 		"source.organizeImports": "never"
 	},
-	"npm.packageManager": "pnpm"
+	"npm.packageManager": "pnpm",
+
+	// Mise Tools settings
+	"debug.javascript.defaultRuntimeExecutable": {
+		"pwa-node": "${workspaceFolder}\\.vscode\\mise-tools\\node"
+	},
+
+	"github.copilot.chat.commitMessageGeneration.instructions": [
+		{
+			"file": ".github/commit-instructions.md"
+		}
+	]
 }
