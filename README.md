@@ -73,8 +73,8 @@ alphabetical order):
 -   [Asphalt](https://github.com/jackTabsCode/asphalt)
 -   [Darklua](https://darklua.com/)
 -   [Mantle](https://mantledeploy.vercel.app/)
+-   [Mise](https://mise.jdx.dev/)
 -   [Rojo](https://rojo.space/)
--   [Rokit](https://github.com/rojo-rbx/rokit)
 -   [rbxts-build](https://www.npmjs.com/package/rbxts-build)
 -   [roblox-ts](https://roblox-ts.com/)
 

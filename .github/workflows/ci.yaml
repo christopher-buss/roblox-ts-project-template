@@ -18,27 +18,14 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20]
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: pnpm
+      - uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2
 
       - name: Install dependencies
         run: pnpm install
-
-      - name: Setup Rokit
-        uses: CompeyDev/setup-rokit@d49be92bd9502180218c3f43e7988faa945217b0 # v0.1.2
 
       - name: Lint
         run: pnpm lint

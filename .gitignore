@@ -13,7 +13,6 @@ sourcemap.json
 *.rbxl
 *.rbxlx
 
-# Bundled eslint config
-*.mjs
-
 .env
+
+.vscode/mise-tools/
