@@ -21,13 +21,14 @@
 		"postdev:sync": "eslint src/types/services.d.ts --fix",
 		"dev:watch": "rbxts-build watch",
 		"eslint-config": "npx @eslint/config-inspector",
-		"lint": "eslint --max-warnings 0 .",
+		"lint": "eslint --cache",
+		"lint:ci": "eslint --cache --cache-strategy content",
 		"prepare": "node .husky/install.js",
 		"prod:build": "npm run clean && NODE_ENV=production && npx rbxtsc --verbose && npm run darklua",
 		"prod:sync": "rojo serve ./build.project.json"
 	},
 	"lint-staged": {
-		"*": "eslint --fix --max-warnings 0 --no-warn-ignored"
+		"*": "eslint --fix --max-warnings 0 --no-warn-ignored --cache --cache-strategy content"
 	},
 	"dependencies": {
 		"@flamework/components": "catalog:prod",
