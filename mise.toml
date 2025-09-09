@@ -7,5 +7,5 @@ _.file = { path = ".env", redact = true }
 "ubi:jacktabscode/asphalt" = "0.9.1"
 "ubi:lune-org/lune" = "0.8.9"
 "ubi:rojo-rbx/rojo" = "7.4.4"
-"ubi:seaofvoices/darklua" = "0.14.0"
+"ubi:seaofvoices/darklua" = "0.17.1"
 node = { version = "lts", postinstall = "corepack enable" }
