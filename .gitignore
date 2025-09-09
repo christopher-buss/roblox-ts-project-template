@@ -3,6 +3,7 @@
 /include
 *.tsbuildinfo
 flamework.build
+.eslintcache
 
 # Misc
 .DS_Store

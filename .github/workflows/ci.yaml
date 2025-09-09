@@ -27,8 +27,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Cache ESLint
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: .eslintcache
+          key: eslint-cache-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml', 'eslint.config.*') }}-${{ github.run_id }}
+          restore-keys: |
+            eslint-cache-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml', 'eslint.config.*') }}-
+            eslint-cache-${{ runner.os }}-
+
       - name: Lint
-        run: pnpm lint
+        run: pnpm lint:ci
 
       - name: Compile
         run: pnpm prod:build
