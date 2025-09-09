@@ -1,5 +1,6 @@
 catalogs:
   dev:
+    '@antfu/ni': 25.0.0
     '@commitlint/cli': 19.5.0
     '@commitlint/config-conventional': 19.5.0
     '@commitlint/prompt-cli': 19.5.0

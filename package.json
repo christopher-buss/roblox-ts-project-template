@@ -60,6 +60,7 @@
 		"rbxts-transform-env": "catalog:prod"
 	},
 	"devDependencies": {
+		"@antfu/ni": "catalog:dev",
 		"@commitlint/cli": "catalog:dev",
 		"@commitlint/config-conventional": "catalog:dev",
 		"@commitlint/prompt-cli": "catalog:dev",
