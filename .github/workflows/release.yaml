@@ -32,13 +32,13 @@ jobs:
       - uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2
 
       - name: Install dependencies
-        run: corepack pnpm install
+        run: pnpm install
 
       - name: Install roblox-ts
-        run: corepack pnpm add roblox-ts
+        run: pnpm add roblox-ts
 
       - name: Compile
-        run: corepack pnpm prod:build --verbose
+        run: pnpm prod:build --verbose
 
       - name: Build project
         run: rojo build ./build.project.json --output place.rbxlx

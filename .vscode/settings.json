@@ -29,10 +29,12 @@
 	"npm.packageManager": "pnpm",
 
 	// Mise Tools settings
+	"mise.configureExtensionsUseSymLinks": true,
 	"debug.javascript.defaultRuntimeExecutable": {
 		"pwa-node": "${workspaceFolder}\\.vscode\\mise-tools\\node"
 	},
 
+	// Options for GitHub Copilot
 	"github.copilot.chat.commitMessageGeneration.instructions": [
 		{
 			"file": ".github/commit-instructions.md"

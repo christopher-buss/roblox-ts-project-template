@@ -29,10 +29,10 @@ jobs:
       - uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2
 
       - name: Install dependencies
-        run: corepack pnpm install
+        run: pnpm install
 
       - name: Install roblox-ts
-        run: corepack pnpm add roblox-ts
+        run: pnpm add roblox-ts
 
       - name: Setup Rokit
         uses: CompeyDev/setup-rokit@d49be92bd9502180218c3f43e7988faa945217b0 # v0.1.2
