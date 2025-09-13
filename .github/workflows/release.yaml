@@ -130,7 +130,7 @@ jobs:
           name: place
 
       - name: Create a GitHub release
-        uses: ncipollo/release-action@2c591bcc8ecdcd2db72b97d6147f871fcd833ba5 # v1
+        uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1
         with:
           artifacts: place.rbxlx
           body: ${{ steps.tag_version.outputs.changelog }}
