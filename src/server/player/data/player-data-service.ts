@@ -56,11 +56,14 @@ export class PlayerDataService {
 				return;
 			}
 
-			const unsubscribe = store.subscribe(selectPlayerData(tostring(player.UserId)), data => {
-				if (data) {
-					document.write(data);
-				}
-			});
+			const unsubscribe = store.subscribe(
+				selectPlayerData(tostring(player.UserId)),
+				(data) => {
+					if (data) {
+						document.write(data);
+					}
+				},
+			);
 
 			document.beforeClose(() => {
 				unsubscribe();

@@ -13,7 +13,7 @@ export const ONCE_PER_MINUTE = 60;
 export function broadcasterMiddleware(): ProducerMiddleware {
 	// Storybook support
 	if ($NODE_ENV === "development" && IS_EDIT) {
-		return () => innerDispatch => innerDispatch;
+		return () => (innerDispatch) => innerDispatch;
 	}
 
 	const hydrated = new Set<number>();
@@ -26,11 +26,11 @@ export function broadcasterMiddleware(): ProducerMiddleware {
 		producers: slices,
 	});
 
-	Events.store.start.connect(player => {
+	Events.store.start.connect((player) => {
 		broadcaster.start(player);
 	});
 
-	Players.PlayerRemoving.Connect(player => {
+	Players.PlayerRemoving.Connect((player) => {
 		hydrated.delete(player.UserId);
 	});
 

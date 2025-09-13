@@ -83,7 +83,7 @@ export class MtxService implements OnInit, OnStart, OnPlayerJoin {
 	public onStart(): void {
 		Events.mtx.setGamePassActive.connect(
 			this.playerService.withPlayerEntity((playerEntity, gamePassId, active) => {
-				this.setGamePassActive(playerEntity, gamePassId, active).catch(err => {
+				this.setGamePassActive(playerEntity, gamePassId, active).catch((err) => {
 					this.logger.Error(
 						`Failed to set game pass ${gamePassId} active for ${playerEntity.userId}: ${err}`,
 					);
@@ -101,17 +101,17 @@ export class MtxService implements OnInit, OnStart, OnPlayerJoin {
 			return;
 		}
 
-		const unowned = Object.values(GamePass).filter(gamePassId => !gamePasses.has(gamePassId));
+		const unowned = Object.values(GamePass).filter((gamePassId) => !gamePasses.has(gamePassId));
 		for (const gamePassId of unowned) {
 			this.checkForGamePassOwned(playerEntity, gamePassId)
-				.then(owned => {
+				.then((owned) => {
 					if (!owned) {
 						return;
 					}
 
 					this.grantGamePass(playerEntity, tonumber(gamePassId));
 				})
-				.catch(err => {
+				.catch((err) => {
 					this.logger.Warn(`Error checking game pass ${gamePassId}: ${err}`);
 				});
 		}
@@ -251,7 +251,7 @@ export class MtxService implements OnInit, OnStart, OnPlayerJoin {
 		gamePassId: GamePass,
 		active: boolean,
 	): Promise<void> {
-		await this.checkForGamePassOwned(playerEntity, gamePassId).then(owned => {
+		await this.checkForGamePassOwned(playerEntity, gamePassId).then((owned) => {
 			const { userId } = playerEntity;
 			if (!owned) {
 				this.logger.Warn(

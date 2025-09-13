@@ -17,7 +17,7 @@ interface LeaderstatValueTypes {
 
 interface LeaderstatEntry<T extends keyof LeaderstatValueTypes = keyof LeaderstatValueTypes> {
 	Name: Leaderstats;
-	PlayerDataKey?: NestedKeyOf<PlayerData>;
+	PlayerDataKey: NestedKeyOf<PlayerData> | undefined;
 	ValueType: T;
 }
 
@@ -122,7 +122,9 @@ export class LeaderstatsService implements OnInit, OnPlayerJoin, OnPlayerLeave {
 			return;
 		}
 
-		const entry = this.leaderstats.find(leaderstatsEntry => leaderstatsEntry.Name === statName);
+		const entry = this.leaderstats.find(
+			(leaderstatsEntry) => leaderstatsEntry.Name === statName,
+		);
 		if (!entry) {
 			return;
 		}
@@ -144,7 +146,7 @@ export class LeaderstatsService implements OnInit, OnPlayerJoin, OnPlayerLeave {
 		playerDataKey?: NestedKeyOf<PlayerData>,
 	): void {
 		assert(
-			this.leaderstats.find(entry => entry.Name === statName) === undefined,
+			this.leaderstats.find((entry) => entry.Name === statName) === undefined,
 			"Stat provided already exists.",
 		);
 
@@ -168,7 +170,7 @@ export class LeaderstatsService implements OnInit, OnPlayerJoin, OnPlayerLeave {
 		valueMap: Map<Leaderstats, LeaderstatValue>,
 	): void {
 		playerEntity.janitor.Add(
-			store.subscribe(selectPlayerData(playerEntity.userId), save => {
+			store.subscribe(selectPlayerData(playerEntity.userId), (save) => {
 				if (!save) {
 					return;
 				}

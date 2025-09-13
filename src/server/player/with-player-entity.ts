@@ -34,8 +34,7 @@ export function withPlayerEntity<T extends Array<unknown>>(
 		}
 
 		Log.Error(
-			`Unable to find entity for player ${player}, unable to call callback. Stacktrace: \n` +
-				debug.traceback(),
+			`Unable to find entity for player ${player}, unable to call callback. Stacktrace: \n${debug.traceback()}`,
 		);
 
 		return identity<ServerResponse>({

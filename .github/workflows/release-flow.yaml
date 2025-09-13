@@ -1,16 +1,16 @@
 name: Release Flow
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        type: string
-        required: false
-        description: Version to release
   pull_request:
     types:
       - closed
 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to release
+        required: false
+        type: string
 permissions:
   contents: write
   packages: write
@@ -24,12 +24,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: GitFlow workflow action - Release workflows
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        name: GitFlow workflow action - Release workflows
         uses: christopher-buss/gitflow-workflow-action@8053671e9f67cd273a2e47eb4939ba54920ef99e
         with:
           develop_branch: develop
           main_branch: main
           merge_back_from_main: false
           version: ${{ inputs.version }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

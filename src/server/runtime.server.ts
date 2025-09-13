@@ -10,7 +10,7 @@ function start(): void {
 
 	Log.Info(`${GAME_NAME} is starting up! Version: ${game.PlaceVersion}`);
 
-	Modding.registerDependency<Logger>(ctor => Log.ForContext(ctor));
+	Modding.registerDependency<Logger>((ctor) => Log.ForContext(ctor));
 
 	Flamework.addPaths("src/server");
 

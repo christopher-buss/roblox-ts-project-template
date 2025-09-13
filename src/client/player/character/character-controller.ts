@@ -23,7 +23,7 @@ import {
  */
 @Controller({})
 export class CharacterController implements OnStart {
-	private currentCharacter?: CharacterRig;
+	private currentCharacter: CharacterRig | undefined;
 
 	public readonly onCharacterAdded = new Signal<(character: CharacterRig) => void>();
 	public readonly onCharacterRemoving = new Signal();
@@ -32,8 +32,8 @@ export class CharacterController implements OnStart {
 
 	/** @ignore */
 	public onStart(): void {
-		onCharacterAdded(LocalPlayer, character => {
-			this.characterAdded(character).catch(err => {
+		onCharacterAdded(LocalPlayer, (character) => {
+			this.characterAdded(character).catch((err) => {
 				this.logger.Fatal(`Could not get character rig because:\n${err}`);
 			});
 		});

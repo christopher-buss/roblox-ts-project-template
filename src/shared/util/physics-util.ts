@@ -38,7 +38,7 @@ export function addToCollisionGroup(
 		return undefined;
 	}
 
-	const connection = object.DescendantAdded.Connect(descendant => {
+	const connection = object.DescendantAdded.Connect((descendant) => {
 		if (descendant.IsA("BasePart")) {
 			descendant.CollisionGroup = group;
 		}

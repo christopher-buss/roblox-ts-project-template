@@ -5,7 +5,7 @@ on:
     branches:
       - develop
     paths:
-      - 'src/**/*'
+      - "src/**/*"
       - default.project.json
       - mantle.yaml
       - package.json
@@ -46,15 +46,15 @@ jobs:
       - name: Upload place
         uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4
         with:
-          name: place
-          path: place.rbxlx
           if-no-files-found: error
 
+          name: place
+          path: place.rbxlx
   deploy:
-    runs-on: ubuntu-latest
-    environment: development
     needs: build
 
+    runs-on: ubuntu-latest
+    environment: development
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
@@ -97,17 +97,17 @@ jobs:
           done
           echo "Success!"
 
-      - name: Deploy place
-        run: mantle deploy mantle.yaml --environment development
-        env:
-          ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
-          MANTLE_OPEN_CLOUD_API_KEY: ${{ secrets.MANTLE_OPEN_CLOUD_API_KEY }}
+      - env:
           MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.MANTLE_AWS_ACCESS_KEY_ID }}
           MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.MANTLE_AWS_SECRET_ACCESS_KEY }}
 
+          MANTLE_OPEN_CLOUD_API_KEY: ${{ secrets.MANTLE_OPEN_CLOUD_API_KEY }}
+          ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
+        name: Deploy place
+        run: mantle deploy mantle.yaml --environment development
       # Turn off the VPN after deployment to speed up action completion
-      - name: Post WireGuard Connection
-        if: always()
+      - if: always()
+        name: Post WireGuard Connection
         run: |
           sudo wg-quick down ./wg0.conf
           sudo rm -f ./wg0.conf
