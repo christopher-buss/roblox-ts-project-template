@@ -57,15 +57,15 @@ export class PlayerService implements OnStart {
 		setupLifecycle<OnPlayerJoin>(this.playerJoinEvents);
 		setupLifecycle<OnPlayerLeave>(this.playerLeaveEvents);
 
-		onPlayerAdded(player => {
-			this.onPlayerAdded(player).catch(err => {
+		onPlayerAdded((player) => {
+			this.onPlayerAdded(player).catch((err) => {
 				this.logger.Error(`Failed to load player ${player.UserId}: ${err}`);
 			});
 		});
 
 		Players.PlayerRemoving.Connect(
-			this.withPlayerEntity(playerEntity => {
-				this.onPlayerRemoving(playerEntity).catch(err => {
+			this.withPlayerEntity((playerEntity) => {
+				this.onPlayerRemoving(playerEntity).catch((err) => {
 					this.logger.Error(`Failed to close player ${playerEntity.userId}: ${err}`);
 				});
 			}),
@@ -181,7 +181,7 @@ export class PlayerService implements OnStart {
 						event.onPlayerJoin(playerEntity);
 					}),
 				)
-				.catch(err => {
+				.catch((err) => {
 					this.logger.Error(`Error in player lifecycle ${id}: ${err}`);
 				});
 		}

@@ -52,7 +52,7 @@ export class SoundController implements OnInit, OnStart {
 
 	/** @ignore */
 	public onStart(): void {
-		store.subscribe(selectPlayerSettings(USER_ID), current => {
+		store.subscribe(selectPlayerSettings(USER_ID), (current) => {
 			if (!current) {
 				return;
 			}

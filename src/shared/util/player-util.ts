@@ -121,5 +121,5 @@ export async function promisePlayerDisconnected(player: Player): Promise<void> {
 		return;
 	}
 
-	await Promise.fromEvent(Players.PlayerRemoving, playerWhoLeft => playerWhoLeft === player);
+	await Promise.fromEvent(Players.PlayerRemoving, (playerWhoLeft) => playerWhoLeft === player);
 }

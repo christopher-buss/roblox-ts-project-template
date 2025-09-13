@@ -16,11 +16,11 @@ export class PlayerBadgeService implements OnPlayerJoin {
 	public onPlayerJoin(playerEntity: PlayerEntity): void {
 		const { userId } = playerEntity;
 
-		this.awardBadge(playerEntity, Badge.Welcome).catch(err => {
+		this.awardBadge(playerEntity, Badge.Welcome).catch((err) => {
 			this.logger.Error(`Failed to check if ${userId} has badge ${Badge.Welcome}: ${err}`);
 		});
 
-		this.awardUnrewardedBadges(playerEntity).catch(err => {
+		this.awardUnrewardedBadges(playerEntity).catch((err) => {
 			this.logger.Error(`Failed to award unrewarded badges to ${userId}: ${err}`);
 		});
 	}
@@ -100,7 +100,7 @@ export class PlayerBadgeService implements OnPlayerJoin {
 				continue;
 			}
 
-			this.awardBadge(playerEntity, badge).catch(err => {
+			this.awardBadge(playerEntity, badge).catch((err) => {
 				this.logger.Error(`Failed to check if ${userId} has badge ${badge}: ${err}`);
 			});
 		}

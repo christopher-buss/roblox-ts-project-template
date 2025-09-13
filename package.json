@@ -69,6 +69,7 @@
 		"@eslint-react/eslint-plugin": "catalog:dev",
 		"@eslint/config-inspector": "catalog:dev",
 		"@isentinel/eslint-config": "catalog:dev",
+		"@isentinel/tsconfig": "catalog:dev",
 		"@rbxts/compiler-types": "catalog:dev",
 		"@rbxts/types": "catalog:dev",
 		"eslint": "catalog:dev",
@@ -82,6 +83,7 @@
 		"rbxts-transformer-flamework": "catalog:dev",
 		"rimraf": "catalog:dev",
 		"roblox-ts": "catalog:dev",
+		"ts-plugin-sort-import-suggestions": "catalog:dev",
 		"typescript": "catalog:dev"
 	},
 	"packageManager": "pnpm@10.15.1+sha512.34e538c329b5553014ca8e8f4535997f96180a1d0f614339357449935350d924e22f8614682191264ec33d1462ac21561aff97f6bb18065351c162c7e8f6de67",

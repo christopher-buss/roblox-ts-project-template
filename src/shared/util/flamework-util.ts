@@ -69,7 +69,7 @@ export function setupLifecycle<T extends defined>(
 ): void {
 	assert(specifier, "[setupLifecycle] Specifier is required");
 
-	Modding.onListenerAdded<T>(object => {
+	Modding.onListenerAdded<T>((object) => {
 		lifecycle.push({
 			id: Reflect.getMetadata(object, "identifier") ?? "flamework:unknown",
 			event: object,

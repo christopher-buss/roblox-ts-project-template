@@ -10,7 +10,7 @@ export interface TextLabelProps extends FrameProps<TextLabel> {
 	 * The font of the text, defaults to the primary font specified by the
 	 * default theme.
 	 */
-	Font?: BindingValue<Enum.Font>;
+	Font?: BindingValue<Enum.Font> | undefined;
 	/**
 	 * The default properties of a `TextLabel` component, minus the ones
 	 * specified in the TextProps.
@@ -24,9 +24,9 @@ export interface TextLabelProps extends FrameProps<TextLabel> {
 	/** The text to display. */
 	Text: BindingValue<string>;
 	/** The color of the text. */
-	TextColor?: BindingValue<Color3>;
+	TextColor?: BindingValue<Color3> | undefined;
 	/** The size of the text. */
-	TextSize?: BindingValue<number>;
+	TextSize?: BindingValue<number> | undefined;
 }
 
 /**
@@ -62,7 +62,7 @@ export const TextLabel = forwardRef(
 				Font={Font ?? theme.fonts.primary.regular}
 				Position={new UDim2(0.5, 0, 0.5, 0)}
 				Text={Text}
-				TextColor3={TextColor}
+				TextColor3={TextColor ?? theme.colors.text.primary}
 				TextSize={TextSize ?? rem(1)}
 				{...Native}
 			>

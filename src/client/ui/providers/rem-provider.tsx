@@ -2,10 +2,10 @@ import { map, useCamera, useDebounceState, useEventListener } from "@rbxts/prett
 import React, { createContext, useCallback, useEffect } from "@rbxts/react";
 
 export interface RemProviderProps extends React.PropsWithChildren {
-	baseRem?: number;
-	maximumRem?: number;
-	minimumRem?: number;
-	remOverride?: number;
+	baseRem?: number | undefined;
+	maximumRem?: number | undefined;
+	minimumRem?: number | undefined;
+	remOverride?: number | undefined;
 }
 
 export const DEFAULT_REM = 16;

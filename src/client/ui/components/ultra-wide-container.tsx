@@ -26,7 +26,7 @@ export function UltraWideContainer({
 	return (
 		<Group>
 			<uisizeconstraint
-				MaxSize={viewport.map(size => {
+				MaxSize={viewport.map((size) => {
 					const resolution = new Vector2(
 						math.min(size.X, size.Y * MAX_ASPECT_RATIO),
 						size.Y,

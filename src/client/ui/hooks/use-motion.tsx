@@ -8,12 +8,12 @@ import { RunService } from "@rbxts/services";
 export function useMotion<T = number>(
 	goal: number,
 	mapper?: (value: number) => T,
-): LuaTuple<[Binding<T>, Motion]>;
+): [Binding<T>, Motion];
 
 export function useMotion<T extends MotionGoal, U = T>(
 	goal: T,
 	mapper?: (value: T) => U,
-): LuaTuple<[Binding<U>, Motion<T>]>;
+): [Binding<U>, Motion<T>];
 
 /**
  * Creates a memoized Motion object set to the given initial value. Returns a
@@ -29,7 +29,7 @@ export function useMotion<T extends MotionGoal, U = T>(
 export function useMotion<T extends MotionGoal, U = T>(
 	goal: T,
 	mapper?: (value: T) => U,
-): LuaTuple<[Binding<T>, Motion]> | LuaTuple<[Binding<U>, Motion<T>]> {
+): [Binding<T>, Motion] | [Binding<U>, Motion<T>] {
 	const motion = useMemo(() => createMotion(goal), [goal]);
 
 	const get = useLatestCallback(() => {
@@ -44,7 +44,7 @@ export function useMotion<T extends MotionGoal, U = T>(
 	}, [get, mapper, setValue]);
 
 	useEffect(() => {
-		const connection = RunService.Heartbeat.Connect(delta => {
+		const connection = RunService.Heartbeat.Connect((delta) => {
 			motion.step(delta);
 			setValue(get());
 		});
@@ -55,5 +55,5 @@ export function useMotion<T extends MotionGoal, U = T>(
 		};
 	}, [get, motion, setValue]);
 
-	return $tuple(binding, motion);
+	return [binding, motion];
 }

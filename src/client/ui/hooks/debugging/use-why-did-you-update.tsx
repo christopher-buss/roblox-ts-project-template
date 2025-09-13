@@ -54,7 +54,7 @@ export function useWhyDidYouUpdate(
 		}
 
 		if (logEnabled && next(changesObject)[0]) {
-			logFunction(name + " " + TableToString(changesObject, true));
+			logFunction(`${name} ${TableToString(changesObject, true)}`);
 		}
 
 		previousProps.current = props;

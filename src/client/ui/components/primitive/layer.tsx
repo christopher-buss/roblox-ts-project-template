@@ -14,7 +14,7 @@ export interface LayerProps extends React.PropsWithChildren {
 	 */
 	ClampUltraWide?: boolean;
 	/** The display order of the layer. */
-	DisplayOrder?: number;
+	DisplayOrder?: number | undefined;
 }
 
 /**
@@ -45,7 +45,7 @@ export interface LayerProps extends React.PropsWithChildren {
  */
 export function Layer({
 	ClampUltraWide = true,
-	DisplayOrder,
+	DisplayOrder = 0,
 	children,
 }: Readonly<LayerProps>): React.ReactNode {
 	return $NODE_ENV === "development" && IS_EDIT ? (

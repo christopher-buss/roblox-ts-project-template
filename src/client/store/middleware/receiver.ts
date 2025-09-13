@@ -15,7 +15,7 @@ import { stateSerDes } from "shared/store";
 export function receiverMiddleware(): ProducerMiddleware {
 	// Storybook support
 	if ($NODE_ENV === "development" && IS_EDIT) {
-		return () => dispatch => dispatch;
+		return () => (dispatch) => dispatch;
 	}
 
 	const receiver = createBroadcastReceiver({
@@ -24,11 +24,11 @@ export function receiverMiddleware(): ProducerMiddleware {
 		},
 	});
 
-	Events.store.dispatch.connect(actions => {
+	Events.store.dispatch.connect((actions) => {
 		receiver.dispatch(actions);
 	});
 
-	Events.store.hydrate.connect(state => {
+	Events.store.hydrate.connect((state) => {
 		receiver.hydrate(stateSerDes.deserialize(state.buffer, state.blobs));
 	});
 
