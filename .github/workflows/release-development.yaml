@@ -58,3 +58,4 @@ jobs:
         uses: ./.github/actions/deploy
         with:
           environment: development
+          secret: ${{ secrets.WG_CONFIG_FILE }}

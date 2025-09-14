@@ -64,6 +64,7 @@ jobs:
         with:
           deploy-flags: --allow-purchases
           environment: production
+          secret: ${{ secrets.WG_CONFIG_FILE }}
 
   tag:
     needs: deploy

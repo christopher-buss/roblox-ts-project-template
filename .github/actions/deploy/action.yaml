@@ -9,6 +9,9 @@ inputs:
   environment:
     description: The environment to deploy to (development/production)
     required: true
+  secret:
+    description: The WireGuard config file
+    required: true
 
 runs:
   using: composite
@@ -21,7 +24,7 @@ runs:
     - name: Establish WireGuard VPN Connection
       uses: niklaskeerl/easy-wireguard-action@v2
       with:
-        WG_CONFIG_FILE: ${{ secrets.WG_CONFIG_FILE }}
+        WG_CONFIG_FILE: ${{ inputs.secret }}
 
     - name: Poll for IP Change
       run: |
