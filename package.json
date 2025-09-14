@@ -58,7 +58,9 @@
 		"@rbxts/ui-labs": "catalog:prod",
 		"@rbxts/validate-tree": "catalog:prod",
 		"rbxts-transform-debug": "catalog:prod",
-		"rbxts-transform-env": "catalog:prod"
+		"rbxts-transform-env": "catalog:prod",
+		"rbxts-transformer-flamework": "catalog:prod",
+		"roblox-ts": "catalog:prod"
 	},
 	"devDependencies": {
 		"@antfu/ni": "catalog:dev",
@@ -80,9 +82,7 @@
 		"jiti": "catalog:dev",
 		"lint-staged": "catalog:dev",
 		"rbxts-build": "catalog:dev",
-		"rbxts-transformer-flamework": "catalog:dev",
 		"rimraf": "catalog:dev",
-		"roblox-ts": "catalog:dev",
 		"ts-plugin-sort-import-suggestions": "catalog:dev",
 		"typescript": "catalog:dev"
 	},

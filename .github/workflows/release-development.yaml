@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
@@ -29,13 +29,7 @@ jobs:
       - uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2
 
       - name: Install dependencies
-        run: pnpm install
-
-      - name: Install roblox-ts
-        run: pnpm add roblox-ts
-
-      - name: Setup Rokit
-        uses: CompeyDev/setup-rokit@d49be92bd9502180218c3f43e7988faa945217b0 # v0.1.2
+        uses: ./.github/actions/install-dependencies
 
       - name: Compile
         run: pnpm exec rbxtsc --verbose
@@ -47,9 +41,9 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           if-no-files-found: error
-
           name: place
           path: place.rbxlx
+
   deploy:
     needs: build
 
@@ -60,55 +54,7 @@ jobs:
 
       - uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2
 
-      - name: Download place artifact
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+      - name: Deploy to Roblox
+        uses: ./.github/actions/deploy
         with:
-          name: place
-
-      # As ROBLOSECURITY keys are region locked, we need to use a VPN to ensure
-      # the github actions runner is in the same region as our Roblox account.
-      - name: WireGuard Connection
-        run: |
-          sudo apt install resolvconf wireguard
-          echo "${{ secrets.WG_CONFIG_FILE }}" > wg0.conf
-          sudo chmod 600 wg0.conf
-          echo "setting config"
-          sudo wg-quick up ./wg0.conf
-
-        shell: bash
-
-      # Ensure the IP has changed before deploying
-      - name: Poll for IP Change
-        run: |
-          elapsed=0
-          while true; do
-            response=$(curl -s 'https://httpbin.org/ip')
-            content=$(echo $response | jq -r '.origin')
-            if [ "$content" == "104.199.120.221" ]; then
-              break
-            fi
-            if [ $elapsed -ge 20 ]; then
-              echo "Timeout reached!"
-              exit 1
-            fi
-            echo "Polling.. Elapsed: $elapsed, IP: $content"
-            sleep 5
-            elapsed=$((elapsed + 5))
-          done
-          echo "Success!"
-
-      - env:
-          MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.MANTLE_AWS_ACCESS_KEY_ID }}
-          MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.MANTLE_AWS_SECRET_ACCESS_KEY }}
-
-          MANTLE_OPEN_CLOUD_API_KEY: ${{ secrets.MANTLE_OPEN_CLOUD_API_KEY }}
-          ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
-        name: Deploy place
-        run: mantle deploy mantle.yaml --environment development
-      # Turn off the VPN after deployment to speed up action completion
-      - if: always()
-        name: Post WireGuard Connection
-        run: |
-          sudo wg-quick down ./wg0.conf
-          sudo rm -f ./wg0.conf
-        shell: bash
+          environment: development

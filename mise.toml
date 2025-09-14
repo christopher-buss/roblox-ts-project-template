@@ -9,6 +9,7 @@ postinstall = "npx corepack enable"
 experimental = true
 
 [tools]
+"npm:@antfu/ni" = "latest"
 "ubi:blake-mealey/mantle" = "0.11.17-prerelease"
 "ubi:jacktabscode/asphalt" = "0.9.1"
 "ubi:lune-org/lune" = "0.10.2"

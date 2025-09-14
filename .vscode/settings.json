@@ -8,15 +8,16 @@
 	// Enable the ESlint flat config support
 	"eslint.useFlatConfig": true,
 	"eslint.validate": [
-		"typescript",
-		"typescriptreact",
+		"github-actions-workflow",
 		"javascript",
-		"markdown",
 		"json",
 		"jsonc",
-		"yaml",
+		"luau",
+		"markdown",
 		"toml",
-		"luau"
+		"typescript",
+		"typescriptreact",
+		"yaml"
 	],
 	// Silent the stylistic rules in you IDE, but still auto fix them
 	"eslint.rules.customizations": [

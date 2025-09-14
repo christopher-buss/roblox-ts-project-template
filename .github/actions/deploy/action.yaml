@@ -1,0 +1,60 @@
+name: Deploy to Roblox
+description: Deploy the built place file to Roblox using Mantle with VPN connection
+
+inputs:
+  deploy-flags:
+    default: ""
+    description: Additional flags for the mantle deploy command
+    required: false
+  environment:
+    description: The environment to deploy to (development/production)
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Download place artifact
+      uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+      with:
+        name: place
+
+    - name: Establish WireGuard VPN Connection
+      uses: niklaskeerl/easy-wireguard-action@v2
+      with:
+        WG_CONFIG_FILE: ${{ secrets.WG_CONFIG_FILE }}
+
+    - name: Poll for IP Change
+      run: |
+        elapsed=0
+        while true; do
+          response=$(curl -s 'https://httpbin.org/ip')
+          content=$(echo $response | jq -r '.origin')
+          if [ "$content" == "104.199.120.221" ]; then
+            break
+          fi
+          if [ $elapsed -ge 20 ]; then
+            echo "Timeout reached!"
+            exit 1
+          fi
+          echo "Polling.. Elapsed: $elapsed, IP: $content"
+          sleep 5
+          elapsed=$((elapsed + 5))
+        done
+        echo "Success!"
+      shell: bash
+
+    - name: Deploy
+      run: mantle deploy mantle.yaml --environment ${{ inputs.environment }} ${{ inputs.deploy-flags }}
+      env:
+        MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.MANTLE_AWS_ACCESS_KEY_ID }}
+        MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.MANTLE_AWS_SECRET_ACCESS_KEY }}
+        MANTLE_OPEN_CLOUD_API_KEY: ${{ secrets.MANTLE_OPEN_CLOUD_API_KEY }}
+        ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
+      shell: bash
+
+    - if: always()
+      name: Post WireGuard Connection
+      run: |
+        sudo wg-quick down ./wg0.conf
+        sudo rm -f ./wg0.conf
+      shell: bash
