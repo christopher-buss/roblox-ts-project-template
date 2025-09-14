@@ -33,6 +33,12 @@ runs:
       with:
         name: place
 
+    - name: Debug
+      run: |
+        response=$(curl -s 'https://httpbin.org/ip')
+        echo "Current IP: $(echo $response | jq -r '.origin')"
+      shell: bash
+
     - name: Establish WireGuard VPN Connection
       uses: niklaskeerl/easy-wireguard-action@v2
       with:
@@ -44,7 +50,7 @@ runs:
         while true; do
           response=$(curl -s 'https://httpbin.org/ip')
           content=$(echo $response | jq -r '.origin')
-          if [ "$content" == "104.199.120.221" ]; then
+          if [ "$content" == "20.68.48.98" ]; then
             break
           fi
           if [ $elapsed -ge 20 ]; then
