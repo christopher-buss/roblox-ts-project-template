@@ -9,6 +9,18 @@ inputs:
   environment:
     description: The environment to deploy to (development/production)
     required: true
+  mantle-aws-access-key-id:
+    description: Mantle AWS Access Key ID
+    required: true
+  mantle-aws-secret-access-key:
+    description: Mantle AWS Secret Access Key
+    required: true
+  mantle-open-cloud-api-key:
+    description: Mantle Open Cloud API Key
+    required: true
+  roblosecurity:
+    description: Roblox security cookie
+    required: true
   secret:
     description: The WireGuard config file
     required: true
@@ -49,10 +61,10 @@ runs:
     - name: Deploy
       run: mantle deploy mantle.yaml --environment ${{ inputs.environment }} ${{ inputs.deploy-flags }}
       env:
-        MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.MANTLE_AWS_ACCESS_KEY_ID }}
-        MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.MANTLE_AWS_SECRET_ACCESS_KEY }}
-        MANTLE_OPEN_CLOUD_API_KEY: ${{ secrets.MANTLE_OPEN_CLOUD_API_KEY }}
-        ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
+        MANTLE_AWS_ACCESS_KEY_ID: ${{ inputs.MANTLE_AWS_ACCESS_KEY_ID }}
+        MANTLE_AWS_SECRET_ACCESS_KEY: ${{ inputs.MANTLE_AWS_SECRET_ACCESS_KEY }}
+        MANTLE_OPEN_CLOUD_API_KEY: ${{ inputs.MANTLE_OPEN_CLOUD_API_KEY }}
+        ROBLOSECURITY: ${{ inputs.ROBLOSECURITY }}
       shell: bash
 
     - if: always()
