@@ -1,0 +1,81 @@
+name: Deploy to Roblox
+description: Deploy the built place file to Roblox using Mantle with VPN connection
+
+inputs:
+  deploy-flags:
+    default: ""
+    description: Additional flags for the mantle deploy command
+    required: false
+  environment:
+    description: The environment to deploy to (development/production)
+    required: true
+  expected-ip:
+    description: The expected public IP address after establishing the VPN connection
+    required: true
+  mantle-aws-access-key-id:
+    description: Mantle AWS Access Key ID
+    required: true
+  mantle-aws-secret-access-key:
+    description: Mantle AWS Secret Access Key
+    required: true
+  mantle-open-cloud-api-key:
+    description: Mantle Open Cloud API Key
+    required: true
+  roblosecurity:
+    description: Roblox security cookie
+    required: true
+  secret:
+    description: The WireGuard config file
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Download place artifact
+      uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+      with:
+        name: place
+
+    - name: Establish WireGuard VPN Connection
+      uses: niklaskeerl/easy-wireguard-action@fdecd3aabde0060ec80f89aa03070ae0705fedba # v2
+      with:
+        WG_CONFIG_FILE: ${{ inputs.secret }}
+
+    - name: Wait for VPN IP Change
+      run: |
+        expected_ip="${{ inputs.expected-ip }}"
+
+        for i in {1..6}; do
+          current_ip=$(curl -s https://api.ipify.org || echo "")
+          echo "Current IP: $current_ip, Expected: $expected_ip"
+
+          if [ "$current_ip" == "$expected_ip" ]; then
+            echo "Success!"
+            exit 0
+          fi
+
+          if [ $i -lt 6 ]; then
+            echo "Polling.. Elapsed time: $((i * 5)) seconds"
+            sleep 5
+          fi
+        done
+
+        echo "Timeout reached!"
+        exit 1
+      shell: bash
+
+    - name: Deploy
+      run: mantle deploy mantle.yaml --environment ${{ inputs.environment }} ${{ inputs.deploy-flags }}
+      env:
+        MANTLE_AWS_ACCESS_KEY_ID: ${{ inputs.mantle-aws-access-key-id }}
+        MANTLE_AWS_SECRET_ACCESS_KEY: ${{ inputs.mantle-aws-secret-access-key }}
+        MANTLE_OPEN_CLOUD_API_KEY: ${{ inputs.mantle-open-cloud-api-key }}
+        ROBLOSECURITY: ${{ inputs.roblosecurity }}
+      shell: bash
+
+    - if: always()
+      name: Post WireGuard Connection
+      run: |
+        sudo wg-quick down ./wg0.conf
+        sudo rm -f ./wg0.conf
+      shell: bash

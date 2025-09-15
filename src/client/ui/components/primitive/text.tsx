@@ -1,8 +1,8 @@
 import React, { forwardRef } from "@rbxts/react";
 
+import { useRem, useTheme } from "client/ui/hooks";
 import type { BindingValue } from "types/util/react";
 
-import { useRem, useTheme } from "../../hooks";
 import type { FrameProps } from "./frame";
 
 export interface TextLabelProps extends FrameProps<TextLabel> {
@@ -10,7 +10,7 @@ export interface TextLabelProps extends FrameProps<TextLabel> {
 	 * The font of the text, defaults to the primary font specified by the
 	 * default theme.
 	 */
-	Font?: BindingValue<Enum.Font>;
+	Font?: BindingValue<Enum.Font> | undefined;
 	/**
 	 * The default properties of a `TextLabel` component, minus the ones
 	 * specified in the TextProps.
@@ -18,15 +18,15 @@ export interface TextLabelProps extends FrameProps<TextLabel> {
 	Native?: Partial<
 		Omit<
 			React.InstanceProps<TextLabel>,
-			"Font" | "Text" | "TextColor" | "TextColor3" | "TextSize"
+			"Font" | "Text" | "TextColor3" | "TextColor" | "TextSize"
 		>
 	>;
 	/** The text to display. */
 	Text: BindingValue<string>;
 	/** The color of the text. */
-	TextColor?: BindingValue<Color3>;
+	TextColor?: BindingValue<Color3> | undefined;
 	/** The size of the text. */
-	TextSize?: BindingValue<number>;
+	TextSize?: BindingValue<number> | undefined;
 }
 
 /**
@@ -47,19 +47,10 @@ export interface TextLabelProps extends FrameProps<TextLabel> {
  *
  * @see https://create.roblox.com/docs/reference/engine/classes/TextLabel
  */
-const TextLabel = forwardRef(
-	(
-		{
-			CornerRadius,
-			Font,
-			Native,
-			Text,
-			TextColor,
-			TextSize,
-			children,
-		}: Readonly<TextLabelProps>,
-		ref: React.Ref<TextLabel>,
-	) => {
+export const TextLabel = forwardRef(
+	(props: Readonly<TextLabelProps>, ref: React.Ref<TextLabel>) => {
+		const { CornerRadius, Font, Native, Text, TextColor, TextSize, children } = props;
+
 		const rem = useRem();
 		const theme = useTheme();
 
@@ -71,7 +62,7 @@ const TextLabel = forwardRef(
 				Font={Font ?? theme.fonts.primary.regular}
 				Position={new UDim2(0.5, 0, 0.5, 0)}
 				Text={Text}
-				TextColor3={TextColor}
+				TextColor3={TextColor ?? theme.colors.text.primary}
 				TextSize={TextSize ?? rem(1)}
 				{...Native}
 			>
@@ -81,5 +72,3 @@ const TextLabel = forwardRef(
 		);
 	},
 );
-
-export default TextLabel;

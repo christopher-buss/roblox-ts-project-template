@@ -29,7 +29,7 @@ export interface FrameProps<T extends Instance = Frame> extends React.PropsWithC
  *
  * @see https://create.roblox.com/docs/reference/engine/classes/Frame
  */
-const Frame = forwardRef(
+export const Frame = forwardRef(
 	({ CornerRadius, Native, children }: Readonly<FrameProps>, ref: Ref<Frame>) => {
 		return (
 			<frame
@@ -45,5 +45,3 @@ const Frame = forwardRef(
 		);
 	},
 );
-
-export default Frame;

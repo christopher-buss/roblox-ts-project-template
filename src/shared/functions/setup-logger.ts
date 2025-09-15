@@ -29,8 +29,7 @@ class LogEventSFTOutputSink implements ILogEventSink {
 		const messageResult = template.Render(message);
 		const fileInfo = this.getFileInformation(context);
 
-		const formattedMessage =
-			`[${tag}] ${context} (${Environment}) - ${messageResult}` + fileInfo;
+		const formattedMessage = `[${tag}] ${context} (${Environment}) - ${messageResult}${fileInfo}`;
 
 		if (message.Level >= LogLevel.Fatal) {
 			error(formattedMessage);
@@ -43,23 +42,23 @@ class LogEventSFTOutputSink implements ILogEventSink {
 
 	private getLogLevelString(level: LogLevel): string {
 		switch (level) {
-			case LogLevel.Verbose: {
-				return "VERBOSE";
-			}
 			case LogLevel.Debugging: {
 				return "DEBUG";
-			}
-			case LogLevel.Information: {
-				return "INFO";
-			}
-			case LogLevel.Warning: {
-				return "WARN";
 			}
 			case LogLevel.Error: {
 				return "ERROR";
 			}
 			case LogLevel.Fatal: {
 				return "FATAL";
+			}
+			case LogLevel.Information: {
+				return "INFO";
+			}
+			case LogLevel.Verbose: {
+				return "VERBOSE";
+			}
+			case LogLevel.Warning: {
+				return "WARN";
 			}
 		}
 	}
@@ -69,7 +68,7 @@ class LogEventSFTOutputSink implements ILogEventSink {
 			return "";
 		}
 
-		const source =
+		const [source] =
 			context === "Game"
 				? debug.info(STACK_TRACE_LEVEL_MODULE, "sl")
 				: debug.info(STACK_TRACE_LEVEL_FLAMEWORK, "sl");

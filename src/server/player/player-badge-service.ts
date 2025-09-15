@@ -6,21 +6,21 @@ import { store } from "server/store";
 import { selectPlayerAchievements } from "shared/store/persistent";
 import { Badge } from "types/enum/badge";
 
-import type PlayerEntity from "./player-entity";
+import type { PlayerEntity } from "./player-entity";
 import type { OnPlayerJoin } from "./player-service";
 
 @Service({})
-export default class PlayerBadgeService implements OnPlayerJoin {
+export class PlayerBadgeService implements OnPlayerJoin {
 	constructor(private readonly logger: Logger) {}
 
 	public onPlayerJoin(playerEntity: PlayerEntity): void {
 		const { userId } = playerEntity;
 
-		this.awardBadge(playerEntity, Badge.Welcome).catch(err => {
+		this.awardBadge(playerEntity, Badge.Welcome).catch((err) => {
 			this.logger.Error(`Failed to check if ${userId} has badge ${Badge.Welcome}: ${err}`);
 		});
 
-		this.awardUnrewardedBadges(playerEntity).catch(err => {
+		this.awardUnrewardedBadges(playerEntity).catch((err) => {
 			this.logger.Error(`Failed to award unrewarded badges to ${userId}: ${err}`);
 		});
 	}
@@ -100,7 +100,7 @@ export default class PlayerBadgeService implements OnPlayerJoin {
 				continue;
 			}
 
-			this.awardBadge(playerEntity, badge).catch(err => {
+			this.awardBadge(playerEntity, badge).catch((err) => {
 				this.logger.Error(`Failed to check if ${userId} has badge ${badge}: ${err}`);
 			});
 		}

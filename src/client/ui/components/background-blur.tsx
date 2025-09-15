@@ -23,5 +23,5 @@ export function BackgroundBlur({ BlurSize }: Readonly<BackgroundBlurProps>): Rea
 		setVisible(size > 0);
 	});
 
-	return createPortal(<>{visible ? <blureffect Size={BlurSize} /> : undefined}</>, camera);
+	return createPortal(<>{visible ? <blureffect Size={BlurSize ?? 0} /> : undefined}</>, camera);
 }

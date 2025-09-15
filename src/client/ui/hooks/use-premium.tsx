@@ -15,7 +15,7 @@ export function usePremium(): boolean {
 		LocalPlayer.MembershipType === Enum.MembershipType.Premium,
 	);
 
-	useEventListener(Players.PlayerMembershipChanged, player => {
+	useEventListener(Players.PlayerMembershipChanged, (player) => {
 		if (player === LocalPlayer) {
 			setIsPremium(player.MembershipType === Enum.MembershipType.Premium);
 		}

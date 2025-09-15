@@ -1,28 +1,7 @@
 {
+	"extends": "@isentinel/tsconfig/roblox",
 	"compilerOptions": {
-		"incremental": true,
-		"tsBuildInfoFile": "out/tsconfig.tsbuildinfo",
-		"target": "ESNext",
-		"jsx": "react",
-		"jsxFactory": "React.createElement",
-		"jsxFragmentFactory": "React.Fragment",
-		"moduleDetection": "force",
-		"noLib": true,
-		"experimentalDecorators": true,
-		"baseUrl": "src",
-		"rootDir": "src",
-		"module": "commonjs",
-		"moduleResolution": "Node",
-		"resolveJsonModule": true,
 		"typeRoots": ["node_modules/@rbxts", "node_modules/@flamework"],
-		"strict": true,
-		"noFallthroughCasesInSwitch": true,
-		"noImplicitReturns": true,
-		"noUncheckedIndexedAccess": true,
-		"downlevelIteration": true,
-		"outDir": "out/",
-		"allowSyntheticDefaultImports": true,
-		"forceConsistentCasingInFileNames": true,
 		"plugins": [
 			{
 				"transform": "rbxts-transformer-flamework",
@@ -35,8 +14,11 @@
 				"transform": "rbxts-transform-env",
 				"shortCircuitNodeEnv": false,
 				"defaultEnvironment": "development"
+			},
+			{
+				"name": "ts-plugin-sort-import-suggestions",
+				"moveDownPatterns": ["@rbxts"]
 			}
 		]
-	},
-	"exclude": ["./eslint.config.ts", "./commitlint.config.ts"]
+	}
 }

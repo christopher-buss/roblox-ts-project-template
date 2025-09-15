@@ -1,7 +1,6 @@
-/* eslint-disable ts/no-magic-numbers -- Ignore magic numbers for RuleConfigSeverity. */
 import { RuleConfigSeverity, type UserConfig } from "@commitlint/types";
 
-const Configuration: UserConfig = {
+export default {
 	extends: ["@commitlint/config-conventional"],
 	rules: {
 		"header-max-length": [RuleConfigSeverity.Error, "always", 72],
@@ -11,6 +10,4 @@ const Configuration: UserConfig = {
 			["core", "deps", "dev", "lint", "ui", "audio", "assets", "mtx"],
 		],
 	},
-};
-
-export default Configuration;
+} satisfies UserConfig;

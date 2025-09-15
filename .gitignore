@@ -3,6 +3,7 @@
 /include
 *.tsbuildinfo
 flamework.build
+.eslintcache
 
 # Misc
 .DS_Store
@@ -13,7 +14,6 @@ sourcemap.json
 *.rbxl
 *.rbxlx
 
-# Bundled eslint config
-*.mjs
-
 .env
+
+.vscode/mise-tools/

@@ -31,6 +31,22 @@ export function cleanupCharacter(player: Player): void {
 }
 
 /**
+ * A utility function that gets a player by their username.
+ *
+ * @param name - The username of the player to get.
+ * @returns The player with the given username, if any.
+ */
+export function getPlayerByName(name: string): Player | undefined {
+	const player = Players.FindFirstChild(name);
+
+	if (player?.IsA("Player") === false) {
+		return;
+	}
+
+	return player;
+}
+
+/**
  * Attempts to load the player's character model. If the character model fails
  * to load within 10 seconds, the promise will still resolve.
  *
@@ -48,26 +64,6 @@ export async function loadCharacter(player: Player): Promise<void> {
 		}),
 		Promise.delay(CHARACTER_LOAD_TIMEOUT),
 	]);
-}
-
-/**
- * A utility function that listens for when a player is added to the game and
- * calls the callback with the player. This function also calls the callback for
- * all players that are already in the game.
- *
- * @param callback - The callback to call when a player is added to the game.
- * @returns A function that, when called, disconnects the connection.
- */
-export function onPlayerAdded(callback: (player: Player) => void): () => void {
-	const connection = Players.PlayerAdded.Connect(callback);
-
-	for (const player of Players.GetPlayers()) {
-		callback(player);
-	}
-
-	return () => {
-		connection.Disconnect();
-	};
 }
 
 /**
@@ -93,19 +89,23 @@ export function onCharacterAdded(player: Player, callback: (rig: Model) => void)
 }
 
 /**
- * A utility function that gets a player by their username.
+ * A utility function that listens for when a player is added to the game and
+ * calls the callback with the player. This function also calls the callback for
+ * all players that are already in the game.
  *
- * @param name - The username of the player to get.
- * @returns The player with the given username, if any.
+ * @param callback - The callback to call when a player is added to the game.
+ * @returns A function that, when called, disconnects the connection.
  */
-export function getPlayerByName(name: string): Player | undefined {
-	const player = Players.FindFirstChild(name);
+export function onPlayerAdded(callback: (player: Player) => void): () => void {
+	const connection = Players.PlayerAdded.Connect(callback);
 
-	if (player?.IsA("Player") === false) {
-		return;
+	for (const player of Players.GetPlayers()) {
+		callback(player);
 	}
 
-	return player;
+	return () => {
+		connection.Disconnect();
+	};
 }
 
 /**
@@ -121,5 +121,5 @@ export async function promisePlayerDisconnected(player: Player): Promise<void> {
 		return;
 	}
 
-	await Promise.fromEvent(Players.PlayerRemoving, playerWhoLeft => playerWhoLeft === player);
+	await Promise.fromEvent(Players.PlayerRemoving, (playerWhoLeft) => playerWhoLeft === player);
 }

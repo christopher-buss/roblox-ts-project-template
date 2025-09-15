@@ -1,7 +1,8 @@
 import type { OnStart } from "@flamework/core";
 import { Controller } from "@flamework/core";
 import type { Logger } from "@rbxts/log";
-import Signal from "@rbxts/signal";
+import { Error } from "@rbxts/luau-polyfill";
+import Signal from "@rbxts/rbx-better-signal";
 import { promiseTree } from "@rbxts/validate-tree";
 
 import { LocalPlayer } from "client/constants";
@@ -21,8 +22,8 @@ import {
  * `player.Character`.
  */
 @Controller({})
-export default class CharacterController implements OnStart {
-	private currentCharacter?: CharacterRig;
+export class CharacterController implements OnStart {
+	private currentCharacter: CharacterRig | undefined;
 
 	public readonly onCharacterAdded = new Signal<(character: CharacterRig) => void>();
 	public readonly onCharacterRemoving = new Signal();
@@ -31,8 +32,8 @@ export default class CharacterController implements OnStart {
 
 	/** @ignore */
 	public onStart(): void {
-		onCharacterAdded(LocalPlayer, character => {
-			this.characterAdded(character).catch(err => {
+		onCharacterAdded(LocalPlayer, (character) => {
+			this.characterAdded(character).catch((err) => {
 				this.logger.Fatal(`Could not get character rig because:\n${err}`);
 			});
 		});
@@ -74,11 +75,11 @@ export default class CharacterController implements OnStart {
 		});
 
 		const [success, rig] = promise.await();
-		coroutine.close(timeout);
+		task.cancel(timeout);
 		connection.Disconnect();
 
 		if (!success) {
-			throw "Character failed to load.";
+			throw new Error("Character failed to load.");
 		}
 
 		this.listenForCharacterRemoving(model);
@@ -96,7 +97,7 @@ export default class CharacterController implements OnStart {
 				return;
 			}
 
-			this.logger.Verbose(`Character has been removed.`);
+			this.logger.Verbose("Character has been removed.");
 
 			connection.Disconnect();
 			this.currentCharacter = undefined;
@@ -110,7 +111,7 @@ export default class CharacterController implements OnStart {
 	 * @param rig - The character rig that was loaded.
 	 */
 	private onRigLoaded(rig: CharacterRig): void {
-		this.logger.Debug(`Loaded character rig.`);
+		this.logger.Debug("Loaded character rig.");
 		this.currentCharacter = rig;
 		this.onCharacterAdded.Fire(rig);
 	}

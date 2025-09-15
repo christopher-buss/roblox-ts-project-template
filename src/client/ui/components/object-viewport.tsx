@@ -1,6 +1,7 @@
-import Make from "@rbxts/make";
 import { useMountEffect } from "@rbxts/pretty-react-hooks";
 import React, { useRef } from "@rbxts/react";
+
+import Make from "shared/modules/make";
 
 export interface ObjectViewportProps extends React.PropsWithChildren {
 	/** Additional depth to push the camera back. */
@@ -42,7 +43,7 @@ function setDefaultCameraView(camera: Camera, model: Model, cameraDepth = 0): vo
  * @returns The rendered viewport.
  * @component
  */
-export default function ObjectViewport({
+export function ObjectViewport({
 	ExtraCameraDepth,
 	Native,
 	Object,

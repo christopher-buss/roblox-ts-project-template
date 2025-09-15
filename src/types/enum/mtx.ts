@@ -23,5 +23,9 @@ export const Product = {
 export type Product = ValueOf<typeof Product>;
 
 export interface ProductData {
+	purchaseInfo: Array<{
+		purchasePrice: number;
+		purchaseTime: number;
+	}>;
 	timesPurchased: number;
 }

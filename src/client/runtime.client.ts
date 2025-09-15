@@ -13,15 +13,15 @@ function start(): void {
 
 	Log.Info(`${GAME_NAME} client version: ${game.PlaceVersion}`);
 
-	Modding.registerDependency<Logger>(ctor => Log.ForContext(ctor));
+	Modding.registerDependency<Logger>((ctor) => Log.ForContext(ctor));
 
 	Flamework.addPaths("src/client");
 
-	Log.Info(`Flamework ignite!`);
+	Log.Info("Flamework ignite!");
 	Flamework.ignite();
 
 	createApp().catch(() => {
-		Log.Fatal(`Failed to create React app!`);
+		Log.Fatal("Failed to create React app!");
 	});
 }
 

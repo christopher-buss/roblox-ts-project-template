@@ -1,51 +1,43 @@
-import style, { GLOB_TS } from "@isentinel/eslint-config";
+import isentinel, { GLOB_SRC } from "@isentinel/eslint-config";
 
-export default style(
+export default isentinel(
 	{
+		name: "project/base",
+		perfectionist: {
+			customClassGroups: [
+				"onInit",
+				"onStart",
+				"onPlayerJoin",
+				"onPlayerLeave",
+				"onRender",
+				"onPhysics",
+				"onTick",
+			],
+		},
+		pnpm: true,
 		react: true,
+		type: "game",
+	},
+	{
+		name: "project/sort",
+		files: [GLOB_SRC],
 		rules: {
 			"perfectionist/sort-objects": [
-				"warn",
+				"error",
 				{
 					customGroups: {
-						id: "id",
-						name: "name",
-						reactProps: ["children", "ref"],
-						reflex: ["loadPlayerData", "closePlayerData"],
+						id: "^id$",
+						name: "^name$",
+						callbacks: ["\b(on[A-Z][a-zA-Z]*)\b"],
+						reactProps: ["^children$", "^ref$"],
+						reflex: ["^loadPlayerData$", "^closePlayerData$"],
 					},
-					groups: ["id", "name", "reflex", "unknown", "reactProps"],
+					groups: ["id", "name", "reflex", "unknown", "reactProps", "callbacks"],
 					order: "asc",
-					partitionByComment: "Part:**",
+					partitionByComment: "^Part:\\*\\*(.*)$",
 					type: "natural",
 				},
 			],
-		},
-		typescript: {
-			parserOptions: {
-				project: "tsconfig.build.json",
-			},
-			tsconfigPath: "tsconfig.build.json",
-		},
-	},
-	{
-		files: [GLOB_TS],
-		rules: {
-			"no-param-reassign": "error",
-			"ts/no-magic-numbers": [
-				"error",
-				{
-					ignore: [0, 1],
-					ignoreEnums: true,
-					ignoreReadonlyClassProperties: true,
-					ignoreTypeIndexes: true,
-				},
-			],
-		},
-	},
-	{
-		files: ["src/client/ui/hooks/**/*"],
-		rules: {
-			"max-lines-per-function": "off",
 		},
 	},
 );

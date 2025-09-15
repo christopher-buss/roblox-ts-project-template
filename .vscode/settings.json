@@ -1,11 +1,24 @@
 {
 	"typescript.tsdk": "node_modules/typescript/lib",
+	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"files.eol": "\n",
 	"eslint.run": "onType",
 	"eslint.format.enable": true,
+	"editor.formatOnSave": false,
 	// Enable the ESlint flat config support
 	"eslint.useFlatConfig": true,
-	"eslint.validate": ["typescript", "typescriptreact", "markdown", "json", "jsonc", "yaml", "toml", "luau"],
+	"eslint.validate": [
+		"github-actions-workflow",
+		"javascript",
+		"json",
+		"jsonc",
+		"luau",
+		"markdown",
+		"toml",
+		"typescript",
+		"typescriptreact",
+		"yaml"
+	],
 	// Silent the stylistic rules in you IDE, but still auto fix them
 	"eslint.rules.customizations": [
 		{ "rule": "style/*", "severity": "off", "fixable": true },
@@ -21,8 +34,21 @@
 	],
 	// Auto fix
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": "always",
+		"source.fixAll.eslint": "explicit",
 		"source.organizeImports": "never"
 	},
-	"npm.packageManager": "pnpm"
+	"npm.packageManager": "pnpm",
+
+	// Mise Tools settings
+	"mise.configureExtensionsUseSymLinks": true,
+	"debug.javascript.defaultRuntimeExecutable": {
+		"pwa-node": "${workspaceFolder}\\.vscode\\mise-tools\\node"
+	},
+
+	// Options for GitHub Copilot
+	"github.copilot.chat.commitMessageGeneration.instructions": [
+		{
+			"file": ".github/commit-instructions.md"
+		}
+	]
 }

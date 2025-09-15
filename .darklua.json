@@ -2,7 +2,10 @@
 	"generator": "readable",
 	"rules": [
 		"remove_spaces",
-		"remove_comments",
+		{
+			"rule": "remove_comments",
+			"except": ["^--!"]
+		},
 		"remove_assertions",
 		"compute_expression",
 		"remove_unused_if_branch",

@@ -1,10 +1,10 @@
 diff --git a/out/Project/functions/compileFiles.js b/out/Project/functions/compileFiles.js
-index 378a35afddd7693a6f7f829f4af7d52548ea15db..d5ff22b838f98d515edf78275d375131c0ee75c1 100644
+index eafbe133dc7b6ea49d3aceaa9f72843315b1b94d..6da478c65f2af3a378db8afcfd5ba78e07ddacf9 100644
 --- a/out/Project/functions/compileFiles.js
 +++ b/out/Project/functions/compileFiles.js
-@@ -57,14 +57,18 @@ function getReverseSymlinkMap(program) {
-     }
-     return result;
+@@ -44,14 +44,19 @@ function emitResultFailure(messageText) {
+         diagnostics: [(0, createTextDiagnostic_1.createTextDiagnostic)(messageText)],
+     };
  }
 +const ROJO_CACHE = new Map();
  function compileFiles(program, data, pathTranslator, sourceFiles) {
@@ -16,13 +16,14 @@ index 378a35afddd7693a6f7f829f4af7d52548ea15db..d5ff22b838f98d515edf78275d375131
 -        ? rojo_resolver_1.RojoResolver.fromPath(data.rojoConfigPath)
 +        ? ROJO_CACHE.get(data.rojoConfigPath) ?? rojo_resolver_1.RojoResolver.fromPath(data.rojoConfigPath)
          : rojo_resolver_1.RojoResolver.synthetic(outDir);
++
 +    if (data.rojoConfigPath) {
 +        ROJO_CACHE.set(data.rojoConfigPath, rojoResolver);
 +    }
      for (const warning of rojoResolver.getWarnings()) {
          LogService_1.LogService.warn(warning);
      }
-@@ -74,7 +78,14 @@ function compileFiles(program, data, pathTranslator, sourceFiles) {
+@@ -61,7 +66,14 @@ function compileFiles(program, data, pathTranslator, sourceFiles) {
              (0, checkFileName_1.checkFileName)(sourceFile.fileName);
          }
      }
@@ -36,5 +37,5 @@ index 378a35afddd7693a6f7f829f4af7d52548ea15db..d5ff22b838f98d515edf78275d375131
 +        return rojo;
 +    });
      const nodeModulesPathMapping = (0, createNodeModulesPathMapping_1.createNodeModulesPathMapping)(compilerOptions.typeRoots);
-     const reverseSymlinkMap = getReverseSymlinkMap(program);
      const projectType = (_a = data.projectOptions.type) !== null && _a !== void 0 ? _a : inferProjectType(data, rojoResolver);
+     if (projectType !== constants_1.ProjectType.Package && data.rojoConfigPath === undefined) {

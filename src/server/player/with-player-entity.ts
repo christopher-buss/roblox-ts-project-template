@@ -1,10 +1,10 @@
 import { Dependency } from "@flamework/core";
 import Log from "@rbxts/log";
 
-import type PlayerService from "server/player/player-service";
 import type { ServerResponse } from "types/interfaces/network";
 
-import type PlayerEntity from "./player-entity";
+import type { PlayerEntity } from "./player-entity";
+import type { PlayerService } from "./player-service";
 
 let playerService: PlayerService | undefined;
 
@@ -18,12 +18,10 @@ let playerService: PlayerService | undefined;
  * @param func - The callback to wrap.
  * @returns The server response.
  */
-export default function withPlayerEntity<T extends Array<unknown>>(
+export function withPlayerEntity<T extends Array<unknown>>(
 	func: (playerEntity: PlayerEntity, ...args: T) => undefined | void,
 ): (player: Player, ...args: T) => ServerResponse {
-	if (!playerService) {
-		playerService = Dependency<PlayerService>();
-	}
+	playerService ??= Dependency<PlayerService>();
 
 	return (player: Player, ...args: T) => {
 		// eslint-disable-next-line ts/no-non-null-assertion -- We check for this above.
@@ -36,8 +34,7 @@ export default function withPlayerEntity<T extends Array<unknown>>(
 		}
 
 		Log.Error(
-			`Unable to find entity for player ${player}, unable to call callback. Stacktrace: \n` +
-				debug.traceback(),
+			`Unable to find entity for player ${player}, unable to call callback. Stacktrace: \n${debug.traceback()}`,
 		);
 
 		return identity<ServerResponse>({

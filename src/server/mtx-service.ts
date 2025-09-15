@@ -1,19 +1,19 @@
-import type { OnInit } from "@flamework/core";
+import type { OnInit, OnStart } from "@flamework/core";
 import { Service } from "@flamework/core";
-import type { Document } from "@rbxts/lapis";
 import type { Logger } from "@rbxts/log";
-import Object from "@rbxts/object-utils";
+import { Error, Object } from "@rbxts/luau-polyfill";
+import Signal from "@rbxts/rbx-better-signal";
 import { MarketplaceService, Players } from "@rbxts/services";
 import Sift from "@rbxts/sift";
-import Signal from "@rbxts/signal";
 
 import type { PlayerData } from "shared/store/persistent";
 import { selectPlayerData, selectPlayerMtx } from "shared/store/persistent";
+import { noYield } from "shared/util/no-yield";
 import { GamePass, Product } from "types/enum/mtx";
 
-import type PlayerEntity from "./player/player-entity";
-import type { OnPlayerJoin } from "./player/player-service";
-import type PlayerService from "./player/player-service";
+import { Events } from "./network";
+import type { PlayerEntity } from "./player/player-entity";
+import type { OnPlayerJoin, PlayerService } from "./player/player-service";
 import { store } from "./store";
 
 const NETWORK_RETRY_DELAY = 2;
@@ -43,13 +43,13 @@ type ProductInfo = DeveloperProductInfo | GamePassProductInfo;
  * ```
  */
 @Service({})
-export default class MtxService implements OnInit, OnPlayerJoin {
+export class MtxService implements OnInit, OnStart, OnPlayerJoin {
+	private readonly productHandlers = new Map<
+		Product,
+		(playerEntity: PlayerEntity, productId: Product) => boolean
+	>();
 	private readonly productInfoCache = new Map<number, ProductInfo>();
 	private readonly purchaseIdLog = 50;
-
-	public readonly developerProductPurchased = new Signal<
-		(playerEntity: PlayerEntity, productId: Product) => void
-	>();
 
 	public readonly gamePassStatusChanged = new Signal<
 		(playerEntity: PlayerEntity, gamePassId: GamePass, isActive: boolean) => void
@@ -64,7 +64,11 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 	public onInit(): void {
 		MarketplaceService.PromptGamePassPurchaseFinished.Connect(
 			this.playerService.withPlayerEntity((playerEntity, gamePassId, purchased) => {
-				this.onGamePassPurchaseFinished(playerEntity, gamePassId, purchased);
+				if (!purchased) {
+					return;
+				}
+
+				this.grantGamePass(playerEntity, gamePassId);
 			}),
 		);
 
@@ -76,6 +80,19 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 	}
 
 	/** @ignore */
+	public onStart(): void {
+		Events.mtx.setGamePassActive.connect(
+			this.playerService.withPlayerEntity((playerEntity, gamePassId, active) => {
+				this.setGamePassActive(playerEntity, gamePassId, active).catch((err) => {
+					this.logger.Error(
+						`Failed to set game pass ${gamePassId} active for ${playerEntity.userId}: ${err}`,
+					);
+				});
+			}),
+		);
+	}
+
+	/** @ignore */
 	public onPlayerJoin(playerEntity: PlayerEntity): void {
 		const { userId } = playerEntity;
 
@@ -84,17 +101,17 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			return;
 		}
 
-		const unowned = Object.values(GamePass).filter(gamePassId => !gamePasses.has(gamePassId));
+		const unowned = Object.values(GamePass).filter((gamePassId) => !gamePasses.has(gamePassId));
 		for (const gamePassId of unowned) {
 			this.checkForGamePassOwned(playerEntity, gamePassId)
-				.then(owned => {
+				.then((owned) => {
 					if (!owned) {
 						return;
 					}
 
-					store.purchaseGamePass(userId, gamePassId);
+					this.grantGamePass(playerEntity, tonumber(gamePassId));
 				})
-				.catch(err => {
+				.catch((err) => {
 					this.logger.Warn(`Error checking game pass ${gamePassId}: ${err}`);
 				});
 		}
@@ -102,6 +119,34 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		for (const [id, gamePassData] of gamePasses) {
 			this.notifyProductActive(playerEntity, id, gamePassData.active);
 		}
+	}
+
+	/**
+	 * Registers a handler for a specific product. The handler will be called
+	 * when a player purchases the developer product.
+	 *
+	 * The handler should return true if the product was successfully processed,
+	 * or false if there was an error. The handler will also return false if
+	 * there is an error processing the product.
+	 *
+	 * @param productId - The ID of the product to register the handler for.
+	 * @param handler - The callback handler to call when the product is
+	 *   purchased. The handler should return true if the product was
+	 *   successfully processed, or false if there was an error.
+	 * @note Handlers should be registered before the player purchases the
+	 *  product, and should never yield.
+	 */
+	public registerProductHandler(
+		productId: Product,
+		handler: (playerEntity: PlayerEntity, productId: Product) => boolean,
+	): void {
+		if (this.productHandlers.has(productId)) {
+			this.logger.Error(`Handler already registered for product ${productId}`);
+			return;
+		}
+
+		this.logger.Debug(`Registered handler for product ${productId}`);
+		this.productHandlers.set(productId, handler);
 	}
 
 	/**
@@ -114,33 +159,28 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 	 *   if the information is not available.
 	 */
 	public async getProductInfo(
-		infoType: "GamePass" | "Product",
+		infoType: Enum.InfoType,
 		productId: number,
 	): Promise<ProductInfo | undefined> {
 		if (this.productInfoCache.has(productId)) {
 			return this.productInfoCache.get(productId);
 		}
 
-		const price = await Promise.retryWithDelay(
-			async () => {
-				return MarketplaceService.GetProductInfo(
-					productId,
-					Enum.InfoType[infoType],
-				) as ProductInfo;
-			},
+		const productInfo = await Promise.retryWithDelay(
+			async () => MarketplaceService.GetProductInfo(productId, infoType) as ProductInfo,
 			NETWORK_RETRY_ATTEMPTS,
 			NETWORK_RETRY_DELAY,
 		).catch(() => {
 			this.logger.Warn(`Failed to get price for product ${productId}`);
 		});
 
-		if (price === undefined) {
+		if (productInfo === undefined) {
 			return undefined;
 		}
 
-		this.productInfoCache.set(productId, price);
+		this.productInfoCache.set(productId, productInfo);
 
-		return price;
+		return productInfo;
 	}
 
 	/**
@@ -161,7 +201,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 	): Promise<boolean> {
 		// Ensure game passId is a valid game passes for our game
 		if (!Object.values(GamePass).includes(gamePassId)) {
-			throw `Invalid game pass id ${gamePassId}`;
+			throw new Error(`Invalid game pass id ${gamePassId}`);
 		}
 
 		const owned = store.getState(selectPlayerMtx(userId))?.gamePasses.has(gamePassId);
@@ -175,12 +215,8 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 	private grantProduct(
 		playerEntity: PlayerEntity,
 		productId: number,
-		wasPurchased: boolean,
-	): void {
-		if (!wasPurchased) {
-			return;
-		}
-
+		currencySpent: number,
+	): boolean {
 		const { userId } = playerEntity;
 
 		const product = tostring(productId) as Product;
@@ -190,12 +226,44 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			this.logger.Warn(
 				`Player ${userId} attempted to purchased invalid product ${productId}`,
 			);
-			return;
+			return false;
+		}
+
+		const handler = this.productHandlers.get(product);
+		if (!handler) {
+			this.logger.Fatal(`No handler for product ${product}`);
+			return false;
+		}
+
+		const [success, result] = pcall(() => noYield(handler, playerEntity, product));
+		if (!success || !result) {
+			this.logger.Error(`Failed to process product ${product}`);
+			return false;
 		}
 
 		this.logger.Info(`Player ${userId} purchased developer product ${productId}`);
-		store.purchaseDeveloperProduct(userId, product);
-		this.developerProductPurchased.Fire(playerEntity, product);
+		store.purchaseDeveloperProduct(userId, product, currencySpent);
+		return true;
+	}
+
+	private async setGamePassActive(
+		playerEntity: PlayerEntity,
+		gamePassId: GamePass,
+		active: boolean,
+	): Promise<void> {
+		await this.checkForGamePassOwned(playerEntity, gamePassId).then((owned) => {
+			const { userId } = playerEntity;
+			if (!owned) {
+				this.logger.Warn(
+					`Player ${userId} tried to activate not game pass ${gamePassId} that they do not own.`,
+				);
+
+				return;
+			}
+
+			store.setGamePassActive(userId, gamePassId, active);
+			this.notifyProductActive(playerEntity, gamePassId, active);
+		});
 	}
 
 	private notifyProductActive(
@@ -206,17 +274,8 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		this.gamePassStatusChanged.Fire(playerEntity, productId, isActive);
 	}
 
-	private onGamePassPurchaseFinished(
-		playerEntity: PlayerEntity,
-		gamePassId: number,
-		wasPurchased: boolean,
-	): void {
-		if (!wasPurchased) {
-			return;
-		}
-
+	private grantGamePass(playerEntity: PlayerEntity, gamePassId: number): void {
 		const { userId } = playerEntity;
-
 		const gamePass = tostring(gamePassId) as GamePass;
 
 		// Ensure game passId is a valid game passes for our game
@@ -253,7 +312,7 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 
 	private async purchaseIdCheck(
 		playerEntity: PlayerEntity,
-		{ ProductId, PurchaseId }: ReceiptInfo,
+		{ CurrencySpent, ProductId, PurchaseId }: ReceiptInfo,
 	): Promise<Enum.ProductPurchaseDecision> {
 		const { document, userId } = playerEntity;
 
@@ -266,14 +325,16 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 			return Enum.ProductPurchaseDecision.PurchaseGranted;
 		}
 
-		this.grantProduct(playerEntity, ProductId, true);
-
 		const data = store.getState(selectPlayerData(userId));
 		if (!data) {
 			return Enum.ProductPurchaseDecision.NotProcessedYet;
 		}
 
-		this.updateReceiptHistory(data, document, PurchaseId);
+		if (!this.grantProduct(playerEntity, ProductId, CurrencySpent)) {
+			return Enum.ProductPurchaseDecision.NotProcessedYet;
+		}
+
+		this.updateReceiptHistory(userId, data, PurchaseId);
 
 		const [success] = document.save().await();
 		if (!success) {
@@ -283,25 +344,17 @@ export default class MtxService implements OnInit, OnPlayerJoin {
 		return Enum.ProductPurchaseDecision.PurchaseGranted;
 	}
 
-	private updateReceiptHistory(
-		data: PlayerData,
-		document: Document<PlayerData>,
-		purchaseId: string,
-	): void {
+	private updateReceiptHistory(userId: string, data: PlayerData, purchaseId: string): void {
 		const { receiptHistory } = data.mtx;
 
-		const updatedReceiptHistory =
-			receiptHistory.size() >= this.purchaseIdLog
-				? Sift.Array.shift(receiptHistory, receiptHistory.size() - this.purchaseIdLog + 1)
-				: receiptHistory;
-		updatedReceiptHistory.push(purchaseId);
+		let updatedReceiptHistory = Sift.Array.push(receiptHistory, purchaseId);
+		if (updatedReceiptHistory.size() > this.purchaseIdLog) {
+			updatedReceiptHistory = Sift.Array.shift(
+				updatedReceiptHistory,
+				updatedReceiptHistory.size() - this.purchaseIdLog + 1,
+			);
+		}
 
-		document.write(
-			Sift.Dictionary.merge(data, {
-				mtx: {
-					receiptHistory: updatedReceiptHistory,
-				},
-			}),
-		);
+		store.updateReceiptHistory(userId, updatedReceiptHistory);
 	}
 }

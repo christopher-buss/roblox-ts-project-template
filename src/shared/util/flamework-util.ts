@@ -3,7 +3,23 @@ import { Flamework, Modding, Reflect } from "@flamework/core";
 
 export const FLAMEWORK_DEFAULT_LOAD_ORDER = 1;
 
-export const FLAMEWORK_DECORATOR_PREFIX = `flamework:decorators.`;
+export const FLAMEWORK_DECORATOR_PREFIX = "flamework:decorators.";
+
+export interface ListenerData<T> {
+	event: T;
+	id: string;
+	loadOrder: number;
+}
+
+/**
+ * Checks if the given object is a Flamework controller.
+ *
+ * @param object - The object to check.
+ * @returns `true` if the object is a controller, `false` otherwise.
+ */
+export function isController(object: object): boolean {
+	return isDecoratorOf(Flamework.id<typeof Controller>(), object);
+}
 
 /**
  * Checks if the given object is decorated with a specific identifier.
@@ -15,16 +31,6 @@ export const FLAMEWORK_DECORATOR_PREFIX = `flamework:decorators.`;
  */
 export function isDecoratorOf(id: string, object: object): boolean {
 	return Reflect.hasMetadata(object, FLAMEWORK_DECORATOR_PREFIX + id);
-}
-
-/**
- * Checks if the given object is a Flamework controller.
- *
- * @param object - The object to check.
- * @returns `true` if the object is a controller, `false` otherwise.
- */
-export function isController(object: object): boolean {
-	return isDecoratorOf(Flamework.id<typeof Controller>(), object);
 }
 
 /**
@@ -48,12 +54,6 @@ export function isSingleton(object: object): boolean {
 	return isController(object) || isService(object);
 }
 
-export interface ListenerData<T> {
-	event: T;
-	id: string;
-	loadOrder: number;
-}
-
 /**
  * Sets up the lifecycle for a given array of listener data.
  *
@@ -69,7 +69,7 @@ export function setupLifecycle<T extends defined>(
 ): void {
 	assert(specifier, "[setupLifecycle] Specifier is required");
 
-	Modding.onListenerAdded<T>(object => {
+	Modding.onListenerAdded<T>((object) => {
 		lifecycle.push({
 			id: Reflect.getMetadata(object, "identifier") ?? "flamework:unknown",
 			event: object,

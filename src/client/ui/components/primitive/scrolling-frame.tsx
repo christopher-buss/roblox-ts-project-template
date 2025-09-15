@@ -39,7 +39,7 @@ interface ScrollingFrameProps extends React.PropsWithChildren {
  *
  * @see https://developer.roblox.com/en-us/api-reference/class/ScrollingFrame
  */
-export default function ScrollingFrame({
+export function ScrollingFrame({
 	CanvasSize,
 	Native,
 	children,

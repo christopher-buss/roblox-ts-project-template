@@ -5,7 +5,7 @@ declare namespace SoundSystem {
 		id: string,
 		target: CFrame | Instance | Vector3,
 		looped?: boolean,
-	): { Sound: Sound } & Attachment;
+	): Attachment & { Sound: Sound };
 }
 
 export = SoundSystem;

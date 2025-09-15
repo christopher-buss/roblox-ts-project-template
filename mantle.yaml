@@ -6,59 +6,59 @@ owner: personal
 
 state:
   remote:
-    region: eu-central-1
     bucket: christopher-buss-mantle-states
     key: roblox-ts-example
+    region: eu-central-1
 
 environments:
-  - label: development
-    branches:
+  - branches:
       - develop
-    targetNamePrefix: environmentLabel
+    label: development
     targetAccess: private
+    targetNamePrefix: environmentLabel
     targetOverrides:
       icon: assets/marketing/example-icon.png
 
-  - label: production
-    branches:
+  - branches:
       - main
+    label: production
     targetAccess: public
 
 target:
   experience:
-    icon: assets/marketing/example-icon.png
+    badges:
+      1-example:
+        description: This is an example badge.
+        enabled: true
+        icon: assets/badges/example-badge.png
+        name: Welcome Example Badge
     configuration:
+      avatarAnimationType: playerChoice
+      avatarType: playerChoice
+      enableStudioAccessToApis: true
       playableDevices: [computer, console, phone, tablet]
       privateServers:
         price: 0
-      enableStudioAccessToApis: true
-      avatarType: playerChoice
-      avatarAnimationType: playerChoice
-    spatialVoice:
-      enabled: true
-    places:
-      start:
-        file: place.rbxlx
-        configuration:
-          name: roblox-ts Project Template
-          description: A project template for Roblox TypeScript projects.
-          maxPlayerCount: 700
-          allowCopying: true # !!! TURN THIS OFF FOR YOUR GAME !!!
-    badges:
-      1-example:
-        name: Welcome Example Badge
-        description: This is an example badge.
-        icon: assets/badges/example-badge.png
-        enabled: true
-    products:
-      1-example:
-        name: Example Product
-        description: This is an example product.
-        price: 5
-        icon: assets/marketing/example-icon.png
+    icon: assets/marketing/example-icon.png
     passes:
       1-example:
-        name: Example Pass
         description: This is an example pass.
-        price: 5
         icon: assets/marketing/example-icon.png
+        name: Example Pass
+        price: 5
+    places:
+      start:
+        configuration:
+          allowCopying: true # !!! TURN THIS OFF FOR YOUR GAME !!!
+          description: A project template for Roblox TypeScript projects.
+          maxPlayerCount: 700
+          name: roblox-ts Project Template
+        file: place.rbxlx
+    products:
+      1-example:
+        description: This is an example product.
+        icon: assets/marketing/example-icon.png
+        name: Example Product
+        price: 5
+    spatialVoice:
+      enabled: true
