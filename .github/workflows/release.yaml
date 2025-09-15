@@ -32,8 +32,6 @@ jobs:
 
       - name: Install Dependencies
         uses: ./.github/actions/install-dependencies
-        with:
-          install-flags: --filter="catalog:prod,build,types"
 
       - name: Compile
         run: pnpm prod:build --verbose
