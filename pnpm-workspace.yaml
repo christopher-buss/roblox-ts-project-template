@@ -1,3 +1,6 @@
+packages:
+  - "src/*"
+
 catalogs:
   build:
     rbxts-transform-debug: 2.2.0
