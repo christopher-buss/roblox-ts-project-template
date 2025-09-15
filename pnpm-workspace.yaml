@@ -57,10 +57,15 @@ catalogs:
     ts-plugin-sort-import-suggestions: 1.0.4
     typescript: 5.5.3
 
+configDependencies:
+  "@pnpm/trusted-deps": 0.1.0+sha512-IERT0uXPBnSZGsCmoSuPzYNWhXWWnKkuc9q78KzLdmDWJhnrmvc7N4qaHJmaNKIusdCH2riO3iE34Osohj6n8w==
+
 onlyBuiltDependencies:
   - esbuild
   - oxc-resolver
   - unrs-resolver
+
+onlyBuiltDependenciesFile: node_modules/.pnpm-config/@pnpm/trusted-deps/allow.json
 
 patchedDependencies:
   rbxts-transform-env: patches/rbxts-transform-env.patch
@@ -68,3 +73,9 @@ patchedDependencies:
 
 publicHoistPattern:
   - "*@rbxts*"
+
+catalogMode: strict
+enablePrePostScripts: true
+ignoreWorkspaceRootCheck: true
+saveExact: true
+shellEmulator: true
