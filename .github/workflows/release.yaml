@@ -63,6 +63,7 @@ jobs:
         with:
           deploy-flags: --allow-purchases
           environment: production
+          expected-ip: ${{ vars.EXPECTED_IP }}
           mantle-aws-access-key-id: ${{ secrets.MANTLE_AWS_ACCESS_KEY_ID }}
           mantle-aws-secret-access-key: ${{ secrets.MANTLE_AWS_SECRET_ACCESS_KEY }}
           mantle-open-cloud-api-key: ${{ secrets.MANTLE_OPEN_CLOUD_API_KEY }}

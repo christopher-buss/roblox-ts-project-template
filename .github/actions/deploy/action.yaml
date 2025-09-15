@@ -47,7 +47,7 @@ runs:
         while true; do
           response=$(curl -s 'https://httpbin.org/ip' || echo '{"origin":""}')
           content=$(echo $response | jq -r '.origin')
-          if [ "$content" == "${{ vars.EXPECTED_IP }}" ]; then
+          if [ "$content" == "${{ inputs.expected-ip }}" ]; then
             break
           fi
           if [ $elapsed -ge 20 ]; then
