@@ -16,7 +16,6 @@ on:
 
 permissions:
   contents: write
-  packages: write
 
 concurrency:
   group: production_environment
@@ -24,8 +23,8 @@ concurrency:
 
 jobs:
   build:
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true) }}
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
@@ -34,7 +33,7 @@ jobs:
       - name: Install Dependencies
         uses: ./.github/actions/install-dependencies
         with:
-          install-flags: --prod
+          install-flags: --filter="catalog:prod,build,types"
 
       - name: Compile
         run: pnpm prod:build --verbose
@@ -51,7 +50,7 @@ jobs:
 
   deploy:
     needs: build
-
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true) }}
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -69,12 +68,17 @@ jobs:
           mantle-open-cloud-api-key: ${{ secrets.MANTLE_OPEN_CLOUD_API_KEY }}
           roblosecurity: ${{ secrets.ROBLOSECURITY }}
           secret: ${{ secrets.WG_CONFIG_FILE }}
+    timeout-minutes: 15
 
   tag:
     needs: deploy
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          fetch-depth: 0
+
       - id: tag_version
         name: Bump version and push tag
         uses: mathieudutour/github-tag-action@a22cf08638b34d5badda920f9daf6e72c477b07b # v6.2
