@@ -41,24 +41,27 @@ runs:
       with:
         WG_CONFIG_FILE: ${{ inputs.secret }}
 
-    - name: Poll for IP Change
+    - name: Wait for VPN IP Change
       run: |
-        elapsed=0
-        while true; do
-          response=$(curl -s 'https://httpbin.org/ip' || echo '{"origin":""}')
-          content=$(echo $response | jq -r '.origin')
-          if [ "$content" == "${{ inputs.expected-ip }}" ]; then
-            break
+        expected_ip="${{ inputs.expected-ip }}"
+
+        for i in {1..6}; do
+          current_ip=$(curl -s https://api.ipify.org || echo "")
+          echo "Current IP: $current_ip, Expected: $expected_ip"
+
+          if [ "$current_ip" == "$expected_ip" ]; then
+            echo "Success!"
+            exit 0
           fi
-          if [ $elapsed -ge 20 ]; then
-            echo "Timeout reached!"
-            exit 1
+
+          if [ $i -lt 6 ]; then
+            echo "Polling.. Elapsed time: $((i * 5)) seconds"
+            sleep 5
           fi
-          echo "Polling.. Elapsed: $elapsed, IP: $content"
-          sleep 5
-          elapsed=$((elapsed + 5))
         done
-        echo "Success!"
+
+        echo "Timeout reached!"
+        exit 1
       shell: bash
 
     - name: Deploy
