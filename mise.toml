@@ -10,7 +10,7 @@ experimental = true
 
 [tools]
 "npm:@antfu/ni" = "latest"
-"ubi:blake-mealey/mantle" = "0.11.17-prerelease"
+"ubi:blake-mealey/mantle" = "0.11.18"
 "ubi:jacktabscode/asphalt" = "1.1.0"
 "ubi:lune-org/lune" = "0.10.2"
 "ubi:rojo-rbx/rojo" = "7.5.1"
