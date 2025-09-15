@@ -1,4 +1,7 @@
-->roblox-ts template<-
+<h3 align="center">
+    <br />
+    roblox-ts template
+</h3>
 
 <p align="center">
     A roblox-ts template for fully managed rojo projects.
