@@ -9,6 +9,9 @@ inputs:
   environment:
     description: The environment to deploy to (development/production)
     required: true
+  expected-ip:
+    description: The expected public IP address after establishing the VPN connection
+    required: true
   mantle-aws-access-key-id:
     description: Mantle AWS Access Key ID
     required: true
@@ -33,14 +36,8 @@ runs:
       with:
         name: place
 
-    - name: Debug
-      run: |
-        response=$(curl -s 'https://httpbin.org/ip')
-        echo "Current IP: $(echo $response | jq -r '.origin')"
-      shell: bash
-
     - name: Establish WireGuard VPN Connection
-      uses: niklaskeerl/easy-wireguard-action@v2
+      uses: niklaskeerl/easy-wireguard-action@fdecd3aabde0060ec80f89aa03070ae0705fedba # v2
       with:
         WG_CONFIG_FILE: ${{ inputs.secret }}
 
@@ -48,9 +45,9 @@ runs:
       run: |
         elapsed=0
         while true; do
-          response=$(curl -s 'https://httpbin.org/ip')
+          response=$(curl -s 'https://httpbin.org/ip' || echo '{"origin":""}')
           content=$(echo $response | jq -r '.origin')
-          if [ "$content" == "20.68.48.98" ]; then
+          if [ "$content" == "${{ vars.EXPECTED_IP }}" ]; then
             break
           fi
           if [ $elapsed -ge 20 ]; then
