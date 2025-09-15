@@ -67,10 +67,10 @@ runs:
     - name: Deploy
       run: mantle deploy mantle.yaml --environment ${{ inputs.environment }} ${{ inputs.deploy-flags }}
       env:
-        MANTLE_AWS_ACCESS_KEY_ID: ${{ inputs.MANTLE_AWS_ACCESS_KEY_ID }}
-        MANTLE_AWS_SECRET_ACCESS_KEY: ${{ inputs.MANTLE_AWS_SECRET_ACCESS_KEY }}
-        MANTLE_OPEN_CLOUD_API_KEY: ${{ inputs.MANTLE_OPEN_CLOUD_API_KEY }}
-        ROBLOSECURITY: ${{ inputs.ROBLOSECURITY }}
+        MANTLE_AWS_ACCESS_KEY_ID: ${{ inputs.mantle-aws-access-key-id }}
+        MANTLE_AWS_SECRET_ACCESS_KEY: ${{ inputs.mantle-aws-secret-access-key }}
+        MANTLE_OPEN_CLOUD_API_KEY: ${{ inputs.mantle-open-cloud-api-key }}
+        ROBLOSECURITY: ${{ inputs.roblosecurity }}
       shell: bash
 
     - if: always()
