@@ -13,7 +13,6 @@ on:
 
 permissions:
   contents: write
-  packages: write
 
 concurrency:
   group: development_environment
@@ -22,7 +21,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
@@ -46,7 +44,6 @@ jobs:
 
   deploy:
     needs: build
-
     runs-on: ubuntu-latest
     environment: development
     steps:
@@ -55,6 +52,7 @@ jobs:
       - uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2
 
       - name: Deploy to Roblox
+        timeout-minutes: 15
         uses: ./.github/actions/deploy
         with:
           environment: development
