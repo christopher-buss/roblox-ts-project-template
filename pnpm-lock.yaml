@@ -281,7 +281,7 @@ importers:
         version: 1.2.0(eslint@9.35.0(jiti@2.5.1))
       '@isentinel/eslint-config':
         specifier: catalog:lint
-        version: 3.0.0(@eslint-react/eslint-plugin@1.53.1(eslint@9.35.0(jiti@2.5.1))(ts-api-utils@2.1.0(typescript@5.5.3))(typescript@5.5.3))(@types/estree@1.0.8)(@typescript-eslint/utils@8.44.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint-plugin-jest@28.14.0(@typescript-eslint/eslint-plugin@8.39.1(@typescript-eslint/parser@8.39.1(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint-plugin-n@17.22.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint-plugin-react-roblox-hooks@5.1.0-rbx.1(eslint@9.35.0(jiti@2.5.1)))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3)
+        version: 3.0.0(@eslint-react/eslint-plugin@1.53.1(eslint@9.35.0(jiti@2.5.1))(ts-api-utils@2.1.0(typescript@5.5.3))(typescript@5.5.3))(@types/estree@1.0.8)(@typescript-eslint/utils@8.44.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint-plugin-jest@28.14.0(@typescript-eslint/eslint-plugin@8.39.1(@typescript-eslint/parser@8.39.1(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint-plugin-n@17.23.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint-plugin-react-roblox-hooks@5.1.0-rbx.1(eslint@9.35.0(jiti@2.5.1)))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3)
       '@isentinel/tsconfig':
         specifier: catalog:types
         version: 1.0.0(typescript@5.5.3)
@@ -1904,8 +1904,8 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
-  browserslist@4.26.0:
-    resolution: {integrity: sha512-P9go2WrP9FiPwLv3zqRD/Uoxo0RSHjzFCiQz7d4vbmwNqQFo9T9WCeP/Qn5EbcKQY6DBbkxEXNcpJOmncNrb7A==}
+  browserslist@4.26.2:
+    resolution: {integrity: sha512-ECFzp6uFOSB+dcZ5BK/IBaGWssbSYBHvuMeMt3MMFyhI0Z8SqGgEkBLARgpRH3hutIgPVsALcMwbDrJqPxQ65A==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
@@ -1957,8 +1957,8 @@ packages:
   camel-case@4.1.2:
     resolution: {integrity: sha512-gxGWBrTT1JuMx6R+o5PTXMmUnhnVzLQ9SNutD4YqKtI6ap897t3tKECYla6gCWEkplXnlNybEkZg9GEGxKFCgw==}
 
-  caniuse-lite@1.0.30001741:
-    resolution: {integrity: sha512-QGUGitqsc8ARjLdgAfxETDhRbJ0REsP6O3I96TAth/mVjh2cYzN2u+3AzPP3aVSm2FehEItaJw1xd+IGBXWeSw==}
+  caniuse-lite@1.0.30001743:
+    resolution: {integrity: sha512-e6Ojr7RV14Un7dz6ASD0aZDmQPT/A+eZU+nuTNfjqmRrmkmQlnTNWH0SKmqagx9PeW87UVqapSurtAXifmtdmw==}
 
   capital-case@1.0.4:
     resolution: {integrity: sha512-ds37W8CytHgwnhGGTi88pcPyR15qoNkOpYwmMMfnWqqWgESapLqvDx6huFjQ5vqWSn2Z06173XNA7LtMOeUh1A==}
@@ -2251,6 +2251,10 @@ packages:
 
   detect-indent@7.0.1:
     resolution: {integrity: sha512-Mc7QhQ8s+cLrnUfU/Ji94vG/r8M26m8f++vyres4ZoojaRDpZ1eSIh/EpzLNwlWuvzSZ3UbDFspjFvTDXe6e/g==}
+    engines: {node: '>=12.20'}
+
+  detect-indent@7.0.2:
+    resolution: {integrity: sha512-y+8xyqdGLL+6sh0tVeHcfP/QDd8gUgbasolJJpY7NgeQGSZ739bDtSiaiDgtoicy+mtYB81dKLxO9xRhCyIB3A==}
     engines: {node: '>=12.20'}
 
   detect-newline@4.0.1:
@@ -2586,8 +2590,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
 
-  eslint-plugin-n@17.22.0:
-    resolution: {integrity: sha512-+YQ4dW8gg3eVZ3A8lL6zugEmA+Le5IEpCXsI8vKvDvSIB8gEh2N3PKqDwI+J8uLb7nphTJkwiv2e5OlnEDNvpQ==}
+  eslint-plugin-n@17.23.0:
+    resolution: {integrity: sha512-aPePGxUr5LezcXmMRBF83eK1MmqUYY1NdLdHC+jdpfc5b98eL7yDXY20gXJ6DcTxrHBhrLsfYYqo7J+m0h9YXQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.23.0'
@@ -5340,7 +5344,7 @@ snapshots:
 
   '@isentinel/dict-roblox@1.0.3': {}
 
-  '@isentinel/eslint-config@3.0.0(@eslint-react/eslint-plugin@1.53.1(eslint@9.35.0(jiti@2.5.1))(ts-api-utils@2.1.0(typescript@5.5.3))(typescript@5.5.3))(@types/estree@1.0.8)(@typescript-eslint/utils@8.44.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint-plugin-jest@28.14.0(@typescript-eslint/eslint-plugin@8.39.1(@typescript-eslint/parser@8.39.1(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint-plugin-n@17.22.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint-plugin-react-roblox-hooks@5.1.0-rbx.1(eslint@9.35.0(jiti@2.5.1)))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3)':
+  '@isentinel/eslint-config@3.0.0(@eslint-react/eslint-plugin@1.53.1(eslint@9.35.0(jiti@2.5.1))(ts-api-utils@2.1.0(typescript@5.5.3))(typescript@5.5.3))(@types/estree@1.0.8)(@typescript-eslint/utils@8.44.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint-plugin-jest@28.14.0(@typescript-eslint/eslint-plugin@8.39.1(@typescript-eslint/parser@8.39.1(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint-plugin-n@17.23.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint-plugin-react-roblox-hooks@5.1.0-rbx.1(eslint@9.35.0(jiti@2.5.1)))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3)':
     dependencies:
       '@antfu/install-pkg': 1.1.0
       '@clack/prompts': 0.11.0
@@ -5394,7 +5398,7 @@ snapshots:
     optionalDependencies:
       '@eslint-react/eslint-plugin': 1.53.1(eslint@9.35.0(jiti@2.5.1))(ts-api-utils@2.1.0(typescript@5.5.3))(typescript@5.5.3)
       eslint-plugin-jest: 28.14.0(@typescript-eslint/eslint-plugin@8.39.1(@typescript-eslint/parser@8.39.1(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3)
-      eslint-plugin-n: 17.22.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3)
+      eslint-plugin-n: 17.23.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3)
       eslint-plugin-react-roblox-hooks: 5.1.0-rbx.1(eslint@9.35.0(jiti@2.5.1))
     transitivePeerDependencies:
       - '@eslint/json'
@@ -5689,7 +5693,7 @@ snapshots:
       eslint-plugin-jest: 28.14.0(@typescript-eslint/eslint-plugin@8.39.1(@typescript-eslint/parser@8.39.1(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3))(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3)
       eslint-plugin-jest-formatting: 3.1.0(eslint@9.35.0(jiti@2.5.1))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.35.0(jiti@2.5.1))
-      eslint-plugin-n: 17.22.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3)
+      eslint-plugin-n: 17.23.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3)
       eslint-plugin-prettier: 5.5.4(eslint-config-prettier@9.1.2(eslint@9.35.0(jiti@2.5.1)))(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)
       eslint-plugin-promise: 7.2.1(eslint@9.35.0(jiti@2.5.1))
       eslint-plugin-react: 7.37.5(eslint@9.35.0(jiti@2.5.1))
@@ -6340,13 +6344,13 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
-  browserslist@4.26.0:
+  browserslist@4.26.2:
     dependencies:
       baseline-browser-mapping: 2.8.4
-      caniuse-lite: 1.0.30001741
+      caniuse-lite: 1.0.30001743
       electron-to-chromium: 1.5.218
       node-releases: 2.0.21
-      update-browserslist-db: 1.1.3(browserslist@4.26.0)
+      update-browserslist-db: 1.1.3(browserslist@4.26.2)
 
   buffer@5.7.1:
     dependencies:
@@ -6394,7 +6398,7 @@ snapshots:
       pascal-case: 3.1.2
       tslib: 2.8.1
 
-  caniuse-lite@1.0.30001741: {}
+  caniuse-lite@1.0.30001743: {}
 
   capital-case@1.0.4:
     dependencies:
@@ -6554,7 +6558,7 @@ snapshots:
 
   core-js-compat@3.45.1:
     dependencies:
-      browserslist: 4.26.0
+      browserslist: 4.26.2
 
   core-util-is@1.0.3: {}
 
@@ -6718,6 +6722,8 @@ snapshots:
   destr@2.0.5: {}
 
   detect-indent@7.0.1: {}
+
+  detect-indent@7.0.2: {}
 
   detect-newline@4.0.1: {}
 
@@ -7135,7 +7141,7 @@ snapshots:
       safe-regex-test: 1.1.0
       string.prototype.includes: 2.0.1
 
-  eslint-plugin-n@17.22.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3):
+  eslint-plugin-n@17.23.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.5.3):
     dependencies:
       '@eslint-community/eslint-utils': 4.9.0(eslint@9.35.0(jiti@2.5.1))
       enhanced-resolve: 5.18.3
@@ -7156,7 +7162,7 @@ snapshots:
     dependencies:
       '@altano/repository-tools': 2.0.1
       change-case: 5.4.4
-      detect-indent: 7.0.1
+      detect-indent: 7.0.2
       detect-newline: 4.0.1
       eslint: 9.35.0(jiti@2.5.1)
       eslint-fix-utils: 0.4.0(@types/estree@1.0.8)(eslint@9.35.0(jiti@2.5.1))
@@ -9192,7 +9198,7 @@ snapshots:
 
   sort-package-json@3.4.0:
     dependencies:
-      detect-indent: 7.0.1
+      detect-indent: 7.0.2
       detect-newline: 4.0.1
       git-hooks-list: 4.1.1
       is-plain-obj: 4.1.0
@@ -9490,9 +9496,9 @@ snapshots:
       '@unrs/resolver-binding-win32-ia32-msvc': 1.11.1
       '@unrs/resolver-binding-win32-x64-msvc': 1.11.1
 
-  update-browserslist-db@1.1.3(browserslist@4.26.0):
+  update-browserslist-db@1.1.3(browserslist@4.26.2):
     dependencies:
-      browserslist: 4.26.0
+      browserslist: 4.26.2
       escalade: 3.2.0
       picocolors: 1.1.1
 

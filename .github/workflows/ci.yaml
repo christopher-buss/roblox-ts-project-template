@@ -43,4 +43,4 @@ jobs:
         run: nr prod:build
 
       - name: Build project
-        run: rojo build ./build.project.json --output place.rbxlx
+        run: rojo build ./build.project.json --output place.rbxl
