@@ -1,33 +1,45 @@
 {
 	"name": "example-build",
-	"globIgnorePaths": ["**/package.json", "**/tsconfig.json"],
+	"globIgnorePaths": ["**/package.json", "**/tsconfig.json", "**/*.story.luau", "**/*.spec.luau"],
 	"tree": {
 		"$className": "DataModel",
+		"HttpService": {
+			"$className": "HttpService",
+			"$properties": {
+				"HttpEnabled": true
+			}
+		},
+		"ReplicatedStorage": {
+			"$className": "ReplicatedStorage",
+			"TS": {
+				"$path": "dist/shared"
+			},
+			"TS-types": {
+				"$path": "dist/types"
+			},
+			"rbxts_include": {
+				"$path": "include",
+				"node_modules": {
+					"$className": "Folder",
+					"@flamework": {
+						"$path": "node_modules/@flamework"
+					},
+					"@rbxts": {
+						"$path": "node_modules/@rbxts"
+					}
+				}
+			}
+		},
 		"ServerScriptService": {
 			"$className": "ServerScriptService",
 			"TS": {
 				"$path": "dist/server"
 			}
 		},
-		"ReplicatedStorage": {
-			"$className": "ReplicatedStorage",
-			"rbxts_include": {
-				"$path": "include",
-				"node_modules": {
-					"$className": "Folder",
-					"@rbxts": {
-						"$path": "node_modules/@rbxts"
-					},
-					"@flamework": {
-						"$path": "node_modules/@flamework"
-					}
-				}
-			},
-			"TS": {
-				"$path": "dist/shared"
-			},
-			"TS-types": {
-				"$path": "dist/types"
+		"SoundService": {
+			"$className": "SoundService",
+			"$properties": {
+				"RespectFilteringEnabled": true
 			}
 		},
 		"StarterPlayer": {
@@ -39,22 +51,28 @@
 				}
 			}
 		},
+		"TextChatService": {
+			"$className": "TextChatService",
+			"$properties": {
+				"ChatVersion": "TextChatService"
+			}
+		},
 		"Workspace": {
 			"$className": "Workspace",
+			"$path": "assets/models/workspace",
 			"$properties": {
-				"FilteringEnabled": true
-			}
-		},
-		"HttpService": {
-			"$className": "HttpService",
-			"$properties": {
-				"HttpEnabled": true
-			}
-		},
-		"SoundService": {
-			"$className": "SoundService",
-			"$properties": {
-				"RespectFilteringEnabled": true
+				"FilteringEnabled": true,
+				"SignalBehavior": "Deferred"
+			},
+			"Baseplate": {
+				"$className": "Part",
+				"$properties": {
+					"Anchored": true,
+					"Color": [0.38823, 0.37254, 0.38823],
+					"Locked": true,
+					"Position": [0, -10, 0],
+					"Size": [50, 2, 50]
+				}
 			}
 		}
 	}

@@ -33,14 +33,14 @@ jobs:
         run: pnpm exec rbxtsc --verbose
 
       - name: Build project
-        run: rojo build ./default.project.json --output place.rbxlx
+        run: rojo build ./default.project.json --output place.rbxl
 
       - name: Upload place
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           if-no-files-found: error
           name: place
-          path: place.rbxlx
+          path: place.rbxl
 
   deploy:
     needs: build

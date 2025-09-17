@@ -53,7 +53,7 @@ target:
           description: A project template for Roblox TypeScript projects.
           maxPlayerCount: 700
           name: roblox-ts Project Template
-        file: place.rbxlx
+        file: place.rbxl
     products:
       1-example:
         description: This is an example product.

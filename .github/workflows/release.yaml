@@ -37,14 +37,14 @@ jobs:
         run: pnpm prod:build --verbose
 
       - name: Build project
-        run: rojo build ./build.project.json --output place.rbxlx
+        run: rojo build ./build.project.json --output place.rbxl
 
       - name: Upload place
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           if-no-files-found: error
           name: place
-          path: place.rbxlx
+          path: place.rbxl
 
   deploy:
     needs: build
@@ -92,7 +92,7 @@ jobs:
       - name: Create a GitHub release
         uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1
         with:
-          artifacts: place.rbxlx
+          artifacts: place.rbxl
           body: ${{ steps.tag_version.outputs.changelog }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           tag: ${{ steps.tag_version.outputs.new_tag }}
