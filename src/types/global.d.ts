@@ -1,4 +1,3 @@
-// eslint-disable-next-line ts/naming-convention -- Required for Roblox global override.
 interface _G {
 	/** Enable React dev mode. */
 	__DEV__: boolean;

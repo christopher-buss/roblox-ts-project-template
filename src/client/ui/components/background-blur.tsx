@@ -17,11 +17,11 @@ interface BackgroundBlurProps {
  */
 export function BackgroundBlur({ BlurSize }: Readonly<BackgroundBlurProps>): React.ReactNode {
 	const camera = useCamera();
-	const [visible, setVisible] = useState(false);
+	const [isVisible, setIsVisible] = useState(false);
 
 	useBindingListener(BlurSize, (size = 0) => {
-		setVisible(size > 0);
+		setIsVisible(size > 0);
 	});
 
-	return createPortal(<>{visible ? <blureffect Size={BlurSize ?? 0} /> : undefined}</>, camera);
+	return createPortal(<>{isVisible ? <blureffect Size={BlurSize ?? 0} /> : undefined}</>, camera);
 }

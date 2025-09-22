@@ -9,7 +9,7 @@ import { LocalPlayer } from "client/constants";
 import {
 	CHARACTER_LOAD_TIMEOUT,
 	type CharacterRig,
-	characterSchema,
+	CharacterSchema,
 	onCharacterAdded,
 } from "shared/util/player-util";
 
@@ -58,7 +58,7 @@ export class CharacterController implements OnStart {
 	 * @returns A promise that resolves when the character rig is loaded.
 	 */
 	private async characterAdded(model: Model): Promise<void> {
-		const promise = promiseTree(model, characterSchema);
+		const promise = promiseTree(model, CharacterSchema);
 
 		// If our character fails to load, we want to cancel the promise
 		const timeout = task.delay(CHARACTER_LOAD_TIMEOUT, () => {

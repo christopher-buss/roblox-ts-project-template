@@ -41,10 +41,10 @@ interface ServerToClientEvents {
 	};
 }
 
-type ClientToServerFunctions = object;
+interface ClientToServerFunctions {}
 
-export const GlobalEvents = Networking.createEvent<ClientToServerEvents, ServerToClientEvents>();
-export const GlobalFunctions = Networking.createFunction<
+export const GLOBAL_EVENTS = Networking.createEvent<ClientToServerEvents, ServerToClientEvents>();
+export const GLOBAL_FUNCTIONS = Networking.createFunction<
 	ClientToServerFunctions,
 	NonNullable<unknown>
 >();

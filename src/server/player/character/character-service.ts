@@ -11,7 +11,7 @@ import { addToCollisionGroup } from "shared/util/physics-util";
 import {
 	CHARACTER_LOAD_TIMEOUT,
 	type CharacterRig,
-	characterSchema,
+	CharacterSchema,
 	loadCharacter,
 	onCharacterAdded,
 } from "shared/util/player-util";
@@ -94,7 +94,7 @@ export class CharacterService implements OnStart, OnPlayerJoin {
 	}
 
 	private async characterAdded(playerEntity: PlayerEntity, model: Model): Promise<void> {
-		const promise = promiseTree(model, characterSchema);
+		const promise = promiseTree(model, CharacterSchema);
 
 		const { player } = playerEntity;
 

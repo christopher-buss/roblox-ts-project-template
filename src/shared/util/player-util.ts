@@ -3,9 +3,9 @@ import type { EvaluateInstanceTree } from "@rbxts/validate-tree";
 
 export const CHARACTER_LOAD_TIMEOUT = 10;
 
-export type CharacterRig = EvaluateInstanceTree<typeof characterSchema>;
+export type CharacterRig = EvaluateInstanceTree<typeof CharacterSchema>;
 
-export const characterSchema = {
+export const CharacterSchema = {
 	$className: "Model",
 	Head: "MeshPart",
 	Humanoid: {

@@ -10,15 +10,12 @@ import { store } from "../store";
 import type { PlayerEntity } from "./player-entity";
 import type { OnPlayerJoin, OnPlayerLeave } from "./player-service";
 
-interface LeaderstatValueTypes {
-	IntValue: number;
-	StringValue: string;
-}
+type LeaderstatValueTypes = Pick<Instances, "IntValue" | "StringValue">;
 
 interface LeaderstatEntry<T extends keyof LeaderstatValueTypes = keyof LeaderstatValueTypes> {
-	Name: Leaderstats;
-	PlayerDataKey: NestedKeyOf<PlayerData> | undefined;
-	ValueType: T;
+	name: Leaderstats;
+	playerDataKey: NestedKeyOf<PlayerData> | undefined;
+	valueType: T;
 }
 
 type Leaderstats = "Coins" | "Example2";
@@ -69,17 +66,17 @@ export class LeaderstatsService implements OnInit, OnPlayerJoin, OnPlayerLeave {
 		const valueMap = new Map<Leaderstats, LeaderstatValue>();
 
 		for (const entry of this.leaderstats) {
-			const stat = new Instance(entry.ValueType);
-			stat.Name = entry.Name;
+			const stat = new Instance(entry.valueType);
+			stat.Name = entry.name;
 			stat.Parent = leaderstats;
-			valueMap.set(entry.Name, stat);
+			valueMap.set(entry.name, stat);
 
-			if (playerData === undefined || entry.PlayerDataKey === undefined) {
-				stat.Value = entry.ValueType === "IntValue" ? 0 : "N/A";
+			if (playerData === undefined || entry.playerDataKey === undefined) {
+				stat.Value = entry.valueType === "IntValue" ? 0 : "N/A";
 				continue;
 			}
 
-			stat.Value = this.getPlayerData(playerData, entry.PlayerDataKey);
+			stat.Value = this.getPlayerData(playerData, entry.playerDataKey);
 		}
 
 		this.subscribeToPlayerData(playerEntity, valueMap);
@@ -123,13 +120,13 @@ export class LeaderstatsService implements OnInit, OnPlayerJoin, OnPlayerLeave {
 		}
 
 		const entry = this.leaderstats.find(
-			(leaderstatsEntry) => leaderstatsEntry.Name === statName,
+			(leaderstatsEntry) => leaderstatsEntry.name === statName,
 		);
 		if (!entry) {
 			return;
 		}
 
-		return valueMap.get(entry.Name);
+		return valueMap.get(entry.name);
 	}
 
 	/**
@@ -146,14 +143,14 @@ export class LeaderstatsService implements OnInit, OnPlayerJoin, OnPlayerLeave {
 		playerDataKey?: NestedKeyOf<PlayerData>,
 	): void {
 		assert(
-			this.leaderstats.find((entry) => entry.Name === statName) === undefined,
+			this.leaderstats.find((entry) => entry.name === statName) === undefined,
 			"Stat provided already exists.",
 		);
 
 		this.leaderstats.push({
-			Name: statName,
-			PlayerDataKey: playerDataKey,
-			ValueType: valueType,
+			name: statName,
+			playerDataKey,
+			valueType,
 		});
 
 		this.logger.Info("Registered leaderboard stat {@stat}", statName);
@@ -176,16 +173,16 @@ export class LeaderstatsService implements OnInit, OnPlayerJoin, OnPlayerLeave {
 				}
 
 				for (const entry of this.leaderstats) {
-					if (entry.PlayerDataKey === undefined) {
+					if (entry.playerDataKey === undefined) {
 						continue;
 					}
 
-					const stat = valueMap.get(entry.Name);
+					const stat = valueMap.get(entry.name);
 					if (!stat) {
 						continue;
 					}
 
-					stat.Value = this.getPlayerData(save, entry.PlayerDataKey);
+					stat.Value = this.getPlayerData(save, entry.playerDataKey);
 				}
 			}),
 		);
@@ -201,7 +198,7 @@ export class LeaderstatsService implements OnInit, OnPlayerJoin, OnPlayerLeave {
 	private getPlayerData(
 		playerData: PlayerData,
 		nestedKey: NestedKeyOf<PlayerData>,
-	): ValueOf<LeaderstatValueTypes> {
+	): number | string {
 		const keys = nestedKey.split(".");
 		let value = playerData;
 		for (const key of keys) {

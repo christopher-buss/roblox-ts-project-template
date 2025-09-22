@@ -13,7 +13,7 @@ export interface ObjectViewportProps extends React.PropsWithChildren {
 }
 
 function setDefaultCameraView(camera: Camera, model: Model, cameraDepth = 0): void {
-	const [modelCF] = model.GetBoundingBox();
+	const [modelCf] = model.GetBoundingBox();
 
 	const radius = model.GetExtentsSize().Magnitude / 2;
 	const halfFov = math.rad(camera.FieldOfView) / 2;
@@ -23,8 +23,8 @@ function setDefaultCameraView(camera: Camera, model: Model, cameraDepth = 0): vo
 	// 2. Move to model position
 	// 3. Push camera back by depth in the original angle given
 	camera.CFrame = camera.CFrame.sub(camera.CFrame.Position)
-		.add(modelCF.Position)
-		.add(camera.CFrame.Position.sub(modelCF.Position).Unit.mul(depth));
+		.add(modelCf.Position)
+		.add(camera.CFrame.Position.sub(modelCf.Position).Unit.mul(depth));
 }
 
 /**

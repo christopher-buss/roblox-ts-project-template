@@ -32,8 +32,8 @@ export function UltraWideContainer({
 						size.Y,
 					);
 					const scale = resolution.Magnitude / BASE_RESOLUTION.Magnitude;
-					const desktop = resolution.X > resolution.Y || scale >= 1;
-					if (!desktop) {
+					const isDesktop = resolution.X > resolution.Y || scale >= 1;
+					if (!isDesktop) {
 						return new Vector2(1920, 1080);
 					}
 

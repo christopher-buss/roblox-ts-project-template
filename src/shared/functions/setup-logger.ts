@@ -9,7 +9,7 @@ import { $NODE_ENV } from "rbxts-transform-env";
 export const LOG_LEVEL: LogLevel =
 	$NODE_ENV === "development" ? LogLevel.Debugging : LogLevel.Information;
 
-const Environment = RunService.IsClient() ? "Client" : "Server";
+const ENVIRONMENT = RunService.IsClient() ? "Client" : "Server";
 
 const STACK_TRACE_LEVEL_MODULE = 5;
 const STACK_TRACE_LEVEL_FLAMEWORK = 4;
@@ -18,7 +18,7 @@ const STACK_TRACE_LEVEL_FLAMEWORK = 4;
  * Represents a log event sink that outputs log messages using the Roblox
  * logging functions.
  */
-class LogEventSFTOutputSink implements ILogEventSink {
+class LogEventOutputSink implements ILogEventSink {
 	public Emit(message: LogEvent): void {
 		const template = new PlainTextMessageTemplateRenderer(
 			MessageTemplateParser.GetTokens(message.Template),
@@ -29,7 +29,7 @@ class LogEventSFTOutputSink implements ILogEventSink {
 		const messageResult = template.Render(message);
 		const fileInfo = this.getFileInformation(context);
 
-		const formattedMessage = `[${tag}] ${context} (${Environment}) - ${messageResult}${fileInfo}`;
+		const formattedMessage = `[${tag}] ${context} (${ENVIRONMENT}) - ${messageResult}${fileInfo}`;
 
 		if (message.Level >= LogLevel.Fatal) {
 			error(formattedMessage);
@@ -83,7 +83,7 @@ export function setupLogger(): void {
 		Logger.configure()
 			.SetMinLogLevel(LOG_LEVEL)
 			.EnrichWithProperty("Version", $package.version)
-			.WriteTo(new LogEventSFTOutputSink())
+			.WriteTo(new LogEventOutputSink())
 			.Create(),
 	);
 }

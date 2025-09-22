@@ -3,7 +3,7 @@ import type { ErrorInfo } from "@rbxts/react";
 import React, { ReactComponent } from "@rbxts/react";
 
 interface ErrorBoundaryProps extends React.PropsWithChildren {
-	Fallback: (error: unknown) => React.ReactNode;
+	onFallback: (error: unknown) => React.ReactNode;
 }
 
 interface ErrorBoundaryState {
@@ -45,10 +45,10 @@ export class ErrorBoundary extends React.Component<
 
 	public override render(): React.ReactNode {
 		const { hasError, message } = this.state;
-		const { Fallback, children } = this.props;
+		const { onFallback, children } = this.props;
 
 		if (hasError) {
-			return Fallback(message);
+			return onFallback(message);
 		}
 
 		return children;

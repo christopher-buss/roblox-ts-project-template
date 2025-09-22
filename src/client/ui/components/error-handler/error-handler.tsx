@@ -8,7 +8,7 @@ type ErrorHandlerProps = React.PropsWithChildren;
 export function ErrorHandler({ children }: Readonly<ErrorHandlerProps>): React.ReactNode {
 	return (
 		<ErrorBoundary
-			Fallback={(err) => {
+			onFallback={(err) => {
 				return <ErrorPage Message={tostring(err)} />;
 			}}
 		>

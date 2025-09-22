@@ -3,7 +3,7 @@ import { ReflexProvider } from "@rbxts/react-reflex";
 import type { Root } from "@rbxts/react-roblox";
 import { createPortal, createRoot } from "@rbxts/react-roblox";
 
-import { PLAYER_GUI } from "client/constants";
+import { PlayerGui } from "client/constants";
 import { store } from "client/store";
 
 import type { RemProviderProps } from "../providers/rem-provider";
@@ -30,7 +30,7 @@ export function mount({ baseRem, key, remOverride, children }: MountProps): Root
 		<StrictMode>
 			<RemProvider key="rem-provider" baseRem={baseRem} remOverride={remOverride}>
 				<ReflexProvider key="reflex-provider" producer={store}>
-					{createPortal(children, PLAYER_GUI, key)}
+					{createPortal(children, PlayerGui, key)}
 				</ReflexProvider>
 			</RemProvider>
 		</StrictMode>,

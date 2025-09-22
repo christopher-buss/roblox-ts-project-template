@@ -11,7 +11,7 @@ import { selectPlayerData, selectPlayerMtx } from "shared/store/persistent";
 import { noYield } from "shared/util/no-yield";
 import { GamePass, Product } from "types/enum/mtx";
 
-import { Events } from "./network";
+import { events } from "./network";
 import type { PlayerEntity } from "./player/player-entity";
 import type { OnPlayerJoin, PlayerService } from "./player/player-service";
 import { store } from "./store";
@@ -81,7 +81,7 @@ export class MtxService implements OnInit, OnStart, OnPlayerJoin {
 
 	/** @ignore */
 	public onStart(): void {
-		Events.mtx.setGamePassActive.connect(
+		events.mtx.setGamePassActive.connect(
 			this.playerService.withPlayerEntity((playerEntity, gamePassId, active) => {
 				this.setGamePassActive(playerEntity, gamePassId, active).catch((err) => {
 					this.logger.Error(
@@ -101,8 +101,10 @@ export class MtxService implements OnInit, OnStart, OnPlayerJoin {
 			return;
 		}
 
-		const unowned = Object.values(GamePass).filter((gamePassId) => !gamePasses.has(gamePassId));
-		for (const gamePassId of unowned) {
+		const unownedGamePasses = Object.values(GamePass).filter(
+			(gamePassId) => !gamePasses.has(gamePassId),
+		);
+		for (const gamePassId of unownedGamePasses) {
 			this.checkForGamePassOwned(playerEntity, gamePassId)
 				.then((owned) => {
 					if (!owned) {
@@ -204,8 +206,8 @@ export class MtxService implements OnInit, OnStart, OnPlayerJoin {
 			throw new Error(`Invalid game pass id ${gamePassId}`);
 		}
 
-		const owned = store.getState(selectPlayerMtx(userId))?.gamePasses.has(gamePassId);
-		if (owned === true) {
+		const isGamePassOwned = store.getState(selectPlayerMtx(userId))?.gamePasses.has(gamePassId);
+		if (isGamePassOwned === true) {
 			return true;
 		}
 

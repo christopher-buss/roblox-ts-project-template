@@ -46,10 +46,10 @@ export function RemProvider({
 			viewport.Y,
 		);
 		const scale = resolution.Magnitude / BASE_RESOLUTION.Magnitude;
-		const desktop = resolution.X > resolution.Y || scale >= 1;
+		const isDesktop = resolution.X > resolution.Y || scale >= 1;
 
 		// Portrait mode should downscale slower than landscape
-		const factor = desktop ? scale : map(scale, 0, 1, SLOW_DOWN_SCALE, 1);
+		const factor = isDesktop ? scale : map(scale, 0, 1, SLOW_DOWN_SCALE, 1);
 
 		setRem(math.clamp(math.round(baseRem * factor), minimumRem, maximumRem));
 	}, [baseRem, camera, maximumRem, minimumRem, remOverride, setRem]);

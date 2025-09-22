@@ -3,7 +3,7 @@ import { createBroadcaster } from "@rbxts/reflex";
 import { Players } from "@rbxts/services";
 
 import { $NODE_ENV } from "rbxts-transform-env";
-import { Events } from "server/network";
+import { events } from "server/network";
 import { IS_EDIT } from "shared/constants";
 import type { SerializedSharedState, SharedState } from "shared/store";
 import { slices, stateSerDes } from "shared/store";
@@ -26,7 +26,7 @@ export function broadcasterMiddleware(): ProducerMiddleware {
 		producers: slices,
 	});
 
-	Events.store.start.connect((player) => {
+	events.store.start.connect((player) => {
 		broadcaster.start(player);
 	});
 
@@ -53,10 +53,10 @@ function beforeHydrate(hydrated: Set<number>): (player: Player, state: SharedSta
 }
 
 function dispatch(player: Player, actions: Array<BroadcastAction>): void {
-	Events.store.dispatch.fire(player, actions);
+	events.store.dispatch.fire(player, actions);
 }
 
 function hydrate(player: Player, state: SharedState): void {
 	// The cast is necessary due to the typings of the reflex library.
-	Events.store.hydrate.fire(player, state as unknown as SerializedSharedState);
+	events.store.hydrate.fire(player, state as unknown as SerializedSharedState);
 }

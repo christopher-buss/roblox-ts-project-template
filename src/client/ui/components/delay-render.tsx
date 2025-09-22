@@ -40,14 +40,14 @@ export function DelayRender({
 	UnmountDelay = 0,
 	children,
 }: Readonly<DelayRenderProps>): React.ReactNode {
-	const [render, setRender] = useState(false);
+	const [shouldRender, setShouldRender] = useState(false);
 
 	useEffect(() => {
 		const delay = ShouldRender ? MountDelay : UnmountDelay;
 		return setTimeout(() => {
-			setRender(ShouldRender);
+			setShouldRender(ShouldRender);
 		}, delay);
 	}, [MountDelay, ShouldRender, UnmountDelay]);
 
-	return <>{render ? children : undefined}</>;
+	return <>{shouldRender ? children : undefined}</>;
 }

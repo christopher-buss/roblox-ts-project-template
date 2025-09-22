@@ -1,21 +1,21 @@
 import Log from "@rbxts/log";
 
 import { $NODE_ENV } from "rbxts-transform-env";
-import { GlobalEvents, GlobalFunctions } from "shared/network";
+import { GLOBAL_EVENTS, GLOBAL_FUNCTIONS } from "shared/network";
 
-export const Events = GlobalEvents.createServer({
+export const events = GLOBAL_EVENTS.createServer({
 	warnOnInvalidGuards: $NODE_ENV === "development",
 });
-export const Functions = GlobalFunctions.createServer({
+export const functions = GLOBAL_FUNCTIONS.createServer({
 	warnOnInvalidGuards: $NODE_ENV === "development",
 });
 
 if ($NODE_ENV === "development") {
-	GlobalEvents.registerHandler("onBadRequest", (player, message) => {
+	GLOBAL_EVENTS.registerHandler("onBadRequest", (player, message) => {
 		Log.Warn(`Bad request from ${player.UserId}: ${message}`);
 	});
 
-	GlobalFunctions.registerHandler("onBadResponse", (player, message) => {
+	GLOBAL_FUNCTIONS.registerHandler("onBadResponse", (player, message) => {
 		Log.Warn(`Bad response from ${player.UserId}: ${message}`);
 	});
 }
