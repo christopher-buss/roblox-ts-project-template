@@ -34,3 +34,5 @@ export const PaddingComponent = forwardRef(
 		);
 	},
 );
+
+PaddingComponent.displayName = "PaddingComponent";

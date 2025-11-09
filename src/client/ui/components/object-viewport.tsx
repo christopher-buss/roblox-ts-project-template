@@ -51,20 +51,25 @@ export function ObjectViewport({
 }: Readonly<ObjectViewportProps>): React.ReactNode {
 	// Setup the viewport after mounting when we have a ref to it
 	const viewportRef = useRef<ViewportFrame>();
+	const objectRef = useRef<BasePart | Model>(Object);
 
 	useMountEffect(() => {
 		const viewport = viewportRef.current;
 		assert(viewport !== undefined, "Viewport is not defined");
 
-		let model = Object;
-		if (!model.IsA("Model")) {
-			model = Make("Model", {
-				Children: [Object],
-				PrimaryPart: Object as BasePart,
-			});
-		}
+		const model = (() => {
+			const { current } = objectRef;
+			if (!current.IsA("Model")) {
+				return Make("Model", {
+					Children: [current],
+					PrimaryPart: current,
+				});
+			}
 
-		model.Parent = viewport;
+			return current;
+		})();
+
+		objectRef.current.Parent = viewport;
 
 		const viewportCamera = new Instance("Camera");
 		viewport.CurrentCamera = viewportCamera;

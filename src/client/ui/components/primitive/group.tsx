@@ -38,3 +38,5 @@ export const Group = forwardRef(
 		);
 	},
 );
+
+Group.displayName = "Group";

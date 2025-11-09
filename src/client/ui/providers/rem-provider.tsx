@@ -24,6 +24,8 @@ const SLOW_DOWN_SCALE = 0.25;
 
 export const RemContext = createContext<number>(DEFAULT_REM);
 
+RemContext.displayName = "RemContext";
+
 export function RemProvider({
 	baseRem = DEFAULT_REM,
 	maximumRem = math.huge,

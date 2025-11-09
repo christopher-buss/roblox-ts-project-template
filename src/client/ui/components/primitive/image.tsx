@@ -46,3 +46,5 @@ export const ImageLabel = forwardRef((props: Readonly<ImageProps>, ref: React.Re
 		</imagelabel>
 	);
 });
+
+ImageLabel.displayName = "ImageLabel";

@@ -45,3 +45,5 @@ export const Frame = forwardRef(
 		);
 	},
 );
+
+Frame.displayName = "Frame";

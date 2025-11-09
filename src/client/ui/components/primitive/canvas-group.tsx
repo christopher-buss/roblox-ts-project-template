@@ -38,3 +38,5 @@ export const CanvasGroup = forwardRef(
 		);
 	},
 );
+
+CanvasGroup.displayName = "CanvasGroup";

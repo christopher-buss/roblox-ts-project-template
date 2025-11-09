@@ -19,7 +19,7 @@ interface ErrorBoundaryState {
  *
  * ```tsx
  * <ErrorBoundary
- * 	fallback={message => <ErrorPage message={tostring(message)} />}
+ * 	fallback={(message) => <ErrorPage message={tostring(message)} />}
  * />;
  * ```
  *
@@ -39,7 +39,7 @@ export class ErrorBoundary extends React.Component<
 
 		this.setState({
 			hasError: true,
-			message: `${error} ${errorInfo.componentStack}`,
+			message: `${err} ${errorInfo.componentStack}`,
 		});
 	}
 

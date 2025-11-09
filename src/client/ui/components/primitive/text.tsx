@@ -72,3 +72,5 @@ export const TextLabel = forwardRef(
 		);
 	},
 );
+
+TextLabel.displayName = "TextLabel";
