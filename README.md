@@ -40,7 +40,7 @@ which is a highly opinionated guide for writing clean and consistent code.
 <!-- prettier-ignore -->
 > [!NOTE]
 > This aims to be a fully-fledged solution to fully managed rojo projects but
-> does not currently have any built-in support for handing models.  
+> does not currently have any built-in support for handling models.  
 > Eventually this functionality will exist. For now, you can investigate
 > [Lune](https://lune-org.github.io/docs) to figure out solutions that will work
 > for your use case.
