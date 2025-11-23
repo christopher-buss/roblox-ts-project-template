@@ -16,7 +16,8 @@
 
 </div>
 
-> [!CAUTION] You likely do not need a fully managed rojo project. For the vast
+> [!CAUTION] 
+> You likely do not need a fully managed rojo project. For the vast
 > majority of projects, a more simple setup will suffice. If you are new to
 > roblox-ts, I would strongly advise against using the vast majority of the
 > tooling in this project. Instead, I would recommend starting with a more
@@ -35,7 +36,8 @@ initiating new projects, complete with frequently used patterns that I adopt
 already configured. Additionally, it integrates my own customized eslint-config,
 which is a highly opinionated guide for writing clean and consistent code.
 
-> [!NOTE] This aims to be a fully-fledged solution to fully managed rojo
+> [!NOTE] 
+> This aims to be a fully-fledged solution to fully managed rojo
 > projects but does not currently have any built-in support for handing models.
 > Eventually this functionality will exist. For now, you can investigate
 > [Lune](https://lune-org.github.io/docs) to figure out solutions that will work
