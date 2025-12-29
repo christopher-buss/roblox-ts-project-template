@@ -28,7 +28,7 @@ jobs:
         uses: ./.github/actions/install-dependencies
 
       - name: Cache ESLint
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
         with:
           key: eslint-cache-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml', 'eslint.config.*') }}-${{ github.run_id }}
           path: .eslintcache
