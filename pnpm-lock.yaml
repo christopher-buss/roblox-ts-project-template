@@ -1,3 +1,24 @@
+---
+lockfileVersion: '9.0'
+
+importers:
+
+  .:
+    configDependencies:
+      '@pnpm/trusted-deps':
+        specifier: 0.1.0
+        version: 0.1.0
+
+packages:
+
+  '@pnpm/trusted-deps@0.1.0':
+    resolution: {integrity: sha512-IERT0uXPBnSZGsCmoSuPzYNWhXWWnKkuc9q78KzLdmDWJhnrmvc7N4qaHJmaNKIusdCH2riO3iE34Osohj6n8w==}
+
+snapshots:
+
+  '@pnpm/trusted-deps@0.1.0': {}
+
+---
 lockfileVersion: '9.0'
 
 settings:
@@ -174,12 +195,8 @@ catalogs:
       version: 5.5.3
 
 patchedDependencies:
-  rbxts-transform-env:
-    hash: d5de0b34affbebaa240f20b1f794325c51fdac347eeb1cc6bb7a0a34eed624c2
-    path: patches/rbxts-transform-env.patch
-  roblox-ts:
-    hash: 2d127ba5e34f18fa0146434ab816a90e1ccfb9d33604f80883960ee57cd643d4
-    path: patches/roblox-ts.patch
+  rbxts-transform-env: d5de0b34affbebaa240f20b1f794325c51fdac347eeb1cc6bb7a0a34eed624c2
+  roblox-ts: 2d127ba5e34f18fa0146434ab816a90e1ccfb9d33604f80883960ee57cd643d4
 
 importers:
 
