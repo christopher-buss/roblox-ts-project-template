@@ -11,7 +11,7 @@ experimental = true
 [tools]
 "npm:@antfu/ni" = "latest"
 "ubi:blake-mealey/mantle" = "0.11.18"
-"ubi:jacktabscode/asphalt" = "1.2.0"
+"ubi:jacktabscode/asphalt" = "2.0.2"
 "ubi:lune-org/lune" = "0.10.4"
 "ubi:rojo-rbx/rojo" = "7.6.1"
 "ubi:seaofvoices/darklua" = "0.17.3"
